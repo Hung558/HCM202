@@ -1,0 +1,9 @@
+{
+  "title": "Chương VI – Sổ tay rèn luyện đạo đức",
+  "virtues": [
+    { "id": "can", "name": "Cần", "suggestions": [] },
+    { "id": "kiem", "name": "Kiệm", "suggestions": ["Tiết kiệm tiền tiêu vặt tuần này"] },
+    { "id": "liem", "name": "Liêm", "suggestions": [] },
+    { "id": "chinh", "name": "Chính", "suggestions": [] }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "title": "Chương III – Sơ đồ tư duy động",
+  "mindmap": {
+    "id": "root", "label": "Độc lập dân tộc và CNXH", "children": [
+      { "id": "dldt", "label": "Độc lập dân tộc", "children": [
+        { "id": "dldt-1", "label": "Gắn liền tự do, hạnh phúc" },
+        { "id": "dldt-2", "label": "Thật sự, hoàn toàn, triệt để" },
+        { "id": "dldt-3", "label": "Gắn với toàn vẹn lãnh thổ" }
+      ] }
+    ]
+  }
+}

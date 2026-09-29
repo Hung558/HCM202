@@ -1,0 +1,8 @@
+{
+  "title": "Chương II – Trục thời gian tương tác",
+  "periods": [
+    { "id": "1911-1920", "name": "Thời kỳ 1911 - 1920", "events": [
+      { "id": 1, "date": "7/1920", "title": "Đọc Sơ thảo Luận cương của Lênin", "description": "Xác định phương hướng giải phóng dân tộc.", "image": "" }
+    ] }
+  ]
+}

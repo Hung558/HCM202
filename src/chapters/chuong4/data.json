@@ -1,0 +1,9 @@
+{
+  "title": "Chương IV – Trắc nghiệm tình huống",
+  "questions": [
+    { "id": 1, "scenario": "Một cán bộ làm việc trọng hình thức, không kiểm tra đến nơi đến chốn.", "options": ["Tham ô", "Quan liêu", "Lãng phí", "Đặc quyền"], "answer": 1, "explanation": "Theo Hồ Chí Minh, đây là biểu hiện của bệnh quan liêu." }
+  ],
+  "ranks": [
+    { "minScore": 0, "name": "Cần rèn luyện thêm" }
+  ]
+}
