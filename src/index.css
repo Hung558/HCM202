@@ -1,15 +1,73 @@
-@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Lora:ital,wght@1,500&display=swap");
 @import "tailwindcss";
 
-/* Theme chung cả nhóm – chỉ chủ project sửa. Dùng: bg-primary, text-accent, bg-surface... */
+/* Theme chung cả nhóm (lấy từ thiết kế Chương 6) – chỉ chủ project sửa. Xem mục "Style" trong README. */
 @theme {
-  --color-primary: #b91c1c;
-  --color-primary-dark: #7f1d1d;
-  --color-accent: #eab308;
-  --color-surface: #fdfaf5;
+  /* Nền & chữ */
+  --color-paper: #F5F1EA;       /* nền trang */
+  --color-cream: #FBF3E4;       /* khối trích dẫn, ô nổi bật */
+  --color-ink: #1F1B16;         /* chữ chính, khối tối, nút tối */
+  --color-ink-soft: #5C5347;    /* đoạn văn */
+  --color-muted: #7A7063;       /* nhãn, chú thích */
+  --color-faint: #A89C8B;       /* chữ mờ, icon phụ */
+  --color-on-dark: #FFF8EC;     /* chữ trên nền đỏ / tối */
+
+  /* Viền & thanh */
+  --color-line: #E6DFD3;        /* viền thẻ */
+  --color-line-strong: #D9CFBF; /* viền nút phụ, input */
+  --color-track: #EFE9DF;       /* nền thanh tiến độ */
+
+  /* Màu nhấn */
+  --color-primary: #B4322A;     /* đỏ chủ đạo */
+  --color-primary-dark: #8A1F19;
+  --color-amber: #E59A2F;       /* số thứ tự, tiến độ */
+  --color-gold: #F2C06B;        /* nút vàng, chữ nhấn trên nền tối */
+  --color-success: #2F7D4F;     /* đúng / đã xong */
+  --color-success-soft: #E8F5ED;
+
   --font-sans: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Lora", Georgia, serif; /* chỉ dùng cho trích dẫn, in nghiêng */
+}
+
+/* Mẫu dùng lại: className="card", "eyebrow", "btn btn-primary"... */
+@utility card {
+  background: white;
+  border: 1px solid var(--color-line);
+  border-radius: 22px;
+}
+@utility eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-primary);
+}
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding-inline: 1.25rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+@utility btn-primary {
+  background: var(--color-primary);
+  color: var(--color-on-dark);
+  &:hover { background: var(--color-primary-dark); }
+}
+@utility btn-dark {
+  background: var(--color-ink);
+  color: var(--color-on-dark);
+  &:hover { background: black; }
+}
+@utility btn-outline {
+  border: 1px solid var(--color-line-strong);
+  &:hover { background: white; }
 }
 
 body {
-  @apply bg-surface text-stone-800 font-sans;
+  @apply bg-paper text-ink font-sans antialiased;
 }
