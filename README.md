@@ -1,7 +1,5 @@
 # HCM Web – Web hỗ trợ học Tư tưởng Hồ Chí Minh
 
-## Bắt đầu từ con số 0 (máy chưa cài gì)
-
 ### Bước 1 – Cài phần mềm (chỉ làm 1 lần)
 1. **Node.js** (bản LTS, từ 22 trở lên): tải ở https://nodejs.org → cài như phần mềm bình thường (Next liên tục).
 2. **VS Code** (trình soạn code): https://code.visualstudio.com
