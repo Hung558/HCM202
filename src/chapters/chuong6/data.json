@@ -1,9 +1,185 @@
 {
-  "title": "Chương VI – Sổ tay rèn luyện đạo đức",
+  "chapter": "Chương VI",
+  "chapterTitle": "Tư tưởng Hồ Chí Minh về văn hóa, đạo đức, con người",
+  "content": [
+    {
+      "id": "van-hoa",
+      "numeral": "I",
+      "title": "Tư tưởng Hồ Chí Minh về văn hóa",
+      "summary": "UNESCO ghi nhận Hồ Chí Minh là \"Anh hùng giải phóng dân tộc, Nhà văn hóa kiệt xuất Việt Nam\" (Nghị quyết 24C/18.6.5, năm 1987). Cả cuộc đời Người chú trọng chống giặc dốt, phát triển văn hóa, nâng cao dân trí.",
+      "parts": [
+        {
+          "title": "Quan niệm về văn hóa",
+          "points": [
+            "Bốn cách tiếp cận: theo nghĩa rộng (tổng hợp mọi phương thức sinh hoạt); theo nghĩa hẹp (đời sống tinh thần của xã hội, kiến trúc thượng tầng); theo nghĩa hẹp hơn (trường học, số người đi học, xóa nạn mù chữ); theo phương thức sử dụng công cụ sinh hoạt.",
+            "Tháng 8-1943: \"Văn hóa là sự tổng hợp của mọi phương thức sinh hoạt cùng với biểu hiện của nó mà loài người đã sản sinh ra nhằm thích ứng những nhu cầu đời sống và đòi hỏi của sự sinh tồn\"."
+          ]
+        },
+        {
+          "title": "Quan hệ giữa văn hóa với các lĩnh vực khác",
+          "points": [
+            "Với chính trị: giải phóng chính trị mở đường cho văn hóa phát triển; văn hóa phải ở trong chính trị, phục vụ nhiệm vụ chính trị.",
+            "Với kinh tế: văn hóa là kiến trúc thượng tầng, nhưng không hoàn toàn phụ thuộc mà có vai trò tác động tích cực trở lại kinh tế.",
+            "Với xã hội: xã hội thế nào văn hóa thế ấy; phải giải phóng xã hội thì mới giải phóng được văn hóa.",
+            "Giữ gìn bản sắc dân tộc, tiếp thu tinh hoa nhân loại: lấy văn hóa dân tộc làm gốc; \"cái gì hay, cái gì tốt là ta học lấy\"."
+          ]
+        },
+        {
+          "title": "Vai trò của văn hóa",
+          "points": [
+            "Văn hóa là mục tiêu: quyền sống, quyền sung sướng, quyền tự do, quyền mưu cầu hạnh phúc; khát vọng về các giá trị chân, thiện, mỹ.",
+            "Văn hóa là động lực: văn hóa chính trị soi đường; văn nghệ nâng cao lòng yêu nước; giáo dục \"trồng người\"; đạo đức, lối sống nâng cao phẩm giá; pháp luật bảo đảm kỷ cương.",
+            "Văn hóa là một mặt trận; anh chị em văn nghệ sĩ là chiến sĩ trên mặt trận ấy.",
+            "Văn hóa phục vụ quần chúng nhân dân: \"Từ trong quần chúng ra. Về sâu trong quần chúng\"."
+          ]
+        },
+        {
+          "title": "Xây dựng nền văn hóa mới",
+          "points": [
+            "Năm 1943: năm nội dung – xây dựng tâm lý, luân lý, xã hội, chính trị, kinh tế.",
+            "Kháng chiến chống Pháp: nền văn hóa có tính chất dân tộc, khoa học, đại chúng.",
+            "Thời kỳ xây dựng CNXH: nền văn hóa có nội dung xã hội chủ nghĩa và tính chất dân tộc.",
+            "Tóm lại: một nền văn hóa toàn diện, giữ gìn cốt cách dân tộc, bảo đảm tính khoa học, tiến bộ và nhân văn."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dao-duc",
+      "numeral": "II",
+      "title": "Tư tưởng Hồ Chí Minh về đạo đức",
+      "summary": "\"Cũng như sông thì có nguồn mới có nước, không có nguồn thì sông cạn. Cây phải có gốc, không có gốc thì cây héo. Người cách mạng phải có đạo đức, không có đạo đức thì dù tài giỏi mấy cũng không lãnh đạo được nhân dân.\"",
+      "parts": [
+        {
+          "title": "Vai trò và sức mạnh của đạo đức cách mạng",
+          "points": [
+            "Đạo đức là gốc, là nền tảng tinh thần của xã hội, của người cách mạng; là nhân tố quyết định sự thành bại của mọi công việc.",
+            "Đức và tài thống nhất, trong đó đức là gốc: \"Nếu không có đạo đức cách mạng thì có tài cũng vô dụng\".",
+            "Đạo đức là thước đo lòng cao thượng của con người.",
+            "Đạo đức là nhân tố tạo nên sức hấp dẫn của chủ nghĩa xã hội."
+          ]
+        },
+        {
+          "title": "Các chuẩn mực đạo đức cách mạng",
+          "points": [
+            "Trung với nước, hiếu với dân – phẩm chất bao trùm, quan trọng nhất, chi phối các phẩm chất khác.",
+            "Cần, kiệm, liêm, chính, chí công vô tư – nội dung cốt lõi, gắn liền với hoạt động hằng ngày của mỗi người.",
+            "Thương yêu con người, sống có tình có nghĩa.",
+            "Tinh thần quốc tế trong sáng: \"Quan sơn muôn dặm một nhà, Bốn phương vô sản đều là anh em!\"."
+          ]
+        },
+        {
+          "title": "Các nguyên tắc xây dựng đạo đức cách mạng",
+          "points": [
+            "Nói đi đôi với làm, nêu gương về đạo đức: \"Một tấm gương sống còn có giá trị hơn một trăm bài diễn văn tuyên truyền\".",
+            "Xây đi đôi với chống: xây các chuẩn mực đạo đức mới, chống các biểu hiện vô đạo đức; lấy xây làm chính.",
+            "Tu dưỡng đạo đức suốt đời: \"Cũng như ngọc càng mài càng sáng, vàng càng luyện càng trong\"."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "con-nguoi",
+      "numeral": "III",
+      "title": "Tư tưởng Hồ Chí Minh về con người",
+      "summary": "Con người là một chỉnh thể thống nhất về trí lực, tâm lực, thể lực. \"Chữ người, nghĩa hẹp là gia đình, anh em, họ hàng, bè bạn; nghĩa rộng là đồng bào cả nước; rộng hơn nữa là cả loài người.\"",
+      "parts": [
+        {
+          "title": "Quan niệm về con người",
+          "points": [
+            "Con người đa dạng bởi mối quan hệ giữa cá nhân và xã hội; trong mỗi con người đều có tính tốt và tính xấu.",
+            "Nhìn nhận con người lịch sử – cụ thể về giới tính, lứa tuổi, nghề nghiệp, vị trí... trong từng giai đoạn lịch sử."
+          ]
+        },
+        {
+          "title": "Vai trò của con người",
+          "points": [
+            "Con người là mục tiêu của cách mạng: giải phóng dân tộc, giải phóng xã hội, giải phóng giai cấp, giải phóng con người.",
+            "Con người là động lực của cách mạng: \"Dễ trăm lần không dân cũng chịu, khó vạn lần dân liệu cũng xong\"."
+          ]
+        },
+        {
+          "title": "Xây dựng con người",
+          "points": [
+            "\"Vì lợi ích trăm năm thì phải trồng người\" – công việc lâu dài, gian khổ của văn hóa giáo dục.",
+            "\"Muốn xây dựng chủ nghĩa xã hội, trước hết cần phải có những con người xã hội chủ nghĩa\".",
+            "Xây dựng con người toàn diện vừa \"hồng\" vừa \"chuyên\": ý thức làm chủ; cần kiệm xây dựng đất nước; yêu nước, quốc tế trong sáng; phương pháp làm việc khoa học.",
+            "Phương pháp: mỗi người tự rèn luyện, kết hợp nêu gương, giáo dục và vai trò của tổ chức Đảng, chính quyền, đoàn thể."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hien-nay",
+      "numeral": "IV",
+      "title": "Xây dựng văn hóa, đạo đức, con người Việt Nam hiện nay",
+      "summary": "Đại hội XII chỉ rõ: thành quả trong lĩnh vực văn hóa chưa tương xứng; \"đạo đức, lối sống có mặt xuống cấp đáng lo ngại\". Do đó phải chú trọng hơn nữa việc xây dựng văn hóa, đạo đức, con người.",
+      "parts": [
+        {
+          "title": "Xây dựng và phát triển văn hóa, con người",
+          "points": [
+            "Nghị quyết Trung ương 5 khóa VIII (7-1998): xây dựng nền văn hóa tiên tiến, đậm đà bản sắc dân tộc; văn hóa là nền tảng tinh thần của xã hội, vừa là mục tiêu vừa là động lực.",
+            "\"Văn hóa còn thì chế độ còn, văn hóa mất thì chế độ mất; không gì đáng sợ bằng văn hóa lâm nguy.\"",
+            "Phát huy nhân tố con người là trung tâm của chiến lược phát triển; đổi mới căn bản và toàn diện giáo dục, đào tạo."
+          ]
+        },
+        {
+          "title": "Xây dựng đạo đức cách mạng",
+          "points": [
+            "\"Thanh niên phải có đức, có tài\"; cần trả lời dứt khoát: \"Học để làm gì? Học để phục vụ ai?\".",
+            "Học tập đạo đức Hồ Chí Minh là trung với nước, hiếu với dân, suốt đời đấu tranh cho sự nghiệp cách mạng.",
+            "Có đức tin tuyệt đối vào sức mạnh của nhân dân, kính trọng và hết lòng phục vụ nhân dân; nhân ái, vị tha, khoan dung."
+          ]
+        }
+      ]
+    }
+  ],
+  "title": "Sổ tay rèn luyện đạo đức",
+  "subtitle": "Chương VI – Tư tưởng Hồ Chí Minh về văn hóa, đạo đức, con người",
+  "intro": "Cần, kiệm, liêm, chính, chí công vô tư là nội dung cốt lõi của đạo đức cách mạng, gắn liền với hoạt động hằng ngày của mỗi người. Mỗi ngày đánh dấu những việc bạn đã làm để rèn luyện từng đức tính.",
+  "quotes": [
+    { "text": "Người có bốn đức: Cần, Kiệm, Liêm, Chính. Thiếu một đức, thì không thành người.", "source": "Hồ Chí Minh, Toàn tập, t.6, tr.117" },
+    { "text": "Việc thiện thì dù nhỏ mấy cũng làm. Việc ác thì dù nhỏ mấy cũng tránh.", "source": "Hồ Chí Minh, Toàn tập, t.6, tr.131" },
+    { "text": "Cần với kiệm, phải đi đôi với nhau, như hai chân của con người.", "source": "Hồ Chí Minh, Toàn tập, t.6, tr.122" },
+    { "text": "Lao động là nghĩa vụ thiêng liêng, là nguồn sống, nguồn hạnh phúc của chúng ta.", "source": "Hồ Chí Minh, Toàn tập, t.13, tr.69" },
+    { "text": "Một dân tộc biết cần, kiệm, biết liêm, là một dân tộc giàu về vật chất, mạnh về tinh thần, là một dân tộc văn minh tiến bộ.", "source": "Hồ Chí Minh, Toàn tập, t.6, tr.128" },
+    { "text": "Mỗi con người đều có thiện và ác ở trong lòng. Ta phải biết làm cho phần tốt ở trong mỗi con người nảy nở như hoa mùa Xuân và phần xấu bị mất dần đi.", "source": "Hồ Chí Minh, Toàn tập, t.15, tr.672" }
+  ],
   "virtues": [
-    { "id": "can", "name": "Cần", "suggestions": [] },
-    { "id": "kiem", "name": "Kiệm", "suggestions": ["Tiết kiệm tiền tiêu vặt tuần này"] },
-    { "id": "liem", "name": "Liêm", "suggestions": [] },
-    { "id": "chinh", "name": "Chính", "suggestions": [] }
+    {
+      "id": "can",
+      "name": "Cần",
+      "meaning": "Siêng năng, chăm chỉ, cố gắng dẻo dai; lao động có kế hoạch, sáng tạo, có năng suất cao, tự lực cánh sinh, không lười biếng.",
+      "suggestions": ["Lập kế hoạch học tập cho ngày hôm nay", "Hoàn thành bài tập trước hạn", "Tự học thêm 30 phút ngoài giờ lên lớp"]
+    },
+    {
+      "id": "kiem",
+      "name": "Kiệm",
+      "meaning": "Tiết kiệm sức lao động, thì giờ, tiền của của dân, của nước, của bản thân; không xa xỉ, không hoang phí, không bừa bãi. Tiết kiệm không phải là bủn xỉn.",
+      "suggestions": ["Không mua sắm thứ không cần thiết", "Tắt điện, nước khi không sử dụng", "Không lướt mạng xã hội quá 1 giờ"]
+    },
+    {
+      "id": "liem",
+      "name": "Liêm",
+      "meaning": "Trong sạch, không tham lam; luôn tôn trọng, giữ gìn của công, của dân. Không tham địa vị, tiền tài, sung sướng; chỉ ham học, ham làm, ham tiến bộ.",
+      "suggestions": ["Tự làm bài, không gian lận khi kiểm tra", "Giữ gìn tài sản chung của lớp, của trường", "Trả lại đồ nhặt được cho người mất"]
+    },
+    {
+      "id": "chinh",
+      "name": "Chính",
+      "meaning": "Không tà, thẳng thắn, đứng đắn. Đối với mình chớ tự kiêu, tự đại; đối với người chớ nịnh hót người trên, xem khinh người dưới; đối với việc thì để việc công lên trên việc tư.",
+      "suggestions": ["Thẳng thắn nhận lỗi khi làm sai", "Góp ý chân thành, không nói xấu sau lưng", "Làm một việc tốt, dù nhỏ"]
+    },
+    {
+      "id": "cong",
+      "name": "Chí công vô tư",
+      "meaning": "Hoàn toàn vì lợi ích chung, không vì tư lợi; công bằng, không thiên tư, thiên vị; \"lo trước thiên hạ, vui sau thiên hạ\". Chí công vô tư là chống chủ nghĩa cá nhân.",
+      "suggestions": ["Nhận phần việc khó khi làm việc nhóm", "Giúp đỡ một bạn học còn gặp khó khăn", "Đánh giá thành viên nhóm công bằng, khách quan"]
+    }
+  ],
+  "principles": [
+    { "name": "Nói đi đôi với làm, nêu gương về đạo đức", "detail": "Lời nói phải đi đôi với việc làm; lấy gương người tốt, việc tốt để hằng ngày giáo dục lẫn nhau." },
+    { "name": "Xây đi đôi với chống", "detail": "Xây dựng các chuẩn mực đạo đức mới, đồng thời chống các biểu hiện vô đạo đức, suy thoái; lấy xây làm chính." },
+    { "name": "Tu dưỡng đạo đức suốt đời", "detail": "Tự giáo dục, tự trau dồi đạo đức là cuộc cách mạng trường kỳ trong mỗi người: \"Cũng như ngọc càng mài càng sáng, vàng càng luyện càng trong\"." }
   ]
 }
