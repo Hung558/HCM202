@@ -1,9 +1,3 @@
-import data from './data.json'
+import InteractiveTimeline from './InteractiveTimeline.jsx'
 
-export default function Timeline() {
-  return (
-    <main className="min-h-screen p-6">
-      <h1 className="text-2xl font-bold">{data.title}</h1>
-    </main>
-  )
-}
+export default InteractiveTimeline

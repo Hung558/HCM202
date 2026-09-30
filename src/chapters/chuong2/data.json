@@ -1,8 +1,666 @@
 {
-  "title": "Chương II – Trục thời gian tương tác",
+  "header": {
+    "eyebrow": "GIÁO TRÌNH CHUẨN BỘ GD&ĐT · TƯ TƯỞNG HỒ CHÍ MINH",
+    "title": "Chương II: Cơ sở, quá trình hình thành và phát triển Tư tưởng Hồ Chí Minh",
+    "subtitle": "Khám phá chiều sâu cơ sở thực tiễn, cội nguồn lý luận và 5 chặng đường lịch sử vĩ đại định hình nên ngọn cờ tư tưởng cứu nước, giải phóng dân tộc Việt Nam.",
+    "intro": "Tư tưởng Hồ Chí Minh không phải là sản phẩm ngẫu nhiên hay bất biến, mà là kết tinh sống động từ truyền thống yêu nước nồng nàn của dân tộc Việt Nam, tinh hoa văn hóa nhân loại và ánh sáng cách mạng của chủ nghĩa Mác - Lênin; được tôi luyện qua hoạt động thực tiễn phong phú, bản lĩnh độc lập tự chủ và phẩm chất lỗi lạc của lãnh tụ Nguyễn Ái Quốc - Hồ Chí Minh."
+  },
   "periods": [
-    { "id": "1911-1920", "name": "Thời kỳ 1911 - 1920", "events": [
-      { "id": 1, "date": "7/1920", "title": "Đọc Sơ thảo Luận cương của Lênin", "description": "Xác định phương hướng giải phóng dân tộc.", "image": "" }
-    ] }
+    {
+      "id": "period-1",
+      "number": "I",
+      "timeSpan": "Trước 05/06/1911",
+      "title": "Thời kỳ I: Hình thành tư tưởng yêu nước và chí hướng cứu nước mới",
+      "shortTitle": "Trước 1911",
+      "badge": "Thời kỳ I",
+      "core": "Tiếp thu truyền thống quê hương, gia đình, dân tộc và định hình hoài bão cứu nước",
+      "summary": "Nguyễn Tất Thành sinh ra và lớn lên trong bối cảnh đất nước chìm dưới ách đô hộ của thực dân Pháp. Tiếp thụ truyền thống yêu nước kiên cường của quê hương xứ Nghệ, sự giáo dục nghiêm cẩn của người cha Nguyễn Sinh Sắc và lòng nhân hậu của người mẹ Hoàng Thị Loan. Người khâm phục lòng yêu nước của các bậc tiền bối nhưng không tán thành con đường của họ, nung nấu ý chí sang phương Tây tìm hiểu cội nguồn sức mạnh kẻ thù để trở về giúp đồng bào."
+    },
+    {
+      "id": "period-2",
+      "number": "II",
+      "timeSpan": "1911 – 1920",
+      "title": "Thời kỳ II: Dần hình thành tư tưởng cứu nước theo con đường cách mạng vô sản",
+      "shortTitle": "1911 – 1920",
+      "badge": "Thời kỳ II",
+      "core": "Khảo sát thực tiễn thế giới, tiếp cận Luận cương Lênin và bước ngoặt sang lập trường vô sản",
+      "summary": "Mười năm bôn ba qua nhiều châu lục, làm nhiều nghề lao động cực nhọc để kiếm sống và thâm nhập thực tiễn các nước đế quốc và thuộc địa. Người nhận rõ bản chất áp bức bóc lột của chủ nghĩa đế quốc và tình cảnh chung của nhân dân lao động. Đọc Luận cương của Lênin (7/1920) và bỏ phiếu tán thành Quốc tế III, sáng lập Đảng Cộng sản Pháp (12/1920) đánh dấu bước ngoặt quyết định về chất: từ chủ nghĩa yêu nước đến chủ nghĩa Mác - Lênin."
+    },
+    {
+      "id": "period-3",
+      "number": "III",
+      "timeSpan": "1920 – 1930",
+      "title": "Thời kỳ III: Hình thành những nội dung cơ bản tư tưởng về cách mạng Việt Nam",
+      "shortTitle": "1920 – 1930",
+      "badge": "Thời kỳ III",
+      "core": "Hoạt động lý luận sắc bén, chuẩn bị về tư tưởng, chính trị, tổ chức và thành lập Đảng",
+      "summary": "Hoạt động sôi nổi trên mặt trận báo chí (Le Paria, Thanh niên), xuất bản các tác phẩm kinh điển 'Bản án chế độ thực dân Pháp' (1925) và 'Đường Kách mệnh' (1927). Thành lập Hội Việt Nam Cách mạng Thanh niên. Tháng 2/1930, chủ trì Hội nghị hợp nhất thành lập Đảng Cộng sản Việt Nam và soạn thảo Cương lĩnh chính trị đầu tiên - văn kiện sáng tạo độc lập, giải quyết đúng đắn mối quan hệ dân tộc và giai cấp, chấm dứt khủng hoảng đường lối cứu nước."
+    },
+    {
+      "id": "period-4",
+      "number": "IV",
+      "timeSpan": "1930 – 1941",
+      "title": "Thời kỳ IV: Vượt qua thử thách, giữ vững đường lối cách mạng đúng đắn, sáng tạo",
+      "shortTitle": "1930 – 1941",
+      "badge": "Thời kỳ IV",
+      "core": "Kiên định lập trường trước khuynh hướng tả khuynh giáo điều và chuẩn bị trở về lãnh đạo cách mạng",
+      "summary": "Thời kỳ đầy thử thách cam go: bị giam cầm trong ngục tù đế quốc Anh tại Hồng Kông, chịu đựng sự phê phán và hiểu lầm do quan điểm tả khuynh, giáo điều từ Quốc tế Cộng sản và một số đồng chí trong Đảng (cho rằng Cương lĩnh đầu tiên có biểu hiện 'dân tộc chủ nghĩa', 'hữu khuynh'). Người kiên định giữ vững lập trường cách mạng chân chính, vượt qua mọi gian truân, tìm cách trở về nước trực tiếp nắm thời cơ, lãnh đạo toàn Đảng chuyển hướng chiến lược giương cao ngọn cờ giải phóng dân tộc."
+    },
+    {
+      "id": "period-5",
+      "number": "V",
+      "timeSpan": "1941 – 1969",
+      "title": "Thời kỳ V: Tiếp tục phát triển, hoàn thiện, soi đường cho sự nghiệp cách mạng",
+      "shortTitle": "1941 – 1969",
+      "badge": "Thời kỳ V",
+      "core": "Trực tiếp lãnh đạo Cách mạng Tháng Tám, hai cuộc kháng chiến vĩ đại và để lại Di chúc lịch sử",
+      "summary": "Về nước thành lập Mặt trận Việt Minh (1941), chỉ đạo thành lập Đội VN Tuyên truyền Giải phóng quân (1944), lãnh đạo Tổng khởi nghĩa Cách mạng Tháng Tám thắng lợi và đọc Tuyên ngôn Độc lập (1945). Đề ra phương châm 'Dĩ bất biến ứng vạn biến', lãnh đạo toàn dân kháng chiến chống Pháp thắng lợi (1954). Tiếp tục lãnh đạo thực hiện đồng thời hai nhiệm vụ chiến lược: xây dựng CNXH ở miền Bắc và đấu tranh giải phóng miền Nam; nêu cao chân lý thời đại 'Không có gì quý hơn độc lập, tự do' và để lại bản Di chúc thiêng liêng."
+    }
+  ],
+  "events": [
+    {
+      "id": "ev-01",
+      "periodId": "period-1",
+      "date": "Trước 1911",
+      "year": 1890,
+      "location": "Kim Liên, Nam Đàn, Nghệ An & Kinh thành Huế",
+      "tag": "Cội nguồn tư tưởng",
+      "title": "Tiếp thu truyền thống quê hương, gia đình và nuôi dưỡng lòng yêu nước",
+      "shortDesc": "Hấp thụ truyền thống hiếu học, kiên trung của xứ Nghệ, nhân cách thanh liêm của cha Nguyễn Sinh Sắc và đức hy sinh, nhân hậu của mẹ Hoàng Thị Loan.",
+      "detailDesc": "Nguyễn Tất Thành (sinh ngày 19/5/1890 tại làng Kim Liên, Nam Đàn, Nghệ An) lớn lên trong gia đình nhà nho yêu nước. Cha của Người là cụ Phó bảng Nguyễn Sinh Sắc - một vị quan thanh liêm với triết lý: 'Quan trường là nô lệ trong những người nô lệ, lại càng nô lệ hơn'. Cụ luôn dạy các con: 'Đừng lấy phong cách nhà quan làm phong cách nhà ta'. Mẹ của Người là cụ bà Hoàng Thị Loan, người mẹ Việt Nam tiêu biểu tảo tần, nhân hậu, hết mực thương chồng yêu con. Nền tảng đạo đức gia đình và bề dày lịch sử oanh liệt của quê hương Nghệ An đã vun đắp tâm hồn, lý tưởng vị tha, thương dân từ thuở thiếu thời.",
+      "significance": "Đặt nền móng đạo đức, nhân cách văn hóa và hun đúc lòng căm thù giặc, tình thương sâu sắc đối với đồng bào cùng khổ.",
+      "quotes": "Đừng lấy phong cách nhà quan làm phong cách nhà ta. (Lời dạy của cụ Phó bảng Nguyễn Sinh Sắc)",
+      "works": "Các bài học vỡ lòng chữ Hán và sách báo tiến bộ thời thơ ấu tại Huế và Vinh."
+    },
+    {
+      "id": "ev-02",
+      "periodId": "period-1",
+      "date": "Tháng 04/1908",
+      "year": 1908,
+      "location": "Kinh thành Huế",
+      "tag": "Hành động thực tiễn",
+      "title": "Tham gia phong trào chống sưu thuế của nhân dân Trung Kỳ",
+      "shortDesc": "Người thanh niên Nguyễn Tất Thành trực tiếp làm thông ngôn, xuống đường sát cánh cùng nông dân nghèo biểu tình đòi giảm sưu thuế.",
+      "detailDesc": "Khi đang học tại trường Quốc học Huế, chứng kiến cuộc sống lầm than cơ cực và sự phẫn uất của nhân dân miền Trung trước chế độ sưu thuế nặng nề, Nguyễn Tất Thành đã dấn thân tham gia cuộc biểu tình chống thuế của nông dân Thừa Thiên Huế. Người can đảm nhận lời làm thông ngôn tiếng Pháp giúp bà con nông dân gửi nguyện vọng đến quan Pháp. Hành động này thể hiện tinh thần nhập thế, không đứng ngoài nỗi đau khổ của nhân dân, bất chấp việc sau đó Người bị chính quyền thực dân theo dõi và buộc phải rời khỏi trường học.",
+      "significance": "Đánh dấu bước ngoặt dấn thân vào phong trào đấu tranh thực tế, gắn bó máu thịt với nỗi thống khổ của nhân dân lao động nghèo.",
+      "quotes": "Thấy nhân dân bị bóc lột cùng cực, tôi không thể khoanh tay đứng nhìn. Phải đứng về phía nhân dân đòi công lý.",
+      "works": "Đơn thỉnh cầu đòi giảm sưu thuế của nhân dân Thừa Thiên (Người làm thông ngôn)."
+    },
+    {
+      "id": "ev-03",
+      "periodId": "period-1",
+      "date": "1910",
+      "year": 1910,
+      "location": "Trường Dục Thanh, Phan Thiết (Bình Thuận)",
+      "tag": "Gieo mầm lý tưởng",
+      "title": "Dạy học tại trường Dục Thanh, truyền bá lòng yêu nước cho học sinh",
+      "shortDesc": "Thầy giáo Nguyễn Tất Thành dạy chữ Quốc ngữ, chữ Pháp và thể dục, truyền ngọn lửa tự hào dân tộc và ý thức công dân cho thanh thiếu niên.",
+      "detailDesc": "Trên đường vào Nam tìm cơ hội cứu nước, Nguyễn Tất Thành dừng chân tại Phan Thiết và nhận lời làm thầy giáo tại trường Dục Thanh (trường tư thục do các sĩ phu yêu nước phong trào Duy Tân sáng lập). Với phương pháp sư phạm tiến bộ, Người dạy học sinh không chỉ kiến thức sách vở mà còn đưa học sinh đi dã ngoại, rèn luyện thể chất, khơi dậy tinh thần yêu non sông gấm vóc, trân trọng nòi giống Lạc Hồng và ý thức trách nhiệm đối với vận mệnh Tổ quốc.",
+      "significance": "Thể hiện tư tưởng giáo dục tiến bộ: học đi đôi với hành, giáo dục phải gắn liền với bồi dưỡng lòng yêu nước và ý chí tự cường dân tộc.",
+      "quotes": "Dạy chữ để mở mang dân trí, rèn thân để cứu quốc, khơi dậy lòng yêu nước trong mỗi người con đất Việt.",
+      "works": "Bài giảng chữ Quốc ngữ, thơ ca yêu nước truyền khẩu tại trường Dục Thanh."
+    },
+    {
+      "id": "ev-04",
+      "periodId": "period-1",
+      "date": "05/06/1911",
+      "year": 1911,
+      "location": "Bến cảng Nhà Rồng (Sài Gòn)",
+      "tag": "Khởi đầu hành trình vĩ đại",
+      "title": "Rời bến cảng Nhà Rồng ra đi tìm đường cứu nước",
+      "image": "./images/image.png",
+      "imageCaption": "Chân dung người thanh niên yêu nước Nguyễn Tất Thành và con tàu Đô đốc Latouche-Tréville rời bến cảng Sài Gòn ngày 05/06/1911 (Tư liệu Bảo tàng Hồ Chí Minh)",
+      "shortDesc": "Với tên gọi Văn Ba, Người bước lên con tàu Đô đốc Latouche-Tréville mang theo hoài bão cháy bỏng tìm chân lý giải phóng non sông.",
+      "detailDesc": "Tuy rất khâm phục lòng yêu nước của các vị tiền bối như Phan Bội Châu (Đông Du nhờ Nhật), Phan Châu Trinh (Duy Tân dựa Pháp cải cách), Hoàng Hoa Thám (khởi nghĩa Yên Thế dựa vào núi rừng), nhưng Nguyễn Tất Thành sớm nhận ra hạn chế trong phương pháp của các cụ: cụ Phan Bội Châu chẳng khác nào 'đuổi hổ cửa trước rước beo cửa sau'; cụ Phan Châu Trinh 'chẳng khác nào xin giặc rủ lòng thương'. Người quyết định chọn một hướng đi hoàn toàn mới: sang phương Tây - nơi có khẩu hiệu Tự do, Bình đẳng, Bác ái, tìm hiểu bản chất kẻ thù và học hỏi kinh nghiệm cách mạng thế giới để trở về giúp đồng bào.",
+      "significance": "Quyết định lịch sử mở đầu cuộc hành trình 30 năm bôn ba tìm chân lý, khai mở tương lai tươi sáng cho cách mạng giải phóng dân tộc Việt Nam.",
+      "quotes": "Tôi muốn đi ra nước ngoài, xem nước Pháp và các nước khác. Sau khi xem xét họ làm như thế nào, tôi sẽ trở về giúp đồng bào chúng ta.",
+      "works": "Quyết định mang tính bước ngoặt tư duy: Không dựa vào ngoại bang mà tự lực khảo sát thực tiễn phương Tây."
+    },
+    {
+      "id": "ev-05",
+      "periodId": "period-2",
+      "date": "Cuối 07/1911",
+      "year": 1911,
+      "location": "Cảng Marseille (Cộng hòa Pháp)",
+      "tag": "Tiếp xúc thực tiễn phương Tây",
+      "title": "Cập cảng Marseille, bắt đầu khảo sát thực tiễn phương Tây",
+      "shortDesc": "Lần đầu tiên đặt chân lên đất Pháp, Người tận mắt chứng kiến xã hội tư bản thực tế khác xa với những khẩu hiệu hào nhoáng được tuyên truyền.",
+      "detailDesc": "Sau gần hai tháng làm phụ bếp gian khổ trên tàu vượt đại dương, tàu cập cảng Marseille. Lần đầu tiên đặt chân lên chính quốc, Nguyễn Tất Thành ngỡ ngàng khi thấy ngay tại đất Pháp cũng có những người Pháp nghèo khổ, rách rưới phải làm phu khuân vác, bới thùng rác kiếm ăn. Ngược lại, người Pháp đối xử với Người bình đẳng hơn ở thuộc địa, gọi Người bằng 'ông' (Monsieur). Điều này bước đầu thức tỉnh nhận thức: xã hội phương Tây không phải chỉ toàn những điều hoa mỹ, mà chứa đầy mâu thuẫn giai cấp sâu sắc.",
+      "significance": "Phá tan định kiến về một chính quốc 'văn minh' thuần nhất, mở đầu quá trình phân biệt giữa nhân dân lao động Pháp với bọn thực dân xâm lược.",
+      "quotes": "Tại sao người Pháp không khai hóa đồng bào của họ trước khi đi khai hóa chúng ta?",
+      "works": "Ghi chép và thư từ gửi trường thuộc địa tại Paris (thể hiện nguyện vọng tìm hiểu văn hóa chính trị Pháp)."
+    },
+    {
+      "id": "ev-06",
+      "periodId": "period-2",
+      "date": "1911 – 1917",
+      "year": 1912,
+      "location": "Hoa Kỳ (1912), Anh (1913) và nhiều nước thuộc địa Á - Phi - Mỹ Latinh",
+      "tag": "Khảo sát quốc tế",
+      "title": "Bôn ba khắp các châu lục, nhận thức bản chất chủ nghĩa đế quốc",
+      "shortDesc": "Khảo sát thực tiễn tại Mỹ, Anh và các thuộc địa; đúc kết kết luận cốt lõi: nhân dân lao động là bạn, chủ nghĩa đế quốc là kẻ thù chung.",
+      "detailDesc": "Nguyễn Tất Thành tiếp tục theo các chuyến tàu biển đi qua nhiều nước ở châu Á, châu Phi, châu Mỹ Latinh; sống tại Boston và New York (Mỹ, 1912), sau đó sang London (Anh, 1913-1917). Người làm nhiều nghề: cào tuyết, quét dọn, bồi bàn, phụ bếp, rửa ảnh. Tại Mỹ, Người nghiên cứu Bản Tuyên ngôn Độc lập 1776 nhưng nhận thấy người da đen vẫn bị đối xử tàn bạo (nạn Ku Klux Klan). Tại Anh, Người tham gia Công đoàn lao động hải ngoại. Người rút ra kết luận mang tính quy luật: 'Ở đâu bọn đế quốc thực dân cũng tàn bạo, ở đâu những người lao động nghèo khổ cũng là bạn'.",
+      "significance": "Hình thành thế giới quan nhân đạo sâu sắc và tư duy phân tích giai cấp sơ khởi: đoàn kết nhân dân lao động thế giới chống chủ nghĩa đế quốc bóc lột.",
+      "quotes": "Dù màu da có khác nhau, trên đời này chỉ có hai giống người: giống người bóc lột và giống người bị bóc lột. Mà cũng chỉ có một mối tình hữu ái là thật mà thôi: tình hữu ái vô sản.",
+      "works": "Các bài ghi chép khảo sát phong trào công nhân Anh, phong trào đòi bình đẳng của người da màu tại Mỹ."
+    },
+    {
+      "id": "ev-07",
+      "periodId": "period-2",
+      "date": "1917",
+      "year": 1917,
+      "location": "Thủ đô Paris (Pháp)",
+      "tag": "Hoạt động chính trị",
+      "title": "Trở lại Pháp, gia nhập Đảng Xã hội và phong trào công nhân",
+      "shortDesc": "Người hòa mình vào đời sống chính trị sôi động của giai cấp cần lao Pháp, tích cực hoạt động trong phong trào của Việt kiều yêu nước.",
+      "detailDesc": "Cuối năm 1917, giữa lúc Chiến tranh thế giới thứ nhất đang đi vào giai đoạn kết thúc và Cách mạng Tháng Mười Nga bùng nổ thắng lợi, Nguyễn Tất Thành từ Anh trở lại Paris. Người kết giao với các nhà hoạt động yêu nước tiền bối như Phan Châu Trinh, Phan Văn Trường, Nguyễn Thế Truyền, tạo thành nhóm 'Những người Việt Nam yêu nước'. Năm 1919, Người gia nhập Đảng Xã hội Pháp (SFIO) vì thấy đây là tổ chức duy nhất bênh vực các dân tộc thuộc địa và tán thành lý tưởng Tự do - Bình đẳng - Bác ái chân chính.",
+      "significance": "Đánh dấu sự chuyển biến từ một thanh niên yêu nước đơn lẻ thành một nhà hoạt động chính trị có tổ chức trong phong trào công nhân quốc tế.",
+      "quotes": "Tôi tham gia Đảng Xã hội Pháp vì đây là tổ chức duy nhất ở Pháp bênh vực nhân dân các nước thuộc địa.",
+      "works": "Tham gia biên tập và dịch tài liệu tuyên truyền cho công nhân người Việt tại Paris."
+    },
+    {
+      "id": "ev-08",
+      "periodId": "period-2",
+      "date": "18/06/1919",
+      "year": 1919,
+      "location": "Cung điện Versailles (Pháp)",
+      "tag": "Tiếng sấm quốc tế",
+      "title": "Gửi Bản Yêu sách của nhân dân An Nam tới Hội nghị Versailles",
+      "image": "./images/yeu_sach_an_nam_1919.png",
+      "imageCaption": "Văn bản gốc tiếng Pháp Bản Yêu sách của nhân dân An Nam (8 điểm) gửi Hội nghị Versailles ngày 18/06/1919 ký tên Nguyễn Ái Quốc",
+      "shortDesc": "Ký tên Nguyễn Ái Quốc, đòi quyền tự do dân chủ và bình đẳng cho nhân dân Việt Nam, làm rung chuyển dư luận chính giới Pháp.",
+      "detailDesc": "Thay mặt Hội những người Việt Nam yêu nước tại Pháp, Nguyễn Ái Quốc gửi tới Hội nghị Versailles bản 'Yêu sách của nhân dân An Nam' (Revendications du peuple annamite) gồm 8 điểm, đòi chính phủ Pháp thừa nhận các quyền tự do, dân chủ, bình đẳng cho nhân dân An Nam: ân xá tù chính trị, tự do báo chí, tự do hội họp, lập pháp, bình đẳng tư pháp. Tuy các nước đế quốc thắng trận hoàn toàn phớt lờ, nhưng bản Yêu sách đã gây tiếng vang lớn trên trường quốc tế và thổi luồng gió mới thức tỉnh tinh thần yêu nước trong nhân dân trong nước.",
+      "significance": "Tiếng nói chính nghĩa đầu tiên của đại biểu dân tộc Việt Nam trên diễn đàn quốc tế. Người rút ra bài học đắt giá: Muốn giải phóng, chỉ có thể trông cậy vào chính lực lượng của bản thân mình.",
+      "quotes": "Chủ nghĩa Uyn-xơn chỉ là trò bịp bợm. Muốn được giải phóng, các dân tộc chỉ có thể trông cậy vào lực lượng của bản thân mình.",
+      "works": "Bản Yêu sách của nhân dân An Nam (8 điểm) in bằng tiếng Pháp và chữ Quốc ngữ."
+    },
+    {
+      "id": "ev-09",
+      "periodId": "period-2",
+      "date": "Tháng 07/1920",
+      "year": 1920,
+      "location": "Paris (Pháp)",
+      "tag": "Tìm thấy ánh sáng chân lý",
+      "title": "Đọc Sơ thảo Luận cương của Lênin về vấn đề dân tộc và thuộc địa",
+      "shortDesc": "Tìm thấy con đường chân chính giải phóng giống nòi: con đường cách mạng vô sản theo học thuyết Mác - Lênin vĩ đại.",
+      "detailDesc": "Trên báo L'Humanité (Nhân đạo) các ngày 16 và 17/7/1920, Nguyễn Ái Quốc đọc bản 'Sơ thảo lần thứ nhất những luận cương về vấn đề dân tộc và vấn đề thuộc địa' của V.I. Lênin gửi Đại hội II Quốc tế Cộng sản. Luận cương đã giải đáp chính xác và thấu đáo câu hỏi Người trăn trở suốt 10 năm: làm thế nào để giải phóng dân tộc thuộc địa? Lênin khẳng định phong trào giải phóng dân tộc thuộc địa là một bộ phận khăng khít của cách mạng vô sản thế giới, các đảng cộng sản phải hết lòng ủng hộ phong trào này.",
+      "significance": "Thời khắc lịch sử quyết định phương hướng cứu nước. Người xúc động đến phát khóc và khẳng định: 'Đây là cái cần thiết cho chúng ta, đây là con đường giải phóng chúng ta!'.",
+      "quotes": "Luận cương của Lênin làm cho tôi rất cảm động, phấn khởi, sáng tỏ, tin tưởng biết bao! Tôi vui mừng đến phát khóc lên. Ngồi một mình trong buồng mà tôi nói to lên như đang nói trước quần chúng đông đảo: Hỡi đồng bào bị đọa đày đau khổ! Đây là cái cần thiết cho chúng ta, đây là con đường giải phóng chúng ta!",
+      "works": "Nghiên cứu bản Sơ thảo Luận cương của Lênin trên báo L'Humanité (7/1920)."
+    },
+    {
+      "id": "ev-10",
+      "periodId": "period-2",
+      "date": "25 – 30/12/1920",
+      "year": 1920,
+      "location": "Thành phố Tours (Pháp)",
+      "tag": "Bước ngoặt về chất",
+      "title": "Bỏ phiếu tán thành Quốc tế III, sáng lập Đảng Cộng sản Pháp",
+      "image": "./images/dai_hoi_tours_1920_goc.jpg",
+      "imageCaption": "Bức ảnh lịch sử: Đồng chí Nguyễn Ái Quốc phát biểu tại Đại hội lần thứ XVIII Đảng Xã hội Pháp ở thành phố Tours (tháng 12/1920) (Ảnh: TTXVN)",
+      "shortDesc": "Tại Đại hội XVIII Đảng Xã hội Pháp, Người trở thành một trong những người sáng lập Đảng Cộng sản Pháp và là người cộng sản Việt Nam đầu tiên.",
+      "detailDesc": "Tại Đại hội lần thứ XVIII của Đảng Xã hội Pháp họp ở thành phố Tours, Nguyễn Ái Quốc đã đứng về phía đa số kiên quyết bỏ phiếu tán thành gia nhập Quốc tế III (Quốc tế Cộng sản do Lênin sáng lập) và tham gia sáng lập Đảng Cộng sản Pháp. Trong bài phát biểu nổi tiếng tại Đại hội, Người tố cáo đanh thép tội ác dã man của thực dân Pháp tại Đông Dương và kêu gọi Đảng hành động cụ thể để ủng hộ các dân tộc thuộc địa.",
+      "significance": "Bước nhảy vọt về chất trong tư tưởng Hồ Chí Minh: từ chủ nghĩa yêu nước chân chính vươn lên lập trường chủ nghĩa Mác - Lênin và cách mạng vô sản. Mở ra kỷ nguyên kết hợp độc lập dân tộc với chủ nghĩa xã hội.",
+      "quotes": "Tôi tham gia Quốc tế III vì Quốc tế này quan tâm giải phóng các dân tộc thuộc địa. Tự do cho đồng bào tôi, độc lập cho Tổ quốc tôi, đấy là tất cả những điều tôi muốn, đấy là tất cả những điều tôi hiểu.",
+      "works": "Bài phát biểu lịch sử tại Đại hội Tours (26/12/1920)."
+    },
+    {
+      "id": "ev-11",
+      "periodId": "period-3",
+      "date": "1921",
+      "year": 1921,
+      "location": "Paris (Pháp)",
+      "tag": "Đoàn kết quốc tế",
+      "title": "Tham gia sáng lập Hội Liên hiệp thuộc địa",
+      "shortDesc": "Tập hợp các nhà yêu nước đến từ các thuộc địa của Pháp (châu Phi, Antilles, Madagascar, Đông Dương) tạo mặt trận chung chống chủ nghĩa đế quốc.",
+      "detailDesc": "Nhận thức sâu sắc rằng các dân tộc thuộc địa cần đoàn kết để tự giải phóng, năm 1921, cùng với các nhà hoạt động cách mạng của các xứ thuộc địa Pháp như Algeria, Madagascar, Antilles... Nguyễn Ái Quốc tích cực tham gia vận động và sáng lập Hội Liên hiệp thuộc địa (Union Intercoloniale). Người được bầu vào Ban Chấp hành của Hội. Tôn chỉ của Hội là tập hợp nhân dân các xứ thuộc địa đang sống trên đất Pháp, đấu tranh đòi quyền tự quyết và vạch trần tội ác thực dân.",
+      "significance": "Hiện thực hóa tư tưởng đoàn kết quốc tế giữa các dân tộc thuộc địa bị áp bức, đặt nền móng cho liên minh cách mạng Á - Phi.",
+      "quotes": "Sự đoàn kết giữa các dân tộc thuộc địa là vũ khí sắc bén nhất để đập tan ách thống trị thực dân.",
+      "works": "Lời kêu gọi nhân dân các thuộc địa (Tuyên ngôn của Hội Liên hiệp thuộc địa, 1921)."
+    },
+    {
+      "id": "ev-12",
+      "periodId": "period-3",
+      "date": "01/04/1922",
+      "year": 1922,
+      "location": "Paris (Pháp)",
+      "tag": "Chiến sĩ báo chí cách mạng",
+      "title": "Sáng lập báo Le Paria (Người cùng khổ)",
+      "image": "./images/tranh_biem_hoa_le_paria.jpg",
+      "imageCaption": "Tranh châm biếm do Nguyễn Ái Quốc tự vẽ trên báo Le Paria (Người cùng khổ) vạch trần tội ác thực dân Pháp",
+      "shortDesc": "Làm chủ nhiệm, chủ bút kiêm phát hành báo Le Paria bằng tiếng Pháp - tiếng nói chiến đấu đanh thép của các dân tộc nô lệ.",
+      "detailDesc": "Ngày 01/04/1922, số đầu tiên của tờ báo Le Paria (Người cùng khổ) ra mắt tại Paris. Nguyễn Ái Quốc là linh hồn của tờ báo: Người vừa viết xã luận, vẽ tranh châm biếm, sửa morasse, bỏ tiền túi in báo và tự mang báo đi phát hành hoặc bí mật chuyển về các nước thuộc địa. Tờ báo trở thành vũ khí tư tưởng sắc bén, thức tỉnh lương tri nhân loại tiến bộ, khơi dậy tinh thần tự giải phóng của nhân dân các nước thuộc địa của đế quốc Pháp.",
+      "significance": "Đặt nền móng cho báo chí cách mạng mácxít của các dân tộc thuộc địa; chuyển hóa lý luận mácxít thành ngôn ngữ chiến đấu bình dị, lay động quần chúng.",
+      "quotes": "Le Paria là diễn đàn của các dân tộc thuộc địa, vũ khí chiến đấu chống chủ nghĩa tư bản thực dân và thức tỉnh các tầng lớp bị áp bức.",
+      "works": "Các bài báo sắc sảo trên Le Paria: Lời than vãn của bà Trưng Trắc, Vi hành (Incognito), Động vật học..."
+    },
+    {
+      "id": "ev-13",
+      "periodId": "period-3",
+      "date": "Tháng 06/1925",
+      "year": 1925,
+      "location": "Paris (Pháp) & Quảng Châu (Trung Quốc)",
+      "tag": "Tác phẩm kinh điển & Tổ chức tiền thân",
+      "title": "Xuất bản Bản án chế độ thực dân Pháp & Sáng lập Hội VN Cách mạng Thanh niên",
+      "image": "./images/ban_an_thuc_dan_1925.jpg",
+      "imageCaption": "Trang bìa tác phẩm 'Bản án chế độ thực dân Pháp' (Le Procès de la colonisation française) xuất bản tại Paris năm 1925",
+      "shortDesc": "Bản cáo trạng lịch sử tố cáo toàn diện tội ác thực dân Pháp; đồng thời thành lập tổ chức tiền thân đào tạo cán bộ chuẩn bị cho sự ra đời của Đảng.",
+      "detailDesc": "Năm 1925 là năm ghi dấu ấn đặc biệt của Nguyễn Ái Quốc. Tại Paris, tác phẩm 'Bản án chế độ thực dân Pháp' (Le Procès de la colonisation française) được xuất bản, vạch trần tội ác dã man về kinh tế, chính trị, văn hóa của thực dân Pháp đối với nhân dân thuộc địa. Đồng thời, tại Quảng Châu (Trung Quốc), Người thành lập Hội Việt Nam Cách mạng Thanh niên (tháng 6/1925) - tổ chức tiền thân của Đảng, và cho ra đời tờ báo Thanh niên (21/6/1925). Người trực tiếp mở các lớp huấn luyện chính trị cho thanh niên yêu nước sang từ Việt Nam.",
+      "significance": "Trang bị vũ khí lý luận chống thực dân Pháp; chuẩn bị chu đáo về tổ chức và đội ngũ cán bộ nòng cốt cho sự ra đời của Đảng Cộng sản Việt Nam.",
+      "quotes": "Chủ nghĩa tư bản là một con đỉa có một cái vòi bám vào giai cấp vô sản ở chính quốc và một cái vòi khác bám vào giai cấp vô sản ở thuộc địa. Nếu muốn giết con vật ấy, người ta phải đồng thời cắt cả hai vòi.",
+      "works": "Tác phẩm Bản án chế độ thực dân Pháp (Paris, 1925) & Báo Thanh niên (Quảng Châu, 1925)."
+    },
+    {
+      "id": "ev-14",
+      "periodId": "period-3",
+      "date": "Đầu năm 1927",
+      "year": 1927,
+      "location": "Quảng Châu (Trung Quốc)",
+      "tag": "Ngọn đuốc lý luận",
+      "title": "Xuất bản tác phẩm Đường Kách mệnh",
+      "image": "./images/duong_kach_menh_1927.jpg",
+      "imageCaption": "Trang bìa tác phẩm 'Đường Kách mệnh' do Bộ Tuyên truyền Hội Liên hiệp các dân tộc bị áp bức xuất bản năm 1927 tại Quảng Châu",
+      "shortDesc": "Tác phẩm lý luận cách mạng kinh điển, vạch rõ phương hướng, đường lối, lực lượng và vai trò tiền phong của Đảng cho cách mạng Việt Nam.",
+      "detailDesc": "Tác phẩm 'Đường Kách mệnh' tập hợp các bài giảng của Nguyễn Ái Quốc tại các lớp huấn luyện chính trị ở Quảng Châu. Tác phẩm xác định rõ: Cách mạng muốn thành công trước hết phải có Đảng cách mạng lãnh đạo; Đảng phải lấy chủ nghĩa Mác - Lênin làm cốt; Cách mạng giải phóng dân tộc là sự nghiệp của toàn dân, trong đó công nông là gốc, là chủ cách mạng, các tầng lớp khác là bầu bạn; Cách mạng Việt Nam là một bộ phận của cách mạng thế giới. Mở đầu tác phẩm, Người đặt ra 23 tiêu chuẩn về tư cách một người cách mệnh.",
+      "significance": "Sự chuẩn bị toàn diện và trực tiếp về chính trị, tư tưởng và lý luận cho việc thành lập Đảng Cộng sản Việt Nam.",
+      "quotes": "Đảng muốn vững thì phải có chủ nghĩa làm cốt, trong đảng ai ai cũng phải hiểu, ai ai cũng phải theo chủ nghĩa ấy. Đảng mà không có chủ nghĩa cũng như người không có trí khôn, tàu không có bàn chỉ nam. Bây giờ học thuyết nhiều, chủ nghĩa nhiều, nhưng chủ nghĩa chân chính nhất, chắc chắn nhất, cách mạng nhất là chủ nghĩa Lênin.",
+      "works": "Tác phẩm Đường Kách mệnh (Bộ Tuyên truyền của Hội Liên hiệp các dân tộc bị áp bức xuất bản, 1927)."
+    },
+    {
+      "id": "ev-15",
+      "periodId": "period-3",
+      "date": "03/02/1930",
+      "year": 1930,
+      "location": "Bán đảo Cửu Long, Hương Cảng (Hồng Kông)",
+      "tag": "Sáng lập Đảng & Cương lĩnh đầu tiên",
+      "title": "Chủ trì Hội nghị thành lập Đảng & thông qua Cương lĩnh chính trị đầu tiên",
+      "shortDesc": "Hợp nhất 3 tổ chức cộng sản thành Đảng Cộng sản Việt Nam; thông qua Cương lĩnh vắn tắt - ngọn cờ dẫn đường cho cách mạng Việt Nam.",
+      "detailDesc": "Từ ngày 6/1 đến 7/2/1930 (lấy ngày 3/2 làm kỷ niệm), với tư cách phái viên của Quốc tế Cộng sản, Nguyễn Ái Quốc chủ trì Hội nghị hợp nhất các tổ chức cộng sản (Đông Dương Cộng sản Đảng, An Nam Cộng sản Đảng và sau đó là Đông Dương Cộng sản Liên đoàn) tại Hồng Kông. Người khởi thảo: Chánh cương vắn tắt, Sách lược vắn tắt, Chương trình tóm tắt và Điều lệ vắn tắt của Đảng. Các văn kiện này hợp thành Cương lĩnh chính trị đầu tiên của Đảng, xác định mục tiêu làm 'tư sản dân quyền cách mạng và thổ địa cách mạng để đi tới xã hội cộng sản', giương cao ngọn cờ độc lập dân tộc gắn liền với CNXH.",
+      "significance": "Chấm dứt hoàn toàn cuộc khủng hoảng sâu sắc về đường lối và giai cấp lãnh đạo cách mạng kéo dài hơn 2/3 thế kỷ; đánh dấu sự hình thành cơ bản tư tưởng Hồ Chí Minh về cách mạng Việt Nam.",
+      "quotes": "Chủ trương làm tư sản dân quyền cách mạng và thổ địa cách mạng để đi tới xã hội cộng sản... Đánh đổ đế quốc chủ nghĩa Pháp và bọn phong kiến. Làm cho nước Nam được hoàn toàn độc lập.",
+      "works": "Chánh cương vắn tắt của Đảng, Sách lược vắn tắt của Đảng, Chương trình vắn tắt, Lời kêu gọi nhân dịp thành lập Đảng (1930)."
+    },
+    {
+      "id": "ev-16",
+      "periodId": "period-4",
+      "date": "Tháng 10/1930",
+      "year": 1930,
+      "location": "Hương Cảng (Hồng Kông)",
+      "tag": "Thử thách nội bộ & Quan điểm tả khuynh",
+      "title": "Hội nghị Trung ương Đảng tháng 10/1930 và quan điểm tả khuynh",
+      "shortDesc": "Tư tưởng sáng tạo của Người trong Cương lĩnh đầu tiên bị phê phán là 'hữu khuynh', 'dân tộc chủ nghĩa' do ảnh hưởng của Đại hội VI Quốc tế Cộng sản.",
+      "detailDesc": "Do chịu ảnh hưởng nặng nề từ các quan điểm tả khuynh, giáo điều của Đại hội VI Quốc tế Cộng sản (1928), Hội nghị Trung ương họp tháng 10/1930 do đồng chí Trần Phú chủ trì đã ra nghị quyết cho rằng Hội nghị hợp nhất do Nguyễn Ái Quốc chủ trì có nhiều sai lầm, 'chỉ lo đến việc phản đế mà quên mất lợi ích giai cấp tranh đấu, ấy là một sự rất nguy hiểm'. Hội nghị quyết định thủ tiêu Chánh cương, Sách lược vắn tắt của Nguyễn Ái Quốc; đổi tên Đảng thành Đảng Cộng sản Đông Dương, đặt nhiệm vụ đấu tranh giai cấp và thổ địa cách mạng lên hàng đầu.",
+      "significance": "Một khúc quanh thử thách cam go. Nguyễn Ái Quốc kiên nhẫn, bình tĩnh, giữ vững nguyên tắc chân lý khoa học, không nản lòng trước những định kiến sai lầm.",
+      "quotes": "Trong hoàn cảnh thuộc địa, nếu không giải quyết được vấn đề dân tộc giải phóng thì quyền lợi của giai cấp vạn năm cũng không đòi lại được.",
+      "works": "Báo cáo gửi Quốc tế Cộng sản kiên định bảo vệ đường lối đoàn kết toàn dân tộc."
+    },
+    {
+      "id": "ev-17",
+      "periodId": "period-4",
+      "date": "06/06/1931 – 1933",
+      "year": 1931,
+      "location": "Hương Cảng (Hồng Kông)",
+      "tag": "Ngục tù đế quốc",
+      "title": "Bị cảnh sát Anh bắt giam tại Hồng Kông (Vụ án Tống Văn Sơ)",
+      "shortDesc": "Thoát khỏi âm mưu ám sát và dẫn độ của mật thám Pháp nhờ sự giúp đỡ chí tình của luật sư tiến bộ Francis Loseby.",
+      "detailDesc": "Ngày 06/06/1931, Nguyễn Ái Quốc (với tên gọi Tống Văn Sơ) bị cảnh sát Anh bắt giam tại số nhà 186 phố Tam Kung (Cửu Long, Hồng Kông). Thực dân Pháp cấu kết tìm mọi cách đòi chính quyền Anh trục xuất Người sang Đông Dương để hành quyết. Trong tình thế ngàn cân treo sợi tóc, nhờ sự can thiệp nhân đạo và dũng cảm của gia đình luật sư tiến bộ người Anh Francis Loseby, Người được Tòa án Tối cao Hồng Kông và Viện Cơ mật Hoàng gia Anh tuyên trả tự do. Đầu năm 1933, Người bí mật rời Hồng Kông an toàn.",
+      "significance": "Biểu tượng rực rỡ của ý chí gang thép, bản lĩnh cách mạng bất khuất và nghệ thuật vận dụng pháp luật tư sản để bảo vệ chân lý của Người.",
+      "quotes": "Kiên định mục tiêu cách mạng, biến nhà tù đế quốc thành trường học rèn luyện ý chí đấu tranh.",
+      "works": "Các bản tự biện hộ và thư gửi văn phòng luật sư Loseby (1931 - 1933)."
+    },
+    {
+      "id": "ev-18",
+      "periodId": "period-4",
+      "date": "1934 – 1938",
+      "year": 1934,
+      "location": "Mátxcơva (Liên Xô)",
+      "tag": "Học tập & Nghiên cứu lý luận",
+      "title": "Học tập tại Trường Quốc tế Lênin và Viện Nghiên cứu các vấn đề dân tộc",
+      "shortDesc": "Vượt qua sự hiểu lầm và trạng thái thụ động, Người đi sâu nghiên cứu lý luận Mác - Lênin, lịch sử văn hóa thế giới và chuẩn bị thời cơ.",
+      "detailDesc": "Mùa xuân 1934, Người trở lại Mátxcơva với bí danh Linov, vào học tại Trường Quốc tế Lênin, sau đó làm nghiên cứu sinh tại Ban Sử của Viện Nghiên cứu các vấn đề dân tộc và thuộc địa. Đây là giai đoạn Người sống trầm lặng, chịu sự giám sát và nghi ngờ về quan điểm lập trường từ một số cán bộ Quốc tế Cộng sản. Bằng sự nhẫn nại phi thường và niềm tin tất thắng vào chân lý, Người tập trung nghiên cứu, làm giàu trí tuệ, dịch sách, theo dõi sát sao cục diện chuyển biến của tình hình quốc tế khi nguy cơ phát xít bùng nổ.",
+      "significance": "Củng cố và hoàn thiện tầm vóc học thuật, phương pháp luận khoa học biện chứng, tích lũy năng lượng cho bước ngoặt lãnh đạo cách mạng nước nhà.",
+      "quotes": "Người ta chỉ có thể trở thành người cộng sản khi biết làm giàu trí óc của mình bằng sự hiểu biết tất cả những kho tàng tri thức mà nhân loại đã tạo ra. (V.I. Lênin)",
+      "works": "Các công trình nghiên cứu lịch sử dân tộc Đông Dương và dịch thuật lý luận tại Viện Nghiên cứu dân tộc thuộc địa."
+    },
+    {
+      "id": "ev-19",
+      "periodId": "period-4",
+      "date": "06/06/1938",
+      "year": 1938,
+      "location": "Mátxcơva (Liên Xô)",
+      "tag": "Quyết tâm hành động",
+      "title": "Gửi thư đề nghị Quốc tế Cộng sản cho phép trở về nước hoạt động",
+      "shortDesc": "Bức thư tâm can gửi lãnh tụ Dimitrov bày tỏ khát vọng cháy bỏng muốn trở về trực tiếp chiến đấu bên cạnh phong trào cách mạng đồng bào.",
+      "detailDesc": "Nhận thấy Chiến tranh thế giới thứ hai sắp bùng nổ và thời cơ cách mạng lớn đang đến rất gần, ngày 06/06/1938, Nguyễn Ái Quốc gửi thư cho Georgi Dimitrov (Tổng Bí thư Quốc tế Cộng sản) tha thiết đề nghị được trở về nước hoạt động. Bức thư có đoạn viết cảm động: 'Xin đồng chí giúp đỡ tôi thay đổi tình cảnh đau buồn này... Đừng để tôi sống quá lâu trong tình trạng không hoạt động và giống như là sống ở bên cạnh, ở bên ngoài của Đảng'. Đề nghị chính đáng của Người đã được chấp thuận.",
+      "significance": "Khẳng định tinh thần trách nhiệm vô bờ bến đối với vận mệnh non sông, mở lối thoát cho giai đoạn khó khăn để bước vào giai đoạn hành động quyết định.",
+      "quotes": "Xin đồng chí giúp đỡ tôi thay đổi tình cảnh đau buồn này... Đừng để tôi sống quá lâu trong tình trạng không hoạt động và giống như là sống ở bên cạnh, ở bên ngoài của Đảng.",
+      "works": "Thư gửi Tổng Bí thư Quốc tế Cộng sản Georgi Dimitrov (06/06/1938)."
+    },
+    {
+      "id": "ev-20",
+      "periodId": "period-5",
+      "date": "28/01/1941",
+      "year": 1941,
+      "location": "Cột mốc 108, Pác Bó, Hà Quảng (Cao Bằng)",
+      "tag": "Trở về đất mẹ",
+      "title": "Trở về Tổ quốc trực tiếp lãnh đạo phong trào cách mạng",
+      "shortDesc": "Sau 30 năm bôn ba hải ngoại, Người đặt chân lên mảnh đất quê hương tại cột mốc biên giới 108, xúc động nghẹn ngào trước non sông.",
+      "detailDesc": "Ngày 28/01/1941 (tức mùng 2 Tết Tân Tỵ), Nguyễn Ái Quốc cùng một số cán bộ vượt qua cột mốc 108 biên giới Việt - Trung trở về mảnh đất Pác Bó (xã Trường Hà, huyện Hà Quảng, tỉnh Cao Bằng). Sau 30 năm xa cách, Người cúi xuống hôn mảnh đất thiêng liêng của Tổ quốc. Người chọn hang Cốc Bó làm căn cứ bí mật, mở các lớp huấn luyện cán bộ, biên soạn tập tài liệu 'Con đường giải phóng' (tháng 1/1941) và chỉ đạo chuẩn bị cho Hội nghị Trung ương VIII quan trọng bậc nhất của Đảng.",
+      "significance": "Thời khắc lịch sử thiêng liêng: Cách mạng Việt Nam từ đây có vị Tổng chỉ huy vĩ đại trực tiếp chèo lái con thuyền cứu quốc ngay tại cội nguồn đất mẹ.",
+      "quotes": "Bác về im lặng. Con chim hót / Thánh thót bờ lau, vui ngẩn ngơ... / Bác đã về đây, Tổ quốc ơi! / Nhớ thương hòn đất ấm hơi Người... (Thơ Tố Hữu)",
+      "works": "Tập bài giảng Con đường giải phóng (1/1941), tài liệu huấn luyện du kích Pác Bó."
+    },
+    {
+      "id": "ev-21",
+      "periodId": "period-5",
+      "date": "Tháng 05/1941",
+      "year": 1941,
+      "location": "Lán Khuổi Nặm, Pác Bó (Cao Bằng)",
+      "tag": "Chuyển hướng chiến lược tối cao",
+      "title": "Chủ trì Hội nghị Trung ương VIII & Thành lập Mặt trận Việt Minh",
+      "shortDesc": "Đặt nhiệm vụ giải phóng dân tộc lên trên hết, tạm gác khẩu hiệu điền địa, sáng lập Việt Nam Độc lập Đồng minh (Việt Minh).",
+      "detailDesc": "Từ ngày 10 đến 19/5/1941, tại lán Khuổi Nặm (Pác Bó), Nguyễn Ái Quốc chủ trì Hội nghị lần thứ VIII Ban Chấp hành Trung ương Đảng. Hội nghị khẳng định: 'Trong lúc này quyền lợi dân tộc giải phóng cao hơn hết thảy'. Hội nghị quyết định tạm gác khẩu hiệu cách mạng ruộng đất, giải quyết vấn đề dân tộc trong khuôn khổ từng nước Đông Dương; thành lập Mặt trận Việt Nam Độc lập Đồng minh (gọi tắt là Việt Minh, 19/5/1941) nhằm tập hợp mọi lực lượng yêu nước không phân biệt giai cấp, tôn giáo; chuẩn bị khởi nghĩa vũ trang từng phần tiến tới tổng khởi nghĩa.",
+      "significance": "Sự trở về hoàn chỉnh và phát triển rực rỡ tư tưởng của Cương lĩnh chính trị đầu tiên 1930; ngọn cờ tập hợp sức mạnh toàn dân tộc làm nên thắng lợi Cách mạng Tháng Tám 1945.",
+      "quotes": "Trong lúc này nếu không giải quyết được vấn đề dân tộc giải phóng, không đòi được độc lập, tự do cho toàn thể dân tộc, thì chẳng những toàn thể quốc gia dân tộc còn chịu mãi kiếp ngựa trâu, mà quyền lợi của bộ phận, giai cấp đến vạn năm cũng không đòi lại được.",
+      "works": "Nghị quyết Hội nghị Trung ương VIII (5/1941), Tuyên ngôn và Điều lệ Việt Minh, Thư Kính cáo đồng bào (06/06/1941)."
+    },
+    {
+      "id": "ev-22",
+      "periodId": "period-5",
+      "date": "22/12/1944",
+      "year": 1944,
+      "location": "Rừng Trần Hưng Đạo, Nguyên Bình (Cao Bằng)",
+      "tag": "Xây dựng lực lượng vũ trang",
+      "title": "Chỉ đạo thành lập Đội Việt Nam Tuyên truyền Giải phóng quân",
+      "image": "./images/giai_phong_quan_1944.jpg",
+      "imageCaption": "Tư liệu lịch sử: Đồng chí Võ Nguyên Giáp và 34 chiến sĩ Đội Việt Nam Tuyên truyền Giải phóng quân tại rừng Trần Hưng Đạo (22/12/1944)",
+      "shortDesc": "Tiền thân của Quân đội nhân dân Việt Nam anh hùng, với phương châm 'chính trị trọng hơn quân sự', 'tuyên truyền trọng hơn tác chiến'.",
+      "detailDesc": "Tháng 12/1944, Hồ Chí Minh ra chỉ thị thành lập Đội Việt Nam Tuyên truyền Giải phóng quân. Người giao cho đồng chí Võ Nguyên Giáp tổ chức lễ thành lập tại khu rừng Trần Hưng Đạo (Cao Bằng) gồm 34 chiến sĩ kiên trung. Trong chỉ thị, Người vạch rõ: tên của nó mang ý nghĩa 'chính trị trọng hơn quân sự', nó là đội quân đàn anh, khởi đầu cho cả một lực lượng vũ trang giải phóng nhân dân rộng khắp mai sau, tiến hành hai trận đầu thắng lợi vang dội Phai Khắt và Nà Ngần.",
+      "significance": "Hiện thực hóa tư tưởng quân sự Hồ Chí Minh: khởi nghĩa toàn dân và xây dựng quân đội nhân dân từ nhân dân mà ra, vì nhân dân mà chiến đấu.",
+      "quotes": "Đội Việt Nam Tuyên truyền Giải phóng quân là đội đàn anh, mong cho nó hạnh phúc một sự nghiệp vô cùng vẻ vang. Tuy lúc đầu quy mô của nó còn nhỏ, nhưng tiền đồ của nó rất vẻ vang. Nó là khởi điểm của giải phóng quân, nó có thể đi suốt từ Nam chí Bắc.",
+      "works": "Chỉ thị thành lập Đội Việt Nam Tuyên truyền Giải phóng quân (12/1944)."
+    },
+    {
+      "id": "ev-23",
+      "periodId": "period-5",
+      "date": "19/08/1945",
+      "year": 1945,
+      "location": "Thủ đô Hà Nội và toàn quốc",
+      "tag": "Kỳ tích dân tộc",
+      "title": "Lãnh đạo Tổng khởi nghĩa Cách mạng Tháng Tám giành thắng lợi",
+      "shortDesc": "Chớp thời cơ ngàn năm có một, ra Lời kêu gọi Tổng khởi nghĩa: Đem sức ta mà tự giải phóng cho ta.",
+      "detailDesc": "Giữa tháng 8/1945, khi phát xít Nhật đầu hàng Đồng minh, chớp đúng thời cơ cách mạng chín muồi, dù đang ốm nặng tại Tân Trào (Tuyên Quang), Hồ Chí Minh kiên quyết chỉ thị: 'Dù phải đốt cháy cả dãy Trường Sơn cũng phải kiên quyết giành cho được độc lập!'. Người ra Lời kêu gọi Tổng khởi nghĩa. Chỉ trong vòng 15 ngày (từ 14 đến 28/8/1945), dưới sự lãnh đạo của Đảng và Mặt trận Việt Minh, hơn 20 triệu nhân dân ta đã nhất tề vùng lên lật đổ ách thống trị hơn 80 năm của thực dân Pháp và ngót ngàn năm phong kiến, giành chính quyền về tay nhân dân.",
+      "significance": "Thắng lợi vĩ đại đầu tiên của chủ nghĩa Mác - Lênin và tư tưởng Hồ Chí Minh tại một nước thuộc địa; mở ra kỷ nguyên độc lập dân tộc gắn liền với chủ nghĩa xã hội.",
+      "quotes": "Giờ quyết định cho vận mệnh dân tộc ta đã đến. Toàn quốc đồng bào hãy đứng dậy đem sức ta mà tự giải phóng cho ta!",
+      "works": "Thư kêu gọi Tổng khởi nghĩa (8/1945), Nghị quyết Quốc dân Đại hội Tân Trào."
+    },
+    {
+      "id": "ev-24",
+      "periodId": "period-5",
+      "date": "02/09/1945",
+      "year": 1945,
+      "location": "Quảng trường Ba Đình (Hà Nội)",
+      "tag": "Khai sinh nước Việt Nam mới",
+      "title": "Đọc bản Tuyên ngôn Độc lập, khai sinh nước VNDCCH",
+      "image": "./images/quang_truong_ba_dinh_1945.jpg",
+      "imageCaption": "Lễ đài Độc lập tại Quảng trường Ba Đình ngày 02/09/1945, nơi Chủ tịch Hồ Chí Minh đọc bản Tuyên ngôn Độc lập",
+      "shortDesc": "Khẳng định trước toàn thế giới quyền độc lập tự do thiêng liêng của dân tộc, mở ra kỷ nguyên độc lập tự do cho đất nước.",
+      "detailDesc": "Ngày 02/09/1945, tại Quảng trường Ba Đình lịch sử, trước hàng chục vạn đồng bào, Chủ tịch Hồ Chí Minh thay mặt Chính phủ lâm thời đọc bản 'Tuyên ngôn Độc lập', khai sinh nước Việt Nam Dân chủ Cộng hòa. Mở đầu, Người viện dẫn Tuyên ngôn Độc lập 1776 của Mỹ và Tuyên ngôn Nhân quyền & Dân quyền 1791 của Pháp để khẳng định quyền con người, rồi nâng tầm lên thành quyền tự quyết thiêng liêng của các dân tộc: 'Tất cả các dân tộc trên thế giới đều sinh ra bình đẳng, dân tộc nào cũng có quyền sống, quyền sung sướng và quyền tự do'.",
+      "significance": "Văn kiện lập quốc vĩ đại kết tinh tinh hoa văn hóa và tư tưởng độc lập tự do; tuyên bố chấm dứt chế độ thực dân phong kiến, mở đầu thời đại Hồ Chí Minh.",
+      "quotes": "Nước Việt Nam có quyền hưởng tự do và độc lập, và sự thật đã thành một nước tự do, độc lập. Toàn thể dân tộc Việt Nam quyết đem tất cả tinh thần và lực lượng, tính mạng và của cải để giữ vững quyền tự do, độc lập ấy!",
+      "works": "Tuyên ngôn Độc lập (02/09/1945)."
+    },
+    {
+      "id": "ev-25",
+      "periodId": "period-5",
+      "date": "19/12/1946",
+      "year": 1946,
+      "location": "Làng Vạn Phúc, Hà Đông (Hà Nội)",
+      "tag": "Lời thề bảo vệ non sông",
+      "title": "Ra Lời kêu gọi Toàn quốc kháng chiến & nghệ thuật 'Dĩ bất biến ứng vạn biến'",
+      "image": "./images/ho_chi_minh_dong_khe_1950.jpg",
+      "imageCaption": "Chủ tịch Hồ Chí Minh trực tiếp ra mặt trận quan sát và chỉ đạo chiến dịch trong cuộc kháng chiến chống Pháp (Đông Khê 1950)",
+      "shortDesc": "Khởi đầu cuộc kháng chiến trường kỳ chống thực dân Pháp với quyết tâm sắt đá: 'Thà hy sinh tất cả, chứ nhất định không chịu mất nước'.",
+      "detailDesc": "Trước dã tâm quay lại xâm lược của thực dân Pháp, sau khi đã kiên nhẫn nhân nhượng và đàm phán bằng sách lược 'Dĩ bất biến ứng vạn biến' (tạm hòa hoãn với Tưởng để gạt thực dân Pháp, rồi tạm hòa hoãn với Pháp qua Hiệp định Sơ bộ 6/3 và Tạm ước 14/9 để đuổi quân Tưởng), đến khi kẻ thù lấn tới, đêm 19/12/1946, Chủ tịch Hồ Chí Minh đã ra 'Lời kêu gọi toàn quốc kháng chiến'. Lời hiệu triệu vang vọng núi sông vạch rõ đường lối kháng chiến toàn dân, toàn diện, trường kỳ và tự lực cánh sinh.",
+      "significance": "Kết tinh ý chí quật cường chống ngoại xâm của dân tộc; mẫu mực đỉnh cao của sách lược cách mạng mềm dẻo về sách lược nhưng kiên định về nguyên tắc độc lập.",
+      "quotes": "Chúng ta muốn hòa bình, chúng ta phải nhân nhượng. Nhưng chúng ta càng nhân nhượng, thực dân Pháp càng lấn tới, vì chúng quyết tâm cướp nước ta lần nữa! Không! Chúng ta thà hy sinh tất cả, chứ nhất định không chịu mất nước, nhất định không chịu làm nô lệ.",
+      "works": "Lời kêu gọi toàn quốc kháng chiến (19/12/1946), Chỉ thị Toàn dân kháng chiến."
+    },
+    {
+      "id": "ev-26",
+      "periodId": "period-5",
+      "date": "1946 – 1954",
+      "year": 1954,
+      "location": "Chiến khu Việt Bắc & Thung lũng Điện Biên Phủ",
+      "tag": "Kháng chiến thắng lợi",
+      "title": "Lãnh đạo kháng chiến chống Pháp thắng lợi (Điện Biên Phủ 'lừng lẫy năm châu')",
+      "image": "./images/dien_bien_phu_1954.jpg",
+      "imageCaption": "Lá cờ 'Quyết chiến Quyết thắng' tung bay trên nóc hầm tướng De Castries - Chiến dịch Điện Biên Phủ đại thắng (07/05/1954)",
+      "shortDesc": "Đưa đường lối kháng chiến toàn dân toàn diện đến chiến thắng Điện Biên Phủ 1954 chấn động địa cầu, giải phóng hoàn toàn miền Bắc.",
+      "detailDesc": "Suốt 9 năm trường kỳ kháng chiến, từ căn cứ ATK Việt Bắc, Chủ tịch Hồ Chí Minh cùng Trung ương Đảng đã chỉ đạo quân dân ta vừa kháng chiến vừa kiến quốc, đánh bại các kế hoạch quân sự của thực dân Pháp (Việt Bắc Thu - Đông 1947, Biên Giới 1950, Hòa Bình 1951...). Đỉnh cao là Chiến dịch Điện Biên Phủ lịch sử (1954). Thắng lợi này buộc chính phủ Pháp phải ký kết Hiệp định Genève (7/1954), công nhận độc lập, chủ quyền, thống nhất và toàn vẹn lãnh thổ của ba nước Việt Nam, Lào, Campuchia.",
+      "significance": "Mở đầu sự sụp đổ không thể cứu vãn của hệ thống thuộc địa kiểu cũ của chủ nghĩa thực dân trên phạm vi toàn thế giới; chứng minh một dân tộc đất không rộng người không đông hoàn toàn có thể đánh bại đế quốc hùng mạnh.",
+      "quotes": "Điện Biên Phủ như là một cái mốc chói lọi bằng vàng của lịch sử. Nó ghi nhận nơi chủ nghĩa thực dân lăn xuống dốc và tan rã.",
+      "works": "Tác phẩm Sửa đổi lối làm việc (1947), Thư gửi cán bộ, chiến sĩ mặt trận Điện Biên Phủ (1954)."
+    },
+    {
+      "id": "ev-27",
+      "periodId": "period-5",
+      "date": "17/07/1966",
+      "year": 1966,
+      "location": "Thủ đô Hà Nội",
+      "tag": "Chân lý thời đại",
+      "title": "Ra Lời kêu gọi chống Mỹ: 'Không có gì quý hơn độc lập, tự do!'",
+      "image": "./images/ho_chi_minh_1967_anefo.jpg",
+      "imageCaption": "Chủ tịch Hồ Chí Minh đọc Lời kêu gọi chống Mỹ cứu nước với chân lý thời đại: 'Không có gì quý hơn độc lập, tự do!'",
+      "shortDesc": "Tuyên bố đanh thép khẳng định ý chí quyết tâm sắt đá của dân tộc Việt Nam trước bom đạn đế quốc Mỹ xâm lược.",
+      "detailDesc": "Trước việc đế quốc Mỹ ồ ạt đưa hàng chục vạn quân viễn chinh vào miền Nam và dùng không quân đánh phá ác liệt miền Bắc, ngày 17/07/1966, trên Đài Tiếng nói Việt Nam, Chủ tịch Hồ Chí Minh đã đọc Lời kêu gọi đồng bào và chiến sĩ cả nước. Người khẳng định đanh thép: 'Chiến tranh có thể kéo dài 5 năm, 10 năm, 20 năm hoặc lâu hơn nữa. Hà Nội, Hải Phòng và một số thành phố, xí nghiệp có thể bị tàn phá, song nhân dân Việt Nam quyết không sợ! Không có gì quý hơn độc lập, tự do! Đến ngày thắng lợi, nhân dân ta sẽ xây dựng lại đất nước ta đàng hoàng hơn, to đẹp hơn!'.",
+      "significance": "Đúc kết chân lý lớn của thời đại, trở thành nguồn cổ vũ tinh thần vô song dẫn dắt quân và dân ta vượt qua muôn vàn gian nan, đánh cho Mỹ cút, đánh cho Ngụy nhào.",
+      "quotes": "Chiến tranh có thể kéo dài 5 năm, 10 năm, 20 năm hoặc lâu hơn nữa... Song nhân dân Việt Nam quyết không sợ! Không có gì quý hơn độc lập, tự do! Đến ngày thắng lợi, nhân dân ta sẽ xây dựng lại đất nước ta đàng hoàng hơn, to đẹp hơn!",
+      "works": "Lời kêu gọi đồng bào và chiến sĩ cả nước (17/07/1966)."
+    },
+    {
+      "id": "ev-28",
+      "periodId": "period-5",
+      "date": "1954 – 1969",
+      "year": 1969,
+      "location": "Thủ đô Hà Nội",
+      "tag": "Di sản thiêng liêng",
+      "title": "Lãnh đạo thực hiện hai nhiệm vụ chiến lược & Để lại bản Di chúc lịch sử",
+      "image": "./images/di_chuc_ho_chi_minh_1969.png",
+      "imageCaption": "Bút tích bản Di chúc lịch sử viết tay ngày 10/5/1969 của Chủ tịch Hồ Chí Minh để lại cho toàn Đảng, toàn dân",
+      "shortDesc": "Xây dựng CNXH ở miền Bắc, chi viện tiền tuyến lớn miền Nam và để lại áng văn Di chúc bất hủ cho muôn đời sau.",
+      "detailDesc": "Từ năm 1954 đến 1969, Người cùng Trung ương Đảng lãnh đạo đồng thời hai nhiệm vụ chiến lược: xây dựng chủ nghĩa xã hội ở miền Bắc làm hậu phương lớn vững chắc, và tiến hành cách mạng dân tộc dân chủ nhân dân ở miền Nam nhằm giải phóng non sông. Ngày 02/09/1969, Bác Hồ kính yêu thanh thản đi vào cõi vĩnh hằng, để lại bản Di chúc lịch sử vô giá - kết tinh tư tưởng, đạo đức, tâm hồn và phong cách của một bậc vĩ nhân, dặn dò toàn Đảng toàn dân về đoàn kết, về công tác xây dựng Đảng, về bồi dưỡng thế hệ cách mạng cho đời sau.",
+      "significance": "Di chúc là bảo vật quốc gia, kim chỉ nam soi đường cho công cuộc xây dựng, chỉnh đốn Đảng và sự nghiệp đổi mới đất nước vững bước đi lên CNXH.",
+      "quotes": "Điều mong muốn cuối cùng của tôi là: Toàn Đảng, toàn dân ta đoàn kết phấn đấu, xây dựng một nước Việt Nam hòa bình, thống nhất, độc lập, dân chủ và giàu mạnh, và góp phần xứng đáng vào sự nghiệp cách mạng thế giới.",
+      "works": "Bản Di chúc lịch sử (1965 – 1969), Báo cáo Chính trị tại Đại hội III của Đảng (1960)."
+    }
+  ],
+  "foundations": {
+    "title": "Cơ sở hình thành Tư tưởng Hồ Chí Minh",
+    "subtitle": "Ba trụ cột nền tảng tạo nên hệ thống tư tưởng toàn diện, sâu sắc và khoa học",
+    "pillars": [
+      {
+        "id": "practical",
+        "title": "1. Cơ sở thực tiễn",
+        "subtitle": "Hiện thực lịch sử Việt Nam và thế giới cuối thế kỷ XIX – đầu thế kỷ XX",
+        "badge": "Hiện thực khách quan",
+        "items": [
+          {
+            "heading": "Thực tiễn Việt Nam cuối thế kỷ XIX đầu thế kỷ XX",
+            "content": "Năm 1858, thực dân Pháp nổ súng xâm lược. Triều đình nhà Nguyễn nhu nhược ký các hiệp ước đầu hàng, biến nước ta thành nước thuộc địa và phong kiến. Các phong trào yêu nước chống Pháp theo hệ tư tưởng phong kiến (khởi nghĩa Cần Vương, Trương Định, Nguyễn Trung Trực, Phan Đình Phùng, Hoàng Hoa Thám...) liên tục nổ ra anh dũng nhưng đều thất bại vì hệ tư tưởng phong kiến đã lỗi thời. Các phong trào theo khuynh hướng dân chủ tư sản đầu thế kỷ XX (Đông Du của Phan Bội Châu, Duy Tân của Phan Châu Trinh, Đông Kinh Nghĩa Thục của Lương Văn Can, phong trào chống sưu thuế 1908) cũng lần lượt thất bại vì giai cấp tư sản Việt Nam non yếu, chưa có đường lối và phương pháp đúng đắn. Xã hội Việt Nam lâm vào cuộc khủng hoảng sâu sắc về đường lối cứu nước và giai cấp lãnh đạo. Trong khi đó, giai cấp công nhân Việt Nam ra đời, chịu ba tầng áp bức bóc lột, sớm vươn lên thành lực lượng chính trị tiên phong, tạo điều kiện thuận lợi để chủ nghĩa Mác - Lênin xâm nhập vào nước ta."
+          },
+          {
+            "heading": "Thực tiễn thế giới cuối thế kỷ XIX đầu thế kỷ XX",
+            "content": "Chủ nghĩa tư bản chuyển từ tự do cạnh tranh sang giai đoạn đế quốc chủ nghĩa, tăng cường xâm chiếm và áp bức thuộc địa khắp Á, Phi, Mỹ Latinh, làm sâu sắc thêm mâu thuẫn giữa các dân tộc thuộc địa với chủ nghĩa đế quốc. Thắng lợi của Cách mạng Tháng Mười Nga năm 1917 lật đổ giai cấp tư sản và phong kiến, lập nên nhà nước Xô viết công - nông - binh đầu tiên trên thế giới, mở ra thời đại mới: thời đại quá độ từ chủ nghĩa tư bản lên chủ nghĩa xã hội trên toàn cầu. Ngày 02/03/1919, Quốc tế Cộng sản (Quốc tế III) ra đời tại Mátxcơva trở thành bộ tham mưu lãnh đạo phong trào cách mạng thế giới, tích cực truyền bá chủ nghĩa Mác - Lênin tới các thuộc địa. Thực tiễn quốc tế to lớn này đã soi sáng con đường cứu nước của Nguyễn Ái Quốc."
+          }
+        ]
+      },
+      {
+        "id": "theoretical",
+        "title": "2. Cơ sở lý luận",
+        "subtitle": "Chắt lọc truyền thống dân tộc, tinh hoa Đông - Tây và ánh sáng Mác - Lênin",
+        "badge": "Tiền đề học thuyết",
+        "items": [
+          {
+            "heading": "Giá trị truyền thống tốt đẹp của dân tộc Việt Nam",
+            "content": "Chủ nghĩa yêu nước là giá trị xuyên suốt, là động lực và điểm xuất phát thúc đẩy Hồ Chí Minh ra đi tìm đường cứu nước. Người kế thừa và nâng cao tinh thần đấu tranh bất khuất vì độc lập tự do ('Không có gì quý hơn độc lập, tự do'); truyền thống đoàn kết, nhân ái, khoan dung, hòa hiếu; triết lý lấy dân làm gốc ('Dân là gốc của nước; nước lấy dân làm gốc; gốc có vững cây mới bền; xây lầu thắng lợi trên nền nhân dân'); niềm tự hào văn hóa lịch sử dân tộc kết hợp hài hòa với văn minh nhân loại."
+          },
+          {
+            "heading": "Tinh hoa văn hóa nhân loại (Đông & Tây)",
+            "content": "Phương Đông: Kế thừa Nho giáo về việc dùng đức trị, nhân trị, tu dưỡng đạo đức cá nhân, ước vọng về một xã hội thái bình đại đồng; kế thừa Phật giáo về lòng từ bi, bác ái, cứu khổ cứu nạn, vị tha, bình đẳng, hòa đồng với non sông; kế thừa Lão giáo về lối sống hòa hợp thiên nhiên, bảo vệ môi trường, thoát vòng danh lợi, cần kiệm liêm chính; tiếp thu Chủ nghĩa Tam dân của Tôn Trung Sơn (Dân tộc độc lập, Dân quyền tự do, Dân sinh hạnh phúc). Phương Tây: Tiếp thu khẩu hiệu 'Tự do - Bình đẳng - Bác ái' của Cách mạng Pháp 1789; kế thừa tư tưởng nhân quyền và dân quyền trong Tuyên ngôn Độc lập Mỹ 1776 và Tuyên ngôn Nhân quyền & Dân quyền Pháp 1791; tư tưởng khai sáng của Voltaire, Rousseau, Montesquieu."
+          },
+          {
+            "heading": "Chủ nghĩa Mác - Lênin (Cơ sở lý luận quyết định nhất)",
+            "content": "Chủ nghĩa Mác - Lênin là tiền đề lý luận quan trọng nhất, đóng vai trò quyết định bước phát triển mới về chất trong tư tưởng Hồ Chí Minh. Đây là thế giới quan duy vật biện chứng và phương pháp luận khoa học giúp Người tổng kết kinh nghiệm thực tiễn, phân tích thời cuộc và tìm ra con đường cứu nước đúng đắn: giải phóng dân tộc gắn liền với giải phóng giai cấp và giải phóng con người; độc lập dân tộc gắn liền với chủ nghĩa xã hội. Hồ Chí Minh khẳng định: 'Bây giờ học thuyết nhiều, chủ nghĩa nhiều, nhưng chủ nghĩa chân chính nhất, chắc chắn nhất, cách mạng nhất là chủ nghĩa Lênin'."
+          }
+        ]
+      },
+      {
+        "id": "subjective",
+        "title": "3. Nhân tố chủ quan Hồ Chí Minh",
+        "subtitle": "Phẩm chất phi thường và tài năng hoạt động thực tiễn phát triển lý luận",
+        "badge": "Nhân tố quyết định",
+        "items": [
+          {
+            "heading": "Phẩm chất cá nhân Hồ Chí Minh",
+            "content": "Người có lý tưởng cao cả, hoài bão lớn cứu dân cứu nước; có ý chí, nghị lực phi thường dám một mình ra đi với hai bàn tay trắng; tự học hỏi, thông thạo nhiều ngoại ngữ; có vốn văn hóa sâu rộng Đông - Tây kim cổ. Đặc biệt, Người có bản lĩnh tư duy độc lập, tự chủ, sáng tạo, giàu tinh thần phê phán và đổi mới; có tầm nhìn chiến lược bao quát thời đại; có năng lực tiên tri dự báo tương lai chuẩn xác lạ kỳ; trọn đời tận trung với nước, tận hiếu với dân."
+          },
+          {
+            "heading": "Tài năng hoạt động thực tiễn và phát triển lý luận",
+            "content": "Trước khi làm Chủ tịch nước, Người đã sống, học tập và hoạt động tại khoảng 30 quốc gia trên thế giới, thấu hiểu sâu sắc bản chất chủ nghĩa đế quốc và tình cảnh các thuộc địa. Người là nhà tổ chức vĩ đại: trực tiếp tham gia sáng lập Đảng Cộng sản Pháp (1920), sáng lập Đảng Cộng sản Việt Nam (1930), sáng lập Mặt trận Dân tộc Thống nhất (Việt Minh, 1941), sáng lập Quân đội nhân dân Việt Nam (1944) và khai sinh nước Việt Nam Dân chủ Cộng hòa (1945). Không giáo điều kinh viện, Người luôn gắn liền lý luận với thực tiễn, bổ sung và làm phong phú chủ nghĩa Mác - Lênin trong thời đại mới."
+          }
+        ]
+      }
+    ]
+  },
+  "significance": {
+    "title": "Giá trị của Tư tưởng Hồ Chí Minh",
+    "subtitle": "Di sản vô giá soi sáng cách mạng giải phóng dân tộc Việt Nam và cống hiến cho phong trào tiến bộ nhân loại",
+    "domains": [
+      {
+        "id": "vietnam",
+        "title": "Đối với Cách mạng Việt Nam",
+        "tag": "Ngọn cờ thắng lợi",
+        "points": [
+          {
+            "title": "Đưa cách mạng giải phóng dân tộc đến thắng lợi hoàn toàn",
+            "desc": "Tìm ra con đường cứu nước đúng đắn, sáng lập Đảng ta và dẫn dắt cuộc Cách mạng Tháng Tám 1945 thành công, kháng chiến chống Pháp thắng lợi (1954), xây dựng CNXH ở miền Bắc và đánh thắng đế quốc Mỹ thống nhất giang sơn non sông một dải (1975)."
+          },
+          {
+            "title": "Nền tảng tư tưởng và kim chỉ nam cho mọi hành động",
+            "desc": "Lần đầu tiên trong lịch sử dân tộc, hệ tư tưởng định hướng dẫn đường cho cách mạng Việt Nam là của chính người Việt Nam. Là sợi chỉ đỏ xuyên suốt dẫn dắt công cuộc Đổi mới, giữ vững độc lập chủ quyền và định hướng đi lên CNXH."
+          },
+          {
+            "title": "Hệ thống lý luận mở và đầy sức sống trường tồn",
+            "desc": "Bao quát toàn diện các vấn đề về độc lập dân tộc gắn liền với CNXH; xây dựng Đảng cầm quyền trong sạch, vững mạnh; xây dựng Nhà nước của dân, do dân, vì dân; đại đoàn kết toàn dân tộc kết hợp đoàn kết quốc tế."
+          }
+        ]
+      },
+      {
+        "id": "humanity",
+        "title": "Đối với sự phát triển tiến bộ của Nhân loại",
+        "tag": "Cống hiến toàn cầu",
+        "points": [
+          {
+            "title": "Mở ra con đường giải phóng cho các dân tộc thuộc địa",
+            "desc": "Cống hiến lý luận to lớn: Cách mạng giải phóng dân tộc ở thuộc địa hoàn toàn có thể chủ động giành thắng lợi trước cách mạng vô sản ở chính quốc, cổ vũ phong trào giải phóng dân tộc Á - Phi - Mỹ Latinh đập tan hệ thống thuộc địa cũ."
+          },
+          {
+            "title": "Tích cực đóng góp cho hòa bình, hữu nghị và hợp tác quốc tế",
+            "desc": "Người là chiến sĩ quốc tế lỗi lạc, kiên trì giương cao ngọn cờ hòa bình, nhân đạo và hợp tác bình đẳng: 'Làm bạn với tất cả mọi nước dân chủ và không gây thù oán với một ai'."
+          },
+          {
+            "title": "Biểu tượng cao đẹp của lương tri và phẩm giá con người",
+            "desc": "Được UNESCO tôn vinh là Anh hùng giải phóng dân tộc và Danh nhân văn hóa kiệt xuất; là biểu tượng mẫu mực của đạo đức chí công vô tư, khoan dung, hòa ái và giản dị thanh cao."
+          }
+        ]
+      }
+    ]
+  },
+  "quiz": [
+    {
+      "id": 1,
+      "question": "Hồ Chí Minh rời Bến cảng Nhà Rồng ra đi tìm đường cứu nước vào thời gian nào và trên con tàu nào?",
+      "options": [
+        "05/06/1911 trên tàu Đô đốc Latouche-Tréville",
+        "18/06/1919 trên tàu Amiral Courbet",
+        "03/02/1930 trên tàu D'Artagnan",
+        "19/05/1890 trên tàu La Seyne"
+      ],
+      "answer": 0,
+      "explanation": "Ngày 05/06/1911, người thanh niên yêu nước Nguyễn Tất Thành lấy tên Văn Ba bước lên tàu Đô đốc Latouche-Tréville rời bến cảng Nhà Rồng sang phương Tây tìm đường cứu nước."
+    },
+    {
+      "id": 2,
+      "question": "Sự kiện nào đánh dấu bước ngoặt quyết định về chất trong tư tưởng Hồ Chí Minh: từ chủ nghĩa yêu nước đến chủ nghĩa Mác - Lênin?",
+      "options": [
+        "Gửi Bản Yêu sách của nhân dân An Nam tới Hội nghị Versailles (1919)",
+        "Đọc Sơ thảo Luận cương của Lênin (7/1920) và bỏ phiếu tán thành Quốc tế III tại Đại hội Tours (12/1920)",
+        "Dạy học tại trường Dục Thanh ở Phan Thiết (1910)",
+        "Tham gia phong trào chống sưu thuế ở Trung Kỳ (1908)"
+      ],
+      "answer": 1,
+      "explanation": "Tháng 7/1920, Người đọc Luận cương của Lênin tìm thấy con đường cứu nước. Tháng 12/1920 tại Đại hội Tours, Người bỏ phiếu tán thành Quốc tế III, sáng lập Đảng Cộng sản Pháp, trở thành người cộng sản Việt Nam đầu tiên."
+    },
+    {
+      "id": 3,
+      "question": "Cơ sở lý luận nào giữ vai trò quan trọng nhất và quyết định bước phát triển nhảy vọt về chất trong tư tưởng Hồ Chí Minh?",
+      "options": [
+        "Học thuyết Nho giáo của Khổng Tử",
+        "Tư tưởng của Đại Cách mạng Pháp 1789",
+        "Chủ nghĩa Mác - Lênin",
+        "Chủ nghĩa Tam dân của Tôn Trung Sơn"
+      ],
+      "answer": 2,
+      "explanation": "Chủ nghĩa Mác - Lênin là thế giới quan khoa học, phương pháp luận biện chứng và tiền đề lý luận quan trọng nhất, giữ vai trò quyết định trong việc hình thành tư tưởng Hồ Chí Minh."
+    },
+    {
+      "id": 4,
+      "question": "Hai tác phẩm lý luận kinh điển nào do Người viết vào các năm 1925 và 1927 chuẩn bị toàn diện về tư tưởng chính trị cho sự ra đời của Đảng?",
+      "options": [
+        "Vấn đề dân bản xứ & Vi hành",
+        "Bản án chế độ thực dân Pháp (1925) & Đường Kách mệnh (1927)",
+        "Con đường giải phóng & Sửa đổi lối làm việc",
+        "Tuyên ngôn Độc lập & Lời kêu gọi toàn quốc kháng chiến"
+      ],
+      "answer": 1,
+      "explanation": "'Bản án chế độ thực dân Pháp' (1925) tố cáo tội ác thực dân, và 'Đường Kách mệnh' (1927) vạch rõ đường lối cách mạng, khẳng định Đảng phải lấy chủ nghĩa Mác - Lênin làm cốt."
+    },
+    {
+      "id": 5,
+      "question": "Tư tưởng sáng tạo của Hồ Chí Minh trong Cương lĩnh chính trị đầu tiên (1930) từng bị phê phán sai lầm là gì tại Hội nghị BCH Trung ương tháng 10/1930?",
+      "options": [
+        "Tả khuynh giáo điều",
+        "Chủ quan duy ý chí",
+        "Hữu khuynh, dân tộc chủ nghĩa (chỉ lo phản đế mà quên đấu tranh giai cấp)",
+        "Vô chính phủ"
+      ],
+      "answer": 2,
+      "explanation": "Do ảnh hưởng tả khuynh của Đại hội VI Quốc tế Cộng sản, Cương lĩnh đầu tiên của Nguyễn Ái Quốc bị phê phán là 'hữu khuynh', 'dân tộc chủ nghĩa' vì đã đoàn kết các tầng lớp nhân dân yêu nước thay vì chỉ nhấn mạnh đấu tranh giai cấp thuần túy."
+    },
+    {
+      "id": 6,
+      "question": "Sự kiện nào đánh dấu sự trở về hoàn chỉnh với tư tưởng đúng đắn, sáng tạo của Cương lĩnh 1930, đặt nhiệm vụ giải phóng dân tộc lên hàng đầu?",
+      "options": [
+        "Hội nghị Trung ương VIII (tháng 5/1941) tại Pác Bó do Nguyễn Ái Quốc chủ trì",
+        "Thành lập Đảng Cộng sản Đông Dương (10/1930)",
+        "Đại hội Tours (12/1920)",
+        "Thành lập Đội Việt Nam Tuyên truyền Giải phóng quân (1944)"
+      ],
+      "answer": 0,
+      "explanation": "Hội nghị Trung ương VIII (5/1941) tại Pác Bó đã đặt nhiệm vụ giải phóng dân tộc lên trên hết, tạm gác khẩu hiệu cách mạng điền địa, thành lập Mặt trận Việt Minh."
+    },
+    {
+      "id": 7,
+      "question": "Chân lý lớn của thời đại được Chủ tịch Hồ Chí Minh khẳng định trong Lời kêu gọi ngày 17/07/1966 là gì?",
+      "options": [
+        "Dĩ bất biến ứng vạn biến",
+        "Nước lấy dân làm gốc",
+        "Không có gì quý hơn độc lập, tự do!",
+        "Đoàn kết, đoàn kết, đại đoàn kết"
+      ],
+      "answer": 2,
+      "explanation": "Ngày 17/07/1966, trước sự leo thang tàn bạo của giặc Mỹ, Bác Hồ ra lời kêu gọi với chân lý bất hủ: 'Không có gì quý hơn độc lập, tự do! Đến ngày thắng lợi, nhân dân ta sẽ xây dựng lại đất nước ta đàng hoàng hơn, to đẹp hơn!'."
+    }
   ]
 }
