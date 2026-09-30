@@ -1,8 +1,76 @@
 {
-  "title": "Chương V – Kéo thả ghép nối",
+  "title": "Đại đoàn kết toàn dân tộc và đoàn kết quốc tế",
+  "author": "Phúc Nguyên",
+  "source": "Tóm lược Chương V, Giáo trình Tư tưởng Hồ Chí Minh, trang in 99–118 của tài liệu được cung cấp.",
+  "historySource": {
+    "label": "Ủy ban Trung ương Mặt trận Tổ quốc Việt Nam · Lịch sử Mặt trận dân tộc thống nhất",
+    "url": "https://m.mattran.org.vn/gioi-thieu/lich-su-mat-tran-dan-toc-thong-nhat-32563.html"
+  },
+  "sections": [
+    {
+      "id": "people",
+      "title": "Lực lượng đại đoàn kết",
+      "subtitle": "Tập hợp rộng rãi, nền tảng vững chắc",
+      "pages": "99–102",
+      "points": [
+        "Đại đoàn kết toàn dân tộc là vấn đề có ý nghĩa chiến lược, quyết định thành công của cách mạng; là mục tiêu, nhiệm vụ hàng đầu của cách mạng Việt Nam.",
+        "Chủ thể là toàn thể nhân dân và mọi người Việt Nam yêu nước, ở trong nước và ngoài nước; không phân biệt dân tộc, giai cấp, tầng lớp, tôn giáo, tuổi tác hay nghề nghiệp.",
+        "Nền tảng của khối đại đoàn kết là liên minh công nhân, nông dân và trí thức. Đoàn kết, thống nhất trong Đảng là hạt nhân của đoàn kết toàn dân tộc."
+      ]
+    },
+    {
+      "id": "conditions",
+      "title": "Điều kiện xây dựng khối đoàn kết",
+      "subtitle": "Yêu nước · Khoan dung · Tin dân",
+      "pages": "102–103",
+      "points": [
+        "Kế thừa truyền thống yêu nước, nhân nghĩa, đoàn kết của dân tộc, biến những giá trị đó thành cơ sở để quy tụ các lực lượng.",
+        "Có lòng khoan dung, độ lượng với con người; trân trọng phần thiện và những điểm tương đồng để tập hợp, đoàn kết rộng rãi.",
+        "Có niềm tin vào nhân dân: yêu dân, tin dân, dựa vào dân và phấn đấu vì hạnh phúc của nhân dân."
+      ]
+    },
+    {
+      "id": "front",
+      "title": "Mặt trận dân tộc thống nhất",
+      "subtitle": "Hình thức tổ chức của khối đại đoàn kết",
+      "pages": "103–107",
+      "points": [
+        "Mặt trận quy tụ các tổ chức và cá nhân yêu nước, tập hợp nhân dân thành một lực lượng có tổ chức vì độc lập, thống nhất của Tổ quốc và tự do, hạnh phúc của nhân dân.",
+        "Xây dựng trên nền tảng liên minh công nhân – nông dân – trí thức, dưới sự lãnh đạo của Đảng; xuất phát từ mục tiêu vì nước, vì dân.",
+        "Hoạt động theo nguyên tắc hiệp thương dân chủ; đoàn kết lâu dài, chặt chẽ, thật sự, chân thành, thân ái giúp đỡ nhau cùng tiến bộ.",
+        "Thực hiện tốt công tác dân vận; tập hợp nhân dân vào các đoàn thể phù hợp và đoàn kết các đoàn thể trong Mặt trận dân tộc thống nhất."
+      ]
+    },
+    {
+      "id": "international",
+      "title": "Đoàn kết quốc tế",
+      "subtitle": "Kết hợp sức mạnh dân tộc với sức mạnh thời đại",
+      "pages": "107–114",
+      "points": [
+        "Đoàn kết quốc tế góp phần tạo sức mạnh tổng hợp cho cách mạng Việt Nam và cùng nhân dân thế giới thực hiện mục tiêu hòa bình, độc lập dân tộc, dân chủ và tiến bộ xã hội.",
+        "Các lực lượng cần đoàn kết gồm phong trào cộng sản và công nhân quốc tế; phong trào giải phóng dân tộc; các lực lượng tiến bộ, yêu chuộng hòa bình, dân chủ, tự do và công lý.",
+        "Bốn tầng mặt trận: đại đoàn kết dân tộc; đoàn kết Việt Nam – Lào – Campuchia; nhân dân Á – Phi đoàn kết với Việt Nam; nhân dân thế giới đoàn kết với Việt Nam chống đế quốc xâm lược.",
+        "Nguyên tắc: thống nhất mục tiêu và lợi ích, có lý, có tình; đồng thời giữ vững độc lập, tự chủ. Nội lực là nhân tố quyết định để tranh thủ và phát huy sự giúp đỡ quốc tế."
+      ]
+    },
+    {
+      "id": "application",
+      "title": "Vận dụng và liên hệ",
+      "subtitle": "Từ kiến thức đến hành động",
+      "pages": "114–117",
+      "points": [
+        "Quán triệt tư tưởng đại đoàn kết trong hoạch định chủ trương, đường lối; phát huy sức mạnh dân tộc và sức mạnh quốc tế trên cơ sở lợi ích quốc gia, dân tộc.",
+        "Củng cố khối đại đoàn kết trên nền tảng liên minh công nhân – nông dân – trí thức dưới sự lãnh đạo của Đảng; hài hòa lợi ích cá nhân, tập thể và xã hội.",
+        "Kết hợp đại đoàn kết toàn dân tộc với đoàn kết quốc tế, chủ động hợp tác và hội nhập gắn với độc lập, tự chủ, tự lực, tự cường."
+      ],
+      "discussion": "Liên hệ sinh viên: khi làm việc nhóm, bạn có thể lắng nghe khác biệt và thống nhất mục tiêu chung như thế nào?"
+    }
+  ],
   "timeLimitSeconds": 60,
   "pairs": [
-    { "id": "1941", "year": 1941, "organization": "Mặt trận Việt Minh" },
-    { "id": "1951", "year": 1951, "organization": "Mặt trận Liên Việt" }
+    { "id": "phan-de", "year": 1930, "organization": "Hội Phản đế đồng minh", "explanation": "Hình thức tổ chức đầu tiên của Mặt trận dân tộc thống nhất Việt Nam dưới sự lãnh đạo của Đảng." },
+    { "id": "viet-minh", "year": 1941, "organization": "Mặt trận Việt Minh", "explanation": "Tên đầy đủ là Việt Nam Độc lập Đồng minh, ra đời để tập hợp lực lượng đấu tranh giành độc lập dân tộc." },
+    { "id": "lien-viet", "year": 1951, "organization": "Mặt trận Liên Việt", "explanation": "Hình thành từ sự hợp nhất Mặt trận Việt Minh và Hội Liên Việt, củng cố khối đoàn kết trong kháng chiến chống Pháp. Phân biệt với Hội Liên Việt thành lập năm 1946." },
+    { "id": "giai-phong", "year": 1960, "organization": "Mặt trận Dân tộc Giải phóng miền Nam Việt Nam", "explanation": "Tập hợp các lực lượng yêu nước ở miền Nam, đấu tranh giải phóng miền Nam, tiến tới thống nhất đất nước." }
   ]
 }
