@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd'
-import { Check, Clock3, GripVertical, Play, RotateCcw, Trophy } from 'lucide-react'
+import { Check, CircleAlert, Clock3, GripVertical, Play, RotateCcw, Trophy, X } from 'lucide-react'
 import data from './data.json'
 import { matchPair, secondsLeft, shuffle } from './game.js'
 
@@ -11,6 +11,8 @@ export default function MatchingGame() {
   const [matched, setMatched] = useState([])
   const [selected, setSelected] = useState(null)
   const [attempts, setAttempts] = useState(0)
+  const [feedback, setFeedback] = useState(null)
+  const [showError, setShowError] = useState(false)
   const [remaining, setRemaining] = useState(data.timeLimitSeconds)
   const [message, setMessage] = useState('Chọn chế độ rồi bắt đầu. Bạn cần ghép đúng cả 4 cặp.')
   const deadline = useRef(null)
@@ -26,6 +28,8 @@ export default function MatchingGame() {
       setRemaining(left)
       if (left === 0) {
         setStatus('timeout')
+        setFeedback(null)
+        setShowError(false)
         setSelected(null)
         setMessage('Hết giờ! Xem lời giải bên dưới rồi thử lại nhé.')
       }
@@ -36,6 +40,8 @@ export default function MatchingGame() {
   }, [running, mode])
 
   function start() {
+    setFeedback(null)
+    setShowError(false)
     setOrder(shuffle(data.pairs))
     setMatched([])
     setSelected(null)
@@ -47,6 +53,8 @@ export default function MatchingGame() {
   }
 
   function changeMode(value) {
+    setFeedback(null)
+    setShowError(false)
     setMode(value)
     setStatus('ready')
     setMatched([])
@@ -62,6 +70,8 @@ export default function MatchingGame() {
     if (mode === 'timed' && secondsLeft(deadline.current) === 0) {
       setRemaining(0)
       setStatus('timeout')
+      setFeedback(null)
+      setShowError(false)
       setSelected(null)
       setMessage('Hết giờ! Xem lời giải bên dưới rồi thử lại nhé.')
       return
@@ -69,6 +79,8 @@ export default function MatchingGame() {
     const result = matchPair(data.pairs, matched, id, year)
     if (result === 'ignored') return
     setAttempts((count) => count + 1)
+    setFeedback({ type: result, id, year })
+    setShowError(result === 'wrong')
     if (result === 'wrong') {
       setMessage(`Chưa đúng: ${data.pairs.find((pair) => pair.id === id).organization} không ứng với năm ${year}. Hãy thử một mốc khác.`)
       return
@@ -105,19 +117,35 @@ export default function MatchingGame() {
           <p className="mt-4 text-sm text-on-dark/80">{attempts} lượt ghép · {attempts - matched.length} lượt chưa đúng</p>
         </div>
       </div>
-      <p role="status" aria-live="polite" aria-atomic="true" className={`my-5 min-h-14 rounded-2xl border p-4 text-sm leading-relaxed ${status === 'won' ? 'border-success bg-success-soft text-success' : 'border-line bg-cream text-ink-soft'}`}>{message}</p>
+      <div role="status" aria-live="polite" aria-atomic="true" className={`my-5 flex min-h-14 items-start gap-3 rounded-2xl border p-4 text-sm leading-relaxed ${feedback?.type === 'wrong' ? 'border-primary bg-primary/10 text-primary' : feedback?.type === 'correct' || status === 'won' ? 'border-success bg-success-soft text-success' : 'border-line bg-cream text-ink-soft'}`}>
+        {feedback?.type === 'wrong' && <CircleAlert className="mt-0.5 size-5 shrink-0" aria-hidden="true" />}
+        {feedback?.type === 'correct' && <Check className="mt-0.5 size-5 shrink-0" aria-hidden="true" />}
+        <p key={attempts}>{message}</p>
+      </div>
+      {showError && running && feedback?.type === 'wrong' && (
+        <div key={`error-${attempts}`} role="alert" aria-atomic="true" className="fixed inset-x-4 bottom-5 z-30 mx-auto flex max-w-[560px] items-start gap-3 rounded-2xl border border-primary bg-primary p-4 text-on-dark sm:inset-x-auto sm:right-5">
+          <CircleAlert className="mt-1 size-6 shrink-0" aria-hidden="true" />
+          <div className="min-w-0 flex-1">
+            <p className="font-bold">Ghép nối chưa đúng!</p>
+            <p className="mt-1 text-sm leading-relaxed">{message}</p>
+          </div>
+          <button type="button" aria-label="Đóng thông báo ghép sai" onClick={() => setShowError(false)} className="grid min-h-11 min-w-11 shrink-0 place-items-center rounded-full hover:bg-on-dark/20 focus-visible:outline-2 focus-visible:outline-on-dark"><X className="size-5" /></button>
+        </div>
+      )}
       {selectedPair && running && <p className="mb-4 text-sm font-semibold text-primary">Đang chọn: {selectedPair.organization}. Chọn năm phù hợp ở cột trái.</p>}
       <DragDropContext onDragStart={() => setSelected(null)} onDragEnd={({ draggableId, destination }) => { if (destination?.droppableId.startsWith('year-')) match(draggableId, Number(destination.droppableId.slice(5))) }} dragHandleUsageInstructions="Nhấn Space để nhấc thẻ, dùng phím mũi tên để di chuyển và Space để thả. Nhấn Escape để hủy. Hoặc dùng nút Chọn tổ chức rồi chọn năm.">
         <div className="grid grid-cols-2 gap-3 sm:gap-6" aria-describedby="matching-help">
           <div className="min-w-0"><h3 className="mb-3 text-sm font-bold text-muted">01 · Năm thành lập</h3>
             <div className="space-y-3">{data.pairs.map((pair) => {
               const done = matched.includes(pair.id)
+              const wrong = feedback?.type === 'wrong' && feedback.year === pair.year
               return <Droppable key={pair.id} droppableId={`year-${pair.year}`} isDropDisabled={!running || done}>
-                {(provided, snapshot) => <div ref={provided.innerRef} {...provided.droppableProps} className={`min-h-32 rounded-2xl border-2 border-dashed p-3 sm:p-5 ${done ? 'border-success bg-success-soft' : snapshot.isDraggingOver ? 'border-primary bg-primary/10' : 'border-line-strong bg-white'}`}>
+                {(provided, snapshot) => <div ref={provided.innerRef} {...provided.droppableProps} className={`min-h-32 rounded-2xl border-2 p-3 transition-colors sm:p-5 ${done ? 'border-success bg-success-soft' : wrong ? 'border-primary bg-primary/10' : snapshot.isDraggingOver ? 'border-dashed border-primary bg-primary/10' : 'border-dashed border-line-strong bg-white'}`}>
                   <button disabled={!running || done || !selected} onClick={() => match(selected, pair.year)} aria-label={`Ghép tổ chức đã chọn vào năm ${pair.year}`} className="min-h-11 w-full rounded-xl text-left focus-visible:outline-2 focus-visible:outline-primary">
-                    <span className={`flex items-center justify-between gap-1 text-[clamp(22px,4vw,30px)] font-extrabold ${done ? 'text-success' : 'text-amber'}`}>{pair.year}{done && <Check className="size-5 shrink-0" aria-hidden="true" />}</span>
+                    <span className={`flex items-center justify-between gap-1 text-[clamp(22px,4vw,30px)] font-extrabold ${done ? 'text-success' : wrong ? 'text-primary' : 'text-amber'}`}>{pair.year}{done && <Check className="size-5 shrink-0" aria-hidden="true" />}{wrong && <X className="size-5 shrink-0 text-primary" aria-hidden="true" />}</span>
                     <span className="mt-1 block break-words text-xs leading-relaxed text-ink-soft sm:text-sm">{done ? pair.organization : selected ? 'Bấm để ghép vào đây' : 'Thả tổ chức vào đây'}</span>
                   </button>{provided.placeholder}
+                  {wrong && <p className="mt-2 text-xs font-bold text-primary">Chưa khớp tổ chức. Thử lại nhé!</p>}
                 </div>}
               </Droppable>
             })}</div>
@@ -126,9 +154,10 @@ export default function MatchingGame() {
             <Droppable droppableId="bank" isDropDisabled>
               {(provided) => <div ref={provided.innerRef} {...provided.droppableProps} className="min-h-48 space-y-3">
                 {available.map((pair, index) => <Draggable key={pair.id} draggableId={pair.id} index={index} isDragDisabled={!running}>
-                  {(drag, snapshot) => <div ref={drag.innerRef} {...drag.draggableProps} className={`min-h-32 rounded-2xl border p-3 sm:p-5 ${selected === pair.id || snapshot.isDragging ? 'border-primary bg-cream' : 'border-line bg-white'} ${!running ? 'opacity-60' : ''}`}>
+                  {(drag, snapshot) => <div ref={drag.innerRef} {...drag.draggableProps} className={`min-h-32 rounded-2xl border p-3 sm:p-5 ${feedback?.type === 'wrong' && feedback.id === pair.id ? 'border-primary bg-primary/10' : selected === pair.id || snapshot.isDragging ? 'border-primary bg-cream' : 'border-line bg-white'} ${!running ? 'opacity-60' : ''}`}>
                     <div {...drag.dragHandleProps} aria-label={`Kéo ${pair.organization}`} className="flex min-h-11 items-start gap-2 rounded-lg text-sm font-bold leading-relaxed focus-visible:outline-2 focus-visible:outline-primary"><GripVertical className="mt-0.5 size-4 shrink-0 text-faint" aria-hidden="true" /><span className="break-words">{pair.organization}</span></div>
                     <button disabled={!running} aria-pressed={selected === pair.id} onClick={() => setSelected(selected === pair.id ? null : pair.id)} className="mt-2 min-h-11 rounded-full border border-line-strong px-3 text-xs font-semibold hover:bg-paper disabled:cursor-not-allowed">{selected === pair.id ? 'Bỏ chọn' : 'Chọn tổ chức'}</button>
+                    {feedback?.type === 'wrong' && feedback.id === pair.id && <p className="mt-2 flex items-center gap-1 text-xs font-bold text-primary"><CircleAlert className="size-4 shrink-0" aria-hidden="true" />Chọn một năm khác</p>}
                   </div>}
                 </Draggable>)}{provided.placeholder}
                 {available.length === 0 && <div className="rounded-2xl bg-success-soft p-6 text-center text-success"><Trophy className="mx-auto mb-3 size-8" /><p className="text-sm font-semibold">Tất cả đã về đúng vị trí!</p></div>}
