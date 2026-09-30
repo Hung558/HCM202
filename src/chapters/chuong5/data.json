@@ -9,6 +9,15 @@
   "sections": [
     {
       "id": "people",
+      "video": {
+        "title": "Tư tưởng đại đoàn kết trong Di chúc của Chủ tịch Hồ Chí Minh",
+        "publisher": "VTV",
+        "duration": "3:04",
+        "type": "external",
+        "sourceUrl": "https://vtv.vn/video/bac-ho-691869.htm",
+        "context": "Gợi mở vai trò hạt nhân của đoàn kết trong Đảng đối với khối đoàn kết toàn dân tộc.",
+        "question": "Vì sao đoàn kết trong Đảng có ý nghĩa đối với việc tập hợp các lực lượng nhân dân?"
+      },
       "title": "Lực lượng đại đoàn kết",
       "subtitle": "Tập hợp rộng rãi, nền tảng vững chắc",
       "pages": "99–102",
@@ -20,6 +29,15 @@
     },
     {
       "id": "conditions",
+      "video": {
+        "title": "Sức mạnh của lòng dân và tinh thần đại đoàn kết dân tộc",
+        "publisher": "VTV",
+        "duration": "3:07",
+        "type": "external",
+        "sourceUrl": "https://vtv.vn/video/suc-manh-cua-long-dan-va-tinh-than-dai-doan-ket-518604.htm",
+        "context": "Minh họa truyền thống đoàn kết và ý nghĩa của việc tin dân, dựa vào dân.",
+        "question": "Niềm tin vào nhân dân giúp xây dựng khối đoàn kết bền vững như thế nào?"
+      },
       "title": "Điều kiện xây dựng khối đoàn kết",
       "subtitle": "Yêu nước · Khoan dung · Tin dân",
       "pages": "102–103",
@@ -31,6 +49,14 @@
     },
     {
       "id": "front",
+      "video": {
+        "title": "Kỷ niệm 80 năm thành lập Mặt trận Việt Minh",
+        "publisher": "VTV",
+        "type": "external",
+        "sourceUrl": "https://vtv.vn/chinh-tri/ky-niem-80-nam-thanh-lap-mat-tran-viet-minh-20210519220145875.htm",
+        "context": "Một trường hợp lịch sử cụ thể: Mặt trận Việt Minh ra đời năm 1941 để tập hợp lực lượng đấu tranh giành độc lập.",
+        "question": "Mặt trận đã biến tinh thần yêu nước thành sức mạnh có tổ chức bằng cách nào?"
+      },
       "title": "Mặt trận dân tộc thống nhất",
       "subtitle": "Hình thức tổ chức của khối đại đoàn kết",
       "pages": "103–107",
@@ -43,6 +69,16 @@
     },
     {
       "id": "international",
+      "video": {
+        "title": "Học Bác mỗi ngày – Đoàn kết quốc tế trong tư tưởng Hồ Chí Minh",
+        "publisher": "Kênh Cầu Ông Lãnh · YouTube",
+        "duration": "4:22",
+        "type": "youtube",
+        "youtubeId": "15PW4zTvBSQ",
+        "sourceUrl": "https://www.youtube.com/watch?v=15PW4zTvBSQ",
+        "context": "Video tham khảo theo chủ đề đoàn kết quốc tế, xem kết hợp với các nguyên tắc trong giáo trình.",
+        "question": "Vì sao tranh thủ sự ủng hộ quốc tế phải đi đôi với giữ vững độc lập, tự chủ?"
+      },
       "title": "Đoàn kết quốc tế",
       "subtitle": "Kết hợp sức mạnh dân tộc với sức mạnh thời đại",
       "pages": "107–114",
@@ -55,6 +91,16 @@
     },
     {
       "id": "application",
+      "video": {
+        "title": "Ngày hội Đại đoàn kết toàn dân tộc của cộng đồng người Việt ở nước ngoài",
+        "publisher": "VTV4 · YouTube",
+        "duration": "Khoảng 2 phút",
+        "type": "youtube",
+        "youtubeId": "IhUWLePQJNo",
+        "sourceUrl": "https://www.youtube.com/watch?v=IhUWLePQJNo",
+        "context": "Liên hệ thực tiễn qua hoạt động gắn kết cộng đồng người Việt ở nước ngoài.",
+        "question": "Bạn có thể đề xuất hoạt động nào để kết nối những người có hoàn cảnh và quan điểm khác nhau trong lớp?"
+      },
       "title": "Vận dụng và liên hệ",
       "subtitle": "Từ kiến thức đến hành động",
       "pages": "114–117",
