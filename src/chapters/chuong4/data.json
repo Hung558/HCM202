@@ -1,9 +1,422 @@
 {
-  "title": "Chương IV – Trắc nghiệm tình huống",
-  "questions": [
-    { "id": 1, "scenario": "Một cán bộ làm việc trọng hình thức, không kiểm tra đến nơi đến chốn.", "options": ["Tham ô", "Quan liêu", "Lãng phí", "Đặc quyền"], "answer": 1, "explanation": "Theo Hồ Chí Minh, đây là biểu hiện của bệnh quan liêu." }
+  "chapter": "IV",
+  "title": "Tư tưởng Hồ Chí Minh về Đảng Cộng sản Việt Nam và Nhà nước của dân, do dân, vì dân",
+  "feature": "Trắc nghiệm tình huống",
+  "intro": "Mỗi câu là một tình huống thực tế. Hãy xác định vấn đề, nguyên tắc tư tưởng Hồ Chí Minh liên quan và cách xử lý đúng nhất.",
+  "sessionSize": 10,
+  "scenarios": [
+    {
+      "id": "sc01",
+      "title": "Chỉ ngồi đọc báo cáo",
+      "description": "Một trưởng phòng chỉ yêu cầu cán bộ dưới cấp nộp báo cáo bằng văn bản, hầu như không đi kiểm tra thực tế ở cơ sở. Nhiều kiến nghị của người dân gửi về phòng tồn đợi nhiều tháng chưa được giải quyết. Mỗi buổi giao ban chỉ nghe đọc số liệu, không ai hỏi chuyện gì đang xảy ra ngoài thực tế. Nhân viên quen dần với việc 'sống' bằng giấy tờ, còn dân thì mất dần niềm tin vào cơ quan.",
+      "question": "Theo tư tưởng Hồ Chí Minh, cách làm việc của người trưởng phòng này chủ yếu phản ánh căn bệnh gì?",
+      "options": [
+        "Thiếu dân chủ trong nội bộ cơ quan",
+        "Quan liêu",
+        "Tập thể lãnh đạo, cá nhân phụ trách",
+        "Đoàn kết quốc tế"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Hồ Chí Minh mô tả bệnh quan liêu là 'đắp chăn lài; làm việc bằng giấy tờ, họp hành nhiều mà không đến nơi đến chốn, xa rời thực tế và xa rời quần chúng'. Chỉ giỏi văn bản, không đi kiểm tra, để kiến nghị của dân tồn đọng là biểu hiện điển hình của quan liêu.",
+      "referenceTopic": "Chống quan liêu",
+      "difficulty": "de",
+      "points": 10
+    },
+    {
+      "id": "sc02",
+      "title": "Trả 'lại quả móc' mới được duyệt dự án",
+      "description": "Một cán bộ quản lý tài sản công đã tự ý sử dụng ngân sách của cơ quan để mua sắm đồ dùng phục vụ mục đích cá nhân và lập chứng từ khống để hợp thức hóa khoản chi. Hành vi này diễn ra trong thời gian dài nhưng không được báo cáo đầy đủ. Tài sản của Nhà nước bị thất thoát, còn người dân là đối tượng chịu thiệt vì nguồn lực công bị sử dụng sai mục đích.",
+      "question": "Căn bệnh nào theo tư tưởng Hồ Chí Minh bộc lộ rõ nhất trong tình huống trên?",
+      "options": [
+        "Tham ô",
+        "Lãng phí",
+        "Cá biệt",
+        "Tự kiêu, tự cao"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Tham ô là hành vi dùng quyền lực hoặc hoàn cảnh công vụ để vơ vét, chiếm đoạt tài sản của Nhà nước và của nhân dân. Việc đòi 'lại quả' để đổi lấy việc duyệt dự án là tham ô điển hình. Hồ Chí Minh xếp tham ô vào nhóm bệnh nguy hiểm nhất vì nó bòn rút của công, làm cho dân khổ.",
+      "referenceTopic": "Chống tham ô",
+      "difficulty": "de",
+      "points": 10
+    },
+    {
+      "id": "sc03",
+      "title": "Cây cầu 20 năm chưa xong",
+      "description": "Một công trình công cộng được khởi công cách đây rất lâu, kinh phí đã được cấp đủ các kỳ nhưng tiến độ cứ kéo dài không rõ nguyên nhân. Máy móc thi công lúc có lúc không, mỗi năm chỉ kịp hoàn thành một phần nhỏ khối lượng. Dù chưa xong, cơ quan chủ quản vẫn phê duyệt và thanh toán đầy đủ các hồ sơ. Người dân hai bờ ngày ngày vẫn ngóng cây cầu nối.",
+      "question": "Tình huống trên chủ yếu phản ánh căn bệnh nào?",
+      "options": [
+        "Lãng phí",
+        "Quan liêu",
+        "Tham ô",
+        "Đặc quyền đặc lợi"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Lãng phí theo Hồ Chí Minh là không quý trọng thời gian, sức lực, của cải của dân và của Nhà nước: công trình dở dang kéo dài, kinh phí đội lên nặng nề, quyền lợi của dân bị ảnh hưởng. Đây là biểu hiện lãng phí của cải công cộng điển hình.",
+      "referenceTopic": "Chống lãng phí",
+      "difficulty": "de",
+      "points": 10
+    },
+    {
+      "id": "sc04",
+      "title": "Dùng quyền hạn của chức vụ cho việc nhà",
+      "description": "Một cán bộ có chức vụ thường dùng mối quan hệ công vụ để giải quyết việc tư: nhờ cấp dưới làm hộ việc nhà, dùng xe và nhân sự của cơ quan cho việc riêng, nhắn em ruột bỏ qua thủ tục để hưởng chính sách. Anh ta không đụng đến tiền công quỹ, nhưng mọi lợi thế từ chức vụ đều được đem ra phục vụ lợi ích cá nhân và gia đình.",
+      "question": "Theo tư tưởng Hồ Chí Minh, hành vi này vi phạm nguyên tắc nào nhất?",
+      "options": [
+        "Chống lãng phí",
+        "Chống đặc quyền đặc lợi",
+        "Tự phê bình và phê bình",
+        "Bảo vệ kỷ luật, kỷ cương"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Hồ Chí Minh phê phán những người 'danh phụ chức', đem quyền hạn của chức vụ ra thu vén lợi ích riêng cho cá nhân và thân quyến. Đó chính là đặc quyền đặc lợi: biến công vụ thành lợi thế cá nhân dù chưa trực tiếp chiếm đoạt tiền của.",
+      "referenceTopic": "Chống đặc quyền đặc lợi",
+      "difficulty": "trungbinh",
+      "points": 10
+    },
+    {
+      "id": "sc05",
+      "title": "Không ai được động đến khuyết điểm",
+      "description": "Trước cuộc họp kiểm điểm định kỳ, một bí thư chi bộ dặn cán bộ viên chức 'nói khái quát, đừng động chạm ai'. Bản thân ông chỉ nhận thành tích, né tránh các tồn tại đã được dân phản ánh nhiều lần. Khi có ý kiến thẳng thắn, ông liền giận dữ, quy chụp là 'phá đoàn kết'. Không khí phê bình trong chi bộ vì thế trở nên hình thức, nể nang.",
+      "question": "Theo tư tưởng Hồ Chí Minh, thái độ của người bí thư này vi phạm chế độ nào?",
+      "options": [
+        "Tập trung dân chủ",
+        "Tự phê bình và phê bình",
+        "Công vụ phục vụ nhân dân",
+        "Phòng, chống tham nhũng"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Hồ Chí Minh coi tự phê bình và phê bình là nhu cầu của Đảng, là 'liều thuốc tốt nhất', 'món quà quý nhất' để giữ Đảng trong sạch, vững mạnh. Chặn phê bình, tự phụ, né tránh khuyết điểm là vi phạm chế độ tự phê bình và phê bình, khiến tập thể không tự sửa được sai lầm.",
+      "referenceTopic": "Tự phê bình và phê bình",
+      "difficulty": "trungbinh",
+      "points": 10
+    },
+    {
+      "id": "sc06",
+      "title": "Quyết định 'một mình một phủ'",
+      "description": "Một chủ tịch xã trong nhiều năm tự quyết mọi việc: không hỏi ý kiến thường trực, không đưa ra hội nghị, sau đó mới yêu cầu tập thể 'thông qua cho đúng quy trình'. Nhiều quyết định sai vì thiếu tham khảo, nhưng khi biết sai vẫn im lặng không báo cáo. Thành tích cá nhân được nêu cao, vai trò tập thể bị coi nhẹ.",
+      "question": "Cách làm việc trên vi phạm nguyên tắc tổ chức cơ bản nào của Đảng?",
+      "options": [
+        "Tập trung dân chủ",
+        "Tự phê bình và phê bình",
+        "Trọng dân, gần dân",
+        "Công khai, minh bạch"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Tập trung dân chủ là nguyên tắc tổ chức cơ bản của Đảng: lãnh đạo tập thể, cá nhân phụ trách; quyết định tập thể, thực hiện cá nhân. Tự ý quyết mọi việc rồi ép tập thể 'thông qua hình thức' là vi phạm tập trung dân chủ, dễ dẫn đến chủ quan, độc đoán, sai lầm kéo dài.",
+      "referenceTopic": "Tập trung dân chủ",
+      "difficulty": "trungbinh",
+      "points": 10
+    },
+    {
+      "id": "sc07",
+      "title": "Bè phái trong đảng bộ cơ sở",
+      "description": "Trong một đảng bộ cơ sở, vài cán bộ chủ chốt va chạm cá nhân, kéo bè kéo phái, dùng các cuộc họp để lôi kéo số đông chống nhau. Việc chung bị bỏ bê, nội bộ chia năm xẻ bảy, dân nhìn thấy và mất niềm tin. Có cán bộ cho rằng 'miễn mình đúng là được', không cần giữ gìn kỷ luật, kỷ cương của Đảng.",
+      "question": "Theo tư tưởng Hồ Chí Minh, tình trạng trên chủ yếu vi phạm điều gì?",
+      "options": [
+        "Kỷ luật, kỷ cương của Đảng",
+        "Chống lãng phí",
+        "Dân cầm quyền",
+        "Phát huy làm chủ của nhân dân"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Hồ Chí Minh nhấn mạnh kỷ luật, kỷ cương của Đảng là tuyệt đối, tự giác và bình đẳng; đoàn kết là truyền thống quý báu của Đảng — 'đoàn kết, đoàn kết, đại đoàn kết'. Va chạm cá nhân, bè phái, bỏ mặc kỷ cương làm suy yếu Đảng và làm mất lòng tin của dân.",
+      "referenceTopic": "Kỷ luật, kỷ cương của Đảng",
+      "difficulty": "de",
+      "points": 10
+    },
+    {
+      "id": "sc08",
+      "title": "Hứa trước dân nhưng không làm",
+      "description": "Một cán bộ thường xuyên hứa hẹn trước dân nhưng không thực hiện, tiếp dân cho có, giải quyết công việc tùy hứng theo kiểu 'được chăng hay chớ'. Người dân đến cơ quan phải đi lại nhiều lần, trình tự thủ tục không được công khai. Dần dần, người dân không còn muốn đến cơ quan nữa, mặc dù việc của dân là chính đáng.",
+      "question": "Theo tư tưởng Hồ Chí Minh, tình huống trên vi phạm phẩm chất đạo đức nào nhất?",
+      "options": [
+        "Cần, kiệm, liêm, chính",
+        "Trọng dân, gần dân, hiểu dân, học dân",
+        "Trung với nước, hiếu với dân",
+        "Yêu thương con người"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Hồ Chí Minh xác định 'trọng dân, gần dân, hiểu dân, học dân và có trách nhiệm trước dân' là nền tảng đạo đức của người cách mạng. Cán bộ hứa mà không làm, tiếp dân hình thức, làm dân nản lòng là vi phạm trực tiếp phẩm chất trọng dân, gần dân.",
+      "referenceTopic": "Đạo đức của cán bộ, đảng viên",
+      "difficulty": "trungbinh",
+      "points": 10
+    },
+    {
+      "id": "sc09",
+      "title": "Không ai được giám sát ai",
+      "description": "Ở một địa phương, nhiều năm liền không tổ chức họp dân đúng quy định, các ý kiến đóng góp gửi qua hộp thư góp ý chẳng được xem xét. Việc thực hiện quy chế dân chủ ở cơ sở chỉ là hình thức: dân không được biết, không được bàn, không được kiểm tra. Cán bộ địa phương làm việc theo kiểu 'mình biết là đủ'.",
+      "question": "Tình huống trên vi phạm phương châm nào của Nhà nước kiểu mới theo Hồ Chí Minh?",
+      "options": [
+        "Của dân, do dân, vì dân",
+        "Kiên quyết chống tham ô, lãng phí",
+        "Giữ vững kỷ luật, kỷ cương",
+        "Tôn trọng hiến pháp và pháp luật"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Quyền làm chủ của dân được Hồ Chí Minh diễn đạt bằng công thức 'dân biết, dân bàn, dân làm, dân kiểm tra'. Không tổ chức họp dân, không xem xét ý kiến đóng góp là phủ nhận phương châm 'do dân', khiến dân không thể kiểm tra, giám sát hoạt động của Nhà nước.",
+      "referenceTopic": "Nhà nước do dân",
+      "difficulty": "trungbinh",
+      "points": 10
+    },
+    {
+      "id": "sc10",
+      "title": "Chính quyền và nhân dân cùng thực hiện quyền làm chủ",
+      "description": "Một địa phương chuẩn bị triển khai dự án xây dựng khu dân cư mới. Trước khi quyết định, cấp ủy lãnh đạo việc lấy ý kiến nhân dân, chính quyền tổ chức các cuộc họp công khai để tiếp thu ý kiến và người dân trực tiếp tham gia đóng góp, giám sát quá trình thực hiện. Nhờ vậy, dự án nhận được sự đồng thuận cao và triển khai hiệu quả.",
+      "question": "Theo tư tưởng Hồ Chí Minh, tình huống trên thể hiện rõ nhất mối quan hệ nào trong hệ thống chính trị?",
+      "options": [
+        "Đảng lãnh đạo, Nhà nước quản lý, nhân dân làm chủ",
+        "Đảng quyết định mọi việc thay nhân dân",
+        "Nhà nước quản lý, nhân dân chỉ thực hiện",
+        "Đảng và Nhà nước hoạt động độc lập với nhân dân"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Theo tư tưởng Hồ Chí Minh, Đảng giữ vai trò lãnh đạo, Nhà nước tổ chức quản lý xã hội bằng pháp luật, còn nhân dân là chủ thể của quyền lực, trực tiếp tham gia và giám sát hoạt động của bộ máy nhà nước.",
+      "referenceTopic": "Mối quan hệ giữa Đảng – Nhà nước – nhân dân",
+      "difficulty": "kho",
+      "points": 10
+    },
+    {
+      "id": "sc11",
+      "title": "Cơ quan tự đặt thêm thủ tục cho dân",
+      "description": "Một cơ quan hành chính cấp huyện tự đặt thêm thủ tục ngoài quy định, yêu cầu dân nộp thêm giấy tờ không do Nhà nước quy định. Lý do đưa ra là 'đặc thù địa phương'. Dân làm việc phải đi lại nhiều chuyến, chi phí tốn kém, còn cán bộ cơ quan thì tiện quản lý. Khi có kiến nghị đổi mới, câu trả lời là 'cả nước chưa làm thì mình không làm trước'.",
+      "question": "Theo tư tưởng Hồ Chí Minh, tình huống trên vi phạm đặc trưng nào của Nhà nước kiểu mới?",
+      "options": [
+        "Nhà nước pháp quyền, tôn trọng hiến pháp và pháp luật",
+        "Của dân, do dân, vì dân",
+        "Đảng lãnh đạo, Nhà nước quản lý",
+        "Kiên quyết chống tham ô, lãng phí, quan liêu"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Hồ Chí Minh coi Nhà nước kiểu mới là Nhà nước pháp quyền: pháp luật do dân lập ra, mọi cơ quan phải tôn trọng Hiến pháp và pháp luật, hoạt động theo pháp luật. Tự đặt thêm thủ tục trái quy định là vi phạm nguyên tắc thượng tôn pháp luật.",
+      "referenceTopic": "Nhà nước pháp quyền",
+      "difficulty": "trungbinh",
+      "points": 10
+    },
+    {
+      "id": "sc12",
+      "title": "Chờ dân đến tìm mới giải quyết",
+      "description": "Một xã có nhiều chính sách hỗ trợ hộ nghèo nhưng triển khai chậm, người thụ hưởng là người nghèo, người yếu thế nên chậm được hưởng. Cán bộ xuống xã không chủ động nắm tình hình mà chờ dân đến tìm. Không ai đi 'đến nơi đến chốn' để xem chính sách đã đến tay dân chưa, đã đúng đối tượng chưa.",
+      "question": "Theo tư tưởng Hồ Chí Minh, tình huống trên phản ánh gì về tinh thần 'công bộc'?",
+      "options": [
+        "Công bộc phải tận tụy phục vụ nhân dân, đi đến nơi đến chốn",
+        "Công bộc là 'quan' ra lệnh cho dân",
+        "Công bộc chỉ cần xử lý công văn, giấy tờ",
+        "Công bộc làm việc theo giờ hành chính là đủ"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Hồ Chí Minh khẳng định cán bộ là 'công bộc', là 'đầy tớ thật trung thành của nhân dân', phải tận tụy phục vụ dân, đi đến nơi đến chốn. Chờ dân đến tìm, không chủ động nắm tình hình là trái với tinh thần phục vụ của công bộc.",
+      "referenceTopic": "Cán bộ là công bộc phục vụ nhân dân",
+      "difficulty": "de",
+      "points": 10
+    },
+    {
+      "id": "sc13",
+      "title": "Quyền lực không bị ràng buộc",
+      "description": "Một cán bộ nắm nhiều quyền quyết định về đất đai, giấy phép suốt nhiều năm, không bị luân chuyển, không bị kiểm tra định kỳ. Các cơ quan giám sát hoạt động hình thức, dân thì không được cung cấp thông tin. Có người cảnh báo rủi ro nhưng chưa ai xử lý; quyền lực gần như không bị kiểm soát.",
+      "question": "Theo tư tưởng Hồ Chí Minh, bài học quan trọng nhất từ tình huống này là gì?",
+      "options": [
+        "Phải có cơ chế kiểm soát quyền lực, không để quyền lực bị lạm dụng",
+        "Cần tăng lương để cán bộ khỏi tham nhũng",
+        "Nên tin tưởng tuyệt đối vào cán bộ giữ vai trò then chốt",
+        "Cán bộ giỏi thì không cần bị giám sát"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Hồ Chí Minh luôn trăn trở về chống lạm quyền: cán bộ là 'người giữ của công' nên quyền lực phải được giám sát. Quyền lực không bị kiểm soát thì dễ sa vào tham ô, quan liêu, đặc quyền đặc lợi; bài học là phải có cơ chế kiểm soát quyền lực chặt chẽ.",
+      "referenceTopic": "Kiểm soát quyền lực",
+      "difficulty": "kho",
+      "points": 10
+    },
+    {
+      "id": "sc14",
+      "title": "Đảng viên đi trước, làng nước theo sau",
+      "description": "Một chi bộ có nhiều đảng viên là người có uy tín ở địa phương. Khi địa phương vận động hiến máu, quyên góp xây cầu dân sinh, những đảng viên này xung phong đi đầu: việc gì khó họ làm trước, việc gì dân chưa hiểu họ giải thích. Nhờ vậy, phong trào ở địa phương lan tỏa, dân tin theo, việc khó dần chuyển biến.",
+      "question": "Tình huống trên thể hiện điều gì về vai trò của Đảng và đảng viên theo tư tưởng Hồ Chí Minh?",
+      "options": [
+        "Đảng thay mặt nhân dân quyết mọi việc",
+        "Đảng là đạo đức, là văn minh; đảng viên gương mẫu đi đầu",
+        "Đảng cầm quyền là để đứng trên dân",
+        "Đảng chỉ làm công tác tư tưởng"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Hồ Chí Minh dạy 'một tấm gương sống còn có giá trị hơn một trăm bài diễn văn tuyên truyền'. Đảng là đạo đức, là văn minh; đảng viên đi trước, làng nước theo sau. Gương đi đầu của đảng viên tạo niềm tin và dẫn dắt quần chúng.",
+      "referenceTopic": "Mối quan hệ giữa Đảng – Nhà nước – nhân dân",
+      "difficulty": "de",
+      "points": 10
+    },
+    {
+      "id": "sc15",
+      "title": "Thước đo của lòng dân",
+      "description": "Khi kiểm điểm, một cán bộ cho rằng cứ tổ chức nhiều hội nghị, nêu cao thành tích là tốt. Một cán bộ khác phản biện: việc tốt nhất là dân ấm no, dân hiểu rõ việc Nhà nước, dân tin tưởng phục tùng đường lối, chính sách của Đảng và Nhà nước. Cơ quan quyết định lấy 'lòng dân' làm thước đo cho mọi hoạt động của mình.",
+      "question": "Theo tư tưởng Hồ Chí Minh, điều gì là thước đo quan trọng nhất đối với hiệu quả hoạt động của Đảng và Nhà nước?",
+      "options": [
+        "Số hội nghị, số văn bản ban hành",
+        "Dân ấm no, dân hiểu rõ, dân tin tưởng phục tùng đường lối, chính sách",
+        "Đáp ứng chỉ tiêu kiểm điểm thành tích",
+        "Số công trình khang trang của cơ quan"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Hồ Chí Minh viết: 'Nếu dân không ấm no, dân không có quyền làm chủ, dân không hiểu rõ việc Nhà nước, dân không tin tưởng phục tùng đường lối chính sách của Đảng và Nhà nước là lỗi của Đảng và Nhà nước'. Thước đo cao nhất là đời sống và niềm tin của dân.",
+      "referenceTopic": "Nhà nước của dân, do dân, vì dân",
+      "difficulty": "kho",
+      "points": 10
+    },
+    {
+      "id": "sc16",
+      "title": "Đảng phải tự đổi mới",
+      "description": "Sau khi phát hiện nhiều hạn chế trong công tác lãnh đạo, một tổ chức đảng chủ động kiểm điểm, lắng nghe góp ý của nhân dân, sửa đổi quy chế làm việc và nâng cao trách nhiệm của từng đảng viên. Những hạn chế trước đây được khắc phục rõ rệt.",
+      "question": "Theo tư tưởng Hồ Chí Minh, tình huống trên thể hiện nội dung nào?",
+      "options": [
+        "Đảng phải thường xuyên tự đổi mới, tự chỉnh đốn",
+        "Đảng chỉ cần giữ nguyên phương thức lãnh đạo",
+        "Đảng chỉ sửa đổi khi có cấp trên yêu cầu",
+        "Đảng chỉ tập trung phát triển kinh tế"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Theo tư tưởng Hồ Chí Minh, muốn giữ vững vai trò lãnh đạo, Đảng phải thường xuyên tự đổi mới, tự chỉnh đốn, nâng cao năng lực lãnh đạo và sức chiến đấu.",
+      "referenceTopic": "Xây dựng Đảng trong sạch, vững mạnh",
+      "difficulty": "trungbinh",
+      "points": 10
+    },
+    {
+      "id": "sc17",
+      "title": "Lắng nghe ý kiến nhân dân",
+      "description": "Trước khi ban hành một chính sách ảnh hưởng trực tiếp đến đời sống người dân, chính quyền địa phương tổ chức lấy ý kiến rộng rãi, công khai tiếp thu và điều chỉnh nhiều nội dung theo góp ý của nhân dân.",
+      "question": "Theo tư tưởng Hồ Chí Minh, tình huống trên thể hiện tư tưởng nào?",
+      "options": [
+        "Đảng và Nhà nước phải gắn bó mật thiết với nhân dân",
+        "Đảng quyết định thay nhân dân",
+        "Nhân dân chỉ có quyền thực hiện",
+        "Nhà nước chỉ cần quản lý bằng mệnh lệnh"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Theo tư tưởng Hồ Chí Minh, Đảng và Nhà nước phải luôn dựa vào nhân dân, tôn trọng quyền làm chủ của nhân dân và lắng nghe ý kiến của nhân dân trong quá trình lãnh đạo, quản lý.",
+      "referenceTopic": "Mối quan hệ giữa Đảng – Nhà nước – nhân dân",
+      "difficulty": "trungbinh",
+      "points": 10
+    }
   ],
+  "topics": [
+    "Xây dựng Đảng trong sạch, vững mạnh",
+    "Đạo đức của cán bộ, đảng viên",
+    "Tập trung dân chủ",
+    "Tự phê bình và phê bình",
+    "Mối quan hệ giữa Đảng – Nhà nước – nhân dân",
+    "Nhà nước của dân, do dân, vì dân",
+    "Nhà nước do dân",
+    "Nhà nước pháp quyền",
+    "Kiểm soát quyền lực",
+    "Chống quan liêu",
+    "Chống tham ô",
+    "Chống lãng phí",
+    "Chống đặc quyền đặc lợi",
+    "Cán bộ là công bộc phục vụ nhân dân",
+    "Kỷ luật, kỷ cương của Đảng"
+  ],
+  "difficulties": {
+    "de": {
+      "label": "Dễ",
+      "color": "green"
+    },
+    "trungbinh": {
+      "label": "Trung bình",
+      "color": "amber"
+    },
+    "kho": {
+      "label": "Khó",
+      "color": "red"
+    }
+  },
+  "badges": [
+    {
+      "id": "party-ethics-master",
+      "name": "Bậc thầy đạo đức",
+      "icon": "HeartHandshake",
+      "condition": "Đúng ít nhất 3 câu về đạo đức cán bộ, trọng dân, công bộc",
+      "check": {
+        "topicAny": [
+          "Đạo đức của cán bộ, đảng viên",
+          "Cán bộ là công bộc phục vụ nhân dân"
+        ],
+        "minCorrect": 2
+      }
+    },
+    {
+      "id": "guardian-of-the-people",
+      "name": "Người giữ gìn lợi ích nhân dân",
+      "icon": "ShieldCheck",
+      "condition": "Đúng ít nhất 3 câu về chống quan liêu, tham ô, lãng phí, đặc quyền đặc lợi",
+      "check": {
+        "topicAny": [
+          "Chống quan liêu",
+          "Chống tham ô",
+          "Chống lãng phí",
+          "Chống đặc quyền đặc lợi"
+        ],
+        "minCorrect": 2
+      }
+    },
+    {
+      "id": "rule-of-law-explorer",
+      "name": "Khám phá pháp quyền",
+      "icon": "Scale",
+      "condition": "Đúng ít nhất 2 câu về pháp quyền, kiểm soát quyền lực",
+      "check": {
+        "topicAny": [
+          "Nhà nước pháp quyền",
+          "Kiểm soát quyền lực"
+        ],
+        "minCorrect": 2
+      }
+    },
+    {
+      "id": "outstanding-cadre",
+      "name": "Cán bộ mẫu mực",
+      "icon": "Award",
+      "condition": "Tổng điểm từ 120 trở lên",
+      "check": {
+        "minScore": 120
+      }
+    },
+    {
+      "id": "perfect-run",
+      "name": "Hoàn hảo",
+      "icon": "Trophy",
+      "condition": "Đúng cả 10 câu trong lượt chơi",
+      "check": {
+        "perfect": true
+      }
+    },
+    {
+      "id": "anti-corruption-expert",
+      "name": "Chuyên gia chống tham nhũng",
+      "icon": "Eye",
+      "condition": "Đúng cả các câu về chống tham ô và lãng phí trong lượt chơi",
+      "check": {
+        "topicAny": [
+          "Chống tham ô",
+          "Chống lãng phí"
+        ],
+        "minCorrect": 2
+      }
+    }
+  ],
+  "reflectiveTemplate": "Nếu bạn là cán bộ trong tình huống '{title}', theo tư tưởng Hồ Chí Minh, bạn sẽ làm gì khác đi?",
   "ranks": [
-    { "minScore": 0, "name": "Cần rèn luyện thêm" }
+    {
+      "minScore": 0,
+      "name": "Cần rèn luyện thêm"
+    },
+    {
+      "minScore": 60,
+      "name": "Khá"
+    },
+    {
+      "minScore": 90,
+      "name": "Giỏi"
+    },
+    {
+      "minScore": 120,
+      "name": "Xuất sắc"
+    }
   ]
 }
