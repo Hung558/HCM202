@@ -1,6 +1,1492 @@
 {
-  "title": "Chương I – Flashcards & Từ điển thuật ngữ",
-  "cards": [
-    { "id": 1, "term": "Đại hội VII năm 1991", "definition": "Lần đầu tiên Đảng khẳng định lấy chủ nghĩa Mác - Lênin và tư tưởng Hồ Chí Minh làm nền tảng tư tưởng." }
-  ]
+  "schemaVersion": "1.0.0",
+  "metadata": {
+    "id": "ho-chi-minh-introduction-foundations-v1",
+    "title": "Tư tưởng Hồ Chí Minh: khái niệm, cơ sở hình thành và nhận thức của Đảng",
+    "language": "vi-VN",
+    "encoding": "UTF-8",
+    "createdAt": "2026-09-30",
+    "scope": "Phần nhập môn theo mô tả của người dùng; chưa gắn với số chương của một giáo trình cụ thể.",
+    "contentStyle": "Diễn giải ngắn để ôn tập, không phải trích dẫn nguyên văn hoặc toàn bộ định nghĩa trong giáo trình.",
+    "editorialNotes": [
+      "Các mốc Đại hội là những mốc chọn lọc phục vụ chương này, không phải danh mục đầy đủ mọi Đại hội.",
+      "Định nghĩa thuật ngữ được giải thích trong ngữ cảnh môn học; các mẹo phân biệt là nội dung biên soạn.",
+      "Các khoảng ôn là lựa chọn thiết kế cho bản đầu tiên của ứng dụng, không phải kết quả đánh giá trí nhớ cá nhân."
+    ],
+    "counts": {
+      "flashcards": 36,
+      "glossary": 24,
+      "sources": 12,
+      "categories": 5
+    }
+  },
+  "categories": [
+    {
+      "id": "concepts",
+      "name": "Khái niệm và vai trò",
+      "order": 1
+    },
+    {
+      "id": "theoretical_foundations",
+      "name": "Cơ sở tư tưởng, lý luận",
+      "order": 2
+    },
+    {
+      "id": "historical_context",
+      "name": "Cơ sở thực tiễn và mốc tiếp cận",
+      "order": 3
+    },
+    {
+      "id": "subjective_factors",
+      "name": "Nhân tố chủ quan",
+      "order": 4
+    },
+    {
+      "id": "party_congresses",
+      "name": "Nhận thức của Đảng qua các Đại hội",
+      "order": 5
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fc001",
+      "categoryId": "concepts",
+      "order": 1,
+      "type": "question_answer",
+      "front": "Tư tưởng Hồ Chí Minh là gì?",
+      "back": "Hệ thống quan điểm toàn diện, sâu sắc về cách mạng Việt Nam, hình thành qua vận dụng sáng tạo Mác - Lênin, phát huy di sản dân tộc và tiếp nhận văn hóa thế giới; có giá trị định hướng lâu dài.",
+      "keywords": [
+        "khái niệm"
+      ],
+      "glossaryIds": [
+        "g01"
+      ],
+      "citations": [
+        {
+          "sourceId": "s01",
+          "locator": "Phần IV, mục 4: đoạn định nghĩa tư tưởng Hồ Chí Minh"
+        }
+      ]
+    },
+    {
+      "id": "fc002",
+      "categoryId": "concepts",
+      "order": 2,
+      "type": "term_explanation",
+      "front": "Ba nguồn tư tưởng, lý luận chủ yếu",
+      "back": "Truyền thống dân tộc; tinh hoa văn hóa thế giới; chủ nghĩa Mác - Lênin.",
+      "keywords": [
+        "nguồn gốc"
+      ],
+      "glossaryIds": [
+        "g04",
+        "g06",
+        "g07"
+      ],
+      "citations": [
+        {
+          "sourceId": "s03",
+          "locator": "Chuyên đề 1, II.1.b"
+        }
+      ]
+    },
+    {
+      "id": "fc003",
+      "categoryId": "concepts",
+      "order": 3,
+      "type": "term_explanation",
+      "front": "Tính hệ thống của tư tưởng Hồ Chí Minh",
+      "back": "Các quan điểm liên hệ với nhau, bao quát giải phóng dân tộc, xây dựng chính quyền, đoàn kết, văn hóa và đạo đức.",
+      "keywords": [
+        "hệ thống"
+      ],
+      "glossaryIds": [
+        "g01"
+      ],
+      "citations": [
+        {
+          "sourceId": "s08",
+          "locator": "Đoạn trình bày các nội dung được Đại hội IX khái quát"
+        }
+      ]
+    },
+    {
+      "id": "fc004",
+      "categoryId": "concepts",
+      "order": 4,
+      "type": "term_explanation",
+      "front": "Giá trị của tư tưởng Hồ Chí Minh",
+      "back": "Theo Cương lĩnh 2011, đây là di sản tinh thần quý báu của Đảng và dân tộc, có ý nghĩa dẫn đường cho cách mạng.",
+      "keywords": [
+        "giá trị"
+      ],
+      "glossaryIds": [
+        "g01"
+      ],
+      "citations": [
+        {
+          "sourceId": "s01",
+          "locator": "Phần IV, mục 4"
+        }
+      ]
+    },
+    {
+      "id": "fc005",
+      "categoryId": "concepts",
+      "order": 5,
+      "type": "term_explanation",
+      "front": "Nền tảng tư tưởng của Đảng",
+      "back": "Theo Điều lệ được thông qua tại Đại hội VII, nền tảng ấy gồm chủ nghĩa Mác - Lênin và tư tưởng Hồ Chí Minh.",
+      "keywords": [
+        "nền tảng"
+      ],
+      "glossaryIds": [
+        "g02",
+        "g04"
+      ],
+      "citations": [
+        {
+          "sourceId": "s02",
+          "locator": "Phần mở đầu Điều lệ"
+        }
+      ]
+    },
+    {
+      "id": "fc006",
+      "categoryId": "concepts",
+      "order": 6,
+      "type": "term_explanation",
+      "front": "Kim chỉ nam cho hành động",
+      "back": "Cách nói về vai trò định hướng hoạt động. Trong Điều lệ, vai trò này gắn với việc đề ra đường lối phù hợp thực tiễn.",
+      "keywords": [
+        "định hướng"
+      ],
+      "glossaryIds": [
+        "g03"
+      ],
+      "citations": [
+        {
+          "sourceId": "s02",
+          "locator": "Phần mở đầu Điều lệ; giải nghĩa trong ngữ cảnh"
+        }
+      ]
+    },
+    {
+      "id": "fc007",
+      "categoryId": "theoretical_foundations",
+      "order": 7,
+      "type": "term_explanation",
+      "front": "Nguồn lý luận giữ vai trò quyết định",
+      "back": "Chủ nghĩa Mác - Lênin cung cấp cách nhìn và phương pháp phân tích để Hồ Chí Minh tìm hướng giải phóng dân tộc.",
+      "keywords": [
+        "Mác - Lênin"
+      ],
+      "glossaryIds": [
+        "g04"
+      ],
+      "citations": [
+        {
+          "sourceId": "s04",
+          "locator": "Mục 2: đoạn về cơ sở chủ yếu hình thành tư tưởng"
+        }
+      ]
+    },
+    {
+      "id": "fc008",
+      "categoryId": "theoretical_foundations",
+      "order": 8,
+      "type": "term_explanation",
+      "front": "Vai trò của chủ nghĩa yêu nước",
+      "back": "Lòng yêu nước là động lực ban đầu thúc đẩy Hồ Chí Minh tìm đường cứu nước và tiếp cận học thuyết Mác - Lênin.",
+      "keywords": [
+        "yêu nước"
+      ],
+      "glossaryIds": [
+        "g05"
+      ],
+      "citations": [
+        {
+          "sourceId": "s04",
+          "locator": "Mục 2: đoạn về động lực ban đầu"
+        }
+      ]
+    },
+    {
+      "id": "fc009",
+      "categoryId": "theoretical_foundations",
+      "order": 9,
+      "type": "term_explanation",
+      "front": "Giá trị truyền thống của dân tộc",
+      "back": "Các giá trị tiêu biểu gồm yêu nước, đoàn kết, nhân ái, ý chí vượt khó, sáng tạo và tinh thần hiếu học.",
+      "keywords": [
+        "truyền thống"
+      ],
+      "glossaryIds": [
+        "g05",
+        "g06"
+      ],
+      "citations": [
+        {
+          "sourceId": "s03",
+          "locator": "Chuyên đề 1, II.1.b: các giá trị truyền thống"
+        }
+      ]
+    },
+    {
+      "id": "fc010",
+      "categoryId": "theoretical_foundations",
+      "order": 10,
+      "type": "term_explanation",
+      "front": "Tinh hoa văn hóa nhân loại",
+      "back": "Những giá trị có ích được tiếp nhận từ cả phương Đông và phương Tây để làm giàu tư tưởng.",
+      "keywords": [
+        "văn hóa"
+      ],
+      "glossaryIds": [
+        "g07"
+      ],
+      "citations": [
+        {
+          "sourceId": "s03",
+          "locator": "Chuyên đề 1, II.1.b: tinh hoa văn hóa nhân loại"
+        }
+      ]
+    },
+    {
+      "id": "fc011",
+      "categoryId": "theoretical_foundations",
+      "order": 11,
+      "type": "term_explanation",
+      "front": "Tiếp thu từ Nho giáo",
+      "back": "Tiếp thu tinh thần hiếu học, tu dưỡng; phê phán tư tưởng đẳng cấp và coi thường phụ nữ.",
+      "keywords": [
+        "Nho giáo"
+      ],
+      "glossaryIds": [
+        "g08"
+      ],
+      "citations": [
+        {
+          "sourceId": "s05",
+          "locator": "Đoạn về tiếp thu văn hóa phương Đông: Nho giáo"
+        }
+      ]
+    },
+    {
+      "id": "fc012",
+      "categoryId": "theoretical_foundations",
+      "order": 12,
+      "type": "term_explanation",
+      "front": "Tiếp thu từ Phật giáo",
+      "back": "Đề cao thương người, vị tha, khoan dung và gắn bó với cộng đồng.",
+      "keywords": [
+        "Phật giáo"
+      ],
+      "glossaryIds": [
+        "g09"
+      ],
+      "citations": [
+        {
+          "sourceId": "s05",
+          "locator": "Đoạn về Phật giáo"
+        }
+      ]
+    },
+    {
+      "id": "fc013",
+      "categoryId": "theoretical_foundations",
+      "order": 13,
+      "type": "term_explanation",
+      "front": "Chủ nghĩa Tam dân của Tôn Trung Sơn",
+      "back": "Gắn vấn đề dân tộc với độc lập, dân quyền với tự do, dân sinh với hạnh phúc.",
+      "keywords": [
+        "Tam dân"
+      ],
+      "glossaryIds": [
+        "g10"
+      ],
+      "citations": [
+        {
+          "sourceId": "s05",
+          "locator": "Đoạn về Tôn Trung Sơn"
+        }
+      ]
+    },
+    {
+      "id": "fc014",
+      "categoryId": "theoretical_foundations",
+      "order": 14,
+      "type": "term_explanation",
+      "front": "Tiếp thu văn hóa phương Tây",
+      "back": "Hồ Chí Minh tìm hiểu các giá trị dân chủ, tự do, bình đẳng và quyền con người; tiếp nhận chúng có phê phán.",
+      "keywords": [
+        "phương Tây"
+      ],
+      "glossaryIds": [
+        "g11"
+      ],
+      "citations": [
+        {
+          "sourceId": "s05",
+          "locator": "Đoạn về lĩnh hội tư tưởng văn hóa phương Tây"
+        }
+      ]
+    },
+    {
+      "id": "fc015",
+      "categoryId": "theoretical_foundations",
+      "order": 15,
+      "type": "question_answer",
+      "front": "Tiếp thu có chọn lọc nghĩa là gì?",
+      "back": "Xem xét giá trị và hạn chế của từng tư tưởng, giữ phần phù hợp với mục tiêu cứu nước và hoàn cảnh Việt Nam.",
+      "keywords": [
+        "chọn lọc"
+      ],
+      "glossaryIds": [
+        "g12"
+      ],
+      "citations": [
+        {
+          "sourceId": "s06",
+          "locator": "Đoạn về gạn lọc các hạt nhân hợp lý khi tiếp thu văn hóa"
+        }
+      ]
+    },
+    {
+      "id": "fc016",
+      "categoryId": "theoretical_foundations",
+      "order": 16,
+      "type": "term_explanation",
+      "front": "Quan hệ với chủ nghĩa Mác - Lênin",
+      "back": "Tư tưởng Hồ Chí Minh vận dụng và bổ sung sáng tạo học thuyết này khi giải quyết vấn đề của cách mạng Việt Nam.",
+      "keywords": [
+        "vận dụng"
+      ],
+      "glossaryIds": [
+        "g04",
+        "g12"
+      ],
+      "citations": [
+        {
+          "sourceId": "s12",
+          "locator": "Đoạn về quan hệ giữa Mác - Lênin và tư tưởng Hồ Chí Minh"
+        }
+      ]
+    },
+    {
+      "id": "fc017",
+      "categoryId": "historical_context",
+      "order": 17,
+      "type": "term_explanation",
+      "front": "Yêu cầu từ thực tiễn Việt Nam",
+      "back": "Tình trạng mất độc lập và khó khăn của các phong trào cứu nước đặt ra yêu cầu tìm đường giải phóng dân tộc phù hợp.",
+      "keywords": [
+        "cứu nước"
+      ],
+      "glossaryIds": [
+        "g13"
+      ],
+      "citations": [
+        {
+          "sourceId": "s07",
+          "locator": "Phần đầu: bối cảnh và yêu cầu tìm con đường cứu nước"
+        }
+      ]
+    },
+    {
+      "id": "fc018",
+      "categoryId": "historical_context",
+      "order": 18,
+      "type": "term_explanation",
+      "front": "Bối cảnh quốc tế đầu thế kỷ XX",
+      "back": "Sự bành trướng của chủ nghĩa đế quốc và các phong trào chống áp bức tạo bối cảnh quốc tế cho quá trình tìm đường cứu nước.",
+      "keywords": [
+        "quốc tế"
+      ],
+      "glossaryIds": [
+        "g13"
+      ],
+      "citations": [
+        {
+          "sourceId": "s04",
+          "locator": "Mục 1: hoàn cảnh quốc tế"
+        }
+      ]
+    },
+    {
+      "id": "fc019",
+      "categoryId": "historical_context",
+      "order": 19,
+      "type": "term_explanation",
+      "front": "Cách mạng Tháng Mười Nga năm 1917",
+      "back": "Thắng lợi này gợi mở một hướng giải phóng mới và tác động đến lựa chọn con đường cách mạng của Hồ Chí Minh.",
+      "keywords": [
+        "1917"
+      ],
+      "glossaryIds": [
+        "g14"
+      ],
+      "citations": [
+        {
+          "sourceId": "s04",
+          "locator": "Mục 1: bối cảnh thời đại và Cách mạng Tháng Mười"
+        }
+      ]
+    },
+    {
+      "id": "fc020",
+      "categoryId": "historical_context",
+      "order": 20,
+      "type": "question_answer",
+      "front": "Quốc tế Cộng sản ra đời khi nào?",
+      "back": "Tháng 3 năm 1919; tổ chức này còn được gọi là Quốc tế III.",
+      "keywords": [
+        "1919"
+      ],
+      "glossaryIds": [
+        "g15"
+      ],
+      "citations": [
+        {
+          "sourceId": "s03",
+          "locator": "Chuyên đề 1, II.1.a: hoàn cảnh quốc tế"
+        }
+      ]
+    },
+    {
+      "id": "fc021",
+      "categoryId": "subjective_factors",
+      "order": 21,
+      "type": "term_explanation",
+      "front": "Tư duy độc lập, tự chủ",
+      "back": "Tự quan sát, đánh giá và lựa chọn đường cứu nước từ trải nghiệm.",
+      "keywords": [
+        "tư duy"
+      ],
+      "glossaryIds": [
+        "g16",
+        "g17"
+      ],
+      "citations": [
+        {
+          "sourceId": "s07",
+          "locator": "Các đoạn về tư duy mới và tinh thần tự lực, tự cường"
+        }
+      ]
+    },
+    {
+      "id": "fc022",
+      "categoryId": "subjective_factors",
+      "order": 22,
+      "type": "term_explanation",
+      "front": "Phẩm chất cá nhân góp phần hình thành tư tưởng",
+      "back": "Lòng yêu nước, thương dân, ý chí kiên trì và quyết tâm tìm cách giành độc lập là những yếu tố nổi bật.",
+      "keywords": [
+        "phẩm chất"
+      ],
+      "glossaryIds": [
+        "g16"
+      ],
+      "citations": [
+        {
+          "sourceId": "s06",
+          "locator": "Các đoạn về mục tiêu cứu nước, cứu dân và bản lĩnh"
+        }
+      ]
+    },
+    {
+      "id": "fc023",
+      "categoryId": "subjective_factors",
+      "order": 23,
+      "type": "term_explanation",
+      "front": "Vai trò của hoạt động thực tiễn",
+      "back": "Trải nghiệm đấu tranh giúp Hồ Chí Minh kiểm nghiệm nhận thức, tổng kết kinh nghiệm và phát triển lý luận.",
+      "keywords": [
+        "thực tiễn"
+      ],
+      "glossaryIds": [
+        "g18"
+      ],
+      "citations": [
+        {
+          "sourceId": "s08",
+          "locator": "Đoạn về nhà lý luận giàu thực tiễn và nhà thực tiễn giàu lý luận"
+        }
+      ]
+    },
+    {
+      "id": "fc024",
+      "categoryId": "historical_context",
+      "order": 24,
+      "type": "term_explanation",
+      "front": "Ngày 5/6/1911",
+      "back": "Nguyễn Tất Thành bắt đầu hành trình ra nước ngoài tìm đường cứu nước.",
+      "keywords": [
+        "1911"
+      ],
+      "glossaryIds": [
+        "g18"
+      ],
+      "citations": [
+        {
+          "sourceId": "s06",
+          "locator": "Đoạn về ngày bắt đầu hành trình 5/6/1911"
+        }
+      ]
+    },
+    {
+      "id": "fc025",
+      "categoryId": "historical_context",
+      "order": 25,
+      "type": "term_explanation",
+      "front": "Tháng 7/1920",
+      "back": "Nguyễn Ái Quốc đọc bản sơ thảo luận cương của Lênin bàn về dân tộc và thuộc địa, nhận ra hướng giải phóng cần tìm.",
+      "keywords": [
+        "1920",
+        "Lênin"
+      ],
+      "glossaryIds": [
+        "g19"
+      ],
+      "citations": [
+        {
+          "sourceId": "s06",
+          "locator": "Đoạn về đọc luận cương tháng 7/1920"
+        }
+      ]
+    },
+    {
+      "id": "fc026",
+      "categoryId": "historical_context",
+      "order": 26,
+      "type": "term_explanation",
+      "front": "Đại hội Tua, tháng 12/1920",
+      "back": "Nguyễn Ái Quốc tán thành Quốc tế III và tham gia thành lập Đảng Cộng sản Pháp, đánh dấu bước chuyển sang lập trường cộng sản.",
+      "keywords": [
+        "Tua",
+        "1920"
+      ],
+      "glossaryIds": [
+        "g20"
+      ],
+      "citations": [
+        {
+          "sourceId": "s07",
+          "locator": "Đoạn về Đại hội XVIII Đảng Xã hội Pháp tại Tours"
+        }
+      ]
+    },
+    {
+      "id": "fc027",
+      "categoryId": "party_congresses",
+      "order": 27,
+      "type": "term_explanation",
+      "front": "Đại hội II năm 1951",
+      "back": "Đề cao việc học tập đường lối chính trị, tác phong và đạo đức cách mạng của Hồ Chí Minh trong toàn Đảng.",
+      "keywords": [
+        "1951",
+        "II"
+      ],
+      "glossaryIds": [
+        "g21"
+      ],
+      "citations": [
+        {
+          "sourceId": "s11",
+          "locator": "Mục Giai đoạn trước Đại hội VII: diễn văn khai mạc Đại hội II; chú thích 2"
+        }
+      ]
+    },
+    {
+      "id": "fc028",
+      "categoryId": "party_congresses",
+      "order": 28,
+      "type": "term_explanation",
+      "front": "Đại hội V năm 1982",
+      "back": "Đặt yêu cầu tổ chức học tập tư tưởng, đạo đức và tác phong Hồ Chí Minh một cách có hệ thống trong Đảng.",
+      "keywords": [
+        "1982",
+        "V"
+      ],
+      "glossaryIds": [
+        "g21"
+      ],
+      "citations": [
+        {
+          "sourceId": "s11",
+          "locator": "Mục Giai đoạn trước Đại hội VII: Đại hội V; chú thích 5"
+        }
+      ]
+    },
+    {
+      "id": "fc029",
+      "categoryId": "party_congresses",
+      "order": 29,
+      "type": "term_explanation",
+      "front": "Đại hội VI năm 1986",
+      "back": "Đổi mới tư duy gắn với nắm vững tính khoa học, cách mạng của Mác - Lênin và kế thừa di sản lý luận Hồ Chí Minh.",
+      "keywords": [
+        "1986",
+        "VI"
+      ],
+      "glossaryIds": [
+        "g21"
+      ],
+      "citations": [
+        {
+          "sourceId": "s12",
+          "locator": "Đoạn về Đại hội VI và đổi mới tư duy; chú thích 5"
+        }
+      ]
+    },
+    {
+      "id": "fc030",
+      "categoryId": "party_congresses",
+      "order": 30,
+      "type": "term_explanation",
+      "front": "Đại hội VII năm 1991",
+      "back": "Chính thức xác lập tư tưởng Hồ Chí Minh cùng với chủ nghĩa Mác - Lênin làm cơ sở tư tưởng và định hướng hành động của Đảng.",
+      "keywords": [
+        "1991",
+        "VII"
+      ],
+      "glossaryIds": [
+        "g22"
+      ],
+      "citations": [
+        {
+          "sourceId": "s02",
+          "locator": "Phần mở đầu Điều lệ được Đại hội VII thông qua"
+        }
+      ]
+    },
+    {
+      "id": "fc031",
+      "categoryId": "party_congresses",
+      "order": 31,
+      "type": "term_explanation",
+      "front": "Đại hội IX năm 2001",
+      "back": "Khái quát rõ hơn nội hàm tư tưởng Hồ Chí Minh: tính hệ thống, nguồn hình thành, các nội dung chủ yếu và giá trị.",
+      "keywords": [
+        "2001",
+        "IX"
+      ],
+      "glossaryIds": [
+        "g23"
+      ],
+      "citations": [
+        {
+          "sourceId": "s09",
+          "locator": "Phần mở đầu dẫn nội dung Văn kiện Đại hội IX"
+        }
+      ]
+    },
+    {
+      "id": "fc032",
+      "categoryId": "party_congresses",
+      "order": 32,
+      "type": "term_explanation",
+      "front": "Đại hội X năm 2006",
+      "back": "Diễn văn khai mạc tiếp tục khẳng định ý nghĩa nền tảng và giá trị di sản tinh thần của tư tưởng Hồ Chí Minh.",
+      "keywords": [
+        "2006",
+        "X"
+      ],
+      "glossaryIds": [
+        "g21"
+      ],
+      "citations": [
+        {
+          "sourceId": "s10",
+          "locator": "Đoạn về sự nghiệp cách mạng 76 năm và di sản của Hồ Chí Minh"
+        }
+      ]
+    },
+    {
+      "id": "fc033",
+      "categoryId": "party_congresses",
+      "order": 33,
+      "type": "term_explanation",
+      "front": "Đại hội XI năm 2011",
+      "back": "Cương lĩnh được bổ sung, phát triển tiếp tục xác định khái niệm tư tưởng Hồ Chí Minh, nhấn mạnh giá trị và vai trò dẫn đường.",
+      "keywords": [
+        "2011",
+        "XI"
+      ],
+      "glossaryIds": [
+        "g24"
+      ],
+      "citations": [
+        {
+          "sourceId": "s01",
+          "locator": "Phần IV, mục 4"
+        }
+      ]
+    },
+    {
+      "id": "fc034",
+      "categoryId": "party_congresses",
+      "order": 34,
+      "type": "question_answer",
+      "front": "Mốc xác lập nền tảng tư tưởng chung với Mác - Lênin?",
+      "back": "Đại hội VII, năm 1991.",
+      "keywords": [
+        "VII",
+        "1991"
+      ],
+      "glossaryIds": [
+        "g22"
+      ],
+      "citations": [
+        {
+          "sourceId": "s02",
+          "locator": "Phần mở đầu Điều lệ"
+        }
+      ]
+    },
+    {
+      "id": "fc035",
+      "categoryId": "party_congresses",
+      "order": 35,
+      "type": "term_explanation",
+      "front": "Phân biệt Đại hội IX và Đại hội XI",
+      "back": "IX (2001): khái quát nội hàm. XI (2011): định nghĩa trong Cương lĩnh bổ sung, phát triển, nhấn mạnh giá trị lâu dài.",
+      "keywords": [
+        "IX",
+        "XI"
+      ],
+      "glossaryIds": [
+        "g23",
+        "g24"
+      ],
+      "citations": [
+        {
+          "sourceId": "s09",
+          "locator": "Phần đầu về Đại hội IX; đối chiếu Cương lĩnh 2011"
+        },
+        {
+          "sourceId": "s01",
+          "locator": "Phần IV, mục 4: định nghĩa trong Cương lĩnh 2011"
+        }
+      ]
+    },
+    {
+      "id": "fc036",
+      "categoryId": "party_congresses",
+      "order": 36,
+      "type": "question_answer",
+      "front": "Năm 1991 có phải lúc tư tưởng Hồ Chí Minh mới hình thành?",
+      "back": "Không. Đây là mốc nhận thức của Đảng; tư tưởng đã hình thành, phát triển trong quá trình hoạt động cách mạng trước đó.",
+      "keywords": [
+        "phân biệt"
+      ],
+      "glossaryIds": [
+        "g01",
+        "g22"
+      ],
+      "citations": [
+        {
+          "sourceId": "s08",
+          "locator": "Các đoạn về hoạt động thực tiễn và các mốc Đại hội II, VII"
+        }
+      ]
+    }
+  ],
+  "glossary": [
+    {
+      "id": "g01",
+      "term": "Tư tưởng Hồ Chí Minh",
+      "aliases": [
+        "TTHCM",
+        "tư tưởng HCM"
+      ],
+      "definition": "Hệ thống tư tưởng cách mạng gắn với Hồ Chí Minh, được Cương lĩnh 2011 giải thích về nguồn gốc, nội dung và giá trị.",
+      "searchText": "tu tuong ho chi minh tthcm tu tuong hcm",
+      "relatedTermIds": [
+        "g22"
+      ],
+      "relatedFlashcardIds": [
+        "fc001",
+        "fc003",
+        "fc004",
+        "fc036"
+      ],
+      "citations": [
+        {
+          "sourceId": "s11",
+          "locator": "Đoạn về Cương lĩnh 2011; chú thích 21"
+        }
+      ]
+    },
+    {
+      "id": "g02",
+      "term": "Nền tảng tư tưởng",
+      "aliases": [],
+      "definition": "Cơ sở lý luận để Đảng xây dựng nhận thức và xác định đường lối.",
+      "searchText": "nen tang tu tuong",
+      "relatedTermIds": [
+        "g04"
+      ],
+      "relatedFlashcardIds": [
+        "fc005"
+      ],
+      "citations": [
+        {
+          "sourceId": "s02",
+          "locator": "Giải nghĩa theo phần mở đầu Điều lệ"
+        }
+      ]
+    },
+    {
+      "id": "g03",
+      "term": "Kim chỉ nam",
+      "aliases": [],
+      "definition": "Hình ảnh chỉ sự dẫn hướng khi xác định mục tiêu và cách hành động.",
+      "searchText": "kim chi nam",
+      "relatedTermIds": [],
+      "relatedFlashcardIds": [
+        "fc006"
+      ],
+      "citations": [
+        {
+          "sourceId": "s02",
+          "locator": "Giải nghĩa theo phần mở đầu Điều lệ"
+        }
+      ]
+    },
+    {
+      "id": "g04",
+      "term": "Chủ nghĩa Mác - Lênin",
+      "aliases": [
+        "Mác-Lênin",
+        "Marx-Lenin"
+      ],
+      "definition": "Nguồn lý luận quyết định, cung cấp thế giới quan và phương pháp luận cho tư tưởng Hồ Chí Minh.",
+      "searchText": "chu nghia mac - lenin mac-lenin marx-lenin",
+      "relatedTermIds": [
+        "g02",
+        "g06",
+        "g07",
+        "g12"
+      ],
+      "relatedFlashcardIds": [
+        "fc002",
+        "fc005",
+        "fc007",
+        "fc016"
+      ],
+      "citations": [
+        {
+          "sourceId": "s12",
+          "locator": "Đoạn về vai trò học thuyết Mác - Lênin"
+        }
+      ]
+    },
+    {
+      "id": "g05",
+      "term": "Chủ nghĩa yêu nước",
+      "aliases": [],
+      "definition": "Tình cảm và ý chí vì đất nước; động lực đưa Hồ Chí Minh đi tìm con đường giải phóng.",
+      "searchText": "chu nghia yeu nuoc",
+      "relatedTermIds": [
+        "g06"
+      ],
+      "relatedFlashcardIds": [
+        "fc008",
+        "fc009"
+      ],
+      "citations": [
+        {
+          "sourceId": "s04",
+          "locator": "Mục 2"
+        }
+      ]
+    },
+    {
+      "id": "g06",
+      "term": "Giá trị truyền thống dân tộc",
+      "aliases": [],
+      "definition": "Di sản tinh thần được bồi đắp qua lịch sử, như đoàn kết, nhân nghĩa và hiếu học.",
+      "searchText": "gia tri truyen thong dan toc",
+      "relatedTermIds": [
+        "g04",
+        "g05",
+        "g07"
+      ],
+      "relatedFlashcardIds": [
+        "fc002",
+        "fc009"
+      ],
+      "citations": [
+        {
+          "sourceId": "s03",
+          "locator": "Chuyên đề 1, II.1.b"
+        }
+      ]
+    },
+    {
+      "id": "g07",
+      "term": "Tinh hoa văn hóa nhân loại",
+      "aliases": [],
+      "definition": "Những thành tựu tư tưởng, văn hóa có giá trị được chọn lọc từ các dân tộc.",
+      "searchText": "tinh hoa van hoa nhan loai",
+      "relatedTermIds": [
+        "g04",
+        "g06"
+      ],
+      "relatedFlashcardIds": [
+        "fc002",
+        "fc010"
+      ],
+      "citations": [
+        {
+          "sourceId": "s03",
+          "locator": "Chuyên đề 1, II.1.b"
+        }
+      ]
+    },
+    {
+      "id": "g08",
+      "term": "Nho giáo",
+      "aliases": [],
+      "definition": "Nguồn văn hóa phương Đông được tiếp thu về học tập, tu dưỡng và phê phán về hạn chế.",
+      "searchText": "nho giao",
+      "relatedTermIds": [],
+      "relatedFlashcardIds": [
+        "fc011"
+      ],
+      "citations": [
+        {
+          "sourceId": "s05",
+          "locator": "Đoạn về Nho giáo"
+        }
+      ]
+    },
+    {
+      "id": "g09",
+      "term": "Phật giáo",
+      "aliases": [],
+      "definition": "Nguồn giá trị về lòng từ bi, vị tha và khoan dung.",
+      "searchText": "phat giao",
+      "relatedTermIds": [],
+      "relatedFlashcardIds": [
+        "fc012"
+      ],
+      "citations": [
+        {
+          "sourceId": "s05",
+          "locator": "Đoạn về Phật giáo"
+        }
+      ]
+    },
+    {
+      "id": "g10",
+      "term": "Chủ nghĩa Tam dân",
+      "aliases": [
+        "Tam dân",
+        "Tôn Trung Sơn",
+        "Tôn Dật Tiên"
+      ],
+      "definition": "Học thuyết của Tôn Trung Sơn đề cập dân tộc, dân quyền và dân sinh.",
+      "searchText": "chu nghia tam dan tam dan ton trung son ton dat tien",
+      "relatedTermIds": [],
+      "relatedFlashcardIds": [
+        "fc013"
+      ],
+      "citations": [
+        {
+          "sourceId": "s05",
+          "locator": "Đoạn về chủ nghĩa Tam dân"
+        }
+      ]
+    },
+    {
+      "id": "g11",
+      "term": "Văn hóa dân chủ phương Tây",
+      "aliases": [],
+      "definition": "Các giá trị tự do, bình đẳng, dân chủ và quyền con người được Hồ Chí Minh tìm hiểu.",
+      "searchText": "van hoa dan chu phuong tay",
+      "relatedTermIds": [],
+      "relatedFlashcardIds": [
+        "fc014"
+      ],
+      "citations": [
+        {
+          "sourceId": "s05",
+          "locator": "Đoạn về văn hóa phương Tây"
+        }
+      ]
+    },
+    {
+      "id": "g12",
+      "term": "Tiếp thu có chọn lọc",
+      "aliases": [],
+      "definition": "Tiếp nhận điều có giá trị, xem xét hạn chế và vận dụng phù hợp hoàn cảnh cụ thể.",
+      "searchText": "tiep thu co chon loc",
+      "relatedTermIds": [
+        "g04"
+      ],
+      "relatedFlashcardIds": [
+        "fc015",
+        "fc016"
+      ],
+      "citations": [
+        {
+          "sourceId": "s06",
+          "locator": "Đoạn về gạn lọc khi tiếp thu văn hóa"
+        }
+      ]
+    },
+    {
+      "id": "g13",
+      "term": "Cơ sở thực tiễn",
+      "aliases": [],
+      "definition": "Bối cảnh và vấn đề của đời sống đặt ra yêu cầu hình thành, kiểm nghiệm tư tưởng.",
+      "searchText": "co so thuc tien",
+      "relatedTermIds": [],
+      "relatedFlashcardIds": [
+        "fc017",
+        "fc018"
+      ],
+      "citations": [
+        {
+          "sourceId": "s07",
+          "locator": "Bối cảnh Việt Nam và hành trình khảo nghiệm"
+        }
+      ]
+    },
+    {
+      "id": "g14",
+      "term": "Cách mạng Tháng Mười Nga",
+      "aliases": [
+        "Cách mạng Nga 1917"
+      ],
+      "definition": "Cuộc cách mạng năm 1917 ở Nga, mở ra hướng tham khảo mới cho các dân tộc bị áp bức.",
+      "searchText": "cach mang thang muoi nga cach mang nga 1917",
+      "relatedTermIds": [],
+      "relatedFlashcardIds": [
+        "fc019"
+      ],
+      "citations": [
+        {
+          "sourceId": "s04",
+          "locator": "Mục 1"
+        }
+      ]
+    },
+    {
+      "id": "g15",
+      "term": "Quốc tế Cộng sản",
+      "aliases": [
+        "Quốc tế III",
+        "Đệ tam Quốc tế"
+      ],
+      "definition": "Tổ chức quốc tế của phong trào cộng sản, thành lập tháng 3/1919.",
+      "searchText": "quoc te cong san quoc te iii de tam quoc te",
+      "relatedTermIds": [],
+      "relatedFlashcardIds": [
+        "fc020"
+      ],
+      "citations": [
+        {
+          "sourceId": "s03",
+          "locator": "Chuyên đề 1, II.1.a"
+        }
+      ]
+    },
+    {
+      "id": "g16",
+      "term": "Nhân tố chủ quan",
+      "aliases": [],
+      "definition": "Những yếu tố thuộc bản thân Hồ Chí Minh: tư duy, phẩm chất và khả năng hoạt động.",
+      "searchText": "nhan to chu quan",
+      "relatedTermIds": [
+        "g17"
+      ],
+      "relatedFlashcardIds": [
+        "fc021",
+        "fc022"
+      ],
+      "citations": [
+        {
+          "sourceId": "s06",
+          "locator": "Các phần về bản lĩnh, trí tuệ và hoạt động cứu nước"
+        }
+      ]
+    },
+    {
+      "id": "g17",
+      "term": "Tư duy độc lập, tự chủ",
+      "aliases": [],
+      "definition": "Tự tìm hiểu, suy xét và lựa chọn, không sao chép máy móc.",
+      "searchText": "tu duy doc lap, tu chu",
+      "relatedTermIds": [
+        "g16"
+      ],
+      "relatedFlashcardIds": [
+        "fc021"
+      ],
+      "citations": [
+        {
+          "sourceId": "s06",
+          "locator": "Đoạn về tư duy độc lập khi tìm đường cứu nước"
+        }
+      ]
+    },
+    {
+      "id": "g18",
+      "term": "Tổng kết thực tiễn",
+      "aliases": [],
+      "definition": "Rút ra nhận thức lý luận từ trải nghiệm hoạt động, rồi dùng lý luận định hướng việc làm.",
+      "searchText": "tong ket thuc tien",
+      "relatedTermIds": [],
+      "relatedFlashcardIds": [
+        "fc023",
+        "fc024"
+      ],
+      "citations": [
+        {
+          "sourceId": "s08",
+          "locator": "Đoạn về quan hệ giữa lý luận và thực tiễn"
+        }
+      ]
+    },
+    {
+      "id": "g19",
+      "term": "Luận cương của Lênin năm 1920",
+      "aliases": [
+        "Sơ thảo lần thứ nhất những luận cương về vấn đề dân tộc và vấn đề thuộc địa"
+      ],
+      "definition": "Tác phẩm về dân tộc và thuộc địa giúp Nguyễn Ái Quốc xác định hướng cứu nước khi đọc vào tháng 7/1920.",
+      "searchText": "luan cuong cua lenin nam 1920 so thao lan thu nhat nhung luan cuong ve van de dan toc va van de thuoc dia",
+      "relatedTermIds": [],
+      "relatedFlashcardIds": [
+        "fc025"
+      ],
+      "citations": [
+        {
+          "sourceId": "s07",
+          "locator": "Đoạn về tháng 7/1920"
+        }
+      ]
+    },
+    {
+      "id": "g20",
+      "term": "Đại hội Tua",
+      "aliases": [
+        "Đại hội Tours",
+        "Tours 1920"
+      ],
+      "definition": "Đại hội Đảng Xã hội Pháp cuối năm 1920, nơi Nguyễn Ái Quốc tham gia quyết định dẫn tới thành lập Đảng Cộng sản Pháp.",
+      "searchText": "dai hoi tua dai hoi tours tours 1920",
+      "relatedTermIds": [],
+      "relatedFlashcardIds": [
+        "fc026"
+      ],
+      "citations": [
+        {
+          "sourceId": "s07",
+          "locator": "Đoạn về tháng 12/1920"
+        }
+      ]
+    },
+    {
+      "id": "g21",
+      "term": "Mốc nhận thức của Đảng",
+      "aliases": [],
+      "definition": "Thời điểm văn kiện hoặc phát biểu tại Đại hội thể hiện cách Đảng đánh giá tư tưởng Hồ Chí Minh.",
+      "searchText": "moc nhan thuc cua dang",
+      "relatedTermIds": [],
+      "relatedFlashcardIds": [
+        "fc027",
+        "fc028",
+        "fc029",
+        "fc032"
+      ],
+      "citations": [
+        {
+          "sourceId": "s08",
+          "locator": "Đoạn tổng thuật Đại hội II, VII, IX; thuật ngữ tổ chức nội dung"
+        }
+      ]
+    },
+    {
+      "id": "g22",
+      "term": "Đại hội VII",
+      "aliases": [
+        "Đại hội 7",
+        "VII 1991"
+      ],
+      "definition": "Đại hội năm 1991, gắn với việc xác lập tư tưởng Hồ Chí Minh trong nền tảng tư tưởng của Đảng.",
+      "searchText": "dai hoi vii dai hoi 7 vii 1991",
+      "relatedTermIds": [
+        "g01"
+      ],
+      "relatedFlashcardIds": [
+        "fc030",
+        "fc034",
+        "fc036"
+      ],
+      "citations": [
+        {
+          "sourceId": "s02",
+          "locator": "Phần mở đầu Điều lệ"
+        }
+      ]
+    },
+    {
+      "id": "g23",
+      "term": "Đại hội IX",
+      "aliases": [
+        "Đại hội 9",
+        "IX 2001"
+      ],
+      "definition": "Đại hội năm 2001, khái quát rõ hơn nội dung và cơ sở của tư tưởng Hồ Chí Minh.",
+      "searchText": "dai hoi ix dai hoi 9 ix 2001",
+      "relatedTermIds": [
+        "g24"
+      ],
+      "relatedFlashcardIds": [
+        "fc031",
+        "fc035"
+      ],
+      "citations": [
+        {
+          "sourceId": "s09",
+          "locator": "Phần mở đầu"
+        }
+      ]
+    },
+    {
+      "id": "g24",
+      "term": "Đại hội XI",
+      "aliases": [
+        "Đại hội 11",
+        "XI 2011"
+      ],
+      "definition": "Đại hội năm 2011; Cương lĩnh bổ sung, phát triển nêu định nghĩa và giá trị tư tưởng Hồ Chí Minh.",
+      "searchText": "dai hoi xi dai hoi 11 xi 2011",
+      "relatedTermIds": [
+        "g23"
+      ],
+      "relatedFlashcardIds": [
+        "fc033",
+        "fc035"
+      ],
+      "citations": [
+        {
+          "sourceId": "s01",
+          "locator": "Phần IV, mục 4"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "s01",
+      "title": "Cương lĩnh xây dựng đất nước trong thời kỳ quá độ lên chủ nghĩa xã hội (bổ sung, phát triển năm 2011)",
+      "url": "https://daihoidangtoanquoc.vn/cuong-linh-xay-dung-dat-nuoc-trong-thoi-ky-qua-do-len-chu-nghia-xa-hoi-bo-sung-phat-trien-nam-2011-post1517.html",
+      "publisher": "Trang thông tin chính thức Đại hội Đảng toàn quốc",
+      "type": "party_document",
+      "accessedAt": "2026-09-30",
+      "verificationMethod": "page_text",
+      "verificationNote": "Đã đối chiếu phần văn bản trên trang."
+    },
+    {
+      "id": "s02",
+      "title": "Điều lệ Đảng do Đại hội VII thông qua ngày 27/6/1991",
+      "url": "https://tulieuvankien.dangcongsan.vn/van-kien-tu-lieu-ve-dang/dieu-le-dang/dieu-le-dang-do-dai-hoi-dai-bieu-toan-quoc-lan-thu-vii-cua-dang-thong-qua-263",
+      "publisher": "Tư liệu - Văn kiện Đảng",
+      "type": "party_document",
+      "accessedAt": "2026-09-30",
+      "verificationMethod": "page_text",
+      "verificationNote": "Đã đối chiếu phần văn bản trên trang."
+    },
+    {
+      "id": "s03",
+      "title": "Hướng dẫn chi tiết chuyên đề Tư tưởng Hồ Chí Minh",
+      "url": "https://hungyen.dcs.vn/huong-dan-chi-tiet-chuyen-de-tu-tuong-ho-chi-minh-c2316.html",
+      "publisher": "Cổng thông tin Đảng bộ tỉnh Hưng Yên; nội dung hướng dẫn của Ban Tuyên giáo Trung ương",
+      "type": "teaching_guidance",
+      "accessedAt": "2026-09-30",
+      "verificationMethod": "page_text",
+      "verificationNote": "Đã đối chiếu phần văn bản trên trang."
+    },
+    {
+      "id": "s04",
+      "title": "Bài nghiên cứu về nguồn gốc và giá trị tư tưởng Hồ Chí Minh (ItemID 3540)",
+      "url": "https://hcma.vn/SMPT_Publishing_UC/TinTuc/pPrintTinTuc.aspx?ItemID=3540",
+      "publisher": "Học viện Chính trị quốc gia Hồ Chí Minh",
+      "type": "research_article",
+      "accessedAt": "2026-09-30",
+      "verificationMethod": "page_text",
+      "verificationNote": "Đã đối chiếu phần văn bản trên trang.",
+      "titleIsDescriptive": true
+    },
+    {
+      "id": "s05",
+      "title": "Hồ Chí Minh kế thừa và phát triển giá trị văn hóa dân tộc và nhân loại",
+      "url": "https://tulieuvankien.dangcongsan.vn/c-mac-angghen-lenin-ho-chi-minh/ho-chi-minh/nghien-cuu-hoc-tap-tu-tuong/ho-chi-minh-ke-thua-va-phat-trien-gia-tri-van-hoa-dan-toc-va-nhan-loai-2249",
+      "publisher": "Tư liệu - Văn kiện Đảng",
+      "type": "research_article",
+      "accessedAt": "2026-09-30",
+      "verificationMethod": "page_text",
+      "verificationNote": "Đã đối chiếu phần văn bản trên trang."
+    },
+    {
+      "id": "s06",
+      "title": "Tìm đường cứu nước, cứu dân – Bản lĩnh nhà ái quốc vĩ đại Hồ Chí Minh",
+      "url": "https://baotanghochiminh.vn/tim-duong-cuu-nuoc-cuu-dan-ban-linh-nha-ai-quoc-vi-dai-ho-chi-minh.htm",
+      "publisher": "Bảo tàng Hồ Chí Minh",
+      "type": "historical_article",
+      "accessedAt": "2026-09-30",
+      "verificationMethod": "page_text",
+      "verificationNote": "Đã đối chiếu phần văn bản trên trang."
+    },
+    {
+      "id": "s07",
+      "title": "Con đường cứu nước, giải phóng dân tộc độc lập, tự cường và sáng tạo của Hồ Chí Minh",
+      "url": "https://hochiminh.vn/tu-tuong-dao-duc-ho-chi-minh/nghien-cuu-tu-tuong-dao-duc-ho-chi-minh/con-duong-cuu-nuoc-giai-phong-dan-toc-doc-lap-tu-cuong-va-sang-tao-cua-ho-chi-minh-9036",
+      "publisher": "Chuyên trang Hồ Chí Minh",
+      "type": "historical_article",
+      "accessedAt": "2026-09-30",
+      "verificationMethod": "page_text",
+      "verificationNote": "Đã đối chiếu phần văn bản trên trang."
+    },
+    {
+      "id": "s08",
+      "title": "Đẩy mạnh việc nghiên cứu, học tập và làm theo tư tưởng Hồ Chí Minh",
+      "url": "https://tulieuvankien.dangcongsan.vn/c-mac-angghen-lenin-ho-chi-minh/ho-chi-minh/nghien-cuu-hoc-tap-tu-tuong/day-manh-viec-nghien-cuu-hoc-tap-va-lam-theo-tu-tuong-ho-chi-minh-2121",
+      "publisher": "Tư liệu - Văn kiện Đảng",
+      "type": "speech_or_article",
+      "accessedAt": "2026-09-30",
+      "verificationMethod": "page_text",
+      "verificationNote": "Đã đối chiếu phần văn bản trên trang."
+    },
+    {
+      "id": "s09",
+      "title": "Tư tưởng Hồ Chí Minh - đỉnh cao của trí tuệ, niềm tự hào của dân tộc Việt Nam",
+      "url": "https://tulieuvankien.dangcongsan.vn/van-kien-tu-lieu-ve-dang/gioi-thieu-van-kien-dang/tu-tuong-ho-chi-minh-dinh-cao-cua-tri-tue-niem-tu-hao-cua-dan-toc-viet-nam-904",
+      "publisher": "Tư liệu - Văn kiện Đảng",
+      "type": "research_article",
+      "accessedAt": "2026-09-30",
+      "verificationMethod": "page_text",
+      "verificationNote": "Đã đối chiếu phần văn bản trên trang."
+    },
+    {
+      "id": "s10",
+      "title": "Diễn văn khai mạc Đại hội X",
+      "url": "https://www.sggp.org.vn/dien-van-khai-mac-dai-hoi-x-post179477.html",
+      "publisher": "Báo Sài Gòn Giải Phóng",
+      "type": "congress_speech",
+      "accessedAt": "2026-09-30",
+      "verificationMethod": "page_text",
+      "verificationNote": "Đã đối chiếu phần văn bản trên trang."
+    },
+    {
+      "id": "s11",
+      "title": "90 năm sự phát triển nhận thức của Đảng về tư tưởng Hồ Chí Minh",
+      "url": "https://nxbctqg.org.vn/90-nam-su-phat-trien-nhan-thuc-cua-dang-ve-tu-tuong-ho-chi-minh.html",
+      "publisher": "Nhà xuất bản Chính trị quốc gia Sự thật",
+      "type": "research_article",
+      "accessedAt": "2026-09-30",
+      "verificationMethod": "page_text",
+      "verificationNote": "Đã đối chiếu phần văn bản trên trang."
+    },
+    {
+      "id": "s12",
+      "title": "Học tập, vận dụng và phát triển tư tưởng Hồ Chí Minh trong sự nghiệp đổi mới",
+      "url": "https://hochiminh.vn/tu-tuong-dao-duc-ho-chi-minh/noi-dung-tu-tuong-dao-duc/hoc-tap-van-dung-va-phat-trien-tu-tuong-ho-chi-minh-trong-su-nghiep-doi-moi-29",
+      "publisher": "Chuyên trang Hồ Chí Minh",
+      "type": "research_article",
+      "accessedAt": "2026-09-30",
+      "verificationMethod": "page_text",
+      "verificationNote": "Đã đối chiếu phần văn bản trên trang."
+    }
+  ],
+  "reviewConfig": {
+    "algorithm": "simple_interval_v1",
+    "description": "Lịch ôn đơn giản bằng hai nút; ứng dụng phải triển khai việc cập nhật và truy vấn thẻ đến hạn.",
+    "buttons": [
+      {
+        "action": "known",
+        "label": "Đã thuộc"
+      },
+      {
+        "action": "again",
+        "label": "Cần ôn lại"
+      }
+    ],
+    "knownIntervalsDays": [
+      1,
+      3,
+      7,
+      14,
+      30
+    ],
+    "againIntervalMinutes": 10,
+    "rules": {
+      "timeBase": "Thời điểm người dùng đánh giá; lưu ISO 8601 UTC.",
+      "known": "Lấy i = min(consecutiveKnown, knownIntervalsDays.length - 1) từ trạng thái TRƯỚC khi cập nhật. Đặt nextReviewAt = now + knownIntervalsDays[i] * 86400 giây, tăng consecutiveKnown lên 1 và đặt status = reviewing.",
+      "again": "Đặt consecutiveKnown = 0, status = learning; nextReviewAt = now + againIntervalMinutes * 60 giây; tăng againCount lên 1.",
+      "everyRating": "Tăng reviewCount lên 1, đặt lastReviewedAt = now và lastRating = action. Ghi một sự kiện có eventId duy nhất để tránh xử lý trùng.",
+      "afterLastInterval": "Tiếp tục ôn sau 30 ngày khi chọn Đã thuộc; không tự loại thẻ khỏi lịch.",
+      "due": "Thẻ đã học đến hạn khi nextReviewAt <= now. Thẻ mới có nextReviewAt = null và status = new; xử lý bằng hàng đợi thẻ mới.",
+      "queue": "Lấy thẻ đến hạn trước, sắp xếp nextReviewAt tăng dần; sau đó lấy thẻ mới theo order. Không dùng trạng thái người dùng khác.",
+      "sessionEnd": "Thẻ chọn Cần ôn lại vẫn được lưu lịch sau khi đóng ứng dụng. Chỉ hiển thị lại trong phiên khi tới hạn.",
+      "earlyReview": "Nếu người dùng chủ động ôn sớm và đánh giá, tính lịch mới từ thời điểm đánh giá đó."
+    },
+    "notifications": {
+      "mode": "in_app_due_queue",
+      "requiresApplicationLogic": true,
+      "externalPushConfigured": false
+    }
+  },
+  "userProgress": {
+    "storage": "Lưu riêng trong cơ sở dữ liệu hoặc localStorage theo từng người dùng; không sửa các flashcards dùng chung.",
+    "uniqueKey": [
+      "userId",
+      "datasetId",
+      "flashcardId"
+    ],
+    "recordTemplate": {
+      "userId": null,
+      "datasetId": "ho-chi-minh-introduction-foundations-v1",
+      "flashcardId": null,
+      "status": "new",
+      "consecutiveKnown": 0,
+      "reviewCount": 0,
+      "againCount": 0,
+      "lastRating": null,
+      "lastReviewedAt": null,
+      "nextReviewAt": null
+    },
+    "allowedStatuses": [
+      "new",
+      "learning",
+      "reviewing"
+    ],
+    "allowedRatings": [
+      "known",
+      "again"
+    ],
+    "records": [],
+    "eventTemplate": {
+      "eventId": null,
+      "userId": null,
+      "datasetId": "ho-chi-minh-introduction-foundations-v1",
+      "flashcardId": null,
+      "action": null,
+      "reviewedAt": null
+    }
+  },
+  "integrationNotes": {
+    "flipCard": "Hiển thị front trước, back sau; chỉ bật nút đánh giá sau khi đã mở mặt sau.",
+    "dictionarySearch": "Chuẩn hóa chuỗi tìm kiếm về chữ thường, bỏ dấu và đổi đ thành d; tìm trong searchText. Sắp xếp term bằng locale vi.",
+    "sourceDisplay": "Từ citations.sourceId tra sources.id để hiển thị tên, liên kết nguồn và locator.",
+    "filters": "Lọc flashcards theo categoryId; lọc trạng thái bằng bản ghi userProgress của người đang học.",
+    "glossaryLinks": "glossaryIds liên kết thẻ với thuật ngữ; relatedFlashcardIds hỗ trợ chuyển từ từ điển sang ôn thẻ.",
+    "seedImport": "Upsert theo id trong mỗi nhóm, giữ id ổn định giữa các phiên bản để bảo toàn tiến độ.",
+    "templateUsage": "recordTemplate và eventTemplate mô tả bản ghi mẫu; thay các trường null bằng dữ liệu thật khi tạo, không import mẫu thành bản ghi người dùng."
+  }
 }
