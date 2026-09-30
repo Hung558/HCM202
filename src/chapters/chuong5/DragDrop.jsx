@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { ArrowRight, BookOpen, Puzzle, Users, Globe2 } from 'lucide-react'
 import data from './data.json'
 import MatchingGame from './MatchingGame.jsx'
+import SectionVideo from './SectionVideo.jsx'
 
 export default function DragDrop() {
   const [tab, setTab] = useState('learn')
@@ -44,6 +45,7 @@ export default function DragDrop() {
               <h2 className="mt-3 text-[22px] font-extrabold tracking-[-0.01em]">{section.title}</h2>
               <p className="mt-4 rounded-2xl bg-cream p-5 font-semibold text-ink-soft">{section.subtitle}</p>
               <ul className="mt-6 space-y-5">{section.points.map((point, i) => <li key={point} className="flex gap-4 text-[15.5px] leading-[1.65] text-ink-soft"><span className="font-extrabold text-amber">{String(i + 1).padStart(2, '0')}</span><span>{point}</span></li>)}</ul>
+              {tab === 'learn' && section.video && <SectionVideo key={section.id} video={section.video} />}
               {section.discussion && <p className="mt-6 rounded-2xl border border-line bg-paper p-5 text-sm leading-relaxed">{section.discussion}</p>}
               <div className="mt-7 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-5"><p className="text-xs text-muted">Giáo trình · trang {section.pages}</p><button className="btn btn-outline" onClick={() => active < data.sections.length - 1 ? setActive(active + 1) : setTab('game')}>{active < data.sections.length - 1 ? 'Phần tiếp theo' : 'Bắt đầu ghép nối'}<ArrowRight className="size-4" /></button></div>
             </article>
