@@ -54,13 +54,21 @@ export default function Chuong4Page() {
           Ngoài max-w container — divider & nền blur căng hết chiều rộng trang. */}
       <div className="sticky top-0 z-20 bg-paper/90 backdrop-blur-md">
         <div className="mx-auto max-w-[1180px] px-5">
-          {/* pt-10 NỘI hàng header → --header-height gồm cả khoảng đỉnh trang,
-              tổng biến = đúng toàn bộ chiều cao khối sticky trên divider */}
-          <div ref={headerRowRef} className="pt-10">
-            <ChapterHeader />
-          </div>
-          <div ref={tabsRowRef} className="mt-3 pb-3">
-            <ChapterTabs tab={tab} onTabChange={changeTab} />
+          <div
+            className="flex items-center justify-between gap-6 pt-6 pb-3"
+          >
+            {/* Header bên trái */}
+            <div ref={headerRowRef} className="shrink-0">
+              <ChapterHeader />
+            </div>
+
+            {/* Tabs bên phải */}
+            <div ref={tabsRowRef} className="shrink-0">
+              <ChapterTabs
+                tab={tab}
+                onTabChange={changeTab}
+              />
+            </div>
           </div>
         </div>
         {/* Divider là con TRỰC TIẾP của wrapper full-width → không bị giới hạn max-width */}
