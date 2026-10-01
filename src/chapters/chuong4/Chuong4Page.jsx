@@ -1,9 +1,8 @@
 // Trang Chương IV: header chương LUÔN hiển thị, dưới nó là thanh tab, dưới nữa là panel.
 // - Chỉ panel thay đổi khi chuyển tab — header và thanh tab không bao giờ biến mất/di chuyển
 //   (header + tab bar gộp thành một khối sticky full-width với divider căng hết trang).
-// - Tab mặc định: Scenario Quiz; tab chọn cuối lưu localStorage (readSavedTab/saveTab).
-// - Kiến thức lazy: panel chỉ mount ở lần MỞ TAB ĐẦU TIÊN; file txt chỉ parse khi đó
-//   (cache trong ChapterContent). Quiz giữ mounted (hidden) để không mất tiến độ.
+// - Mở chương luôn vào tab Kiến thức. Kiến thức tách bundle riêng (lazy);
+//   Quiz giữ mounted (hidden) để không mất tiến độ khi chuyển tab.
 // - Chiều cao khối sticky đo bằng ResizeObserver → CSS variables --header-height /
 //   --tabs-height dùng chung cho mục lục sticky và anchor scroll.
 import { Suspense, lazy, useCallback, useEffect, useRef, useState } from 'react'
@@ -11,15 +10,13 @@ import { Loader2 } from 'lucide-react'
 import ChapterHeader from './components/ChapterHeader.jsx'
 import ChapterTabs from './components/ChapterTabs.jsx'
 import ScenarioQuiz from './components/ScenarioQuiz.jsx'
-import { TAB_CONTENT, TAB_QUIZ, readSavedTab, saveTab } from './constants.js'
+import { TAB_CONTENT, TAB_QUIZ } from './constants.js'
 
-// Lazy: bundle Kiến thức (parser + txt) chỉ được nạp khi lần đầu mở tab
+// Lazy: bundle Kiến thức (parser + txt) tách riêng khỏi bundle Quiz
 const ChapterContentLazy = lazy(() => import('./components/ChapterContent.jsx'))
 
 export default function Chuong4Page() {
-  const [tab, setTab] = useState(readSavedTab) // mặc định Scenario Quiz nếu chưa có lưu
-  // nếu tab đã lưu là Kiến thức thì mount panel luôn (tránh tab active mà panel rỗng)
-  const [contentMounted, setContentMounted] = useState(readSavedTab() === TAB_CONTENT)
+  const [tab, setTab] = useState(TAB_CONTENT) // luôn mở tab Kiến thức trước
 
   // Đo động chiều cao 2 hàng sticky → CSS variables cho sidebar & scroll-margin
   const headerRowRef = useRef(null)
@@ -42,11 +39,7 @@ export default function Chuong4Page() {
     }
   }, [])
 
-  const changeTab = useCallback((next) => {
-    setTab(next)
-    if (next === TAB_CONTENT) setContentMounted(true) // lazy: chỉ mount từ lần mở đầu tiên
-    saveTab(next)
-  }, [])
+  const changeTab = useCallback((next) => setTab(next), [])
 
   return (
     <main className="min-h-screen" style={{ '--header-height': `${sticky.header}px`, '--tabs-height': `${sticky.tabs}px` }}>
@@ -79,23 +72,21 @@ export default function Chuong4Page() {
           Không đặt padding-bottom ở đây (làm ngắn vùng sticky của mục lục);
           padding đáy nằm trong từng panel. mt-5 = 20px divider → nội dung. */}
       <div className="mx-auto mt-5 max-w-[1180px] px-5">
+        <div role="tabpanel" hidden={tab !== TAB_CONTENT} className="pb-20">
+          <Suspense
+            fallback={
+              <div className="flex flex-col items-center gap-3 py-20 text-muted">
+                <Loader2 className="size-6 animate-spin text-primary" />
+                <p className="text-[13.5px] font-semibold">Đang tải nội dung chương…</p>
+              </div>
+            }
+          >
+            <ChapterContentLazy topOffset={sticky.header + sticky.tabs + 1} />
+          </Suspense>
+        </div>
         <div role="tabpanel" hidden={tab !== TAB_QUIZ} className="pb-20">
           <ScenarioQuiz />
         </div>
-        {contentMounted && (
-          <div role="tabpanel" hidden={tab !== TAB_CONTENT} className="pb-20">
-            <Suspense
-              fallback={
-                <div className="flex flex-col items-center gap-3 py-20 text-muted">
-                  <Loader2 className="size-6 animate-spin text-primary" />
-                  <p className="text-[13.5px] font-semibold">Đang tải nội dung chương…</p>
-                </div>
-              }
-            >
-              <ChapterContentLazy topOffset={sticky.header + sticky.tabs + 1} />
-            </Suspense>
-          </div>
-        )}
       </div>
     </main>
   )

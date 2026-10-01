@@ -1,11 +1,11 @@
 // Thanh tab bo tròn: chỉ Render NÚT TAB — panel nội dung do Chuong4Page render riêng.
-// Tab active dùng màu đỏ chủ đạo; thanh nằm ngay dưới header chương.
+// Tab active dùng màu đen (ink) giống các chương khác; thanh nằm ngay dưới header chương.
 import { BookOpen, ClipboardList } from 'lucide-react'
 import { TAB_CONTENT, TAB_QUIZ } from '../constants.js'
 
 const TABS = [
-  { id: TAB_QUIZ, label: 'Trắc nghiệm tình huống', icon: ClipboardList },
   { id: TAB_CONTENT, label: 'Kiến thức', icon: BookOpen },
+  { id: TAB_QUIZ, label: 'Trắc nghiệm tình huống', icon: ClipboardList },
 ]
 
 export default function ChapterTabs({ tab, onTabChange }) {
@@ -24,7 +24,7 @@ export default function ChapterTabs({ tab, onTabChange }) {
             aria-selected={active}
             onClick={() => onTabChange(id)}
             className={`inline-flex shrink-0 items-center gap-2 rounded-full px-4 py-2.5 text-[13.5px] font-bold transition-colors sm:px-5 ${
-              active ? 'bg-primary text-on-dark shadow-sm' : 'text-muted hover:bg-paper hover:text-ink'
+              active ? 'bg-ink text-on-dark shadow-sm' : 'text-muted hover:bg-paper hover:text-ink'
             }`}
           >
             <Icon className="size-4" />

@@ -45,7 +45,7 @@ export default function Chuong6() {
               VI
             </span>
             <span className="flex flex-col leading-tight">
-              <span className="text-[15px] font-bold">Chương 6</span>
+              <span className="text-[15px] font-bold">Chương VI</span>
               <span className="text-xs text-[#7A7063]">Tư tưởng Hồ Chí Minh</span>
             </span>
           </a>
