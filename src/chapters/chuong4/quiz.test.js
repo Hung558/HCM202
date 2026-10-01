@@ -116,7 +116,7 @@ test('analytics aggregates history across sessions', () => {
   }
   const a = analytics(state, data)
   assert.equal(a.attempts, 1)
-  assert.equal(a.completionPct, 20) // đã gặp 3/15 tình huống
+  assert.equal(a.completionPct, 18) // đã gặp 3/17 tình huống
   assert.equal(a.correctPct, 67) // 2/3
   assert.equal(a.avgTimeMs, 20_000)
   assert.equal(a.weakTopics.includes('Chống lãng phí'), true)

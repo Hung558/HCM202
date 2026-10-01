@@ -109,6 +109,35 @@ export const pickSession = (scenarios, size, previouslySeenIds = []) => {
   return [...fresh, ...played].slice(0, Math.min(size, scenarios.length))
 }
 
+// Lọc tình huống theo chủ đề (dùng khi bấm "Luyện chủ đề này" từ trang kiến thức).
+// Ưu tiên khớp đúng tên chủ đề, sau đó khớp từng từ khóa (không dấu, không phân biệt hoa/thường).
+export const matchScenariosByTopic = (scenarios, topic) => {
+  const norm = (s) =>
+    String(s ?? '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/đ/gi, 'd')
+      .toLowerCase()
+  const q = norm(topic)
+  if (!q) return scenarios
+  // bỏ từ quá ngắn/generic ("của", "cho", "các"…) để đỡ khớp lan man
+  const STOP = new Set(['cua', 'cho', 'mot', 'cac', 'nhung', 'do', 'vao'])
+  const words = [...new Set(q.split(/[^a-z0-9]+/).filter((w) => w.length >= 3 && !STOP.has(w)))]
+  const scored = scenarios
+    .map((sc) => {
+      const hay = norm(`${sc.referenceTopic} ${sc.title} ${sc.question} ${sc.explanation}`)
+      const topicHay = norm(sc.referenceTopic)
+      let n = topicHay === q ? 100 : 0
+      if (topicHay.includes(q)) n = Math.max(n, 60)
+      for (const w of words) if (hay.includes(w)) n += 1
+      return { sc, n }
+    })
+    .filter((x) => x.n > 0)
+    .sort((a, b) => b.n - a.n)
+  const best = scored[0]?.n ?? 0
+  return scored.filter((x) => x.n >= Math.max(2, best / 3)).map((x) => x.sc)
+}
+
 // Xáo trộn Fisher–Yates, không biến đổi mảng gốc
 export function shuffle(array, rand = Math.random) {
   const out = [...array]
