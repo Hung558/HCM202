@@ -16,7 +16,8 @@ import Review from './components/Review.jsx'
 
 const KEY_TO_INDEX = { a: 0, b: 1, c: 2, d: 3, '1': 0, '2': 1, '3': 2, '4': 3 }
 
-export default function Quiz() {
+// active: false khi panel bị ẩn (đang ở tab Kiến thức) → không bắt phím tắt.
+export default function Quiz({ active = true }) {
   const [state, setState] = useState(loadState) // { history, bookmarks }
   const [screen, setScreen] = useState('intro') // intro | play | result | review
   const [session, setSession] = useState([]) // tình huống của lượt hiện tại
@@ -103,7 +104,7 @@ export default function Quiz() {
 
   // Bàn phím: A–D / 1–4 chọn đáp án, Enter nộp bài hoặc tiếp tục
   useEffect(() => {
-    if (screen !== 'play') return
+    if (screen !== 'play' || !active) return
     const onKey = (e) => {
       if (e.key === 'Enter') {
         e.preventDefault()
@@ -116,7 +117,7 @@ export default function Quiz() {
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [answer, next, revealed, screen])
+  }, [active, answer, next, revealed, screen])
 
   const toggleBookmark = useCallback((id) => {
     setState((s) => ({
@@ -135,28 +136,17 @@ export default function Quiz() {
   }, [])
 
   return (
-    <main className="mx-auto min-h-screen max-w-[1180px] px-5 pt-10 pb-20">
-      <header className="sticky top-0 z-20 -mx-5 border-b border-line bg-paper/90 px-5 pb-3 pt-1 backdrop-blur-md">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <a href="/" className="flex items-center gap-2.5" title="Về trang chủ">
-            <span className="grid size-9 place-items-center rounded-[10px] bg-primary text-[14px] font-extrabold text-on-dark">IV</span>
-            <span className="flex flex-col leading-tight">
-              <span className="text-[14.5px] font-extrabold">Chương IV</span>
-              <span className="text-[11.5px] font-semibold text-muted">{data.feature}</span>
-            </span>
-          </a>
-          {screen === 'play' && (
-            <button onClick={quit} className="btn btn-outline !min-h-[36px] px-3 text-[12.5px]">
-              <LogOut className="size-3.5" /> Thoát
-            </button>
-          )}
+    <section>
+      {/* Nhận diện chương + tab nằm ở header trang (Chuong4Page); ở đây chỉ còn
+          nút Thoát và thanh tiến độ khi đang chơi */}
+      {screen === 'play' && (
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+          <Progress current={qIndex + 1} total={session.length} />
+          <button onClick={quit} className="btn btn-outline !min-h-[36px] px-3 text-[12.5px]">
+            <LogOut className="size-3.5" /> Thoát
+          </button>
         </div>
-        {screen === 'play' && (
-          <div className="mt-3">
-            <Progress current={qIndex + 1} total={session.length} />
-          </div>
-        )}
-      </header>
+      )}
 
       <AnimatePresence mode="wait">
         <motion.div
@@ -236,6 +226,6 @@ export default function Quiz() {
           onContinue={next}
         />
       )}
-    </main>
+    </section>
   )
 }

@@ -2,10 +2,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import '../../index.css'
-import Quiz from './Quiz.jsx'
+import Chuong4Page from './Chuong4Page.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Quiz />
+    <Chuong4Page />
   </StrictMode>,
 )
