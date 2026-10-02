@@ -1,12 +1,122 @@
 {
-  "title": "Chương III – Sơ đồ tư duy động",
-  "mindmap": {
-    "id": "root", "label": "Độc lập dân tộc và CNXH", "children": [
-      { "id": "dldt", "label": "Độc lập dân tộc", "children": [
-        { "id": "dldt-1", "label": "Gắn liền tự do, hạnh phúc" },
-        { "id": "dldt-2", "label": "Thật sự, hoàn toàn, triệt để" },
-        { "id": "dldt-3", "label": "Gắn với toàn vẹn lãnh thổ" }
-      ] }
+  "eyebrow": "Chương III · Sơ đồ tư duy",
+  "title": "Tư tưởng Hồ Chí Minh về độc lập dân tộc và chủ nghĩa xã hội",
+  "intro": "Bấm vào một ý để xem nội dung, bấm mũi tên trên nút để mở hoặc thu gọn nhánh.",
+  "root": {
+    "id": "root",
+    "label": "Tư tưởng Hồ Chí Minh về độc lập dân tộc và chủ nghĩa xã hội",
+    "short": "Độc lập dân tộc và CNXH",
+    "detail": "Chương này trình bày bốn phần: tư tưởng về độc lập dân tộc, tư tưởng về chủ nghĩa xã hội và xây dựng chủ nghĩa xã hội ở Việt Nam, mối quan hệ giữa hai mục tiêu ấy, và việc vận dụng vào sự nghiệp cách mạng hiện nay.",
+    "quote": "Không có gì quý hơn độc lập, tự do.",
+    "children": [
+      {
+        "id": "dl",
+        "label": "Tư tưởng Hồ Chí Minh về độc lập dân tộc",
+        "short": "Độc lập dân tộc",
+        "detail": "Độc lập dân tộc là mục tiêu đầu tiên và xuyên suốt của cách mạng Việt Nam. Phần này gồm hai nội dung: vấn đề độc lập dân tộc và cách mạng giải phóng dân tộc.",
+        "children": [
+          {
+            "id": "dl-1",
+            "label": "Vấn đề độc lập dân tộc",
+            "short": "Vấn đề độc lập dân tộc",
+            "detail": "Độc lập dân tộc là quyền thiêng liêng, bất khả xâm phạm của mọi dân tộc. Đó phải là độc lập thật sự, hoàn toàn, trên mọi mặt chính trị, kinh tế, quân sự, ngoại giao, gắn với thống nhất lãnh thổ và với tự do, hạnh phúc của nhân dân.",
+            "quote": "Nếu nước độc lập mà dân không được hưởng hạnh phúc tự do, thì độc lập cũng chẳng có nghĩa lý gì."
+          },
+          {
+            "id": "dl-2",
+            "label": "Về cách mạng giải phóng dân tộc",
+            "short": "Cách mạng giải phóng dân tộc",
+            "detail": "Giải phóng dân tộc muốn thắng lợi phải đi theo con đường cách mạng vô sản và do Đảng Cộng sản lãnh đạo. Lực lượng là toàn dân tộc, trên nền tảng liên minh công nhân, nông dân và trí thức. Cách mạng giải phóng dân tộc chủ động, sáng tạo, có khả năng giành thắng lợi trước cách mạng vô sản ở chính quốc, và phải dùng bạo lực cách mạng kết hợp đấu tranh chính trị với đấu tranh vũ trang.",
+            "quote": "Muốn cứu nước và giải phóng dân tộc không có con đường nào khác con đường cách mạng vô sản."
+          }
+        ]
+      },
+      {
+        "id": "xh",
+        "label": "Tư tưởng Hồ Chí Minh về chủ nghĩa xã hội và xây dựng chủ nghĩa xã hội ở Việt Nam",
+        "short": "CNXH và xây dựng CNXH",
+        "detail": "Hồ Chí Minh tiếp cận chủ nghĩa xã hội từ thực tiễn Việt Nam, bằng ngôn ngữ giản dị. Phần này gồm quan niệm về chủ nghĩa xã hội, việc xây dựng chủ nghĩa xã hội và thời kỳ quá độ.",
+        "children": [
+          {
+            "id": "xh-1",
+            "label": "Tư tưởng Hồ Chí Minh về chủ nghĩa xã hội",
+            "short": "Quan niệm về CNXH",
+            "detail": "Chủ nghĩa xã hội là xã hội dân giàu, nước mạnh, dân chủ, công bằng, văn minh. Đặc trưng gồm: chế độ chính trị do nhân dân làm chủ; nền kinh tế phát triển cao dựa trên lực lượng sản xuất hiện đại và chế độ sở hữu phù hợp; nền văn hóa, đạo đức phát triển; xã hội công bằng, hợp lý; con người được phát triển toàn diện.",
+            "quote": "Chủ nghĩa xã hội là làm sao cho dân giàu, nước mạnh."
+          },
+          {
+            "id": "xh-2",
+            "label": "Tư tưởng Hồ Chí Minh về xây dựng chủ nghĩa xã hội ở Việt Nam",
+            "short": "Xây dựng CNXH ở Việt Nam",
+            "detail": "Mục tiêu là xây dựng một xã hội dân giàu, nước mạnh, công bằng, dân chủ, văn minh. Xây dựng chủ nghĩa xã hội dựa vào sức mạnh của nhân dân, phát huy cả động lực vật chất lẫn tinh thần, phát triển kinh tế gắn với văn hóa, xây dựng Đảng và Nhà nước trong sạch, vững mạnh, và đặc biệt chú trọng xây dựng con người mới.",
+            "quote": "Muốn xây dựng chủ nghĩa xã hội, trước hết cần có những con người xã hội chủ nghĩa."
+          },
+          {
+            "id": "xh-3",
+            "label": "Tư tưởng Hồ Chí Minh về thời kỳ quá độ lên chủ nghĩa xã hội ở Việt Nam",
+            "short": "Thời kỳ quá độ lên CNXH",
+            "detail": "Việt Nam đi lên chủ nghĩa xã hội từ một nước thuộc địa nửa phong kiến, kinh tế lạc hậu, bỏ qua chế độ tư bản chủ nghĩa. Đây là thời kỳ lâu dài, khó khăn, phức tạp, phải làm từng bước vững chắc, phù hợp điều kiện cụ thể, không nóng vội, không chủ quan."
+          }
+        ]
+      },
+      {
+        "id": "qh",
+        "label": "Tư tưởng Hồ Chí Minh về mối quan hệ giữa độc lập dân tộc và chủ nghĩa xã hội",
+        "short": "Quan hệ độc lập dân tộc – CNXH",
+        "detail": "Độc lập dân tộc và chủ nghĩa xã hội là hai mặt thống nhất của một quá trình cách mạng, không thể tách rời nhau.",
+        "children": [
+          {
+            "id": "qh-1",
+            "label": "Độc lập dân tộc là cơ sở, tiền đề để tiến lên chủ nghĩa xã hội",
+            "short": "Độc lập dân tộc là cơ sở, tiền đề",
+            "detail": "Có giành được độc lập, dân tộc mới có điều kiện tự quyết con đường phát triển và bắt tay xây dựng chủ nghĩa xã hội. Độc lập dân tộc mở đường cho việc xây dựng chế độ xã hội mới."
+          },
+          {
+            "id": "qh-2",
+            "label": "Chủ nghĩa xã hội là điều kiện để bảo đảm nền độc lập dân tộc vững chắc",
+            "short": "CNXH bảo đảm độc lập vững chắc",
+            "detail": "Chỉ có chủ nghĩa xã hội mới đem lại cuộc sống ấm no, công bằng cho nhân dân, nhờ đó giữ vững độc lập lâu dài, tránh nguy cơ tụt hậu hoặc lệ thuộc trở lại."
+          },
+          {
+            "id": "qh-3",
+            "label": "Điều kiện để bảo đảm độc lập dân tộc gắn liền với chủ nghĩa xã hội",
+            "short": "Điều kiện bảo đảm hai mục tiêu gắn liền",
+            "detail": "Cần giữ vững vai trò lãnh đạo của Đảng Cộng sản, phát huy sức mạnh đại đoàn kết toàn dân tộc, và kết hợp sức mạnh dân tộc với sức mạnh thời đại, gắn với đoàn kết quốc tế."
+          }
+        ]
+      },
+      {
+        "id": "vd",
+        "label": "Vận dụng tư tưởng Hồ Chí Minh về độc lập dân tộc gắn liền với chủ nghĩa xã hội trong sự nghiệp cách mạng Việt Nam giai đoạn hiện nay",
+        "short": "Vận dụng trong giai đoạn hiện nay",
+        "detail": "Bốn nội dung vận dụng chính để giữ vững độc lập dân tộc gắn liền với chủ nghĩa xã hội trong sự nghiệp cách mạng hiện nay.",
+        "children": [
+          {
+            "id": "vd-1",
+            "label": "Kiên định mục tiêu và con đường cách mạng mà Hồ Chí Minh đã xác định",
+            "short": "Kiên định mục tiêu và con đường",
+            "detail": "Kiên định mục tiêu độc lập dân tộc gắn liền với chủ nghĩa xã hội, đồng thời vận dụng sáng tạo, đổi mới phù hợp thực tiễn để xây dựng đất nước dân giàu, nước mạnh, dân chủ, công bằng, văn minh."
+          },
+          {
+            "id": "vd-2",
+            "label": "Phát huy sức mạnh dân chủ xã hội chủ nghĩa",
+            "short": "Phát huy dân chủ xã hội chủ nghĩa",
+            "detail": "Phát huy quyền làm chủ của nhân dân, để nhân dân thật sự là chủ và là người làm chủ, qua đó tạo động lực cho phát triển đất nước."
+          },
+          {
+            "id": "vd-3",
+            "label": "Củng cố, kiện toàn, phát huy sức mạnh và hiệu quả hoạt động của toàn bộ hệ thống chính trị",
+            "short": "Củng cố hệ thống chính trị",
+            "detail": "Xây dựng hệ thống chính trị trong sạch, vững mạnh, hoạt động hiệu lực, hiệu quả, giữ vững vai trò lãnh đạo của Đảng và vai trò quản lý của Nhà nước."
+          },
+          {
+            "id": "vd-4",
+            "label": "Đấu tranh chống những biểu hiện suy thoái về tư tưởng chính trị, đạo đức, lối sống và “tự diễn biến”, “tự chuyển hóa” trong nội bộ",
+            "short": "Chống suy thoái, “tự diễn biến”, “tự chuyển hóa”",
+            "detail": "Kiên quyết đấu tranh chống suy thoái về tư tưởng chính trị, đạo đức, lối sống và các biểu hiện “tự diễn biến”, “tự chuyển hóa” trong nội bộ, để giữ vững nền tảng tư tưởng của Đảng."
+          }
+        ]
+      }
     ]
   }
 }
