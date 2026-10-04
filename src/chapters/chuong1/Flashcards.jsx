@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
-import { ArrowRight, BookOpen, Check, Clock3, House, Layers3, RotateCcw, Search } from 'lucide-react'
+import { ArrowRight, BookOpen, Check, Clock3, House, Layers3, RotateCcw, Search, Video } from 'lucide-react'
 import data from './data.json'
 import { currentTime, getStudyQueue, normalizeSearch, rateCard } from './progress.js'
+import ContentVideoTab from './ContentVideoTab.jsx'
+import Sources from './Sources.jsx'
 import styles from './Flashcards.module.css'
 
 const STORAGE_KEY = `hcm202:chuong1:progress:${data.metadata.id}`
 const cards = [...data.flashcards].sort((a, b) => a.order - b.order)
 const categories = [...data.categories].sort((a, b) => a.order - b.order)
-const sources = Object.fromEntries(data.sources.map((source) => [source.id, source]))
 
 function loadProgress() {
   try {
@@ -22,26 +23,6 @@ function formatReviewTime(value) {
   return new Intl.DateTimeFormat('vi-VN', {
     hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit',
   }).format(new Date(value))
-}
-
-function Sources({ citations }) {
-  if (!citations?.length) return null
-  return (
-    <div className="mt-5 border-t border-line pt-4 text-sm text-muted">
-      <p className="mb-2 font-bold text-ink-soft">Nguồn tham khảo</p>
-      <ul className="space-y-2">
-        {citations.map(({ sourceId, locator }) => {
-          const source = sources[sourceId]
-          return source && (
-            <li key={`${sourceId}-${locator}`}>
-              <a className="font-semibold text-primary underline underline-offset-2 hover:text-primary-dark" href={source.url} target="_blank" rel="noopener noreferrer">{source.title}</a>
-              {locator && <span> · {locator}</span>}
-            </li>
-          )
-        })}
-      </ul>
-    </div>
-  )
 }
 
 export default function Flashcards() {
@@ -107,6 +88,11 @@ export default function Flashcards() {
     setSelectedCardId(id)
     setFlipped(false)
     setTab('cards')
+    window.requestAnimationFrame(() => {
+      const target = document.querySelector('#study-card button')
+      target?.focus({ preventScroll: true })
+      target?.scrollIntoView({ block: 'center' })
+    })
   }
 
   return (
@@ -140,6 +126,7 @@ export default function Flashcards() {
         <nav className="mt-10 flex flex-wrap gap-2 border-b border-line pb-3" aria-label="Nội dung Chương 1">
           <button type="button" onClick={() => setTab('cards')} aria-pressed={tab === 'cards'} className={`btn ${tab === 'cards' ? 'btn-dark' : 'btn-outline bg-white'}`}><Layers3 size={18} /> Thẻ ghi nhớ</button>
           <button type="button" onClick={() => setTab('dictionary')} aria-pressed={tab === 'dictionary'} className={`btn ${tab === 'dictionary' ? 'btn-dark' : 'btn-outline bg-white'}`}><BookOpen size={18} /> Từ điển thuật ngữ</button>
+          <button type="button" onClick={() => setTab('content-video')} aria-pressed={tab === 'content-video'} className={`btn ${tab === 'content-video' ? 'btn-dark' : 'btn-outline bg-white'}`}><Video size={18} /> Nội dung &amp; Video</button>
         </nav>
 
         {storageError && <p role="alert" className="mt-5 rounded-xl bg-cream px-4 py-3 text-sm text-ink-soft">Trình duyệt không lưu được tiến độ. Các lựa chọn ôn tập có thể mất khi tải lại trang.</p>}
@@ -216,6 +203,8 @@ export default function Flashcards() {
               {futureReviews.length > 0 && <p className="mt-4 text-sm font-semibold text-primary">Lượt ôn tiếp theo: {formatReviewTime(futureReviews[0])}</p>}
             </div>}
           </section>
+        ) : tab === 'content-video' ? (
+          <ContentVideoTab data={data} onOpenCard={openCard} />
         ) : (
           <section className="mt-8" aria-label="Từ điển thuật ngữ">
             <p className="eyebrow">Tra cứu nhanh</p>
