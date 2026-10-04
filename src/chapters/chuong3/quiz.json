@@ -1,0 +1,340 @@
+{
+  "questions": [
+    {
+      "id": "q01",
+      "section": "s1",
+      "subsection": "1.2",
+      "question": "Năm 1920, Hồ Chí Minh tìm thấy con đường giải phóng dân tộc khi đọc văn kiện nào?",
+      "options": [
+        "Luận cương của Lênin về vấn đề dân tộc và thuộc địa",
+        "Tuyên ngôn Độc lập của Mỹ",
+        "Tuyên ngôn nhân quyền và dân quyền của Pháp",
+        "Cương lĩnh chính trị đầu tiên của Đảng"
+      ],
+      "answer": 0,
+      "explanation": "Sau khi khảo nghiệm nhiều con đường cứu nước, Người tìm thấy con đường giải phóng dân tộc khi đọc Luận cương của Lênin năm 1920."
+    },
+    {
+      "id": "q02",
+      "section": "s1",
+      "subsection": "1.1",
+      "question": "Theo Hồ Chí Minh, độc lập dân tộc phải gắn với điều gì thì mới có ý nghĩa đầy đủ?",
+      "options": [
+        "Quyền lực tập trung vào một giai cấp",
+        "Tự do, hạnh phúc của nhân dân",
+        "Sự viện trợ của các nước lớn",
+        "Việc tạm thời chấp nhận chia cắt lãnh thổ"
+      ],
+      "answer": 1,
+      "explanation": "Độc lập không phải mục đích tự thân. Nếu nhân dân vẫn đói rét, thiếu tự do thì độc lập chưa có ý nghĩa đầy đủ."
+    },
+    {
+      "id": "q03",
+      "section": "s1",
+      "subsection": "1.1",
+      "question": "“Độc lập thật sự, hoàn toàn” theo Hồ Chí Minh là độc lập như thế nào?",
+      "options": [
+        "Chỉ cần độc lập về chính trị, kinh tế có thể dựa vào nước ngoài",
+        "Chỉ cần có quân đội riêng",
+        "Độc lập về mọi mặt: chính trị, kinh tế, quân sự, ngoại giao, văn hóa",
+        "Chỉ cần được công nhận trên văn bản pháp lý"
+      ],
+      "answer": 2,
+      "explanation": "Người không chấp nhận thứ độc lập giả hiệu, chỉ có hình thức mà thực chất vẫn lệ thuộc nước ngoài."
+    },
+    {
+      "id": "q04",
+      "section": "s1",
+      "subsection": "1.2",
+      "question": "Hồ Chí Minh ví chủ nghĩa đế quốc như “con đỉa hai vòi” để rút ra kết luận nào?",
+      "options": [
+        "Cách mạng thuộc địa phải chờ cách mạng chính quốc thắng lợi",
+        "Chỉ cần đấu tranh ngoại giao là đủ",
+        "Cách mạng thuộc địa chỉ là bộ phận phụ thuộc, không thể tự giành thắng lợi",
+        "Cách mạng thuộc địa có thể chủ động giành thắng lợi trước cách mạng ở chính quốc"
+      ],
+      "answer": 3,
+      "explanation": "Một vòi bám chính quốc, một vòi bám thuộc địa. Cắt đứt vòi ở thuộc địa thì sức sống của đế quốc suy yếu."
+    },
+    {
+      "id": "q05",
+      "section": "s1",
+      "subsection": "1.2",
+      "question": "Theo Hồ Chí Minh, lực lượng làm “gốc” của cách mạng giải phóng dân tộc là ai?",
+      "options": [
+        "Công nhân và nông dân",
+        "Trí thức và tiểu thương",
+        "Địa chủ nhỏ và tư sản",
+        "Các tầng lớp yêu nước nói chung, không phân biệt vai trò"
+      ],
+      "answer": 0,
+      "explanation": "Công nhân và nông dân là gốc của cách mạng. Trí thức, tiểu thương, địa chủ nhỏ và các tầng lớp yêu nước khác là bạn của cách mạng."
+    },
+    {
+      "id": "q06",
+      "section": "s1",
+      "subsection": "1.1",
+      "question": "Câu “Không có gì quý hơn độc lập, tự do” nằm trong văn kiện nào?",
+      "options": [
+        "Lời kêu gọi toàn quốc kháng chiến (1946)",
+        "Lời kêu gọi chống Mỹ cứu nước (1966)",
+        "Di chúc",
+        "Tuyên ngôn Độc lập (1945)"
+      ],
+      "answer": 1,
+      "explanation": "Câu này trích từ Lời kêu gọi chống Mỹ cứu nước năm 1966. Câu “thà hy sinh tất cả…” thuộc Lời kêu gọi toàn quốc kháng chiến năm 1946."
+    },
+    {
+      "id": "q07",
+      "section": "s2",
+      "subsection": "2.1",
+      "question": "Con đường đến với chủ nghĩa xã hội của Hồ Chí Minh đi theo hướng nào?",
+      "options": [
+        "Từ chủ nghĩa Mác – Lênin đến chủ nghĩa yêu nước",
+        "Từ cách mạng tư sản Mỹ và Pháp",
+        "Từ chủ nghĩa yêu nước đến chủ nghĩa Mác – Lênin",
+        "Từ phong trào Cần Vương"
+      ],
+      "answer": 2,
+      "explanation": "Người đến với chủ nghĩa xã hội từ chủ nghĩa yêu nước và từ thực tiễn đấu tranh giành độc lập."
+    },
+    {
+      "id": "q08",
+      "section": "s2",
+      "subsection": "2.1",
+      "question": "Hồ Chí Minh nói một cách mộc mạc: chủ nghĩa xã hội là làm sao cho…",
+      "options": [
+        "Mọi người hưởng như nhau dù làm nhiều hay ít",
+        "Nhà nước bao cấp toàn bộ đời sống",
+        "Công nghiệp nặng vượt mọi nước",
+        "Dân giàu, nước mạnh"
+      ],
+      "answer": 3,
+      "explanation": "Người không định nghĩa bằng khái niệm hàn lâm mà dùng những điều nhân dân dễ hiểu."
+    },
+    {
+      "id": "q09",
+      "section": "s2",
+      "subsection": "2.1",
+      "question": "Về xã hội, chủ nghĩa xã hội theo Hồ Chí Minh là xã hội công bằng, hợp lý với nguyên tắc nào?",
+      "options": [
+        "Làm nhiều hưởng nhiều, làm ít hưởng ít, không làm thì không hưởng",
+        "Làm bao nhiêu cũng hưởng như nhau",
+        "Hưởng theo chức vụ, thứ bậc",
+        "Hưởng theo tài sản sở hữu"
+      ],
+      "answer": 0,
+      "explanation": "Đây là đặc trưng về mặt xã hội. Mọi người có công ăn việc làm, ấm no, hạnh phúc."
+    },
+    {
+      "id": "q10",
+      "section": "s2",
+      "subsection": "2.2",
+      "question": "Theo Hồ Chí Minh, động lực quan trọng nhất của việc xây dựng chủ nghĩa xã hội ở Việt Nam là gì?",
+      "options": [
+        "Vốn đầu tư nước ngoài",
+        "Con người",
+        "Tài nguyên thiên nhiên",
+        "Khoa học – kỹ thuật hiện đại"
+      ],
+      "answer": 1,
+      "explanation": "Con người là động lực quan trọng nhất, nên phải phát huy sức mạnh của toàn dân và khối đại đoàn kết toàn dân tộc."
+    },
+    {
+      "id": "q11",
+      "section": "s2",
+      "subsection": "2.2",
+      "question": "Theo Hồ Chí Minh, đâu là những nguy cơ “kẻ thù bên trong” cần kiên quyết chống?",
+      "options": [
+        "Sự phát triển của khoa học – kỹ thuật",
+        "Việc hội nhập quốc tế",
+        "Tham ô, lãng phí, quan liêu, chủ nghĩa cá nhân",
+        "Việc phát huy dân chủ ở cơ sở"
+      ],
+      "answer": 2,
+      "explanation": "Đây là những nguy cơ làm suy yếu sự nghiệp xây dựng chủ nghĩa xã hội."
+    },
+    {
+      "id": "q12",
+      "section": "s2",
+      "subsection": "2.3",
+      "question": "“Quá độ gián tiếp” ở Việt Nam có nghĩa là gì?",
+      "options": [
+        "Đi lên chủ nghĩa xã hội sau khi đã trải qua đầy đủ giai đoạn tư bản chủ nghĩa",
+        "Đi lên chủ nghĩa xã hội nhờ cách mạng thắng lợi ở chính quốc",
+        "Đi lên chủ nghĩa xã hội thật nhanh trong một thế hệ",
+        "Đi lên chủ nghĩa xã hội từ nước nông nghiệp lạc hậu, không trải qua giai đoạn phát triển tư bản chủ nghĩa"
+      ],
+      "answer": 3,
+      "explanation": "Đặc điểm lớn nhất của thời kỳ quá độ ở Việt Nam là tiến thẳng lên chủ nghĩa xã hội mà không qua giai đoạn tư bản chủ nghĩa."
+    },
+    {
+      "id": "q13",
+      "section": "s2",
+      "subsection": "2.3",
+      "question": "Nguyên tắc tiến hành thời kỳ quá độ lên chủ nghĩa xã hội theo Hồ Chí Minh là gì?",
+      "options": [
+        "Không nóng vội, không chủ quan, không rập khuôn máy móc kinh nghiệm nước ngoài",
+        "Làm nhanh để sớm hoàn thành trong thời gian ngắn",
+        "Áp dụng nguyên mẫu kinh nghiệm của nước đi trước",
+        "Chỉ tập trung xây dựng, không cần bảo vệ"
+      ],
+      "answer": 0,
+      "explanation": "Phải căn cứ điều kiện cụ thể của Việt Nam, đi từng bước vững chắc, kiên trì, và kết hợp xây dựng với bảo vệ."
+    },
+    {
+      "id": "q14",
+      "section": "s3",
+      "subsection": "3.1",
+      "question": "Theo Hồ Chí Minh, độc lập dân tộc có vai trò gì đối với chủ nghĩa xã hội?",
+      "options": [
+        "Là kết quả có được sau khi đã hoàn thành xây dựng chủ nghĩa xã hội",
+        "Là cơ sở, tiền đề để tiến lên chủ nghĩa xã hội",
+        "Là mục tiêu đối lập với chủ nghĩa xã hội",
+        "Là mục tiêu cuối cùng, không cần tiến lên nữa"
+      ],
+      "answer": 1,
+      "explanation": "Phải giành được độc lập, dân tộc mới có quyền tự quyết con đường phát triển và có điều kiện xây dựng chủ nghĩa xã hội."
+    },
+    {
+      "id": "q15",
+      "section": "s3",
+      "subsection": "3.1",
+      "question": "Cương lĩnh chính trị đầu tiên của Đảng (1930) xác định con đường cách mạng như thế nào?",
+      "options": [
+        "Làm cách mạng tư sản rồi dừng lại ở chế độ tư bản chủ nghĩa",
+        "Chỉ đấu tranh đòi cải cách trong khuôn khổ thuộc địa",
+        "Làm cách mạng tư sản dân quyền và cách mạng thổ địa để đi tới xã hội cộng sản",
+        "Chỉ giành độc lập rồi không đặt thêm mục tiêu nào"
+      ],
+      "answer": 2,
+      "explanation": "Cách mạng không dừng lại ở độc lập. Sau khi giành độc lập phải tiếp tục tiến lên xây dựng chủ nghĩa xã hội."
+    },
+    {
+      "id": "q16",
+      "section": "s3",
+      "subsection": "3.2",
+      "question": "Nếu độc lập dân tộc không gắn với chủ nghĩa xã hội thì nguy cơ lớn nhất là gì?",
+      "options": [
+        "Kinh tế phát triển quá nhanh, vượt khả năng quản lý",
+        "Không còn cần đến sự lãnh đạo của Đảng",
+        "Không còn khả năng giành chính quyền",
+        "Dễ bị lệ thuộc về kinh tế, chính trị vào các nước lớn, độc lập chỉ còn là hình thức"
+      ],
+      "answer": 3,
+      "explanation": "Chủ nghĩa xã hội tạo cơ sở kinh tế, chính trị, văn hóa để độc lập không chỉ là hình thức."
+    },
+    {
+      "id": "q17",
+      "section": "s3",
+      "subsection": "3.3",
+      "question": "Điều nào sau đây KHÔNG nằm trong các điều kiện để bảo đảm độc lập dân tộc gắn liền với chủ nghĩa xã hội?",
+      "options": [
+        "Đóng cửa, tách khỏi sức mạnh của thời đại",
+        "Giữ vững vai trò lãnh đạo của Đảng Cộng sản Việt Nam",
+        "Xây dựng Nhà nước của dân, do dân, vì dân",
+        "Phát huy sức mạnh đại đoàn kết toàn dân tộc"
+      ],
+      "answer": 0,
+      "explanation": "Điều kiện thứ tư là kết hợp sức mạnh dân tộc với sức mạnh thời đại, đồng thời giữ vững độc lập, tự chủ."
+    },
+    {
+      "id": "q18",
+      "section": "s3",
+      "subsection": "3.3",
+      "question": "Khi nói về điều kiện bảo đảm độc lập dân tộc gắn liền với chủ nghĩa xã hội, khối đại đoàn kết toàn dân tộc được tập hợp trên nền tảng liên minh nào?",
+      "options": [
+        "Liên minh công nhân – tư sản dân tộc",
+        "Liên minh công – nông – trí thức",
+        "Liên minh nông dân – địa chủ",
+        "Liên minh trí thức – doanh nhân"
+      ],
+      "answer": 1,
+      "explanation": "Đại đoàn kết tập hợp mọi tầng lớp nhân dân, đặt lợi ích của dân tộc và nhân dân lên trên hết."
+    },
+    {
+      "id": "q19",
+      "section": "s4",
+      "subsection": "4.1",
+      "question": "Công cuộc Đổi mới từ năm 1986 là đổi mới điều gì?",
+      "options": [
+        "Thay đổi mục tiêu xây dựng chủ nghĩa xã hội",
+        "Từ bỏ chủ nghĩa Mác – Lênin làm nền tảng",
+        "Đổi mới phương thức, cách làm, không thay đổi mục tiêu",
+        "Chỉ thay đổi tên gọi các cơ quan nhà nước"
+      ],
+      "answer": 2,
+      "explanation": "Đảng ta kiên định mục tiêu độc lập dân tộc gắn liền với chủ nghĩa xã hội."
+    },
+    {
+      "id": "q20",
+      "section": "s4",
+      "subsection": "4.1",
+      "question": "Theo định hướng phát triển, đến năm 2045 Việt Nam phấn đấu trở thành nước nào?",
+      "options": [
+        "Nước đang phát triển có công nghiệp hiện đại, thu nhập trung bình cao",
+        "Nước nông nghiệp có thu nhập trung bình thấp",
+        "Nước công nghiệp mới nhưng chưa có thu nhập cao",
+        "Nước phát triển, thu nhập cao"
+      ],
+      "answer": 3,
+      "explanation": "Mốc 2030 là nước đang phát triển có công nghiệp hiện đại, thu nhập trung bình cao. Mốc 2045 là nước phát triển, thu nhập cao."
+    },
+    {
+      "id": "q21",
+      "section": "s4",
+      "subsection": "4.2",
+      "question": "Điền vào chỗ trống: “Dân biết, dân bàn, dân làm, dân kiểm tra, dân giám sát, …”",
+      "options": [
+        "dân thụ hưởng",
+        "dân quyết định",
+        "dân bầu cử",
+        "dân phản biện"
+      ],
+      "answer": 0,
+      "explanation": "Đây là cơ chế thực hiện dân chủ xã hội chủ nghĩa, kết hợp dân chủ đại diện và dân chủ trực tiếp."
+    },
+    {
+      "id": "q22",
+      "section": "s4",
+      "subsection": "4.3",
+      "question": "Hệ thống chính trị nước ta gồm những thành phần nào?",
+      "options": [
+        "Chỉ gồm Đảng và Nhà nước",
+        "Đảng Cộng sản Việt Nam, Nhà nước, Mặt trận Tổ quốc Việt Nam và các tổ chức chính trị – xã hội",
+        "Đảng, Nhà nước, quân đội và các tổ chức kinh tế tư nhân",
+        "Nhà nước, Mặt trận và các tổ chức quốc tế"
+      ],
+      "answer": 1,
+      "explanation": "Hệ thống này phải được củng cố để làm nhiệm vụ lãnh đạo, quản lý và tổ chức thực hiện."
+    },
+    {
+      "id": "q23",
+      "section": "s4",
+      "subsection": "4.4",
+      "question": "Nghị quyết Trung ương 4 khóa XII (2016) nhấn mạnh yêu cầu nào?",
+      "options": [
+        "Đẩy mạnh hội nhập kinh tế quốc tế",
+        "Cải cách hành chính, tinh gọn bộ máy",
+        "Ngăn chặn, đẩy lùi suy thoái về tư tưởng chính trị, đạo đức, lối sống và “tự diễn biến”, “tự chuyển hóa”",
+        "Phát triển kinh tế thị trường định hướng xã hội chủ nghĩa"
+      ],
+      "answer": 2,
+      "explanation": "Suy thoái là nguy cơ lớn đối với sự tồn tại của Đảng và chế độ."
+    },
+    {
+      "id": "q24",
+      "section": "s4",
+      "subsection": "4.4",
+      "question": "“Tự diễn biến”, “tự chuyển hóa” là gì?",
+      "options": [
+        "Sự tấn công trực tiếp từ bên ngoài bằng quân sự",
+        "Sự đổi mới có kế hoạch về phương thức làm việc",
+        "Sự thay đổi cán bộ theo nhiệm kỳ",
+        "Sự biến đổi dần về nhận thức, lập trường, quan điểm ngay trong nội bộ, đi chệch mục tiêu, lý tưởng"
+      ],
+      "answer": 3,
+      "explanation": "Biểu hiện này chịu tác động của các thế lực thù địch và cần được đấu tranh thường xuyên."
+    }
+  ]
+}

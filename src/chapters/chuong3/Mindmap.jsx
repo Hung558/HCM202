@@ -13,6 +13,7 @@ import { ChevronRight, ChevronDown, Maximize, Network, Quote } from "lucide-reac
 import data from "./data.json";
 import NavBar from "./NavBar";
 import Knowledge from "./Knowledge";
+import Review from "./Review";
 
 const COL_GAP = 310;
 const ROW_GAP = 92;
@@ -303,19 +304,19 @@ function MindmapInner() {
 }
 
 export default function Mindmap() {
-  const [tab, setTab] = useState("mindmap"); // mặc định là Sơ đồ tư duy
+  const [tab, setTab] = useState("mindmap");
 
   return (
     <>
       <NavBar activeTab={tab} onTabChange={setTab} />
 
-      {tab === "mindmap" ? (
+      {tab === "mindmap" && (
         <ReactFlowProvider>
           <MindmapInner />
         </ReactFlowProvider>
-      ) : (
-        <Knowledge />
       )}
+      {tab === "knowledge" && <Knowledge />}
+      {tab === "review" && <Review />}
     </>
   );
 }

@@ -3,6 +3,7 @@ import { useState } from "react";
 const TABS = [
     { id: "mindmap", label: "Sơ đồ tư duy" },
     { id: "knowledge", label: "Kiến thức" },
+    { id: "review", label: "Ôn tập" },
 ];
 
 /**
@@ -39,7 +40,7 @@ export default function NavBar({ activeTab, onTabChange }) {
                 </a>
 
                 {/* Tabs */}
-                <div role="tablist" aria-label="Nội dung chương III" className="flex items-center gap-2">
+                <div role="tablist" aria-label="Nội dung chương III" className="flex flex-wrap items-center gap-2">
                     {TABS.map((tab) => {
                         const isActive = current === tab.id;
                         return (
