@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ChapterTabBar from "../../components/ChapterTabBar.jsx";
 import ChapterMenu from "../../components/ChapterMenu.jsx";
+import ChapterLogo from "../../components/ChapterLogo.jsx";
 import { BookOpen, ListChecks, Network } from "lucide-react";
 
 const TABS = [
@@ -29,19 +30,7 @@ export default function NavBar({ activeTab, onTabChange }) {
             <div className="mx-auto flex max-w-[1180px] flex-wrap items-center gap-4 px-5 py-3">
                 <ChapterMenu current="III" />
                 {/* Logo chương */}
-                <a
-                    href="/"
-                    title="Về trang chủ Web học tập"
-                    className="flex items-center gap-2.5 text-ink"
-                >
-                    <span className="grid size-9 place-items-center rounded-[10px] bg-primary text-[15px] font-extrabold text-on-dark">
-                        III
-                    </span>
-                    <span className="flex flex-col leading-tight">
-                        <span className="text-[15px] font-bold">Chương III</span>
-                        <span className="text-xs text-muted">Tư tưởng Hồ Chí Minh</span>
-                    </span>
-                </a>
+                <ChapterLogo num="III" />
 
                 {/* Tabs */}
                 <ChapterTabBar tabs={TABS} value={current} onChange={handleSelect} label="Nội dung chương III" hideIconsOnMobile />

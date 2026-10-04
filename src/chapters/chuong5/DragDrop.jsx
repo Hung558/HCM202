@@ -5,6 +5,7 @@ import MatchingGame from './MatchingGame.jsx'
 import SectionVideo from './SectionVideo.jsx'
 import ChapterTabBar from '../../components/ChapterTabBar.jsx'
 import ChapterMenu from '../../components/ChapterMenu.jsx'
+import ChapterLogo from '../../components/ChapterLogo.jsx'
 
 const TABS = [
   { id: 'learn', label: 'Học bài', icon: BookOpen },
@@ -21,13 +22,7 @@ export default function DragDrop() {
       <nav aria-label="Điều hướng chương V" className="sticky top-0 z-20 border-b border-line bg-paper/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-[1180px] flex-wrap items-center gap-4 px-5 py-3">
           <ChapterMenu current="V" />
-          <a href="/" title="Về trang chủ" className="flex items-center gap-2.5 text-ink">
-            <span className="grid size-9 shrink-0 place-items-center rounded-[10px] bg-primary text-[15px] font-extrabold text-on-dark">V</span>
-            <span className="flex flex-col leading-tight">
-              <span className="text-[15px] font-bold">Chương V</span>
-              <span className="text-xs text-muted">Tư tưởng Hồ Chí Minh</span>
-            </span>
-          </a>
+          <ChapterLogo num="V" />
           <ChapterTabBar tabs={TABS} value={tab} onChange={setTab} label="Nội dung chương V" />
         </div>
       </nav>

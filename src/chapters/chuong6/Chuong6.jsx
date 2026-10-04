@@ -5,6 +5,7 @@ import Content from './Content.jsx'
 import Tracker from './Tracker.jsx'
 import ChapterTabBar from '../../components/ChapterTabBar.jsx'
 import ChapterMenu from '../../components/ChapterMenu.jsx'
+import ChapterLogo from '../../components/ChapterLogo.jsx'
 import { EMPTY, TRACKER_KEY, load, save, streak } from './utils.js'
 
 const FONT_URL =
@@ -44,19 +45,11 @@ export default function Chuong6() {
       <nav className="sticky top-0 z-10 border-b border-[#E6DFD3] bg-[#F5F1EA]/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-[1180px] flex-wrap items-center gap-4 px-5 py-3">
           <ChapterMenu current="VI" />
-          <a href="/" title="Về trang chủ" className="flex items-center gap-2.5 text-[#1F1B16]">
-            <span className="grid size-9 place-items-center rounded-[10px] bg-[#B4322A] text-[15px] font-extrabold text-[#FFF8EC]">
-              VI
-            </span>
-            <span className="flex flex-col leading-tight">
-              <span className="text-[15px] font-bold">Chương VI</span>
-              <span className="text-xs text-[#7A7063]">Tư tưởng Hồ Chí Minh</span>
-            </span>
-          </a>
+          <ChapterLogo num="VI" />
 
           <ChapterTabBar tabs={TABS} value={tab} onChange={go} label="Nội dung chương VI" />
 
-          <div className="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-[#E6DFD3] bg-white px-3.5 py-2 text-sm font-semibold">
+          <div className="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-[#E6DFD3] bg-white px-3.5 py-2 text-sm font-semibold max-sm:hidden">
             <span className="size-2 rounded-full bg-[#E59A2F]" />
             {streak(tracker.log)} ngày liên tiếp
           </div>

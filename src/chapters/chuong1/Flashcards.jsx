@@ -6,6 +6,7 @@ import ContentVideoTab from './ContentVideoTab.jsx'
 import Sources from './Sources.jsx'
 import ChapterTabBar from '../../components/ChapterTabBar.jsx'
 import ChapterMenu from '../../components/ChapterMenu.jsx'
+import ChapterLogo from '../../components/ChapterLogo.jsx'
 import styles from './Flashcards.module.css'
 
 const STORAGE_KEY = `hcm202:chuong1:progress:${data.metadata.id}`
@@ -108,13 +109,7 @@ export default function Flashcards() {
       <nav aria-label="Điều hướng chương I" className="sticky top-0 z-20 border-b border-line bg-paper/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-[1180px] flex-wrap items-center gap-4 px-5 py-3">
           <ChapterMenu current="I" />
-          <a href="/" title="Về trang chủ" className="flex items-center gap-2.5 text-ink">
-            <span className="grid size-9 shrink-0 place-items-center rounded-[10px] bg-primary text-[15px] font-extrabold text-on-dark">I</span>
-            <span className="flex flex-col leading-tight">
-              <span className="text-[15px] font-bold">Chương I</span>
-              <span className="text-xs text-muted">Tư tưởng Hồ Chí Minh</span>
-            </span>
-          </a>
+          <ChapterLogo num="I" />
           <ChapterTabBar tabs={TABS} value={tab} onChange={setTab} label="Nội dung chương I" />
         </div>
       </nav>
