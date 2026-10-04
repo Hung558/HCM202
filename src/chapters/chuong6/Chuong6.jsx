@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { BookOpen, NotebookPen } from 'lucide-react'
 import Content from './Content.jsx'
 import Tracker from './Tracker.jsx'
+import ChapterTabBar from '../../components/ChapterTabBar.jsx'
 import { EMPTY, TRACKER_KEY, load, save, streak } from './utils.js'
 
 const FONT_URL =
@@ -51,20 +52,7 @@ export default function Chuong6() {
             </span>
           </a>
 
-          <div className="ml-auto flex gap-1 rounded-full bg-[#EBE4D8] p-1">
-            {TABS.map(({ id, label, icon: Icon }) => (
-              <button
-                key={id}
-                onClick={() => go(id)}
-                aria-current={tab === id ? 'page' : undefined}
-                className={`relative inline-flex min-h-[40px] items-center gap-2 rounded-full px-[18px] text-sm font-semibold transition-colors ${tab === id ? 'text-[#FFF8EC]' : 'text-[#5C5347] hover:text-[#1F1B16]'}`}
-              >
-                {tab === id && <motion.span layoutId="tab-bg" className="absolute inset-0 rounded-full bg-[#1F1B16]" />}
-                <Icon className="relative size-4" />
-                <span className="relative">{label}</span>
-              </button>
-            ))}
-          </div>
+          <ChapterTabBar tabs={TABS} value={tab} onChange={go} label="Nội dung chương VI" />
 
           <div className="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-[#E6DFD3] bg-white px-3.5 py-2 text-sm font-semibold">
             <span className="size-2 rounded-full bg-[#E59A2F]" />

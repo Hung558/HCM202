@@ -3,6 +3,12 @@ import { ArrowRight, BookOpen, Puzzle, Users, Globe2 } from 'lucide-react'
 import data from './data.json'
 import MatchingGame from './MatchingGame.jsx'
 import SectionVideo from './SectionVideo.jsx'
+import ChapterTabBar from '../../components/ChapterTabBar.jsx'
+
+const TABS = [
+  { id: 'learn', label: 'Học bài', icon: BookOpen },
+  { id: 'game', label: 'Ghép nối', icon: Puzzle },
+]
 
 export default function DragDrop() {
   const [tab, setTab] = useState('learn')
@@ -12,16 +18,15 @@ export default function DragDrop() {
   return (
     <div className="min-h-screen bg-paper text-ink">
       <nav aria-label="Điều hướng chương V" className="sticky top-0 z-20 border-b border-line bg-paper/90 backdrop-blur-md">
-        <div className="mx-auto flex max-w-[1180px] flex-wrap items-center justify-between gap-3 px-5 py-3">
-          <a href="/" aria-label="Chương 5 · Về trang chủ" className="flex items-center gap-2.5">
-            <span className="grid size-10 place-items-center rounded-xl bg-primary font-extrabold text-on-dark">V</span>
-            <span><span className="block text-sm font-bold">Chương 5</span><span className="block text-xs text-muted">Tư tưởng Hồ Chí Minh</span></span>
+        <div className="mx-auto flex max-w-[1180px] flex-wrap items-center gap-4 px-5 py-3">
+          <a href="/" title="Về trang chủ" className="flex items-center gap-2.5 text-ink">
+            <span className="grid size-9 shrink-0 place-items-center rounded-[10px] bg-primary text-[15px] font-extrabold text-on-dark">V</span>
+            <span className="flex flex-col leading-tight">
+              <span className="text-[15px] font-bold">Chương V</span>
+              <span className="text-xs text-muted">Tư tưởng Hồ Chí Minh</span>
+            </span>
           </a>
-          <div className="flex gap-1 rounded-full bg-track p-1" aria-label="Nội dung chương">
-            {[['learn', 'Học bài', BookOpen], ['game', 'Ghép nối', Puzzle]].map(([id, label, Icon]) => (
-              <button key={id} onClick={() => setTab(id)} aria-pressed={tab === id} className={`btn ${tab === id ? 'btn-dark' : 'text-ink-soft'}`}><Icon className="size-4" aria-hidden="true" />{label}</button>
-            ))}
-          </div>
+          <ChapterTabBar tabs={TABS} value={tab} onChange={setTab} label="Nội dung chương V" />
         </div>
       </nav>
       <main className="mx-auto max-w-[1180px] px-5 pt-10 pb-20">

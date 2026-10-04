@@ -6,11 +6,16 @@
 // - Chiều cao khối sticky đo bằng ResizeObserver → CSS variables --header-height /
 //   --tabs-height dùng chung cho mục lục sticky và anchor scroll.
 import { Suspense, lazy, useCallback, useEffect, useRef, useState } from 'react'
-import { Loader2 } from 'lucide-react'
+import { BookOpen, ClipboardList, Loader2 } from 'lucide-react'
 import ChapterHeader from './components/ChapterHeader.jsx'
-import ChapterTabs from './components/ChapterTabs.jsx'
+import ChapterTabBar from '../../components/ChapterTabBar.jsx'
 import ScenarioQuiz from './components/ScenarioQuiz.jsx'
 import { TAB_CONTENT, TAB_QUIZ } from './constants.js'
+
+const TABS = [
+  { id: TAB_CONTENT, label: 'Kiến thức', icon: BookOpen },
+  { id: TAB_QUIZ, label: 'Trắc nghiệm tình huống', icon: ClipboardList },
+]
 
 // Lazy: bundle Kiến thức (parser + txt) tách riêng khỏi bundle Quiz
 const ChapterContentLazy = lazy(() => import('./components/ChapterContent.jsx'))
@@ -18,20 +23,15 @@ const ChapterContentLazy = lazy(() => import('./components/ChapterContent.jsx'))
 export default function Chuong4Page() {
   const [tab, setTab] = useState(TAB_CONTENT) // luôn mở tab Kiến thức trước
 
-  // Đo động chiều cao 2 hàng sticky → CSS variables cho sidebar & scroll-margin
-  const headerRowRef = useRef(null)
-  const tabsRowRef = useRef(null)
+  // Đo động chiều cao thanh sticky (logo + tabs, có thể xuống 2 dòng trên điện thoại)
+  // → CSS variables cho sidebar & scroll-margin. Cả thanh tính vào --header-height.
+  const navRowRef = useRef(null)
   const [sticky, setSticky] = useState({ header: 0, tabs: 0 })
   useEffect(() => {
-    const measure = () =>
-      setSticky({
-        header: headerRowRef.current?.offsetHeight ?? 0,
-        tabs: tabsRowRef.current?.offsetHeight ?? 0,
-      })
+    const measure = () => setSticky({ header: navRowRef.current?.offsetHeight ?? 0, tabs: 0 })
     measure()
     const ro = new ResizeObserver(measure)
-    if (headerRowRef.current) ro.observe(headerRowRef.current)
-    if (tabsRowRef.current) ro.observe(tabsRowRef.current)
+    if (navRowRef.current) ro.observe(navRowRef.current)
     window.addEventListener('resize', measure)
     return () => {
       ro.disconnect()
@@ -46,23 +46,12 @@ export default function Chuong4Page() {
       {/* ===== Vùng full-width: header + tabs + divider =====
           Ngoài max-w container — divider & nền blur căng hết chiều rộng trang. */}
       <div className="sticky top-0 z-20 bg-paper/90 backdrop-blur-md">
-        <div className="mx-auto max-w-[1180px] px-5">
-          <div
-            className="flex items-center justify-between gap-6 pt-6 pb-3"
-          >
-            {/* Header bên trái */}
-            <div ref={headerRowRef} className="shrink-0">
-              <ChapterHeader />
-            </div>
+        <div ref={navRowRef} className="mx-auto flex max-w-[1180px] flex-wrap items-center gap-4 px-5 py-3">
+          {/* Header bên trái */}
+          <ChapterHeader />
 
-            {/* Tabs bên phải */}
-            <div ref={tabsRowRef} className="shrink-0">
-              <ChapterTabs
-                tab={tab}
-                onTabChange={changeTab}
-              />
-            </div>
-          </div>
+          {/* Tabs bên phải */}
+          <ChapterTabBar tabs={TABS} value={tab} onChange={changeTab} label="Nội dung chương IV" />
         </div>
         {/* Divider là con TRỰC TIẾP của wrapper full-width → không bị giới hạn max-width */}
         <div className="h-px bg-line" />

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import ChapterTabBar from "../../components/ChapterTabBar.jsx";
 import { BookOpen, ListChecks, Network } from "lucide-react";
 
 const TABS = [
@@ -24,7 +24,7 @@ export default function NavBar({ activeTab, onTabChange }) {
     };
 
     return (
-        <nav className="sticky top-0 z-30 border-b border-line bg-paper/95 backdrop-blur-md">
+        <nav className="sticky top-0 z-30 border-b border-line bg-paper/90 backdrop-blur-md">
             <div className="mx-auto flex max-w-[1180px] flex-wrap items-center gap-4 px-5 py-3">
                 {/* Logo chương */}
                 <a
@@ -42,30 +42,7 @@ export default function NavBar({ activeTab, onTabChange }) {
                 </a>
 
                 {/* Tabs */}
-                <div role="tablist" aria-label="Nội dung chương III" className="ml-auto flex gap-1 rounded-full bg-[#EBE4D8] p-1">
-                    {TABS.map((tab) => {
-                        const isActive = current === tab.id;
-                        return (
-                            <button
-                                key={tab.id}
-                                type="button"
-                                role="tab"
-                                aria-selected={isActive}
-                                onClick={() => handleSelect(tab.id)}
-                                className={
-                                    "relative inline-flex min-h-[40px] items-center gap-2 rounded-full px-[18px] text-sm font-semibold transition-colors " +
-                                    (isActive ? "text-on-dark" : "text-ink-soft hover:text-ink")
-                                }
-                            >
-                                {isActive && (
-                                    <motion.span layoutId="ch3-tab-bg" className="absolute inset-0 rounded-full bg-ink" />
-                                )}
-                                <tab.icon className="relative hidden size-4 sm:block" />
-                                <span className="relative">{tab.label}</span>
-                            </button>
-                        );
-                    })}
-                </div>
+                <ChapterTabBar tabs={TABS} value={current} onChange={handleSelect} label="Nội dung chương III" hideIconsOnMobile />
             </div>
         </nav>
     );

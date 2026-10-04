@@ -18,6 +18,13 @@ import {
   CheckCircle2,
   X
 } from 'lucide-react'
+import ChapterTabBar from '../../components/ChapterTabBar.jsx'
+
+const TABS = [
+  { id: 'foundations', label: 'I. Cơ sở hình thành', icon: Layers },
+  { id: 'timeline', label: 'II. Quá trình hình thành & phát triển', icon: Clock },
+  { id: 'significance', label: 'III. Giá trị tư tưởng', icon: Sparkles },
+]
 
 import data from './data.json'
 import EventModal from './EventModal.jsx'
@@ -177,103 +184,31 @@ export default function InteractiveTimeline() {
   return (
     <div className="min-h-screen bg-paper text-ink font-sans antialiased selection:bg-amber selection:text-ink">
       {/* 1. THANH ĐIỀU HƯỚNG TRÊN CÙNG (NAVIGATION BAR) */}
-      <nav className="sticky top-0 z-30 border-b border-line bg-paper/95 backdrop-blur-md">
-        <div className="mx-auto flex max-w-[1240px] flex-wrap items-center justify-between gap-4 px-4 sm:px-6 py-3">
-          {/* Logo chương */}
-          <a
-            href="/"
-            title="Về trang chủ Web học tập"
-            className="flex items-center gap-3 transition-opacity hover:opacity-85"
-          >
-            <span className="grid size-9 sm:size-10 place-items-center rounded-xl bg-primary text-[15px] sm:text-[16px] font-extrabold text-on-dark">
-              II
-            </span>
+      <nav className="sticky top-0 z-30 border-b border-line bg-paper/90 backdrop-blur-md">
+        <div className="mx-auto flex max-w-[1180px] flex-wrap items-center gap-4 px-5 py-3">
+          <a href="/" title="Về trang chủ" className="flex items-center gap-2.5 text-ink">
+            <span className="grid size-9 shrink-0 place-items-center rounded-[10px] bg-primary text-[15px] font-extrabold text-on-dark">II</span>
             <span className="flex flex-col leading-tight">
-              <span className="text-[15px] sm:text-[16.5px] font-bold text-ink">Chương II</span>
-              <span className="text-[12px] sm:text-[12.5px] text-muted">Tư tưởng Hồ Chí Minh</span>
+              <span className="text-[15px] font-bold">Chương II</span>
+              <span className="text-xs text-muted">Tư tưởng Hồ Chí Minh</span>
             </span>
           </a>
-
-          {/* Các tab phân mục chuẩn xác theo giáo trình - Tinh chỉnh to rõ hơn */}
-          <div className="flex items-center gap-1.5 rounded-full bg-[#E5DDD0] p-1.5 border border-line/60">
-            <button
-              onClick={() => setActiveTab('foundations')}
-              className={`relative min-h-[40px] sm:min-h-[42px] rounded-full px-4 sm:px-5 text-[13.5px] sm:text-[15px] font-bold transition-colors ${
-                activeTab === 'foundations'
-                  ? 'text-on-dark'
-                  : 'text-ink-soft hover:text-ink'
-              }`}
-            >
-              {activeTab === 'foundations' && (
-                <motion.span
-                  layoutId="main-nav-pill"
-                  className="absolute inset-0 rounded-full bg-ink"
-                  transition={{ duration: 0.15 }}
-                />
-              )}
-              <span className="relative z-10 flex items-center gap-2">
-                <Layers className="size-4 sm:size-4.5" />
-                <span>I. Cơ sở hình thành</span>
-              </span>
-            </button>
-
-            <button
-              onClick={() => setActiveTab('timeline')}
-              className={`relative min-h-[40px] sm:min-h-[42px] rounded-full px-4 sm:px-5 text-[13.5px] sm:text-[15px] font-bold transition-colors ${
-                activeTab === 'timeline'
-                  ? 'text-on-dark'
-                  : 'text-ink-soft hover:text-ink'
-              }`}
-            >
-              {activeTab === 'timeline' && (
-                <motion.span
-                  layoutId="main-nav-pill"
-                  className="absolute inset-0 rounded-full bg-ink"
-                  transition={{ duration: 0.15 }}
-                />
-              )}
-              <span className="relative z-10 flex items-center gap-2">
-                <Clock className="size-4 sm:size-4.5" />
-                <span>II. Quá trình hình thành & phát triển</span>
-              </span>
-            </button>
-
-            <button
-              onClick={() => setActiveTab('significance')}
-              className={`relative min-h-[40px] sm:min-h-[42px] rounded-full px-4 sm:px-5 text-[13.5px] sm:text-[15px] font-bold transition-colors ${
-                activeTab === 'significance'
-                  ? 'text-on-dark'
-                  : 'text-ink-soft hover:text-ink'
-              }`}
-            >
-              {activeTab === 'significance' && (
-                <motion.span
-                  layoutId="main-nav-pill"
-                  className="absolute inset-0 rounded-full bg-ink"
-                  transition={{ duration: 0.15 }}
-                />
-              )}
-              <span className="relative z-10 flex items-center gap-2">
-                <Sparkles className="size-4 sm:size-4.5" />
-                <span>III. Giá trị tư tưởng</span>
-              </span>
-            </button>
-          </div>
-
+          <ChapterTabBar tabs={TABS} value={activeTab} onChange={setActiveTab} label="Nội dung chương II" />
           {/* Nút mở Quiz trắc nghiệm */}
           <button
+            type="button"
             onClick={() => setIsQuizOpen(true)}
-            className="btn btn-outline text-[13px] sm:text-[14px] font-bold py-1.5 px-4 min-h-[40px] sm:min-h-[42px] hidden sm:inline-flex gap-2 rounded-full"
+            className="hidden shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-line bg-white px-3.5 py-2 text-sm font-semibold hover:border-line-strong sm:inline-flex"
             title="Mở bài ôn tập trắc nghiệm nhanh"
           >
             <Award className="size-4 text-amber" />
-            <span>Ôn tập trắc nghiệm</span>
+            Ôn tập trắc nghiệm
           </button>
         </div>
       </nav>
 
       {/* 2. NỘI DUNG CHÍNH (MAIN CONTAINER) */}
-      <main className="mx-auto max-w-[1240px] px-4 sm:px-6 pt-5 pb-16">
+      <main className="mx-auto max-w-[1180px] px-5 pt-5 pb-16">
         {/* HEADER PHÂN MỤC CHUẨN GIÁO TRÌNH */}
         <header className="mb-4">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
@@ -689,7 +624,7 @@ export default function InteractiveTimeline() {
 
       {/* FOOTER */}
       <footer className="border-t border-line bg-paper py-5">
-        <div className="mx-auto flex max-w-[1240px] flex-col sm:flex-row items-center justify-between gap-3 px-4 sm:px-6 text-xs text-muted">
+        <div className="mx-auto flex max-w-[1180px] flex-col sm:flex-row items-center justify-between gap-3 px-5 text-xs text-muted">
           <div className="flex items-center gap-2">
             <span className="font-bold text-ink">Chương II: Tư tưởng Hồ Chí Minh</span>
             <span>·</span>

@@ -1,14 +1,21 @@
 import { useEffect, useState } from 'react'
-import { ArrowRight, BookOpen, Check, Clock3, House, Layers3, RotateCcw, Search, Video } from 'lucide-react'
+import { ArrowRight, BookOpen, Check, Clock3, Layers3, RotateCcw, Search, Video } from 'lucide-react'
 import data from './data.json'
 import { currentTime, getStudyQueue, normalizeSearch, rateCard } from './progress.js'
 import ContentVideoTab from './ContentVideoTab.jsx'
 import Sources from './Sources.jsx'
+import ChapterTabBar from '../../components/ChapterTabBar.jsx'
 import styles from './Flashcards.module.css'
 
 const STORAGE_KEY = `hcm202:chuong1:progress:${data.metadata.id}`
 const cards = [...data.flashcards].sort((a, b) => a.order - b.order)
 const categories = [...data.categories].sort((a, b) => a.order - b.order)
+
+const TABS = [
+  { id: 'content-video', label: 'Nội dung & Video', icon: Video },
+  { id: 'cards', label: 'Thẻ ghi nhớ', icon: Layers3 },
+  { id: 'dictionary', label: 'Từ điển thuật ngữ', icon: BookOpen },
+]
 
 function loadProgress() {
   try {
@@ -26,7 +33,7 @@ function formatReviewTime(value) {
 }
 
 export default function Flashcards() {
-  const [tab, setTab] = useState('cards')
+  const [tab, setTab] = useState('content-video')
   const [categoryId, setCategoryId] = useState('all')
   const [progress, setProgress] = useState(loadProgress)
   const [now, setNow] = useState(() => Date.now())
@@ -97,15 +104,18 @@ export default function Flashcards() {
 
   return (
     <div className="min-h-screen">
-      <header className="sticky top-0 z-20 border-b border-line bg-paper/95 backdrop-blur-md">
-        <div className="mx-auto flex max-w-[1180px] items-center justify-between gap-4 px-5 py-3">
-          <a href="/" className="inline-flex items-center gap-3 font-bold text-ink hover:text-primary" aria-label="Về trang chủ">
-            <span className="grid size-11 place-items-center rounded-xl bg-primary text-on-dark">I</span>
-            <span className="hidden sm:inline">Tư tưởng Hồ Chí Minh</span>
+      <nav aria-label="Điều hướng chương I" className="sticky top-0 z-20 border-b border-line bg-paper/90 backdrop-blur-md">
+        <div className="mx-auto flex max-w-[1180px] flex-wrap items-center gap-4 px-5 py-3">
+          <a href="/" title="Về trang chủ" className="flex items-center gap-2.5 text-ink">
+            <span className="grid size-9 shrink-0 place-items-center rounded-[10px] bg-primary text-[15px] font-extrabold text-on-dark">I</span>
+            <span className="flex flex-col leading-tight">
+              <span className="text-[15px] font-bold">Chương I</span>
+              <span className="text-xs text-muted">Tư tưởng Hồ Chí Minh</span>
+            </span>
           </a>
-          <a href="/" className="btn btn-outline bg-white text-ink-soft"><House size={16} /> Trang chủ</a>
+          <ChapterTabBar tabs={TABS} value={tab} onChange={setTab} label="Nội dung chương I" />
         </div>
-      </header>
+      </nav>
 
       <main className="mx-auto max-w-[1180px] px-5 pb-20 pt-10">
         <div className="grid gap-8 lg:grid-cols-[1fr_280px] lg:items-end">
@@ -123,11 +133,6 @@ export default function Flashcards() {
           </div>
         </div>
 
-        <nav className="mt-10 flex flex-wrap gap-2 border-b border-line pb-3" aria-label="Nội dung Chương 1">
-          <button type="button" onClick={() => setTab('cards')} aria-pressed={tab === 'cards'} className={`btn ${tab === 'cards' ? 'btn-dark' : 'btn-outline bg-white'}`}><Layers3 size={18} /> Thẻ ghi nhớ</button>
-          <button type="button" onClick={() => setTab('dictionary')} aria-pressed={tab === 'dictionary'} className={`btn ${tab === 'dictionary' ? 'btn-dark' : 'btn-outline bg-white'}`}><BookOpen size={18} /> Từ điển thuật ngữ</button>
-          <button type="button" onClick={() => setTab('content-video')} aria-pressed={tab === 'content-video'} className={`btn ${tab === 'content-video' ? 'btn-dark' : 'btn-outline bg-white'}`}><Video size={18} /> Nội dung &amp; Video</button>
-        </nav>
 
         {storageError && <p role="alert" className="mt-5 rounded-xl bg-cream px-4 py-3 text-sm text-ink-soft">Trình duyệt không lưu được tiến độ. Các lựa chọn ôn tập có thể mất khi tải lại trang.</p>}
 
