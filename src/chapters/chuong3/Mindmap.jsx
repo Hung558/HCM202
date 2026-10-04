@@ -12,6 +12,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronRight, ChevronDown, Maximize, Network, Quote } from "lucide-react";
 import data from "./data.json";
 import NavBar from "./NavBar";
+import Knowledge from "./Knowledge";
 
 const COL_GAP = 310;
 const ROW_GAP = 92;
@@ -302,12 +303,19 @@ function MindmapInner() {
 }
 
 export default function Mindmap() {
+  const [tab, setTab] = useState("mindmap"); // mặc định là Sơ đồ tư duy
+
   return (
     <>
-      <NavBar />
-      <ReactFlowProvider>
-        <MindmapInner />
-      </ReactFlowProvider>
+      <NavBar activeTab={tab} onTabChange={setTab} />
+
+      {tab === "mindmap" ? (
+        <ReactFlowProvider>
+          <MindmapInner />
+        </ReactFlowProvider>
+      ) : (
+        <Knowledge />
+      )}
     </>
   );
 }
