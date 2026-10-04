@@ -75,8 +75,10 @@ body {
 /* Chuyển trang mượt: mỗi trang (trang chủ, 6 chương) hiện dần khi mở.
    Lúc rời trang qua menu chương, ChapterMenu làm mờ #root trước rồi mới chuyển. */
 @media (prefers-reduced-motion: no-preference) {
+  /* Không dùng fill "both"/"forwards": nếu transform còn giữ lại sau khi chạy xong,
+     #root thành khung chứa của mọi phần tử position:fixed (modal bị căn giữa theo cả trang). */
   #root {
-    animation: page-in 0.35s ease-out both;
+    animation: page-in 0.35s ease-out;
   }
 }
 @keyframes page-in {

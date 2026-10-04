@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Check, Plus, RotateCcw, X } from 'lucide-react'
 import data from './data.json'
+import { useConfirm } from '../../components/useConfirm.jsx'
 import { EMPTY, dayKey, lastDays, pad, streak } from './utils.js'
 
 const LORA = { fontFamily: "'Lora', serif" }
@@ -32,8 +33,14 @@ export default function Tracker({ state, setState }) {
 
   const setNote = (text) => setState((s) => ({ ...s, notes: { ...s.notes, [today]: text } }))
 
-  const reset = () => {
-    if (confirm('Xóa toàn bộ dữ liệu sổ tay?')) setState(EMPTY)
+  const [confirm, confirmDialog] = useConfirm()
+  const reset = async () => {
+    const ok = await confirm({
+      title: 'Xóa toàn bộ dữ liệu sổ tay?',
+      message: 'Các việc đã đánh dấu, việc tự thêm và nhật ký "Tự soi, tự sửa" sẽ bị xóa khỏi máy này. Không thể hoàn tác.',
+      confirmLabel: 'Xóa dữ liệu',
+    })
+    if (ok) setState(EMPTY)
   }
 
   const total = data.virtues.reduce((n, v) => n + v.suggestions.length + (state.custom[v.id]?.length ?? 0), 0)
@@ -44,6 +51,7 @@ export default function Tracker({ state, setState }) {
 
   return (
     <div className="mx-auto flex max-w-[1180px] flex-col gap-5 px-5 pb-20 pt-10">
+      {confirmDialog}
       <header className="max-w-[680px]">
         <p className="text-[13px] font-bold uppercase tracking-[0.12em] text-[#B4322A]">{todayLabel}</p>
         <h1 className="mt-2.5 text-[clamp(30px,4.6vw,52px)] font-extrabold leading-[1.08] tracking-[-0.02em]">

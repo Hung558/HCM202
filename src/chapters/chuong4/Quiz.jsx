@@ -13,6 +13,7 @@ import ScenarioCard from './components/ScenarioCard.jsx'
 import ExplanationModal from './components/ExplanationModal.jsx'
 import Result from './components/Result.jsx'
 import Review from './components/Review.jsx'
+import { useConfirm } from '../../components/useConfirm.jsx'
 
 const KEY_TO_INDEX = { a: 0, b: 1, c: 2, d: 3, '1': 0, '2': 1, '3': 2, '4': 3 }
 
@@ -126,17 +127,23 @@ export default function Quiz({ active = true }) {
     }))
   }, [])
 
-  const reset = useCallback(() => {
-    if (window.confirm('Xóa toàn bộ lịch sử học tập?')) {
-      clearState()
-      setState({ history: [], bookmarks: [] })
-      setScreen('intro')
-      scrollUp()
-    }
-  }, [])
+  const [confirm, confirmDialog] = useConfirm()
+  const reset = useCallback(async () => {
+    const ok = await confirm({
+      title: 'Xóa toàn bộ lịch sử học tập?',
+      message: 'Kết quả các lượt làm bài và câu hỏi đã đánh dấu sẽ bị xóa khỏi máy này. Không thể hoàn tác.',
+      confirmLabel: 'Xóa lịch sử',
+    })
+    if (!ok) return
+    clearState()
+    setState({ history: [], bookmarks: [] })
+    setScreen('intro')
+    scrollUp()
+  }, [confirm])
 
   return (
     <section>
+      {confirmDialog}
       {/* Nhận diện chương + tab nằm ở header trang (Chuong4Page); ở đây chỉ còn
           nút Thoát và thanh tiến độ khi đang chơi */}
       {screen === 'play' && (
