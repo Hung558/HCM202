@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "1.1.0",
   "metadata": {
     "id": "ho-chi-minh-introduction-foundations-v1",
     "title": "Tư tưởng Hồ Chí Minh: khái niệm, cơ sở hình thành và nhận thức của Đảng",
@@ -11,14 +11,22 @@
     "editorialNotes": [
       "Các mốc Đại hội là những mốc chọn lọc phục vụ chương này, không phải danh mục đầy đủ mọi Đại hội.",
       "Định nghĩa thuật ngữ được giải thích trong ngữ cảnh môn học; các mẹo phân biệt là nội dung biên soạn.",
-      "Các khoảng ôn là lựa chọn thiết kế cho bản đầu tiên của ứng dụng, không phải kết quả đánh giá trí nhớ cá nhân."
+      "Các khoảng ôn là lựa chọn thiết kế cho bản đầu tiên của ứng dụng, không phải kết quả đánh giá trí nhớ cá nhân.",
+      "Tab Nội dung tổ chức lại kiến thức đã có thành bài đọc, bảng và dòng thời gian; câu hỏi tự kiểm tra và gợi ý học là nội dung biên soạn.",
+      "Video là tài liệu tham khảo từ bên ngoài. Chỉ xác minh được metadata và URL; chưa xem toàn bộ hoặc thử phát/nhúng.",
+      "Giữ nguyên ID dữ liệu và thẻ để tiến độ ôn tập hiện có tiếp tục dùng được."
     ],
     "counts": {
       "flashcards": 36,
       "glossary": 24,
-      "sources": 12,
-      "categories": 5
-    }
+      "sources": 16,
+      "categories": 5,
+      "contentSections": 7,
+      "videos": 3,
+      "tabs": 4
+    },
+    "updatedAt": "2026-10-04",
+    "contentVersion": "1.1.0"
   },
   "categories": [
     {
@@ -1402,6 +1410,46 @@
       "accessedAt": "2026-09-30",
       "verificationMethod": "page_text",
       "verificationNote": "Đã đối chiếu phần văn bản trên trang."
+    },
+    {
+      "id": "s13",
+      "title": "1-Khái niệm tư tưởng Hồ Chí Minh – thông tin video",
+      "url": "https://giaotrinh.edu.vn/video/1-khai-niem-tu-tuong-ho-chi-minh",
+      "publisher": "giaotrinh.edu.vn (trang giới thiệu video của Triết học 123)",
+      "type": "video_metadata",
+      "verificationMethod": "indexed_listing",
+      "verificationNote": "Tra được tên, kênh và URL gốc; chưa kiểm tra phát video.",
+      "accessedAt": "2026-10-04"
+    },
+    {
+      "id": "s14",
+      "title": "Full chương 2 – Cơ sở, quá trình hình thành và phát triển của tư tưởng Hồ Chí Minh – thông tin video",
+      "url": "https://giaotrinh.edu.vn/video/full-chuong-2-co-so-qua-trinh-hinh-thanh-va-phat-trien-cua",
+      "publisher": "giaotrinh.edu.vn (trang giới thiệu video của Triết học 123)",
+      "type": "video_metadata",
+      "verificationMethod": "page_text",
+      "verificationNote": "Đã đọc trang giới thiệu và URL gốc; chưa kiểm tra phát video.",
+      "accessedAt": "2026-10-04"
+    },
+    {
+      "id": "s15",
+      "title": "[ Chương 2] Cơ sở hình thành tư tưởng Hồ Chí Minh",
+      "url": "https://www.youtube.com/watch?v=xjhIvpWOEQI",
+      "publisher": "Tekko say hi / YouTube",
+      "type": "video_metadata",
+      "verificationMethod": "youtube_indexed_metadata",
+      "verificationNote": "Đối chiếu tiêu đề và kênh trong kết quả YouTube; chưa kiểm tra phát video.",
+      "accessedAt": "2026-10-04"
+    },
+    {
+      "id": "s16",
+      "title": "Học phần Tư tưởng Hồ Chí Minh – VNU-HCM MOOC",
+      "url": "https://mooc.vnuhcm.edu.vn/courses/course-v1:VNUHCM%2BTTHC080126%2B2026_01/about",
+      "publisher": "Đại học Quốc gia Thành phố Hồ Chí Minh",
+      "type": "course_outline",
+      "verificationMethod": "page_text",
+      "verificationNote": "Dùng để đối chiếu phạm vi: phần khái niệm và phần cơ sở hình thành có thể thuộc hai chương.",
+      "accessedAt": "2026-10-04"
     }
   ],
   "reviewConfig": {
@@ -1487,6 +1535,1261 @@
     "filters": "Lọc flashcards theo categoryId; lọc trạng thái bằng bản ghi userProgress của người đang học.",
     "glossaryLinks": "glossaryIds liên kết thẻ với thuật ngữ; relatedFlashcardIds hỗ trợ chuyển từ từ điển sang ôn thẻ.",
     "seedImport": "Upsert theo id trong mỗi nhóm, giữ id ổn định giữa các phiên bản để bảo toàn tiến độ.",
-    "templateUsage": "recordTemplate và eventTemplate mô tả bản ghi mẫu; thay các trường null bằng dữ liệu thật khi tạo, không import mẫu thành bản ghi người dùng."
+    "templateUsage": "recordTemplate và eventTemplate mô tả bản ghi mẫu; thay các trường null bằng dữ liệu thật khi tạo, không import mẫu thành bản ghi người dùng.",
+    "tabs": "Đọc ui.tabs theo order; mỗi tab dùng dataKey tương ứng. Đây là cấu hình dữ liệu, cần xây dựng giao diện trong ứng dụng.",
+    "chapterReader": "Render contentSections theo order, có mục lục, trước/sau, tìm kiếm không dấu và nút Đã đọc. Với table, lấy key theo columns; bỏ qua citations khi tạo cột.",
+    "contentBlockTypes": {
+      "paragraph": "Hiển thị text và nguồn citations.",
+      "bullet_list": "Hiển thị items[].text và nguồn từng ý.",
+      "table": "columns quy định nhãn/key; rows chứa giá trị, nguồn và liên kết flashcard nếu có.",
+      "timeline": "Hiển thị items theo thứ tự; datePrecision cho biết ngày/tháng/năm, không tự thêm ngày khi nguồn chỉ cho tháng.",
+      "callout": "Hiển thị title, text và tone; study_tip là gợi ý học biên soạn.",
+      "flashcard_review": "Tra flashcardIds từ flashcards và mở chế độ ôn tập."
+    },
+    "videoPlayback": "Dùng embedUrl khi được phép; thêm nút watchUrl dự phòng. Metadata chưa xác nhận video phát được hoặc cho phép nhúng; xử lý lỗi trình phát ở giao diện.",
+    "videoPlayerState": "Nếu cần xem tiếp và lưu vị trí, tích hợp trình phát có sự kiện thời gian/trạng thái. Một iframe đơn thuần không tự lưu tiến độ. Timestamps lưu ISO 8601 UTC.",
+    "videoThumbnails": "thumbnailUrl = null: dùng ảnh mặc định của giao diện hoặc metadata hợp lệ từ nhà cung cấp; không hiển thị ảnh hỏng.",
+    "learningProgress": "Giữ userProgress cho flashcards; dùng learningProgress.reading và learningProgress.video cho hai tính năng mới. Thay trường null trong template bằng dữ liệu thật.",
+    "searchContent": "Chuẩn hóa chữ thường, bỏ dấu, đổi đ thành d, rồi tìm trong searchText của phần nội dung hoặc video.",
+    "migration_1_0_to_1_1": "Thay seed bằng bản mới, upsert theo id. Giữ nguyên tiến độ flashcards. Chỉ tạo bản ghi đọc/xem khi người dùng bắt đầu học."
+  },
+  "chapter": {
+    "id": "ho-chi-minh-introduction-foundations-v1",
+    "title": "Tư tưởng Hồ Chí Minh: khái niệm, cơ sở hình thành và nhận thức của Đảng",
+    "overview": "Học khái niệm, phân tích cơ sở hình thành và nhận diện những mốc Đảng đánh giá vị trí, nội dung, giá trị của tư tưởng Hồ Chí Minh.",
+    "learningObjectives": [
+      "Giải thích được khái niệm và vai trò của tư tưởng Hồ Chí Minh.",
+      "Phân biệt cơ sở thực tiễn, nguồn tư tưởng – lý luận và nhân tố chủ quan.",
+      "Nhận diện đúng các mốc 1911, 1920 và các Đại hội trọng tâm.",
+      "Liên hệ bài đọc, video, từ điển và flashcards để tự ôn tập."
+    ],
+    "scopeNote": "Nhóm kiến thức theo mô tả ban đầu. Trong một số chương trình, khái niệm thuộc Chương 1 và cơ sở hình thành thuộc Chương 2.",
+    "scopeCitations": [
+      {
+        "sourceId": "s16",
+        "locator": "Mô tả nội dung học phần và kế hoạch giảng dạy tuần 1"
+      }
+    ],
+    "sectionIds": [
+      "sec01",
+      "sec02",
+      "sec03",
+      "sec04",
+      "sec05",
+      "sec06",
+      "sec07"
+    ],
+    "videoIds": [
+      "vid01",
+      "vid02",
+      "vid03"
+    ],
+    "estimatedReadMinutes": 8,
+    "recommendedTabSequence": [
+      "content",
+      "videos",
+      "flashcards",
+      "glossary"
+    ]
+  },
+  "ui": {
+    "defaultTabId": "content",
+    "tabs": [
+      {
+        "id": "content",
+        "label": "Nội dung",
+        "order": 1,
+        "enabled": true,
+        "dataKey": "contentSections",
+        "renderer": "chapter_reader"
+      },
+      {
+        "id": "videos",
+        "label": "Video",
+        "order": 2,
+        "enabled": true,
+        "dataKey": "videos",
+        "renderer": "video_library"
+      },
+      {
+        "id": "flashcards",
+        "label": "Flashcards",
+        "order": 3,
+        "enabled": true,
+        "dataKey": "flashcards",
+        "renderer": "flashcard_deck"
+      },
+      {
+        "id": "glossary",
+        "label": "Từ điển",
+        "order": 4,
+        "enabled": true,
+        "dataKey": "glossary",
+        "renderer": "glossary"
+      }
+    ],
+    "content": {
+      "showTableOfContents": true,
+      "showReadProgress": true,
+      "showSources": true,
+      "searchEnabled": true,
+      "completionButtonLabel": "Đã đọc phần này",
+      "reviewButtonLabel": "Ôn thẻ liên quan",
+      "videoButtonLabel": "Xem video liên quan",
+      "previousLabel": "Phần trước",
+      "nextLabel": "Phần tiếp theo"
+    },
+    "videos": {
+      "showSearch": true,
+      "showFilters": true,
+      "filterFields": [
+        "resourceType",
+        "relatedSectionIds"
+      ],
+      "showChannel": true,
+      "showRelatedSections": true,
+      "showDurationWhenKnown": true,
+      "hideUnknownDuration": true,
+      "openExternalLabel": "Mở trên YouTube",
+      "resumeLabel": "Xem tiếp",
+      "completeLabel": "Đã xem",
+      "failureMessage": "Không phát được tại đây. Bạn có thể mở video trên YouTube.",
+      "autoplay": false
+    }
+  },
+  "contentSections": [
+    {
+      "id": "sec01",
+      "chapterId": "ho-chi-minh-introduction-foundations-v1",
+      "order": 1,
+      "title": "Khái niệm và vai trò",
+      "summary": "Hiểu tư tưởng Hồ Chí Minh là gì và vì sao được nghiên cứu như một hệ thống.",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Tư tưởng Hồ Chí Minh bao quát những vấn đề cơ bản của cách mạng Việt Nam. Các quan điểm về giải phóng dân tộc, tổ chức chính quyền, đoàn kết, văn hóa và đạo đức có quan hệ với nhau. Khi học, cần đặt từng luận điểm trong hệ thống ấy để hiểu mục đích và cách vận dụng.",
+          "citations": [
+            {
+              "sourceId": "s01",
+              "locator": "Phần IV, mục 4: đoạn định nghĩa tư tưởng Hồ Chí Minh"
+            },
+            {
+              "sourceId": "s08",
+              "locator": "Đoạn trình bày các nội dung được Đại hội IX khái quát"
+            }
+          ],
+          "id": "sec01-b01"
+        },
+        {
+          "type": "bullet_list",
+          "items": [
+            {
+              "text": "Về nguồn hình thành: kết hợp việc vận dụng sáng tạo Mác - Lênin với kế thừa truyền thống dân tộc và tiếp nhận tinh hoa văn hóa thế giới.",
+              "citations": [
+                {
+                  "sourceId": "s01",
+                  "locator": "Phần IV, mục 4: đoạn định nghĩa tư tưởng Hồ Chí Minh"
+                }
+              ]
+            },
+            {
+              "text": "Về vị trí: cùng với chủ nghĩa Mác - Lênin, tư tưởng Hồ Chí Minh là nền tảng tư tưởng của Đảng.",
+              "citations": [
+                {
+                  "sourceId": "s02",
+                  "locator": "Phần mở đầu Điều lệ"
+                }
+              ]
+            },
+            {
+              "text": "Về ý nghĩa: định hướng hoạt động cách mạng và là một di sản tinh thần quan trọng của dân tộc.",
+              "citations": [
+                {
+                  "sourceId": "s01",
+                  "locator": "Phần IV, mục 4"
+                },
+                {
+                  "sourceId": "s02",
+                  "locator": "Phần mở đầu Điều lệ; giải nghĩa trong ngữ cảnh"
+                }
+              ]
+            }
+          ],
+          "id": "sec01-b02"
+        },
+        {
+          "type": "callout",
+          "tone": "study_tip",
+          "title": "Cách ghi nhớ",
+          "text": "Tự trả lời ba câu: Hệ thống này nói về điều gì? Hình thành từ đâu? Có vai trò gì?",
+          "citations": [],
+          "id": "sec01-b03"
+        }
+      ],
+      "relatedFlashcardIds": [
+        "fc001",
+        "fc003",
+        "fc004",
+        "fc005",
+        "fc006"
+      ],
+      "relatedGlossaryIds": [
+        "g01",
+        "g02",
+        "g03",
+        "g04"
+      ],
+      "relatedVideoIds": [
+        "vid01"
+      ],
+      "selfCheckQuestions": [
+        {
+          "question": "Vì sao cần hiểu tư tưởng Hồ Chí Minh như một hệ thống?",
+          "answerFlashcardIds": [
+            "fc003"
+          ]
+        },
+        {
+          "question": "Nền tảng tư tưởng và kim chỉ nam khác nhau về ý nghĩa diễn đạt thế nào?",
+          "answerFlashcardIds": [
+            "fc005",
+            "fc006"
+          ]
+        }
+      ],
+      "searchText": "khai niem va vai tro hieu tu tuong ho chi minh la gi va vi sao duoc nghien cuu nhu mot he thong. tu tuong ho chi minh bao quat nhung van de co ban cua cach mang viet nam. cac quan diem ve giai phong dan toc, to chuc chinh quyen, doan ket, van hoa va dao duc co quan he voi nhau. khi hoc, can dat tung luan diem trong he thong ay de hieu muc dich va cach van dung. ve nguon hinh thanh: ket hop viec van dung sang tao mac - lenin voi ke thua truyen thong dan toc va tiep nhan tinh hoa van hoa the gioi. ve vi tri: cung voi chu nghia mac - lenin, tu tuong ho chi minh la nen tang tu tuong cua dang. ve y nghia: dinh huong hoat dong cach mang va la mot di san tinh than quan trong cua dan toc. cach ghi nho tu tra loi ba cau: he thong nay noi ve dieu gi? hinh thanh tu dau? co vai tro gi?",
+      "estimatedReadMinutes": 1,
+      "readingEstimateMethod": "Ước tính theo 200 đơn vị cách nhau bởi khoảng trắng/phút, làm tròn lên; không tính thời gian trả lời câu hỏi."
+    },
+    {
+      "id": "sec02",
+      "chapterId": "ho-chi-minh-introduction-foundations-v1",
+      "order": 2,
+      "title": "Cơ sở thực tiễn",
+      "summary": "Nhận diện những vấn đề của Việt Nam và thế giới đặt ra yêu cầu tìm đường cứu nước.",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Tại Việt Nam, tình trạng mất độc lập cùng những khó khăn của các phong trào yêu nước đặt ra yêu cầu tìm một hướng giải phóng dân tộc phù hợp. Đây là vấn đề thực tiễn thúc đẩy quá trình tìm tòi của Nguyễn Tất Thành.",
+          "citations": [
+            {
+              "sourceId": "s07",
+              "locator": "Phần đầu: bối cảnh và yêu cầu tìm con đường cứu nước"
+            }
+          ],
+          "id": "sec02-b01"
+        },
+        {
+          "type": "paragraph",
+          "text": "Trên thế giới, sự mở rộng thống trị của chủ nghĩa đế quốc đi cùng các phong trào đấu tranh chống áp bức. Cách mạng Tháng Mười Nga năm 1917 gợi mở một hướng đi mới. Sự ra đời của Quốc tế Cộng sản vào tháng 3/1919 là một mốc cần nhớ trong bối cảnh đó.",
+          "citations": [
+            {
+              "sourceId": "s04",
+              "locator": "Mục 1: hoàn cảnh quốc tế"
+            },
+            {
+              "sourceId": "s04",
+              "locator": "Mục 1: bối cảnh thời đại và Cách mạng Tháng Mười"
+            },
+            {
+              "sourceId": "s03",
+              "locator": "Chuyên đề 1, II.1.a: hoàn cảnh quốc tế"
+            }
+          ],
+          "id": "sec02-b02"
+        },
+        {
+          "type": "callout",
+          "tone": "study_tip",
+          "title": "Phân biệt khi làm bài",
+          "text": "Cơ sở thực tiễn trả lời câu hỏi: hoàn cảnh nào đặt ra vấn đề cần giải quyết? Cơ sở lý luận trả lời: những nguồn tư tưởng nào giúp nhận thức và giải quyết vấn đề?",
+          "citations": [
+            {
+              "sourceId": "s03",
+              "locator": "Chuyên đề 1, II.1.b"
+            },
+            {
+              "sourceId": "s07",
+              "locator": "Phần đầu: bối cảnh và yêu cầu tìm con đường cứu nước"
+            },
+            {
+              "sourceId": "s04",
+              "locator": "Mục 1: hoàn cảnh quốc tế"
+            }
+          ],
+          "id": "sec02-b03"
+        }
+      ],
+      "relatedFlashcardIds": [
+        "fc017",
+        "fc018",
+        "fc019",
+        "fc020"
+      ],
+      "relatedGlossaryIds": [
+        "g13",
+        "g14",
+        "g15"
+      ],
+      "relatedVideoIds": [
+        "vid02",
+        "vid03"
+      ],
+      "selfCheckQuestions": [
+        {
+          "question": "Vì sao thực tiễn Việt Nam đặt ra yêu cầu tìm con đường cứu nước mới?",
+          "answerFlashcardIds": [
+            "fc017"
+          ]
+        },
+        {
+          "question": "Hai mốc quốc tế 1917 và 1919 tương ứng với sự kiện nào?",
+          "answerFlashcardIds": [
+            "fc019",
+            "fc020"
+          ]
+        }
+      ],
+      "searchText": "co so thuc tien nhan dien nhung van de cua viet nam va the gioi dat ra yeu cau tim duong cuu nuoc. tai viet nam, tinh trang mat doc lap cung nhung kho khan cua cac phong trao yeu nuoc dat ra yeu cau tim mot huong giai phong dan toc phu hop. day la van de thuc tien thuc day qua trinh tim toi cua nguyen tat thanh. tren the gioi, su mo rong thong tri cua chu nghia de quoc di cung cac phong trao dau tranh chong ap buc. cach mang thang muoi nga nam 1917 goi mo mot huong di moi. su ra doi cua quoc te cong san vao thang 3/1919 la mot moc can nho trong boi canh do. phan biet khi lam bai co so thuc tien tra loi cau hoi: hoan canh nao dat ra van de can giai quyet? co so ly luan tra loi: nhung nguon tu tuong nao giup nhan thuc va giai quyet van de?",
+      "estimatedReadMinutes": 1,
+      "readingEstimateMethod": "Ước tính theo 200 đơn vị cách nhau bởi khoảng trắng/phút, làm tròn lên; không tính thời gian trả lời câu hỏi."
+    },
+    {
+      "id": "sec03",
+      "chapterId": "ho-chi-minh-introduction-foundations-v1",
+      "order": 3,
+      "title": "Cơ sở tư tưởng, lý luận",
+      "summary": "Phân biệt ba nguồn hình thành và vai trò riêng của mỗi nguồn.",
+      "blocks": [
+        {
+          "type": "bullet_list",
+          "items": [
+            {
+              "text": "Truyền thống dân tộc: lòng yêu nước là động lực ban đầu; đoàn kết, nhân ái, hiếu học và ý chí vượt khó tạo nền tảng văn hóa.",
+              "citations": [
+                {
+                  "sourceId": "s04",
+                  "locator": "Mục 2: đoạn về động lực ban đầu"
+                },
+                {
+                  "sourceId": "s03",
+                  "locator": "Chuyên đề 1, II.1.b: các giá trị truyền thống"
+                }
+              ]
+            },
+            {
+              "text": "Tinh hoa văn hóa nhân loại: tiếp nhận những giá trị có ích từ cả phương Đông và phương Tây.",
+              "citations": [
+                {
+                  "sourceId": "s03",
+                  "locator": "Chuyên đề 1, II.1.b: tinh hoa văn hóa nhân loại"
+                }
+              ]
+            },
+            {
+              "text": "Chủ nghĩa Mác - Lênin: nguồn lý luận giữ vai trò quyết định, cung cấp thế giới quan và phương pháp luận.",
+              "citations": [
+                {
+                  "sourceId": "s04",
+                  "locator": "Mục 2: đoạn về cơ sở chủ yếu hình thành tư tưởng"
+                }
+              ]
+            }
+          ],
+          "id": "sec03-b01"
+        },
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "tradition",
+              "label": "Nguồn tiếp thu"
+            },
+            {
+              "key": "value",
+              "label": "Điểm cần nhớ"
+            }
+          ],
+          "rows": [
+            {
+              "tradition": "Nho giáo",
+              "value": "Hiếu học, tu dưỡng; phê phán hạn chế về đẳng cấp và thái độ coi thường phụ nữ.",
+              "citations": [
+                {
+                  "sourceId": "s05",
+                  "locator": "Đoạn về tiếp thu văn hóa phương Đông: Nho giáo"
+                }
+              ]
+            },
+            {
+              "tradition": "Phật giáo",
+              "value": "Thương người, vị tha, khoan dung và gắn bó cộng đồng.",
+              "citations": [
+                {
+                  "sourceId": "s05",
+                  "locator": "Đoạn về Phật giáo"
+                }
+              ]
+            },
+            {
+              "tradition": "Chủ nghĩa Tam dân",
+              "value": "Dân tộc – độc lập; dân quyền – tự do; dân sinh – hạnh phúc.",
+              "citations": [
+                {
+                  "sourceId": "s05",
+                  "locator": "Đoạn về Tôn Trung Sơn"
+                }
+              ]
+            },
+            {
+              "tradition": "Văn hóa dân chủ phương Tây",
+              "value": "Tự do, bình đẳng, dân chủ và quyền con người.",
+              "citations": [
+                {
+                  "sourceId": "s05",
+                  "locator": "Đoạn về lĩnh hội tư tưởng văn hóa phương Tây"
+                }
+              ]
+            }
+          ],
+          "id": "sec03-b02"
+        },
+        {
+          "type": "paragraph",
+          "text": "Việc tiếp thu luôn gắn với lựa chọn và phê phán: xem điều gì có giá trị, điều gì có hạn chế và điều gì phù hợp với Việt Nam. Quan hệ với Mác - Lênin cũng cần được hiểu theo hướng vận dụng và phát triển sáng tạo trong giải quyết nhiệm vụ cách mạng cụ thể.",
+          "citations": [
+            {
+              "sourceId": "s06",
+              "locator": "Đoạn về gạn lọc các hạt nhân hợp lý khi tiếp thu văn hóa"
+            },
+            {
+              "sourceId": "s12",
+              "locator": "Đoạn về quan hệ giữa Mác - Lênin và tư tưởng Hồ Chí Minh"
+            }
+          ],
+          "id": "sec03-b03"
+        }
+      ],
+      "relatedFlashcardIds": [
+        "fc007",
+        "fc008",
+        "fc009",
+        "fc010",
+        "fc011",
+        "fc012",
+        "fc013",
+        "fc014",
+        "fc015",
+        "fc016",
+        "fc002"
+      ],
+      "relatedGlossaryIds": [
+        "g04",
+        "g05",
+        "g06",
+        "g07",
+        "g08",
+        "g09",
+        "g10",
+        "g11",
+        "g12"
+      ],
+      "relatedVideoIds": [
+        "vid02",
+        "vid03"
+      ],
+      "selfCheckQuestions": [
+        {
+          "question": "Phân biệt động lực ban đầu với nguồn lý luận quyết định.",
+          "answerFlashcardIds": [
+            "fc007",
+            "fc008"
+          ]
+        },
+        {
+          "question": "Nêu một ví dụ về tiếp thu có chọn lọc.",
+          "answerFlashcardIds": [
+            "fc011",
+            "fc014",
+            "fc015"
+          ]
+        }
+      ],
+      "searchText": "co so tu tuong, ly luan phan biet ba nguon hinh thanh va vai tro rieng cua moi nguon. truyen thong dan toc: long yeu nuoc la dong luc ban dau; doan ket, nhan ai, hieu hoc va y chi vuot kho tao nen tang van hoa. tinh hoa van hoa nhan loai: tiep nhan nhung gia tri co ich tu ca phuong dong va phuong tay. chu nghia mac - lenin: nguon ly luan giu vai tro quyet dinh, cung cap the gioi quan va phuong phap luan. nguon tiep thu diem can nho nho giao hieu hoc, tu duong; phe phan han che ve dang cap va thai do coi thuong phu nu. phat giao thuong nguoi, vi tha, khoan dung va gan bo cong dong. chu nghia tam dan dan toc – doc lap; dan quyen – tu do; dan sinh – hanh phuc. van hoa dan chu phuong tay tu do, binh dang, dan chu va quyen con nguoi. viec tiep thu luon gan voi lua chon va phe phan: xem dieu gi co gia tri, dieu gi co han che va dieu gi phu hop voi viet nam. quan he voi mac - lenin cung can duoc hieu theo huong van dung va phat trien sang tao trong giai quyet nhiem vu cach mang cu the.",
+      "estimatedReadMinutes": 2,
+      "readingEstimateMethod": "Ước tính theo 200 đơn vị cách nhau bởi khoảng trắng/phút, làm tròn lên; không tính thời gian trả lời câu hỏi."
+    },
+    {
+      "id": "sec04",
+      "chapterId": "ho-chi-minh-introduction-foundations-v1",
+      "order": 4,
+      "title": "Nhân tố chủ quan",
+      "summary": "Làm rõ vai trò của bản thân Hồ Chí Minh trong quá trình hình thành tư tưởng.",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Cùng một hoàn cảnh lịch sử, mỗi người có thể lựa chọn một hướng đi khác nhau. Vì vậy, khi giải thích sự hình thành tư tưởng Hồ Chí Minh, cần xem xét cả tư duy, phẩm chất và hoạt động thực tiễn của Người.",
+          "citations": [
+            {
+              "sourceId": "s07",
+              "locator": "Các đoạn về tư duy mới và tinh thần tự lực, tự cường"
+            },
+            {
+              "sourceId": "s06",
+              "locator": "Các đoạn về mục tiêu cứu nước, cứu dân và bản lĩnh"
+            },
+            {
+              "sourceId": "s08",
+              "locator": "Đoạn về nhà lý luận giàu thực tiễn và nhà thực tiễn giàu lý luận"
+            }
+          ],
+          "id": "sec04-b01"
+        },
+        {
+          "type": "bullet_list",
+          "items": [
+            {
+              "text": "Tư duy: quan sát, đánh giá và lựa chọn độc lập, dựa vào trải nghiệm.",
+              "citations": [
+                {
+                  "sourceId": "s07",
+                  "locator": "Các đoạn về tư duy mới và tinh thần tự lực, tự cường"
+                }
+              ]
+            },
+            {
+              "text": "Phẩm chất: yêu nước, thương dân, kiên trì và quyết tâm theo đuổi mục tiêu độc lập.",
+              "citations": [
+                {
+                  "sourceId": "s06",
+                  "locator": "Các đoạn về mục tiêu cứu nước, cứu dân và bản lĩnh"
+                }
+              ]
+            },
+            {
+              "text": "Năng lực hoạt động: rút kinh nghiệm từ đấu tranh, kiểm nghiệm nhận thức và phát triển lý luận.",
+              "citations": [
+                {
+                  "sourceId": "s08",
+                  "locator": "Đoạn về nhà lý luận giàu thực tiễn và nhà thực tiễn giàu lý luận"
+                }
+              ]
+            }
+          ],
+          "id": "sec04-b02"
+        },
+        {
+          "type": "callout",
+          "tone": "study_tip",
+          "title": "Khung trả lời",
+          "text": "Có thể trình bày theo ba vế: điều kiện thực tiễn – nguồn tư tưởng, lý luận – vai trò của chủ thể tiếp nhận và sáng tạo.",
+          "citations": [
+            {
+              "sourceId": "s03",
+              "locator": "Chuyên đề 1, II.1.b"
+            },
+            {
+              "sourceId": "s07",
+              "locator": "Phần đầu: bối cảnh và yêu cầu tìm con đường cứu nước"
+            },
+            {
+              "sourceId": "s07",
+              "locator": "Các đoạn về tư duy mới và tinh thần tự lực, tự cường"
+            },
+            {
+              "sourceId": "s06",
+              "locator": "Các đoạn về mục tiêu cứu nước, cứu dân và bản lĩnh"
+            },
+            {
+              "sourceId": "s08",
+              "locator": "Đoạn về nhà lý luận giàu thực tiễn và nhà thực tiễn giàu lý luận"
+            }
+          ],
+          "id": "sec04-b03"
+        }
+      ],
+      "relatedFlashcardIds": [
+        "fc021",
+        "fc022",
+        "fc023"
+      ],
+      "relatedGlossaryIds": [
+        "g16",
+        "g17",
+        "g18"
+      ],
+      "relatedVideoIds": [
+        "vid02",
+        "vid03"
+      ],
+      "selfCheckQuestions": [
+        {
+          "question": "Nhân tố chủ quan gồm những nhóm yếu tố nào?",
+          "answerFlashcardIds": [
+            "fc021",
+            "fc022",
+            "fc023"
+          ]
+        }
+      ],
+      "searchText": "nhan to chu quan lam ro vai tro cua ban than ho chi minh trong qua trinh hinh thanh tu tuong. cung mot hoan canh lich su, moi nguoi co the lua chon mot huong di khac nhau. vi vay, khi giai thich su hinh thanh tu tuong ho chi minh, can xem xet ca tu duy, pham chat va hoat dong thuc tien cua nguoi. tu duy: quan sat, danh gia va lua chon doc lap, dua vao trai nghiem. pham chat: yeu nuoc, thuong dan, kien tri va quyet tam theo duoi muc tieu doc lap. nang luc hoat dong: rut kinh nghiem tu dau tranh, kiem nghiem nhan thuc va phat trien ly luan. khung tra loi co the trinh bay theo ba ve: dieu kien thuc tien – nguon tu tuong, ly luan – vai tro cua chu the tiep nhan va sang tao.",
+      "estimatedReadMinutes": 1,
+      "readingEstimateMethod": "Ước tính theo 200 đơn vị cách nhau bởi khoảng trắng/phút, làm tròn lên; không tính thời gian trả lời câu hỏi."
+    },
+    {
+      "id": "sec05",
+      "chapterId": "ho-chi-minh-introduction-foundations-v1",
+      "order": 5,
+      "title": "Các mốc trên hành trình tìm đường cứu nước",
+      "summary": "Ghi nhớ ba mốc 1911 và 1920, phân biệt sự kiện với ý nghĩa.",
+      "blocks": [
+        {
+          "type": "timeline",
+          "items": [
+            {
+              "id": "journey1911",
+              "date": "1911-06-05",
+              "datePrecision": "day",
+              "label": "5/6/1911",
+              "title": "Ra nước ngoài tìm đường cứu nước",
+              "text": "Nguyễn Tất Thành bắt đầu hành trình tìm một hướng giải phóng dân tộc.",
+              "flashcardIds": [
+                "fc024"
+              ],
+              "citations": [
+                {
+                  "sourceId": "s06",
+                  "locator": "Đoạn về ngày bắt đầu hành trình 5/6/1911"
+                }
+              ]
+            },
+            {
+              "id": "journey192007",
+              "date": "1920-07",
+              "datePrecision": "month",
+              "label": "Tháng 7/1920",
+              "title": "Đọc luận cương của Lênin",
+              "text": "Nguyễn Ái Quốc tiếp cận luận cương về dân tộc và thuộc địa, nhận thấy hướng giải phóng cần tìm.",
+              "flashcardIds": [
+                "fc025"
+              ],
+              "citations": [
+                {
+                  "sourceId": "s06",
+                  "locator": "Đoạn về đọc luận cương tháng 7/1920"
+                }
+              ]
+            },
+            {
+              "id": "journey192012",
+              "date": "1920-12",
+              "datePrecision": "month",
+              "label": "Tháng 12/1920",
+              "title": "Tham dự Đại hội Tua",
+              "text": "Tán thành Quốc tế III và tham gia thành lập Đảng Cộng sản Pháp.",
+              "flashcardIds": [
+                "fc026"
+              ],
+              "citations": [
+                {
+                  "sourceId": "s07",
+                  "locator": "Đoạn về Đại hội XVIII Đảng Xã hội Pháp tại Tours"
+                }
+              ]
+            }
+          ],
+          "id": "sec05-b01"
+        },
+        {
+          "type": "callout",
+          "tone": "study_tip",
+          "title": "Hai mốc của năm 1920",
+          "text": "Tháng 7 gắn với việc đọc luận cương; tháng 12 gắn với lựa chọn chính trị và tổ chức tại Đại hội Tua.",
+          "citations": [
+            {
+              "sourceId": "s06",
+              "locator": "Đoạn về đọc luận cương tháng 7/1920"
+            },
+            {
+              "sourceId": "s07",
+              "locator": "Đoạn về Đại hội XVIII Đảng Xã hội Pháp tại Tours"
+            }
+          ],
+          "id": "sec05-b02"
+        }
+      ],
+      "relatedFlashcardIds": [
+        "fc024",
+        "fc025",
+        "fc026"
+      ],
+      "relatedGlossaryIds": [
+        "g18",
+        "g19",
+        "g20"
+      ],
+      "relatedVideoIds": [
+        "vid02"
+      ],
+      "selfCheckQuestions": [
+        {
+          "question": "Tháng 7 và tháng 12 năm 1920 khác nhau về sự kiện nào?",
+          "answerFlashcardIds": [
+            "fc025",
+            "fc026"
+          ]
+        }
+      ],
+      "searchText": "cac moc tren hanh trinh tim duong cuu nuoc ghi nho ba moc 1911 va 1920, phan biet su kien voi y nghia. 5/6/1911 ra nuoc ngoai tim duong cuu nuoc nguyen tat thanh bat dau hanh trinh tim mot huong giai phong dan toc. thang 7/1920 doc luan cuong cua lenin nguyen ai quoc tiep can luan cuong ve dan toc va thuoc dia, nhan thay huong giai phong can tim. thang 12/1920 tham du dai hoi tua tan thanh quoc te iii va tham gia thanh lap dang cong san phap. hai moc cua nam 1920 thang 7 gan voi viec doc luan cuong; thang 12 gan voi lua chon chinh tri va to chuc tai dai hoi tua.",
+      "estimatedReadMinutes": 1,
+      "readingEstimateMethod": "Ước tính theo 200 đơn vị cách nhau bởi khoảng trắng/phút, làm tròn lên; không tính thời gian trả lời câu hỏi."
+    },
+    {
+      "id": "sec06",
+      "chapterId": "ho-chi-minh-introduction-foundations-v1",
+      "order": 6,
+      "title": "Nhận thức của Đảng qua các Đại hội",
+      "summary": "Đọc theo thời gian và tập trung vào dấu ấn nhận thức của từng mốc.",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "congress",
+              "label": "Đại hội"
+            },
+            {
+              "key": "year",
+              "label": "Năm"
+            },
+            {
+              "key": "focus",
+              "label": "Nội dung cần nhớ"
+            }
+          ],
+          "rows": [
+            {
+              "congress": "II",
+              "year": 1951,
+              "focus": "Học tập đường lối, tác phong và đạo đức Hồ Chí Minh.",
+              "flashcardIds": [
+                "fc027"
+              ],
+              "citations": [
+                {
+                  "sourceId": "s11",
+                  "locator": "Mục Giai đoạn trước Đại hội VII: diễn văn khai mạc Đại hội II; chú thích 2"
+                }
+              ]
+            },
+            {
+              "congress": "V",
+              "year": 1982,
+              "focus": "Tổ chức học tập tư tưởng, đạo đức, tác phong một cách có hệ thống.",
+              "flashcardIds": [
+                "fc028"
+              ],
+              "citations": [
+                {
+                  "sourceId": "s11",
+                  "locator": "Mục Giai đoạn trước Đại hội VII: Đại hội V; chú thích 5"
+                }
+              ]
+            },
+            {
+              "congress": "VI",
+              "year": 1986,
+              "focus": "Đổi mới tư duy, kế thừa di sản lý luận của Hồ Chí Minh.",
+              "flashcardIds": [
+                "fc029"
+              ],
+              "citations": [
+                {
+                  "sourceId": "s12",
+                  "locator": "Đoạn về Đại hội VI và đổi mới tư duy; chú thích 5"
+                }
+              ]
+            },
+            {
+              "congress": "VII",
+              "year": 1991,
+              "focus": "Xác lập tư tưởng Hồ Chí Minh cùng Mác - Lênin làm nền tảng tư tưởng của Đảng.",
+              "flashcardIds": [
+                "fc030",
+                "fc034"
+              ],
+              "citations": [
+                {
+                  "sourceId": "s02",
+                  "locator": "Phần mở đầu Điều lệ được Đại hội VII thông qua"
+                }
+              ]
+            },
+            {
+              "congress": "IX",
+              "year": 2001,
+              "focus": "Khái quát rõ hơn nội hàm, nguồn gốc và nội dung chủ yếu.",
+              "flashcardIds": [
+                "fc031"
+              ],
+              "citations": [
+                {
+                  "sourceId": "s09",
+                  "locator": "Phần mở đầu dẫn nội dung Văn kiện Đại hội IX"
+                }
+              ]
+            },
+            {
+              "congress": "X",
+              "year": 2006,
+              "focus": "Tiếp tục khẳng định vai trò nền tảng và giá trị di sản tinh thần.",
+              "flashcardIds": [
+                "fc032"
+              ],
+              "citations": [
+                {
+                  "sourceId": "s10",
+                  "locator": "Đoạn về sự nghiệp cách mạng 76 năm và di sản của Hồ Chí Minh"
+                }
+              ]
+            },
+            {
+              "congress": "XI",
+              "year": 2011,
+              "focus": "Nêu định nghĩa trong Cương lĩnh bổ sung, phát triển; nhấn mạnh giá trị dẫn đường.",
+              "flashcardIds": [
+                "fc033"
+              ],
+              "citations": [
+                {
+                  "sourceId": "s01",
+                  "locator": "Phần IV, mục 4"
+                }
+              ]
+            }
+          ],
+          "id": "sec06-b01"
+        },
+        {
+          "type": "callout",
+          "tone": "important",
+          "title": "Tránh nhầm mốc",
+          "text": "Năm 1991 là mốc nhận thức của Đảng về vị trí của tư tưởng Hồ Chí Minh. Quá trình hình thành tư tưởng đã diễn ra từ trước trong hoạt động cách mạng của Người.",
+          "citations": [
+            {
+              "sourceId": "s08",
+              "locator": "Các đoạn về hoạt động thực tiễn và các mốc Đại hội II, VII"
+            }
+          ],
+          "id": "sec06-b02"
+        },
+        {
+          "type": "callout",
+          "tone": "study_tip",
+          "title": "Ba mốc trọng tâm",
+          "text": "Gắn 1991 với vị trí nền tảng; 2001 với khái quát nội hàm; 2011 với định nghĩa trong Cương lĩnh.",
+          "citations": [
+            {
+              "sourceId": "s02",
+              "locator": "Phần mở đầu Điều lệ được Đại hội VII thông qua"
+            },
+            {
+              "sourceId": "s09",
+              "locator": "Phần mở đầu dẫn nội dung Văn kiện Đại hội IX"
+            },
+            {
+              "sourceId": "s01",
+              "locator": "Phần IV, mục 4"
+            },
+            {
+              "sourceId": "s09",
+              "locator": "Phần đầu về Đại hội IX; đối chiếu Cương lĩnh 2011"
+            },
+            {
+              "sourceId": "s01",
+              "locator": "Phần IV, mục 4: định nghĩa trong Cương lĩnh 2011"
+            }
+          ],
+          "id": "sec06-b03"
+        }
+      ],
+      "relatedFlashcardIds": [
+        "fc027",
+        "fc028",
+        "fc029",
+        "fc030",
+        "fc031",
+        "fc032",
+        "fc033",
+        "fc034",
+        "fc035",
+        "fc036"
+      ],
+      "relatedGlossaryIds": [
+        "g01",
+        "g21",
+        "g22",
+        "g23",
+        "g24"
+      ],
+      "relatedVideoIds": [
+        "vid01"
+      ],
+      "selfCheckQuestions": [
+        {
+          "question": "Phân biệt các mốc VII, IX và XI bằng một ý chính cho mỗi mốc.",
+          "answerFlashcardIds": [
+            "fc030",
+            "fc031",
+            "fc033",
+            "fc035"
+          ]
+        }
+      ],
+      "searchText": "nhan thuc cua dang qua cac dai hoi doc theo thoi gian va tap trung vao dau an nhan thuc cua tung moc. dai hoi nam noi dung can nho ii hoc tap duong loi, tac phong va dao duc ho chi minh. v to chuc hoc tap tu tuong, dao duc, tac phong mot cach co he thong. vi doi moi tu duy, ke thua di san ly luan cua ho chi minh. vii xac lap tu tuong ho chi minh cung mac - lenin lam nen tang tu tuong cua dang. ix khai quat ro hon noi ham, nguon goc va noi dung chu yeu. x tiep tuc khang dinh vai tro nen tang va gia tri di san tinh than. xi neu dinh nghia trong cuong linh bo sung, phat trien; nhan manh gia tri dan duong. tranh nham moc nam 1991 la moc nhan thuc cua dang ve vi tri cua tu tuong ho chi minh. qua trinh hinh thanh tu tuong da dien ra tu truoc trong hoat dong cach mang cua nguoi. ba moc trong tam gan 1991 voi vi tri nen tang; 2001 voi khai quat noi ham; 2011 voi dinh nghia trong cuong linh.",
+      "estimatedReadMinutes": 1,
+      "readingEstimateMethod": "Ước tính theo 200 đơn vị cách nhau bởi khoảng trắng/phút, làm tròn lên; không tính thời gian trả lời câu hỏi."
+    },
+    {
+      "id": "sec07",
+      "chapterId": "ho-chi-minh-introduction-foundations-v1",
+      "order": 7,
+      "title": "Tổng kết và tự ôn tập",
+      "summary": "Dùng các câu hỏi để kiểm tra mức hiểu trước khi chuyển sang Flashcards.",
+      "blocks": [
+        {
+          "type": "callout",
+          "tone": "study_tip",
+          "title": "Lộ trình ôn đề xuất",
+          "text": "Đọc khái niệm → phân biệt các cơ sở hình thành → xem nhân tố chủ quan → ôn các mốc thời gian → luyện thẻ ghi nhớ. Sau mỗi phần, tự giải thích bằng lời của mình.",
+          "citations": [],
+          "id": "sec07-b01"
+        },
+        {
+          "type": "flashcard_review",
+          "title": "Các thẻ trọng tâm",
+          "flashcardIds": [
+            "fc001",
+            "fc002",
+            "fc007",
+            "fc008",
+            "fc015",
+            "fc021",
+            "fc025",
+            "fc026",
+            "fc030",
+            "fc035",
+            "fc036"
+          ],
+          "id": "sec07-b02"
+        },
+        {
+          "type": "callout",
+          "tone": "study_tip",
+          "title": "Tự kiểm tra",
+          "text": "Che phần giải thích và thử trả lời. Với ý chưa chắc, mở thuật ngữ liên quan hoặc quay lại mục Nội dung trước khi đánh dấu thẻ.",
+          "citations": [],
+          "id": "sec07-b03"
+        }
+      ],
+      "relatedFlashcardIds": [
+        "fc001",
+        "fc002",
+        "fc007",
+        "fc008",
+        "fc015",
+        "fc021",
+        "fc025",
+        "fc026",
+        "fc030",
+        "fc035",
+        "fc036"
+      ],
+      "relatedGlossaryIds": [
+        "g01",
+        "g04",
+        "g05",
+        "g06",
+        "g07",
+        "g12",
+        "g16",
+        "g17",
+        "g19",
+        "g20",
+        "g22",
+        "g23",
+        "g24"
+      ],
+      "relatedVideoIds": [
+        "vid03"
+      ],
+      "selfCheckQuestions": [
+        {
+          "question": "Trình bày quan hệ giữa hoàn cảnh lịch sử, nguồn lý luận và nhân tố chủ quan.",
+          "answerFlashcardIds": [
+            "fc002",
+            "fc017",
+            "fc021",
+            "fc022",
+            "fc023"
+          ]
+        },
+        {
+          "question": "Vì sao không thể đồng nhất mốc Đại hội VII với thời điểm bắt đầu hình thành tư tưởng Hồ Chí Minh?",
+          "answerFlashcardIds": [
+            "fc024",
+            "fc025",
+            "fc036"
+          ]
+        }
+      ],
+      "searchText": "tong ket va tu on tap dung cac cau hoi de kiem tra muc hieu truoc khi chuyen sang flashcards. lo trinh on de xuat doc khai niem → phan biet cac co so hinh thanh → xem nhan to chu quan → on cac moc thoi gian → luyen the ghi nho. sau moi phan, tu giai thich bang loi cua minh. cac the trong tam tu kiem tra che phan giai thich va thu tra loi. voi y chua chac, mo thuat ngu lien quan hoac quay lai muc noi dung truoc khi danh dau the.",
+      "estimatedReadMinutes": 1,
+      "readingEstimateMethod": "Ước tính theo 200 đơn vị cách nhau bởi khoảng trắng/phút, làm tròn lên; không tính thời gian trả lời câu hỏi."
+    }
+  ],
+  "videos": [
+    {
+      "id": "vid01",
+      "chapterId": "ho-chi-minh-introduction-foundations-v1",
+      "order": 1,
+      "title": "1-Khái niệm tư tưởng Hồ Chí Minh",
+      "provider": "youtube",
+      "providerVideoId": "_HZ-m1Lqekg",
+      "channelName": "Triết học 123",
+      "resourceType": "lecture",
+      "language": "vi",
+      "description": "Gợi ý xem khi học phần khái niệm; đối chiếu các mốc Đại hội với bảng Nội dung.",
+      "descriptionBasis": "Gợi ý học tập biên soạn theo tiêu đề/phạm vi; không phải bản tóm tắt từ việc xem toàn bộ video.",
+      "watchUrl": "https://www.youtube.com/watch?v=_HZ-m1Lqekg",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/_HZ-m1Lqekg",
+      "thumbnailUrl": null,
+      "durationSeconds": null,
+      "publishedAt": null,
+      "relatedSectionIds": [
+        "sec01",
+        "sec06"
+      ],
+      "relatedFlashcardIds": [
+        "fc001",
+        "fc003",
+        "fc004",
+        "fc005",
+        "fc006",
+        "fc027",
+        "fc028",
+        "fc029",
+        "fc030",
+        "fc031",
+        "fc032",
+        "fc033",
+        "fc034",
+        "fc035",
+        "fc036"
+      ],
+      "tags": [
+        "khái niệm",
+        "nhập môn"
+      ],
+      "searchText": "1-khai niem tu tuong ho chi minh triet hoc 123 khai niem nhap mon",
+      "chapters": [],
+      "verification": {
+        "metadataCheckedAt": "2026-10-04",
+        "sourceId": "s13",
+        "playbackStatus": "not_tested",
+        "embedStatus": "unknown",
+        "transcriptReviewed": false
+      },
+      "citations": [
+        {
+          "sourceId": "s13",
+          "locator": "Tên video, kênh đăng và URL YouTube gốc"
+        }
+      ]
+    },
+    {
+      "id": "vid02",
+      "chapterId": "ho-chi-minh-introduction-foundations-v1",
+      "order": 2,
+      "title": "Full chương 2 - Cơ sở, quá trình hình thành và phát triển của tư tưởng Hồ Chí Minh",
+      "provider": "youtube",
+      "providerVideoId": "UmdfV1fU8G0",
+      "channelName": "Triết học 123",
+      "resourceType": "lecture",
+      "language": "vi",
+      "description": "Bài giảng theo chủ đề cơ sở hình thành và quá trình phát triển; phạm vi rộng hơn phần tóm tắt trong bộ dữ liệu.",
+      "descriptionBasis": "Gợi ý học tập biên soạn theo tiêu đề/phạm vi; không phải bản tóm tắt từ việc xem toàn bộ video.",
+      "watchUrl": "https://www.youtube.com/watch?v=UmdfV1fU8G0",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/UmdfV1fU8G0",
+      "thumbnailUrl": null,
+      "durationSeconds": null,
+      "publishedAt": null,
+      "relatedSectionIds": [
+        "sec02",
+        "sec03",
+        "sec04",
+        "sec05"
+      ],
+      "relatedFlashcardIds": [
+        "fc002",
+        "fc007",
+        "fc008",
+        "fc009",
+        "fc010",
+        "fc011",
+        "fc012",
+        "fc013",
+        "fc014",
+        "fc015",
+        "fc016",
+        "fc017",
+        "fc018",
+        "fc019",
+        "fc020",
+        "fc021",
+        "fc022",
+        "fc023",
+        "fc024",
+        "fc025",
+        "fc026"
+      ],
+      "tags": [
+        "cơ sở hình thành",
+        "quá trình phát triển"
+      ],
+      "searchText": "full chuong 2 - co so, qua trinh hinh thanh va phat trien cua tu tuong ho chi minh triet hoc 123 co so hinh thanh qua trinh phat trien",
+      "chapters": [],
+      "verification": {
+        "metadataCheckedAt": "2026-10-04",
+        "sourceId": "s14",
+        "playbackStatus": "not_tested",
+        "embedStatus": "unknown",
+        "transcriptReviewed": false
+      },
+      "citations": [
+        {
+          "sourceId": "s14",
+          "locator": "Tên video, kênh đăng và URL YouTube gốc"
+        }
+      ]
+    },
+    {
+      "id": "vid03",
+      "chapterId": "ho-chi-minh-introduction-foundations-v1",
+      "order": 3,
+      "title": "[ Chương 2] Cơ sở hình thành tư tưởng Hồ Chí Minh",
+      "provider": "youtube",
+      "providerVideoId": "xjhIvpWOEQI",
+      "channelName": "Tekko say hi",
+      "resourceType": "review",
+      "language": "vi",
+      "description": "Video tham khảo về cơ sở hình thành, phù hợp để ôn sau khi đọc nội dung.",
+      "descriptionBasis": "Gợi ý học tập biên soạn theo tiêu đề/phạm vi; không phải bản tóm tắt từ việc xem toàn bộ video.",
+      "watchUrl": "https://www.youtube.com/watch?v=xjhIvpWOEQI",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/xjhIvpWOEQI",
+      "thumbnailUrl": null,
+      "durationSeconds": null,
+      "publishedAt": "2023-05-02",
+      "relatedSectionIds": [
+        "sec02",
+        "sec03",
+        "sec04",
+        "sec07"
+      ],
+      "relatedFlashcardIds": [
+        "fc001",
+        "fc002",
+        "fc007",
+        "fc008",
+        "fc009",
+        "fc010",
+        "fc011",
+        "fc012",
+        "fc013",
+        "fc014",
+        "fc015",
+        "fc016",
+        "fc017",
+        "fc018",
+        "fc019",
+        "fc020",
+        "fc021",
+        "fc022",
+        "fc023",
+        "fc025",
+        "fc026",
+        "fc030",
+        "fc035",
+        "fc036"
+      ],
+      "tags": [
+        "cơ sở hình thành",
+        "ôn tập"
+      ],
+      "searchText": "[ chuong 2] co so hinh thanh tu tuong ho chi minh tekko say hi co so hinh thanh on tap",
+      "chapters": [],
+      "verification": {
+        "metadataCheckedAt": "2026-10-04",
+        "sourceId": "s15",
+        "playbackStatus": "not_tested",
+        "embedStatus": "unknown",
+        "transcriptReviewed": false
+      },
+      "citations": [
+        {
+          "sourceId": "s15",
+          "locator": "Tên video, kênh đăng và URL YouTube gốc"
+        }
+      ]
+    }
+  ],
+  "learningProgress": {
+    "storage": "Lưu riêng theo userId và chapterId trong cơ sở dữ liệu hoặc localStorage; dữ liệu mẫu không phải tiến độ thật.",
+    "reading": {
+      "uniqueKey": [
+        "userId",
+        "chapterId"
+      ],
+      "recordTemplate": {
+        "userId": null,
+        "chapterId": "ho-chi-minh-introduction-foundations-v1",
+        "completedSectionIds": [],
+        "lastSectionId": null,
+        "lastBlockId": null,
+        "updatedAt": null
+      },
+      "records": [],
+      "completionRule": "Đánh dấu một phần sau khi người dùng bấm Đã đọc phần này; mở phần hoặc cuộn qua không tự đánh dấu.",
+      "progressFormula": "Số sectionId hợp lệ, không trùng trong completedSectionIds / số phần hiện có * 100; nếu không có phần thì trả 0."
+    },
+    "video": {
+      "uniqueKey": [
+        "userId",
+        "chapterId",
+        "videoId"
+      ],
+      "recordTemplate": {
+        "userId": null,
+        "chapterId": "ho-chi-minh-introduction-foundations-v1",
+        "videoId": null,
+        "status": "not_started",
+        "lastPositionSeconds": 0,
+        "durationSeconds": null,
+        "completedAt": null,
+        "completionMethod": null,
+        "updatedAt": null
+      },
+      "records": [],
+      "allowedStatuses": [
+        "not_started",
+        "in_progress",
+        "completed"
+      ],
+      "positionSaveIntervalSeconds": 10,
+      "completionRule": "Chỉ completed khi người dùng bấm Đã xem hoặc trình phát gửi sự kiện kết thúc thật; không đánh dấu chỉ vì mở liên kết.",
+      "resumeRule": "Lưu vị trí từ trình phát khi đang xem; khi mở lại, nhảy tới lastPositionSeconds đã kiểm tra. Nếu chưa có thời lượng, chỉ yêu cầu vị trí là số hữu hạn >= 0.",
+      "durationRule": "Lấy thời lượng thật từ trình phát khi có. durationSeconds = null nghĩa là chưa biết, không phải video dài 0 giây.",
+      "externalPlaybackRule": "Khi mở trên YouTube, không tự đo thời gian xem trong tab ngoài; cho phép người dùng tự đánh dấu Đã xem."
+    }
   }
 }
