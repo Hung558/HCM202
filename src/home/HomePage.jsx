@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import chuong2 from '../chapters/chuong2/data.json'
-import { CHAPTERS } from '../components/chapters.js'
+import { CHAPTERS, GLOBE } from '../components/chapters.js'
 import ChapterBook from './ChapterBook.jsx'
 import heroImg from './images/bac_ho_thieu_nhi_1950.jpg'
 import nhaRongImg from './images/nha_rong_1911.png'
@@ -69,6 +69,7 @@ function Nav() {
           <a href="#muc-luc" className={link}>Mục lục</a>
           <a href="#hanh-trinh" className={link}>Cuộc đời và sự nghiệp</a>
           <a href="#loi-bac" className={link}>Lời Bác dạy</a>
+          <a href={GLOBE.href} className={link}>Quả địa cầu</a>
         </div>
         {/* điện thoại: nút lên cùng dòng logo, link xuống dòng dưới */}
         <ChapterBook className="btn btn-dark whitespace-nowrap max-sm:ml-auto">Vào học</ChapterBook>
@@ -220,7 +221,13 @@ function Journey() {
             </motion.a>
           ))}
         </div>
-        <div className="mt-11 flex justify-center">
+        <div className="mt-11 flex flex-wrap justify-center gap-3">
+          <a
+            href={GLOBE.href}
+            className="inline-flex min-h-[44px] items-center rounded-full bg-gold px-[22px] text-[14px] font-semibold text-ink transition-colors duration-150 hover:bg-on-dark"
+          >
+            Xem hành trình trên quả địa cầu 3D →
+          </a>
           <a
             href="/chuong2.html"
             className="inline-flex min-h-[44px] items-center rounded-full border border-gold px-[22px] text-[14px] font-semibold text-gold transition-colors duration-150 hover:bg-gold hover:text-ink"

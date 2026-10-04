@@ -64,6 +64,11 @@ Mỗi folder gồm:
 Không sửa file dùng chung (`src/App.jsx`, `src/index.css`, `vite.config.js`, `package.json`). Cần thêm thư viện thì báo chủ project.
 Icon dùng `lucide-react`, style dùng class Tailwind.
 
+## Trang quả địa cầu 3D (`public/dia-cau/`)
+Trang "Hành trình tìm đường cứu nước" viết bằng HTML/JS thuần + Three.js, chép nguyên từ repo [MLN131_GlobalMap](https://github.com/Hung558/MLN131_GlobalMap). Vite không xử lý thư mục `public/`, chỉ chép nguyên vào bản build, nên mở tại `/dia-cau/index.html`.
+- Sửa sự kiện: `public/dia-cau/events.js`. Sửa danh sách nước: `public/dia-cau/data.js`. Hướng dẫn chi tiết: `public/dia-cau/README.md`.
+- Link tới trang này lấy từ `GLOBE` trong `src/components/chapters.js` (trang chủ, cuốn sách "Vào học", menu ☰ ở các chương).
+
 ## Style – theo thiết kế Chương 6
 
 Theme chung nằm trong `src/index.css`. **Không tự chọn mã màu**, chỉ dùng tên class bên dưới, để khi gộp 6 chương trông như một web.

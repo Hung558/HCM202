@@ -1,8 +1,8 @@
 import { useCallback, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { House, Menu, X } from 'lucide-react'
-import { CHAPTERS } from './chapters.js'
+import { Earth, House, Menu, X } from 'lucide-react'
+import { CHAPTERS, GLOBE } from './chapters.js'
 import { leaveTo, useOverlay } from './overlay.js'
 
 // Nút ☰ đặt bên trái logo chương: mở bảng danh sách 6 chương trượt ra từ bên trái.
@@ -89,6 +89,19 @@ export default function ChapterMenu({ current }) {
                       )
                     })}
                   </ul>
+
+                  {/* Phụ lục: trang quả địa cầu */}
+                  <a
+                    href={GLOBE.href}
+                    onClick={(e) => leaveTo(e, GLOBE.href, close)}
+                    className="mt-2 grid grid-cols-[40px_minmax(0,1fr)] items-start gap-3 rounded-2xl border-t border-dotted border-line-strong px-3 pt-4 pb-3 transition-colors duration-150 hover:bg-cream"
+                  >
+                    <Earth className="size-6 text-primary" aria-hidden="true" />
+                    <span className="flex flex-col gap-1">
+                      <span className="text-[14px] leading-snug font-bold">{GLOBE.title}</span>
+                      <span className="text-[12.5px] text-muted">Phụ lục · {GLOBE.method}</span>
+                    </span>
+                  </a>
                 </nav>
 
                 <div className="border-t border-line p-3">

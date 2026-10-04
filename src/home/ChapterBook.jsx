@@ -1,8 +1,8 @@
 import { useCallback, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { X } from 'lucide-react'
-import { CHAPTERS } from '../components/chapters.js'
+import { Earth, X } from 'lucide-react'
+import { CHAPTERS, GLOBE } from '../components/chapters.js'
 import { leaveTo, useOverlay } from '../components/overlay.js'
 
 const EASE = [0.4, 0, 0.2, 1]
@@ -78,6 +78,13 @@ export default function ChapterBook({ className, children }) {
                       </p>
                       <p className="mt-3 text-[12px] font-bold tracking-[0.12em] text-muted uppercase">Chủ tịch Hồ Chí Minh · 1945</p>
                     </blockquote>
+                    <a
+                      href={GLOBE.href}
+                      onClick={(e) => leaveTo(e, GLOBE.href, close)}
+                      className="btn btn-outline mt-2 bg-white/60 text-[13.5px]"
+                    >
+                      <Earth className="size-4 text-primary" aria-hidden="true" /> Phụ lục: Quả địa cầu 3D
+                    </a>
                     <span className="absolute bottom-5 font-serif text-[13px] text-faint italic">— i —</span>
                     {/* gáy sách */}
                     <span className="absolute inset-y-0 right-0 w-px bg-line-strong" aria-hidden="true" />
@@ -122,6 +129,19 @@ export default function ChapterBook({ className, children }) {
                         </motion.li>
                       ))}
                     </ol>
+
+                    {/* Phụ lục: trang quả địa cầu (điện thoại; máy tính đặt ở trang bìa) */}
+                    <a
+                      href={GLOBE.href}
+                      onClick={(e) => leaveTo(e, GLOBE.href, close)}
+                      className="group -mx-2 mt-1 flex items-center gap-3 rounded-xl border-t-[3px] md:hidden border-double border-line-strong px-2 pt-3 pb-2 transition-colors duration-150 hover:bg-cream"
+                    >
+                      <Earth className="size-5 shrink-0 text-primary" aria-hidden="true" />
+                      <span className="flex-1 text-[13.5px] leading-snug">
+                        <span className="font-bold">Phụ lục:</span> {GLOBE.title}
+                      </span>
+                      <span className="text-[13px] font-semibold whitespace-nowrap text-faint transition-colors group-hover:text-primary">Xem →</span>
+                    </a>
                     <span className="absolute inset-x-0 bottom-5 text-center font-serif text-[13px] text-faint italic">— ii —</span>
                   </motion.section>
                 </div>

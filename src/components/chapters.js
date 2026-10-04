@@ -1,3 +1,10 @@
+// Trang quả địa cầu 3D (code thuần trong public/dia-cau, không qua React)
+export const GLOBE = {
+  href: '/dia-cau/index.html',
+  title: 'Hành trình tìm đường cứu nước trên quả địa cầu 3D',
+  method: '41 sự kiện · 1890–1969',
+}
+
 // Danh sách 6 chương dùng chung (trang chủ + menu chọn chương trên mỗi trang chương)
 export const CHAPTERS = [
   { num: 'I', href: '/chuong1.html', title: 'Khái niệm, cơ sở hình thành và nhận thức của Đảng về tư tưởng Hồ Chí Minh', method: 'Flashcards và từ điển thuật ngữ' },

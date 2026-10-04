@@ -22,3 +22,26 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+Thumbs.db
+desktop.ini
+
+# Biến môi trường / bí mật (giữ lại file mẫu .env.example nếu có)
+.env
+.env.*
+!.env.example
+
+# Vercel CLI
+.vercel
+
+# Báo cáo test
+coverage
+
+# Ghi chú/kế hoạch do công cụ AI sinh ra, cài đặt cá nhân của Claude Code
+/docs/
+/plans/
+.claude/settings.local.json
+
+# Gói thiết kế & project tham khảo bỏ vào thư mục gốc (code đã chép vào src/ hoặc public/)
+/HCM Web Project Overview/
+/Thiết kế giao diện học tập và rèn luyện/
+/earth-globe-threejs-main/

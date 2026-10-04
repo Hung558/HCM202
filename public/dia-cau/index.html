@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tư tưởng Hồ Chí Minh</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:400,700&display=swap&subset=vietnamese">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="globe"></canvas>
+
+    <div id="intro" class="intro">
+        <h1>Quá trình hình thành tư tưởng Hồ Chí Minh</h1>
+        <p>Khám phá hành trình vạn dặm và sự kết tinh của Tư tưởng Hồ Chí Minh qua không gian 3D.</p>
+    </div>
+
+    <div id="timeline" class="timeline-bar">
+        <div id="timeline-toggle" class="timeline-toggle">
+            <span>Các Giai Đoạn Chính</span>
+            <span class="arrow">&#9660;</span>
+        </div>
+        <div id="timeline-dropdown" class="timeline-dropdown" hidden>
+            <div class="timeline-tabs">
+                <button class="timeline-tab active" data-tab="phase-list">Giai đoạn</button>
+                <button class="timeline-tab" data-tab="continent-list">Châu lục</button>
+            </div>
+            <div id="phase-list"></div>
+            <div id="continent-list" hidden></div>
+        </div>
+    </div>
+
+    <button id="rotate-toggle" class="button rotate-toggle">Tắt xoay</button>
+    <a href="/" class="button home-link">&#8592; Về HCM Web</a>
+
+    <div id="focus-label" class="focus-label" hidden></div>
+
+    <div id="details-overlay" class="details-overlay" hidden></div>
+    <div id="details" class="details" hidden>
+        <div class="detail-scroll">
+            <div class="header">
+                <button id="details-close" class="button">Quay về quả địa cầu</button>
+            </div>
+            <div class="detail-content">
+                <h2 id="details-title" class="event-title"></h2>
+                <div id="details-year" class="event-year-line"></div>
+                <div id="details-media" class="media-container"></div>
+                <div id="details-description" class="event-description"></div>
+                <div class="references-section-end">
+                    <div class="references-dropdown">
+                        <button id="references-button" class="references-dropdown-button">Tham khảo &#9650;</button>
+                        <div id="references-content" class="references-dropdown-content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="event-navigation-fixed">
+            <button id="next-button" class="next-event-button"></button>
+            <button id="prev-button" class="prev-event-button"></button>
+        </div>
+    </div>
+
+    <script src="three.js"></script>
+    <script src="lib/topojson-client.min.js"></script>
+    <script src="data.js"></script>
+    <script src="events.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
