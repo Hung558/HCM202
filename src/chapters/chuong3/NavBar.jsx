@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ChapterTabBar from "../../components/ChapterTabBar.jsx";
+import ChapterMenu from "../../components/ChapterMenu.jsx";
 import { BookOpen, ListChecks, Network } from "lucide-react";
 
 const TABS = [
@@ -26,6 +27,7 @@ export default function NavBar({ activeTab, onTabChange }) {
     return (
         <nav className="sticky top-0 z-30 border-b border-line bg-paper/90 backdrop-blur-md">
             <div className="mx-auto flex max-w-[1180px] flex-wrap items-center gap-4 px-5 py-3">
+                <ChapterMenu current="III" />
                 {/* Logo chương */}
                 <a
                     href="/"

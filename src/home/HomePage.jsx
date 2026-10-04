@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import chuong2 from '../chapters/chuong2/data.json'
+import { CHAPTERS } from '../components/chapters.js'
 import heroImg from './images/bac_ho_thieu_nhi_1950.jpg'
 import nhaRongImg from './images/nha_rong_1911.png'
 import toursImg from './images/dai_hoi_tours_1920.jpg'
@@ -11,14 +12,6 @@ import dienBienPhuImg from './images/dien_bien_phu_1954.jpg'
 import diChucImg from './images/di_chuc_1969.png'
 import lamViecImg from './images/bac_ho_lam_viec.png'
 
-const CHAPTERS = [
-  ['I', 'Khái niệm, cơ sở hình thành và nhận thức của Đảng về tư tưởng Hồ Chí Minh', 'Flashcards và từ điển thuật ngữ'],
-  ['II', 'Cơ sở, quá trình hình thành và phát triển tư tưởng Hồ Chí Minh', 'Trục thời gian tương tác'],
-  ['III', 'Tư tưởng Hồ Chí Minh về độc lập dân tộc và chủ nghĩa xã hội', 'Sơ đồ tư duy'],
-  ['IV', 'Tư tưởng Hồ Chí Minh về Đảng Cộng sản Việt Nam và Nhà nước của dân, do dân, vì dân', 'Trắc nghiệm tình huống'],
-  ['V', 'Tư tưởng Hồ Chí Minh về đại đoàn kết toàn dân tộc và đoàn kết quốc tế', 'Kéo thả ghép nối'],
-  ['VI', 'Tư tưởng Hồ Chí Minh về văn hóa, đạo đức, con người', 'Sổ tay rèn luyện đạo đức'],
-]
 
 const JOURNEY = [
   { year: 1911, img: nhaRongImg, alt: 'Bến cảng Nhà Rồng', text: 'Rời bến Nhà Rồng ra đi tìm đường cứu nước' },
@@ -164,10 +157,10 @@ function ChapterIndex() {
         </p>
       </div>
       <div className="card mt-10 overflow-hidden">
-        {CHAPTERS.map(([num, title, method], i) => (
+        {CHAPTERS.map(({ num, href, title, method }, i) => (
           <motion.a
             key={num}
-            href={`/chuong${i + 1}.html`}
+            href={href}
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

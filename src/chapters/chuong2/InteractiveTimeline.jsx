@@ -19,6 +19,7 @@ import {
   X
 } from 'lucide-react'
 import ChapterTabBar from '../../components/ChapterTabBar.jsx'
+import ChapterMenu from '../../components/ChapterMenu.jsx'
 
 const TABS = [
   { id: 'foundations', label: 'I. Cơ sở hình thành', icon: Layers },
@@ -186,6 +187,7 @@ export default function InteractiveTimeline() {
       {/* 1. THANH ĐIỀU HƯỚNG TRÊN CÙNG (NAVIGATION BAR) */}
       <nav className="sticky top-0 z-30 border-b border-line bg-paper/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-[1180px] flex-wrap items-center gap-4 px-5 py-3">
+          <ChapterMenu current="II" />
           <a href="/" title="Về trang chủ" className="flex items-center gap-2.5 text-ink">
             <span className="grid size-9 shrink-0 place-items-center rounded-[10px] bg-primary text-[15px] font-extrabold text-on-dark">II</span>
             <span className="flex flex-col leading-tight">

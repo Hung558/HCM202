@@ -253,7 +253,7 @@ export default function ChapterContent({ topOffset = 0 }) {
 
       {/* Mục lục dính (desktop): offset & chiều cao tính từ CSS variables
           --header-height/--tabs-height (đo động ở Chuong4Page); tự cuộn khi tràn. */}
-      <div className="grid gap-7 pt-8 lg:grid-cols-[300px_minmax(0,1fr)]">
+      <div className="grid grid-cols-1 gap-7 pt-8 lg:grid-cols-[300px_minmax(0,1fr)]">
         <aside ref={asideRef} className="lg:sticky lg:top-[calc(var(--header-height)_+_var(--tabs-height)_+_21px)] lg:max-h-[calc(100vh_-_var(--header-height)_-_var(--tabs-height)_-_33px)] lg:self-start lg:overflow-y-auto">
           {/* THẺ TRÁI: mục lục + ô tìm kiếm. Lọc CHỈ mục lục — nội dung bên phải
               luôn hiện đầy đủ, không bao giờ bị ẩn theo từ khóa. */}

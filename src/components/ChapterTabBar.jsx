@@ -26,7 +26,7 @@ export default function ChapterTabBar({ tabs, value, onChange, label, hideIconsO
       ref={groupRef}
       role="tablist"
       aria-label={label}
-      className="relative ml-auto flex max-w-full gap-1 overflow-x-auto overflow-y-hidden rounded-full bg-[#EBE4D8] p-1"
+      className="relative ml-auto flex max-w-full gap-1 overflow-x-auto overflow-y-hidden rounded-full [scrollbar-width:none] bg-[#EBE4D8] p-1"
     >
       {pill && (
         <motion.span

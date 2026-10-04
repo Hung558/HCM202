@@ -4,6 +4,7 @@ import { BookOpen, NotebookPen } from 'lucide-react'
 import Content from './Content.jsx'
 import Tracker from './Tracker.jsx'
 import ChapterTabBar from '../../components/ChapterTabBar.jsx'
+import ChapterMenu from '../../components/ChapterMenu.jsx'
 import { EMPTY, TRACKER_KEY, load, save, streak } from './utils.js'
 
 const FONT_URL =
@@ -42,6 +43,7 @@ export default function Chuong6() {
     >
       <nav className="sticky top-0 z-10 border-b border-[#E6DFD3] bg-[#F5F1EA]/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-[1180px] flex-wrap items-center gap-4 px-5 py-3">
+          <ChapterMenu current="VI" />
           <a href="/" title="Về trang chủ" className="flex items-center gap-2.5 text-[#1F1B16]">
             <span className="grid size-9 place-items-center rounded-[10px] bg-[#B4322A] text-[15px] font-extrabold text-[#FFF8EC]">
               VI
