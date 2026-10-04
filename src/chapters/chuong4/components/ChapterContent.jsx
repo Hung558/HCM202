@@ -13,9 +13,21 @@
 //   Đoạn văn      — max-w 70ch, giãn dòng rộng cho dễ đọc
 // Chỉ dùng thẻ nhỏ khi thật cần: trạng thái lỗi.
 // Marker "I." / "1." / "a." và dấu "-" / "(1)" của file được giữ nguyên.
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { motion } from 'framer-motion'
 import { AlertCircle, ListTree, Loader2, Search } from 'lucide-react'
 import { parseChapter, searchUnits } from '../contentParser.js'
+
+const EASE = [0.4, 0, 0.2, 1]
+
+// Vạch đỏ bên trái mục đang đọc: dùng chung layoutId nên trượt mượt giữa mục và mục con
+const ActiveBar = () => (
+  <motion.span
+    layoutId="ch4-toc-bar"
+    className="absolute inset-y-0 left-0 w-0.5 rounded-full bg-primary"
+    transition={{ duration: 0.3, ease: EASE }}
+  />
+)
 
 // Cache mức module: parse một lần duy nhất mỗi phiên trang.
 let cachedDoc = null
@@ -130,6 +142,8 @@ export default function ChapterContent({ topOffset = 0 }) {
   const [error, setError] = useState(null)
   const [activeId, setActiveId] = useState(null)
   const [query, setQuery] = useState('')
+  const lockRef = useRef(false) // khóa scroll-spy trong lúc cuộn do bấm mục lục
+  const asideRef = useRef(null)
 
   // Chỉ parse lần đầu tab mở (component mount lần đầu); kết quả lấy từ cache module
   useEffect(() => {
@@ -151,25 +165,62 @@ export default function ChapterContent({ topOffset = 0 }) {
   // Ô tìm kiếm chỉ lọc MỤC LỤC; `doc.sections` bên phải giữ nguyên → không mất nội dung
   const tocSections = useMemo(() => (doc ? searchUnits(doc.sections, query) : []), [doc, query])
 
-  // Đánh dấu mục đang đọc trên mục lục khi cuộn
+  // Mục + mục con theo đúng thứ tự trong trang
+  const spyIds = useMemo(
+    () => flatItems.flatMap(({ item }) => [item.id, ...item.children.map((ch) => ch.id)]),
+    [flatItems],
+  )
+
+  // Đánh dấu mục đang đọc: mục cuối cùng (theo thứ tự trang) đã cuộn qua vạch dưới header
   useEffect(() => {
     if (!doc) return undefined
-    const els = flatItems.map(({ item }) => document.getElementById(`hoc-${item.id}`)).filter(Boolean)
-    if (els.length === 0) return undefined
-    const obs = new IntersectionObserver(
-      (entries) => {
-        const first = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0]
-        if (first) setActiveId(first.target.id.replace('hoc-', ''))
-      },
-      { rootMargin: `${-(topOffset + 24)}px 0px -70% 0px` },
-    )
-    els.forEach((el) => obs.observe(el))
-    return () => obs.disconnect()
-  }, [doc, flatItems, topOffset])
+    let raf = 0
+    const onScroll = () => {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(() => {
+        if (lockRef.current) return
+        const els = spyIds.map((id) => document.getElementById(`hoc-${id}`))
+        if (!els[0]?.offsetParent) return // tab Kiến thức đang ẩn
+        const line = topOffset + 40
+        let cur = spyIds[0]
+        els.forEach((el, i) => {
+          if (el && el.getBoundingClientRect().top <= line) cur = spyIds[i]
+        })
+        setActiveId(cur)
+      })
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      cancelAnimationFrame(raf)
+      window.removeEventListener('scroll', onScroll)
+    }
+  }, [doc, spyIds, topOffset])
 
+  // Mục lục tự cuộn để mục đang đọc luôn nằm trong khung (desktop)
+  useEffect(() => {
+    const box = asideRef.current
+    const el = box?.querySelector(`[data-toc="${activeId}"]`)
+    if (!el || box.scrollHeight <= box.clientHeight) return
+    const b = box.getBoundingClientRect()
+    const r = el.getBoundingClientRect()
+    if (r.top < b.top + 60 || r.bottom > b.bottom - 60) {
+      box.scrollBy({ top: r.top - b.top - box.clientHeight / 3, behavior: 'smooth' })
+    }
+  }, [activeId])
+
+  // Bấm mục lục: sáng ngay mục đó, khóa scroll-spy tới khi cuộn xong để không nhảy qua các mục giữa
   const goto = (id) => {
+    setActiveId(id)
+    lockRef.current = true
+    const unlock = () => {
+      lockRef.current = false
+      clearTimeout(timer)
+      window.removeEventListener('scrollend', unlock)
+    }
+    // ponytail: Safari chưa có scrollend → mở khóa sau 1.2s; cuộn rất xa có thể mở khóa sớm
+    const timer = setTimeout(unlock, 1200)
+    window.addEventListener('scrollend', unlock)
     document.getElementById(`hoc-${id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
@@ -203,7 +254,7 @@ export default function ChapterContent({ topOffset = 0 }) {
       {/* Mục lục dính (desktop): offset & chiều cao tính từ CSS variables
           --header-height/--tabs-height (đo động ở Chuong4Page); tự cuộn khi tràn. */}
       <div className="grid gap-7 pt-8 lg:grid-cols-[300px_minmax(0,1fr)]">
-        <aside className="lg:sticky lg:top-[calc(var(--header-height)_+_var(--tabs-height)_+_21px)] lg:max-h-[calc(100vh_-_var(--header-height)_-_var(--tabs-height)_-_33px)] lg:self-start lg:overflow-y-auto">
+        <aside ref={asideRef} className="lg:sticky lg:top-[calc(var(--header-height)_+_var(--tabs-height)_+_21px)] lg:max-h-[calc(100vh_-_var(--header-height)_-_var(--tabs-height)_-_33px)] lg:self-start lg:overflow-y-auto">
           {/* THẺ TRÁI: mục lục + ô tìm kiếm. Lọc CHỈ mục lục — nội dung bên phải
               luôn hiện đầy đủ, không bao giờ bị ẩn theo từ khóa. */}
           <div className="card p-5">
@@ -237,13 +288,13 @@ export default function ChapterContent({ topOffset = 0 }) {
                       {s.items.map((it) => (
                         <li key={it.id}>
                           <button
+                            data-toc={it.id}
                             onClick={() => goto(it.id)}
-                            className={`block w-full truncate border-l-2 py-1.5 pl-2.5 text-left text-[13px] leading-snug transition-colors ${
-                              activeId === it.id
-                                ? 'border-primary font-bold text-primary'
-                                : 'border-transparent font-medium text-ink-soft hover:text-ink'
+                            className={`relative block w-full truncate py-1.5 pl-2.5 text-left text-[13px] leading-snug transition-colors duration-200 ${
+                              activeId === it.id ? 'font-bold text-primary' : 'font-medium text-ink-soft hover:text-ink'
                             }`}
                           >
+                            {activeId === it.id && <ActiveBar />}
                             {it.marker ? `${it.marker} ` : ''}
                             {it.title}
                           </button>
@@ -252,9 +303,13 @@ export default function ChapterContent({ topOffset = 0 }) {
                               {it.children.map((ch) => (
                                 <li key={ch.id}>
                                   <button
+                                    data-toc={ch.id}
                                     onClick={() => goto(ch.id)}
-                                    className="block w-full truncate border-l-2 border-transparent py-1 pl-2.5 text-left text-[12px] font-medium leading-snug text-muted transition-colors hover:text-ink"
+                                    className={`relative block w-full truncate py-1 pl-2.5 text-left text-[12px] leading-snug transition-colors duration-200 ${
+                                      activeId === ch.id ? 'font-bold text-primary' : 'font-medium text-muted hover:text-ink'
+                                    }`}
                                   >
+                                    {activeId === ch.id && <ActiveBar />}
                                     {ch.marker ? `${ch.marker} ` : ''}
                                     {ch.title}
                                   </button>

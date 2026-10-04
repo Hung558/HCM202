@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { BookOpen, CheckCircle2, Quote } from "lucide-react";
 import data from "./knowledge.json";
 
@@ -9,6 +9,8 @@ const SPY_IDS = data.sections.flatMap((s) => [s.id, ...s.subsections.map((x) => 
 function scrollToId(id) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
+
+const EASE = [0.4, 0, 0.2, 1];
 
 /* ---------- Các khối nội dung ---------- */
 
@@ -96,7 +98,7 @@ function Section({ section, index }) {
 
 /* ---------- Mục lục ---------- */
 
-function Toc({ activeId }) {
+function Toc({ activeId, onSelect }) {
   const activeSection = data.sections.find(
     (s) => s.id === activeId || s.subsections.some((x) => x.id === activeId),
   );
@@ -111,35 +113,60 @@ function Toc({ activeId }) {
             <li key={s.id}>
               <button
                 type="button"
-                onClick={() => scrollToId(s.id)}
+                onClick={() => onSelect(s.id)}
                 aria-current={open ? "true" : undefined}
-                className={`flex min-h-11 w-full items-start gap-3 rounded-xl px-3 py-2.5 text-left text-[14px] font-bold leading-snug ${
-                  open ? "bg-ink text-on-dark" : "text-ink hover:bg-cream"
+                className={`relative flex min-h-11 w-full items-start gap-3 rounded-xl px-3 py-2.5 text-left text-[14px] font-bold leading-snug transition-colors duration-200 ${
+                  open ? "text-on-dark" : "text-ink hover:bg-cream"
                 }`}
               >
-                <span className={open ? "text-gold" : "text-amber"}>{s.number}</span>
-                <span>{s.title}</span>
+                {open && (
+                  <motion.span
+                    layoutId="ch3-toc-active"
+                    className="absolute inset-0 rounded-xl bg-ink"
+                    transition={{ duration: 0.3, ease: EASE }}
+                  />
+                )}
+                <span className={`relative transition-colors duration-200 ${open ? "text-gold" : "text-amber"}`}>{s.number}</span>
+                <span className="relative">{s.title}</span>
               </button>
-              {open && (
-                <ul className="mt-1 mb-1 grid gap-0.5 pl-3">
-                  {s.subsections.map((sub) => (
-                    <li key={sub.id}>
-                      <button
-                        type="button"
-                        onClick={() => scrollToId(sub.id)}
-                        className={`flex w-full gap-2 rounded-lg px-3 py-1.5 text-left text-[13px] leading-snug ${
-                          activeId === sub.id
-                            ? "bg-primary/10 font-bold text-primary"
-                            : "text-ink-soft hover:text-ink"
-                        }`}
-                      >
-                        <span className="shrink-0 font-semibold">{sub.number}</span>
-                        <span className="line-clamp-2">{sub.title}</span>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              )}
+              <AnimatePresence initial={false}>
+                {open && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: EASE }}
+                    className="overflow-hidden"
+                  >
+                    <ul className="grid gap-0.5 py-1 pl-3">
+                      {s.subsections.map((sub) => {
+                        const on = activeId === sub.id;
+                        return (
+                          <li key={sub.id}>
+                            <button
+                              type="button"
+                              onClick={() => onSelect(sub.id)}
+                              className={`relative flex w-full gap-2 rounded-lg px-3 py-1.5 text-left text-[13px] leading-snug transition-colors duration-200 ${
+                                on ? "font-bold text-primary" : "text-ink-soft hover:text-ink"
+                              }`}
+                            >
+                              {on && (
+                                <motion.span
+                                  layoutId="ch3-toc-sub"
+                                  className="absolute inset-0 rounded-lg bg-primary/10"
+                                  transition={{ duration: 0.25, ease: EASE }}
+                                />
+                              )}
+                              <span className="relative shrink-0 font-semibold">{sub.number}</span>
+                              <span className="relative line-clamp-2">{sub.title}</span>
+                            </button>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </li>
           );
         })}
@@ -149,7 +176,7 @@ function Toc({ activeId }) {
 }
 
 /* Mục lục gọn cho điện thoại: thanh chip cuộn ngang */
-function TocMobile({ activeId }) {
+function TocMobile({ activeId, onSelect }) {
   return (
     <nav aria-label="Mục lục chương" className="-mx-5 overflow-x-auto px-5 lg:hidden">
       <ul className="flex w-max gap-2 pb-1">
@@ -159,7 +186,7 @@ function TocMobile({ activeId }) {
             <li key={s.id}>
               <button
                 type="button"
-                onClick={() => scrollToId(s.id)}
+                onClick={() => onSelect(s.id)}
                 className={`btn min-h-11 whitespace-nowrap rounded-full px-4 text-[14px] font-bold ${
                   open ? "bg-ink text-on-dark" : "border border-line-strong bg-white text-ink"
                 }`}
@@ -178,6 +205,22 @@ function TocMobile({ activeId }) {
 
 export default function Knowledge() {
   const [activeId, setActiveId] = useState(data.sections[0].id);
+  // Khi bấm mục lục: khóa scroll-spy cho đến khi cuộn xong, để mục lục không nhảy qua các phần ở giữa
+  const lockRef = useRef(false);
+
+  const select = (id) => {
+    setActiveId(id);
+    lockRef.current = true;
+    const unlock = () => {
+      lockRef.current = false;
+      clearTimeout(timer);
+      window.removeEventListener("scrollend", unlock);
+    };
+    // ponytail: Safari chưa có scrollend → mở khóa sau 1.2s; cuộn rất xa có thể mở khóa sớm
+    const timer = setTimeout(unlock, 1200);
+    window.addEventListener("scrollend", unlock);
+    scrollToId(id);
+  };
 
   // Theo dõi phần đang đọc để tô sáng mục lục
   useEffect(() => {
@@ -188,7 +231,7 @@ export default function Knowledge() {
           if (e.isIntersecting) visible.set(e.target.id, e.boundingClientRect.top);
           else visible.delete(e.target.id);
         });
-        if (visible.size > 0) {
+        if (visible.size > 0 && !lockRef.current) {
           // Lấy phần tử nằm gần mép trên nhất; ưu tiên phần nhỏ khi bằng nhau
           const top = [...visible.entries()].sort((a, b) => a[1] - b[1] || SPY_IDS.indexOf(b[0]) - SPY_IDS.indexOf(a[0]))[0];
           setActiveId(top[0]);
@@ -212,12 +255,12 @@ export default function Knowledge() {
       <p className="mt-3 max-w-[60ch] text-[15.5px] leading-[1.65] text-ink-soft">{data.intro}</p>
 
       <div className="mt-6">
-        <TocMobile activeId={activeId} />
+        <TocMobile activeId={activeId} onSelect={select} />
       </div>
 
       <div className="mt-6 grid items-start gap-6 lg:grid-cols-[300px_minmax(0,1fr)]">
         <aside className="sticky top-24 hidden max-h-[calc(100vh-7rem)] overflow-y-auto lg:block">
-          <Toc activeId={activeId} />
+          <Toc activeId={activeId} onSelect={select} />
         </aside>
 
         <div className="grid gap-5">
