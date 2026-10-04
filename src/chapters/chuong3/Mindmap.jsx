@@ -304,7 +304,7 @@ function MindmapInner() {
 }
 
 export default function Mindmap() {
-  const [tab, setTab] = useState("mindmap");
+  const [tab, setTab] = useState("knowledge"); // mở chương vào tab Kiến thức trước
 
   return (
     <>

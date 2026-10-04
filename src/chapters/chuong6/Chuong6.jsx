@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { BookOpen, NotebookPen } from 'lucide-react'
 import Content from './Content.jsx'
 import Tracker from './Tracker.jsx'
 import { EMPTY, TRACKER_KEY, load, save, streak } from './utils.js'
@@ -8,8 +9,8 @@ const FONT_URL =
   'https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Lora:ital,wght@1,500&display=swap'
 
 const TABS = [
-  { id: 'content', label: 'Học bài' },
-  { id: 'tracker', label: 'Rèn luyện' },
+  { id: 'content', label: 'Học bài', icon: BookOpen },
+  { id: 'tracker', label: 'Rèn luyện', icon: NotebookPen },
 ]
 
 // Chương VI: tab Học bài (mặc định) + tab Rèn luyện
@@ -51,14 +52,15 @@ export default function Chuong6() {
           </a>
 
           <div className="ml-auto flex gap-1 rounded-full bg-[#EBE4D8] p-1">
-            {TABS.map(({ id, label }) => (
+            {TABS.map(({ id, label, icon: Icon }) => (
               <button
                 key={id}
                 onClick={() => go(id)}
                 aria-current={tab === id ? 'page' : undefined}
-                className={`relative min-h-[40px] rounded-full px-[18px] text-sm font-semibold transition-colors ${tab === id ? 'text-[#FFF8EC]' : 'text-[#5C5347] hover:text-[#1F1B16]'}`}
+                className={`relative inline-flex min-h-[40px] items-center gap-2 rounded-full px-[18px] text-sm font-semibold transition-colors ${tab === id ? 'text-[#FFF8EC]' : 'text-[#5C5347] hover:text-[#1F1B16]'}`}
               >
                 {tab === id && <motion.span layoutId="tab-bg" className="absolute inset-0 rounded-full bg-[#1F1B16]" />}
+                <Icon className="relative size-4" />
                 <span className="relative">{label}</span>
               </button>
             ))}

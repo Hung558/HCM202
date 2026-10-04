@@ -89,15 +89,17 @@ export default function Review() {
 
     return (
         <div className="mx-auto max-w-[1180px] px-5 pt-10 pb-20">
-            <p className="eyebrow">Chương III · Ôn tập</p>
-            <h1 className="mt-2.5 text-[clamp(30px,4.6vw,52px)] font-extrabold leading-[1.08] tracking-[-0.02em]">
-                Trắc nghiệm ôn tập
-            </h1>
-            <p className="mt-3 max-w-[640px] text-[15.5px] leading-[1.65] text-ink-soft">
-                Các câu hỏi được soạn từ phần Kiến thức của chương. Chọn một phần để ôn riêng, hoặc làm toàn bộ.
-            </p>
+            <header className="text-center">
+                <p className="eyebrow">Chương III · Ôn tập</p>
+                <h1 className="mt-2.5 text-[clamp(30px,4.6vw,52px)] font-extrabold leading-[1.08] tracking-[-0.02em]">
+                    Trắc nghiệm ôn tập
+                </h1>
+                <p className="mx-auto mt-3 max-w-[640px] text-[15.5px] leading-[1.65] text-ink-soft">
+                    Các câu hỏi được soạn từ phần Kiến thức của chương. Chọn một phần để ôn riêng, hoặc làm toàn bộ.
+                </p>
+            </header>
 
-            <div className="mt-8 max-w-[760px]">
+            <div className="mx-auto mt-8 max-w-[760px]">
                 <AnimatePresence mode="wait">
                     {/* ---------- Chọn phạm vi ---------- */}
                     {phase === "setup" && (
