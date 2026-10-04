@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import chuong2 from '../chapters/chuong2/data.json'
 import { CHAPTERS } from '../components/chapters.js'
+import ChapterBook from './ChapterBook.jsx'
 import heroImg from './images/bac_ho_thieu_nhi_1950.jpg'
 import nhaRongImg from './images/nha_rong_1911.png'
 import toursImg from './images/dai_hoi_tours_1920.jpg'
@@ -70,7 +71,7 @@ function Nav() {
           <a href="#loi-bac" className={link}>Lời Bác dạy</a>
         </div>
         {/* điện thoại: nút lên cùng dòng logo, link xuống dòng dưới */}
-        <a href="/chuong1.html" className="btn btn-dark whitespace-nowrap max-sm:ml-auto">Vào học</a>
+        <ChapterBook className="btn btn-dark whitespace-nowrap max-sm:ml-auto">Vào học</ChapterBook>
       </div>
     </nav>
   )
