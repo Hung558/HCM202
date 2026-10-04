@@ -7,6 +7,7 @@ import Sources from './Sources.jsx'
 import ChapterTabBar from '../../components/ChapterTabBar.jsx'
 import ChapterMenu from '../../components/ChapterMenu.jsx'
 import ChapterLogo from '../../components/ChapterLogo.jsx'
+import SiteFooter from '../../components/SiteFooter.jsx'
 import styles from './Flashcards.module.css'
 
 const STORAGE_KEY = `hcm202:chuong1:progress:${data.metadata.id}`
@@ -244,6 +245,7 @@ export default function Flashcards() {
           </section>
         )}
       </main>
+      <SiteFooter current="I" />
     </div>
   )
 }

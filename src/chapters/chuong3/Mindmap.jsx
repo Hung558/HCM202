@@ -12,6 +12,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronRight, ChevronDown, Maximize, Network, Quote } from "lucide-react";
 import data from "./data.json";
 import NavBar from "./NavBar";
+import SiteFooter from "../../components/SiteFooter.jsx";
 import Knowledge from "./Knowledge";
 import Review from "./Review";
 
@@ -317,6 +318,7 @@ export default function Mindmap() {
       )}
       {tab === "knowledge" && <Knowledge />}
       {tab === "review" && <Review />}
+      <SiteFooter current="III" />
     </>
   );
 }

@@ -4,6 +4,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import chuong2 from '../chapters/chuong2/data.json'
 import { CHAPTERS, GLOBE } from '../components/chapters.js'
 import ChapterBook from './ChapterBook.jsx'
+import StarLogo from '../components/StarLogo.jsx'
+import SiteFooter from '../components/SiteFooter.jsx'
 import heroImg from './images/bac_ho_thieu_nhi_1950.jpg'
 import nhaRongImg from './images/nha_rong_1911.png'
 import toursImg from './images/dai_hoi_tours_1920.jpg'
@@ -38,19 +40,8 @@ const VALUES = [
 ]
 
 const PHOTO = 'grayscale-100 sepia-[.22] contrast-[1.03]'
-const STAR = {
-  clipPath: 'polygon(50% 0%,61.8% 35.3%,100% 35.3%,69.1% 57.1%,80.9% 92.7%,50% 70.9%,19.1% 92.7%,30.9% 57.1%,0% 35.3%,38.2% 35.3%)',
-}
 const H2 = 'mt-3 text-[clamp(30px,4vw,44px)] font-extrabold leading-[1.1] tracking-[-0.02em]'
 const pad = (n) => String(n).padStart(2, '0')
-
-function StarLogo({ size = 'size-[38px]', star = 'size-5', radius = 'rounded-[10px]' }) {
-  return (
-    <span className={`grid shrink-0 place-items-center bg-primary ${size} ${radius}`}>
-      <span className={`bg-gold ${star}`} style={STAR} />
-    </span>
-  )
-}
 
 function Nav() {
   const link =
@@ -327,18 +318,6 @@ function Significance() {
   )
 }
 
-function Footer() {
-  return (
-    <footer className="mt-16 border-t-[3px] border-double border-line-strong">
-      <div className="mx-auto flex max-w-[1180px] flex-col items-center gap-3 px-5 pt-9 pb-12 text-center">
-        <StarLogo size="size-8" star="size-4" radius="rounded-lg" />
-        <span className="text-[14px] font-semibold">HCM Web · Học phần Tư tưởng Hồ Chí Minh</span>
-        <span className="text-[13px] text-muted">Nội dung theo giáo trình của Bộ Giáo dục và Đào tạo · Ảnh tư liệu lịch sử</span>
-      </div>
-    </footer>
-  )
-}
-
 export default function HomePage() {
   // Cuộn mượt khi bấm link neo (#muc-luc…) — đặt ở đây, không sửa index.css
   useEffect(() => {
@@ -358,7 +337,7 @@ export default function HomePage() {
       <Journey />
       <Teachings />
       <Significance />
-      <Footer />
+      <SiteFooter />
     </div>
   )
 }

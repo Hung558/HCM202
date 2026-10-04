@@ -8,6 +8,7 @@
 import { Suspense, lazy, useCallback, useEffect, useRef, useState } from 'react'
 import { BookOpen, ClipboardList, Loader2 } from 'lucide-react'
 import ChapterHeader from './components/ChapterHeader.jsx'
+import SiteFooter from '../../components/SiteFooter.jsx'
 import ChapterTabBar from '../../components/ChapterTabBar.jsx'
 import ScenarioQuiz from './components/ScenarioQuiz.jsx'
 import { TAB_CONTENT, TAB_QUIZ } from './constants.js'
@@ -77,6 +78,7 @@ export default function Chuong4Page() {
           <ScenarioQuiz />
         </div>
       </div>
+      <SiteFooter current="IV" />
     </main>
   )
 }

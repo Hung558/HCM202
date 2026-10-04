@@ -4,11 +4,9 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Earth, X } from 'lucide-react'
 import { CHAPTERS, GLOBE } from '../components/chapters.js'
 import { leaveTo, useOverlay } from '../components/overlay.js'
+import StarLogo from '../components/StarLogo.jsx'
 
 const EASE = [0.4, 0, 0.2, 1]
-const STAR = {
-  clipPath: 'polygon(50% 0%,61.8% 35.3%,100% 35.3%,69.1% 57.1%,80.9% 92.7%,50% 70.9%,19.1% 92.7%,30.9% 57.1%,0% 35.3%,38.2% 35.3%)',
-}
 
 // Nút "Vào học" ở trang chủ: mở một cuốn sách giữa màn hình.
 // Trang trái là bìa học phần, trang phải là mục lục 6 chương (lật mở ra). Điện thoại chỉ hiện trang mục lục.
@@ -58,9 +56,7 @@ export default function ChapterBook({ className, children }) {
                 <div className="grid h-[min(90vh,760px)] grid-rows-[minmax(0,1fr)] overflow-hidden rounded-[14px] [perspective:1800px] md:grid-cols-2">
                   {/* Trang trái: bìa học phần */}
                   <section className="relative hidden flex-col items-center justify-center gap-5 bg-cream px-10 py-12 text-center md:flex">
-                    <span className="grid size-14 place-items-center rounded-[14px] bg-primary">
-                      <span className="size-7 bg-gold" style={STAR} />
-                    </span>
+                    <StarLogo size="size-14" star="size-7" radius="rounded-[14px]" />
                     <p className="eyebrow">Học phần HCM202</p>
                     <h2 className="text-[38px] leading-[1.08] font-extrabold tracking-[-0.02em]">
                       Tư tưởng

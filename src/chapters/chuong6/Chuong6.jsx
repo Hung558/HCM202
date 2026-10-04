@@ -6,6 +6,7 @@ import Tracker from './Tracker.jsx'
 import ChapterTabBar from '../../components/ChapterTabBar.jsx'
 import ChapterMenu from '../../components/ChapterMenu.jsx'
 import ChapterLogo from '../../components/ChapterLogo.jsx'
+import SiteFooter from '../../components/SiteFooter.jsx'
 import { EMPTY, TRACKER_KEY, load, save, streak } from './utils.js'
 
 const FONT_URL =
@@ -71,6 +72,7 @@ export default function Chuong6() {
           )}
         </motion.div>
       </AnimatePresence>
+      <SiteFooter current="VI" />
     </main>
   )
 }

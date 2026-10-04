@@ -21,6 +21,7 @@ import {
 import ChapterTabBar from '../../components/ChapterTabBar.jsx'
 import ChapterMenu from '../../components/ChapterMenu.jsx'
 import ChapterLogo from '../../components/ChapterLogo.jsx'
+import SiteFooter from '../../components/SiteFooter.jsx'
 
 const TABS = [
   { id: 'foundations', label: 'I. Cơ sở hình thành', icon: Layers },
@@ -619,36 +620,7 @@ export default function InteractiveTimeline() {
         />
       </main>
 
-      {/* FOOTER */}
-      <footer className="border-t border-line bg-paper py-5">
-        <div className="mx-auto flex max-w-[1180px] flex-col sm:flex-row items-center justify-between gap-3 px-5 text-xs text-muted">
-          <div className="flex items-center gap-2">
-            <span className="font-bold text-ink">Chương II: Tư tưởng Hồ Chí Minh</span>
-            <span>·</span>
-            <span>Cơ sở, quá trình hình thành và phát triển</span>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <a href="/" className="hover:text-ink transition-colors">
-              Trang chủ
-            </a>
-            <span>·</span>
-            <a href="/chuong1.html" className="hover:text-ink transition-colors">
-              Chương I
-            </a>
-            <span>·</span>
-            <span className="text-ink font-semibold">Chương II</span>
-            <span>·</span>
-            <a href="/chuong3.html" className="hover:text-ink transition-colors">
-              Chương III
-            </a>
-            <span>·</span>
-            <a href="/chuong6.html" className="hover:text-ink transition-colors">
-              Chương VI
-            </a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter current="II" />
     </div>
   )
 }

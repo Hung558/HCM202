@@ -6,6 +6,7 @@ import SectionVideo from './SectionVideo.jsx'
 import ChapterTabBar from '../../components/ChapterTabBar.jsx'
 import ChapterMenu from '../../components/ChapterMenu.jsx'
 import ChapterLogo from '../../components/ChapterLogo.jsx'
+import SiteFooter from '../../components/SiteFooter.jsx'
 
 const TABS = [
   { id: 'learn', label: 'Học bài', icon: BookOpen },
@@ -60,6 +61,7 @@ export default function DragDrop() {
           <p className="mt-2">Thực hiện: {data.author} · Chương V</p>
         </footer>
       </main>
+      <SiteFooter current="V" />
     </div>
   )
 }
