@@ -1,294 +1,295 @@
-import { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { Check, Plus, RotateCcw, X } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
 import data from './data.json'
 import { useConfirm } from '../../components/useConfirm.jsx'
-import { EMPTY, dayKey, lastDays, pad, streak } from './utils.js'
+import { EMPTY, dayKey, lastDays, streak } from './utils.js'
+import { animate, burst, centerOf, petalRain } from '../_fun/fx.js'
+import { award, play, say } from '../_fun/useGame.js'
 
-const LORA = { fontFamily: "'Lora', serif" }
-const heat = (n) => (n === 0 ? '#3A342C' : n < 3 ? '#7A4A2A' : n < 6 ? '#E59A2F' : '#F2C06B')
+// Màu con dấu của 5 đức tính
+const SEAL = ['#B4322A', '#C77A12', '#2F7D4F', '#8A1F19', '#5C4A8A']
+// Ô nhiệt 7 ngày theo số việc tốt: 0 / ≤2 / ≤5 / ≤9 / >9
+const heat = (n) => (n === 0 ? '#3A332B' : n <= 2 ? '#7A4A2C' : n <= 5 ? '#B4322A' : n <= 9 ? '#E59A2F' : '#F2C06B')
+const actsOf = (v, custom) => [...v.suggestions.map((t) => ({ t, c: false })), ...(custom[v.id] ?? []).map((t) => ({ t, c: true }))]
 
-// state/setState được giữ ở Chuong6.jsx (để nav hiện streak); key localStorage: hcm-chuong6-tracker
+// Tab Rèn luyện — "Sổ tay": câu trích, việc tốt hôm nay, 7 ngày gần nhất, 5 đức tính có con dấu, nhật ký, nguyên tắc.
+// state = { custom, log, notes } giữ ở Chuong6.jsx; key localStorage: hcm-chuong6-tracker
 export default function Tracker({ state, setState }) {
-  const [quoteIdx, setQuoteIdx] = useState(() => new Date().getDate() % data.quotes.length)
-  const today = dayKey()
-  const done = state.log[today] ?? []
-
-  const toggle = (id) =>
-    setState((s) => {
-      const cur = s.log[today] ?? []
-      const next = cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id]
-      return { ...s, log: { ...s.log, [today]: next } }
-    })
-
-  const addCustom = (vid, text) =>
-    setState((s) => ({ ...s, custom: { ...s.custom, [vid]: [...(s.custom[vid] ?? []), text] } }))
-
-  const removeCustom = (vid, text) =>
-    setState((s) => ({
-      ...s,
-      custom: { ...s.custom, [vid]: s.custom[vid].filter((t) => t !== text) },
-      log: { ...s.log, [today]: (s.log[today] ?? []).filter((x) => x !== `${vid}:${text}`) },
-    }))
-
-  const setNote = (text) => setState((s) => ({ ...s, notes: { ...s.notes, [today]: text } }))
-
+  const [today] = useState(() => dayKey())
+  const [week] = useState(() => lastDays(7))
+  const [todayLabel] = useState(() => new Date().toLocaleDateString('vi', { weekday: 'long', day: 'numeric', month: 'long' }))
+  const [qi, setQi] = useState(() => new Date().getDate())
+  const [drafts, setDrafts] = useState({})
   const [confirm, confirmDialog] = useConfirm()
-  const reset = async () => {
-    const ok = await confirm({
-      title: 'Xóa toàn bộ dữ liệu sổ tay?',
-      message: 'Các việc đã đánh dấu, việc tự thêm và nhật ký "Tự soi, tự sửa" sẽ bị xóa khỏi máy này. Không thể hoàn tác.',
-      confirmLabel: 'Xóa dữ liệu',
-    })
-    if (ok) setState(EMPTY)
+  const quoteRef = useRef(null)
+  const countRef = useRef(null)
+  const sealRefs = useRef({})
+
+  const done = state.log[today] ?? []
+  const total = data.virtues.reduce((n, v) => n + actsOf(v, state.custom).length, 0)
+  const doneN = data.virtues.reduce((n, v) => n + actsOf(v, state.custom).filter((a) => done.includes(`${v.id}:${a.t}`)).length, 0)
+  const frac = total ? doneN / total : 0
+  const quote = data.quotes[qi % data.quotes.length]
+  const note = state.notes[today] ?? ''
+
+  // Số việc tốt nảy lên khi tăng
+  const prevN = useRef(doneN)
+  useEffect(() => {
+    if (doneN > prevN.current) animate(countRef.current, [{ transform: 'scale(1.4)' }, { transform: 'scale(1)' }], { duration: 300, easing: 'cubic-bezier(.3,1.5,.5,1)' })
+    prevN.current = doneN
+  }, [doneN])
+
+  function toggle(v, t, e) {
+    const key = `${v.id}:${t}`
+    const on = done.includes(key)
+    const next = on ? done.filter((k) => k !== key) : [...done, key]
+    setState((s) => ({ ...s, log: { ...s.log, [today]: next } }))
+    if (on) return play('off')
+    play('ok')
+    award(`c6-${today}-${key}`, 5, e)
+    const full = (x) => actsOf(x, state.custom).every((a) => next.includes(`${x.id}:${a.t}`))
+    if (!full(v)) return say(`Thêm một việc tốt cho “${v.name}”!`)
+    // Đủ việc của đức tính: con dấu "cộp" + cánh hoa
+    setTimeout(() => {
+      play('stamp')
+      const el = sealRefs.current[v.id]
+      animate(el, [{ transform: 'rotate(-10deg) scale(2.2)', opacity: 0 }, { transform: 'rotate(-10deg) scale(.9)', opacity: 1, offset: 0.7 }, { transform: 'rotate(-10deg) scale(1)' }], { duration: 420, easing: 'ease-out' })
+      const p = centerOf(el)
+      burst(p.x, p.y, 28, 'petal')
+      if (data.virtues.every(full)) {
+        play('win')
+        setTimeout(() => petalRain(80), 200)
+        say('Trọn vẹn cả 5 đức tính hôm nay. Tuyệt vời!')
+      } else say(`Cộp! Đã đóng dấu “${v.name}” hôm nay.`)
+    }, 120)
   }
 
-  const total = data.virtues.reduce((n, v) => n + v.suggestions.length + (state.custom[v.id]?.length ?? 0), 0)
-  const frac = total ? Math.min(done.length / total, 1) : 0
-  const quote = data.quotes[quoteIdx]
-  const week = lastDays(7)
-  const todayLabel = new Date().toLocaleDateString('vi', { weekday: 'long', day: 'numeric', month: 'long' })
+  function addCustom(v) {
+    const t = (drafts[v.id] ?? '').trim()
+    setDrafts((d) => ({ ...d, [v.id]: '' }))
+    const cur = state.custom[v.id] ?? []
+    if (!t || v.suggestions.includes(t) || cur.includes(t)) return
+    play('tap')
+    setState((s) => ({ ...s, custom: { ...s.custom, [v.id]: [...cur, t] } }))
+  }
+
+  // Xoá việc tự thêm khỏi danh sách và khỏi mọi ngày trong log
+  function removeCustom(v, t) {
+    const key = `${v.id}:${t}`
+    setState((s) => ({
+      ...s,
+      custom: { ...s.custom, [v.id]: (s.custom[v.id] ?? []).filter((x) => x !== t) },
+      log: Object.fromEntries(Object.entries(s.log).map(([d, list]) => [d, list.filter((k) => k !== key)])),
+    }))
+  }
+
+  async function reset() {
+    const ok = await confirm({
+      title: 'Xóa toàn bộ dữ liệu sổ tay?',
+      message: 'Các việc đã đánh dấu, việc tự thêm và nhật ký trên máy này sẽ bị xóa. Không hoàn tác được.',
+      confirmLabel: 'Xóa dữ liệu',
+    })
+    if (!ok) return
+    setState(EMPTY)
+    say('Đã xóa dữ liệu sổ tay. Bắt đầu lại nào!')
+  }
 
   return (
-    <div className="mx-auto flex max-w-[1180px] flex-col gap-5 px-5 pb-20 pt-10">
+    <>
       {confirmDialog}
-      <header className="max-w-[680px]">
-        <p className="text-[13px] font-bold uppercase tracking-[0.12em] text-[#B4322A]">{todayLabel}</p>
-        <h1 className="mt-2.5 text-[clamp(30px,4.6vw,52px)] font-extrabold leading-[1.08] tracking-[-0.02em]">
-          {data.title}
-        </h1>
-        <p className="mt-3.5 text-pretty text-base leading-relaxed text-[#5C5347]">{data.intro}</p>
-      </header>
-
-      <section className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-4">
-        <button
-          onClick={() => setQuoteIdx((i) => (i + 1) % data.quotes.length)}
-          title="Bấm để xem câu khác"
-          className="flex min-h-[200px] min-w-0 flex-col justify-between gap-[18px] rounded-3xl bg-[#B4322A] px-[30px] py-7 text-left text-[#FFF8EC] sm:col-span-2"
-        >
-          <span className="text-xs font-bold tracking-[0.12em] text-[#F2C06B]">LỜI BÁC DẠY · BẤM ĐỂ ĐỔI</span>
-          <AnimatePresence mode="wait">
-            <motion.blockquote
-              key={quoteIdx}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              className="flex flex-col gap-[18px]"
+      <section className="flex flex-wrap items-stretch gap-4">
+        <div className="flex flex-[2_1_460px] flex-col gap-3.5">
+          <div>
+            <p className="text-[13px] font-extrabold tracking-[.12em] text-primary uppercase">{todayLabel}</p>
+            <h1 className="mt-2 text-[clamp(30px,4.4vw,48px)] leading-[1.08] font-extrabold tracking-[-0.02em]">{data.title}</h1>
+            <p className="mt-3 max-w-[640px] text-[15.5px] leading-[1.65] text-ink-soft">{data.intro}</p>
+          </div>
+          <div className="flex-1 [perspective:800px]">
+            <button
+              ref={quoteRef}
+              type="button"
+              aria-label="Đổi câu trích dẫn"
+              onClick={() => {
+                play('tap')
+                setQi((n) => n + 1)
+                animate(quoteRef.current, [{ transform: 'rotateX(18deg) scale(.97)', opacity: 0.4 }, { transform: 'none', opacity: 1 }], { duration: 360, easing: 'cubic-bezier(.3,1.3,.5,1)' })
+              }}
+              className="relative h-full min-h-[180px] w-full overflow-hidden rounded-[28px] bg-primary p-[clamp(22px,3vw,30px)] text-left text-on-dark"
             >
-              <p style={LORA} className="text-pretty text-[clamp(19px,2.2vw,24px)] italic leading-normal">
+              <span aria-hidden="true" className="absolute top-1.5 right-[22px] font-serif text-[140px] leading-none text-gold/25">
+                ”
+              </span>
+              <span className="relative block font-serif text-[clamp(19px,2.2vw,24px)] leading-normal text-pretty italic" aria-live="polite">
                 “{quote.text}”
-              </p>
-              <footer className="text-[13px] text-[#F6D9C9]">— {quote.source}</footer>
-            </motion.blockquote>
-          </AnimatePresence>
-        </button>
+              </span>
+              <span className="relative mt-4 flex flex-wrap justify-between gap-2.5 text-[13px] text-[#F6D9C9]">
+                <span>— {quote.source}</span>
+                <span className="font-bold">
+                  {(qi % data.quotes.length) + 1}/{data.quotes.length} · chạm để đổi
+                </span>
+              </span>
+            </button>
+          </div>
+        </div>
 
-        <div className="grid grid-rows-2 gap-4">
-          <div className="flex items-center justify-between rounded-[20px] border border-[#E6DFD3] bg-white px-5 py-[18px]">
+        <div className="flex flex-[1_1_300px] flex-col gap-3.5">
+          <div className="flex items-center justify-between gap-3 rounded-3xl border border-line bg-white p-5">
             <div>
-              <p className="text-[13px] font-medium text-[#7A7063]">Việc tốt hôm nay</p>
-              <p className="mt-1 text-4xl font-extrabold leading-tight">
-                <motion.span key={done.length} initial={{ scale: 1.3 }} animate={{ scale: 1 }} className="inline-block">
-                  {done.length}
-                </motion.span>
-                <span className="text-lg font-semibold text-[#A89C8B]">/{total}</span>
+              <p className="text-[13px] font-semibold text-muted">Việc tốt hôm nay</p>
+              <p className="mt-1 text-[40px] leading-none font-extrabold">
+                <span ref={countRef} className="inline-block">
+                  {doneN}
+                </span>
+                <span className="text-[18px] text-faint">/{total}</span>
               </p>
             </div>
             <div
-              className="grid size-14 place-items-center rounded-full transition-all"
+              className="grid size-[76px] place-items-center rounded-full transition-[background] duration-[400ms]"
               style={{ background: `conic-gradient(#B4322A ${frac * 360}deg, #EFE9DF 0)` }}
+              role="progressbar"
+              aria-label="Việc tốt hôm nay"
+              aria-valuemin={0}
+              aria-valuemax={total}
+              aria-valuenow={doneN}
             >
-              <div className="grid size-[42px] place-items-center rounded-full bg-white text-xs font-bold">
-                {Math.round(frac * 100)}%
-              </div>
+              <div className="grid size-[58px] place-items-center rounded-full bg-white text-[14px] font-extrabold">{Math.round(frac * 100)}%</div>
             </div>
           </div>
-
-          <div className="rounded-[20px] bg-[#1F1B16] px-5 py-[18px] text-[#FFF8EC]">
-            <div className="flex justify-between text-[13px] font-medium text-[#BDB2A2]">
+          <div className="flex-1 rounded-3xl bg-ink p-5 text-on-dark">
+            <div className="flex justify-between gap-2.5 text-[13px] font-semibold text-[#BDB2A2]">
               <span>7 ngày gần nhất</span>
-              <span className="font-bold text-[#F2C06B]">{streak(state.log)} ngày chuỗi</span>
+              <span className="font-extrabold text-gold">🔥 {streak(state.log)} ngày chuỗi</span>
             </div>
-            <div className="mt-3 grid grid-cols-7 gap-[5px]">
+            <ol className="mt-3.5 grid grid-cols-7 gap-1.5">
               {week.map((d, i) => {
-                const n = state.log[dayKey(d)]?.length ?? 0
+                const n = (state.log[dayKey(d)] ?? []).length
                 return (
-                  <div key={dayKey(d)} title={`${n} việc`} className="flex flex-col items-center gap-1">
+                  <li key={dayKey(d)} title={`${n} việc`} className="flex flex-col items-center gap-1.5">
                     <div
-                      className="aspect-square w-full max-w-[30px] rounded-[7px]"
-                      style={{
-                        background: heat(n),
-                        outline: i === week.length - 1 ? '1.5px solid #FFF8EC' : 'none',
-                        outlineOffset: 2,
-                      }}
-                    />
-                    <span className="text-[10px] text-[#9C9080]">{d.toLocaleDateString('vi', { weekday: 'narrow' })}</span>
-                  </div>
+                      className={`grid aspect-square w-full max-w-9 place-items-center rounded-[10px] text-[11px] font-extrabold text-ink transition-[background] duration-[400ms] ${i === 6 ? 'outline-[1.5px] outline-offset-2 outline-on-dark' : ''}`}
+                      style={{ background: heat(n) }}
+                    >
+                      {n || ''}
+                    </div>
+                    <span className="text-[11px] font-bold text-[#9C9080]">{d.toLocaleDateString('vi', { weekday: 'narrow' })}</span>
+                  </li>
                 )
               })}
-            </div>
+            </ol>
           </div>
         </div>
       </section>
 
-      <section className="grid grid-cols-[repeat(auto-fill,minmax(min(320px,100%),1fr))] gap-4">
-        {data.virtues.map((v, i) => (
-          <VirtueCard
-            key={v.id}
-            virtue={v}
-            index={i}
-            custom={state.custom[v.id] ?? []}
-            done={done}
-            onToggle={toggle}
-            onAdd={(text) => addCustom(v.id, text)}
-            onRemove={(text) => removeCustom(v.id, text)}
-          />
-        ))}
-
-        <div className="flex flex-col gap-3 rounded-[22px] border border-[#EEDFC4] bg-[#FBF3E4] p-[22px]">
-          <h2 className="text-[22px] font-extrabold">Tự soi, tự sửa</h2>
-          <p className="text-[13.5px] leading-normal text-[#7A6A52]">
-            Nhật ký ngắn cho hôm nay, chỉ lưu trên máy của bạn.
-          </p>
-          <textarea
-            value={state.notes[today] ?? ''}
-            onChange={(e) => setNote(e.target.value)}
-            rows={7}
-            placeholder="Hôm nay mình đã làm tốt điều gì? Điều gì cần sửa?"
-            className="w-full flex-1 resize-none rounded-[14px] border border-[#EEDFC4] bg-[#FFFDF8] p-3.5 text-[14.5px] leading-relaxed outline-none focus:border-[#E59A2F]"
-          />
-        </div>
-      </section>
-
-      <section className="mt-3">
-        <h2 className="mb-3.5 text-2xl font-extrabold tracking-[-0.01em]">Nguyên tắc tu dưỡng đạo đức</h2>
-        <ol className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-4">
-          {data.principles.map((p, i) => (
-            <li key={p.name} className="flex flex-col gap-2.5 rounded-[20px] border border-[#E6DFD3] bg-white p-[22px]">
-              <span className="text-[32px] font-extrabold leading-none text-[#B4322A]">{pad(i + 1)}</span>
-              <h3 className="text-[16.5px] font-bold leading-snug">{p.name}</h3>
-              <p className="text-pretty text-sm leading-relaxed text-[#6B6155]">{p.detail}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <footer className="mt-3 flex justify-center">
-        <button
-          onClick={reset}
-          className="inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-[13px] text-[#A89C8B] hover:text-[#B4322A]"
-        >
-          <RotateCcw className="size-3.5" /> Xóa dữ liệu sổ tay
-        </button>
-      </footer>
-    </div>
-  )
-}
-
-function VirtueCard({ virtue, index, custom, done, onToggle, onAdd, onRemove }) {
-  const [text, setText] = useState('')
-  const actions = [
-    ...virtue.suggestions.map((t) => ({ text: t, custom: false })),
-    ...custom.map((t) => ({ text: t, custom: true })),
-  ]
-  const doneCount = actions.filter((a) => done.includes(`${virtue.id}:${a.text}`)).length
-
-  const submit = (e) => {
-    e.preventDefault()
-    const t = text.trim()
-    if (t && !actions.some((a) => a.text === t)) onAdd(t)
-    setText('')
-  }
-
-  return (
-    <motion.article
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.06 }}
-      className="flex flex-col gap-3.5 rounded-[22px] border border-[#E6DFD3] bg-white p-[22px]"
-    >
-      <div className="flex items-start gap-3.5">
-        <span className="grid size-12 shrink-0 place-items-center rounded-[14px] bg-[#FBF3E4] text-[15px] font-extrabold text-[#B4322A]">
-          {pad(index + 1)}
-        </span>
-        <div className="min-w-0 flex-1">
-          <div className="flex items-baseline justify-between gap-2">
-            <h2 className="text-[22px] font-extrabold tracking-[-0.01em]">{virtue.name}</h2>
-            <span className="text-[13px] font-bold text-[#7A7063]">
-              {doneCount}/{actions.length}
-            </span>
-          </div>
-          <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-[#EFE9DF]">
-            <motion.div
-              className="h-full rounded-full bg-[#E59A2F]"
-              animate={{ width: `${actions.length ? (doneCount / actions.length) * 100 : 0}%` }}
-            />
-          </div>
-        </div>
-      </div>
-
-      <p className="text-pretty text-[13.5px] leading-relaxed text-[#6B6155]">{virtue.meaning}</p>
-
-      <ul className="flex flex-col gap-1.5">
-        <AnimatePresence initial={false}>
-          {actions.map((a) => {
-            const id = `${virtue.id}:${a.text}`
-            const checked = done.includes(id)
-            return (
-              <motion.li
-                key={id}
-                layout
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                className="flex items-center gap-1.5"
-              >
-                <button
-                  onClick={() => onToggle(id)}
-                  aria-pressed={checked}
-                  className={`flex min-h-[44px] flex-1 items-center gap-3 rounded-xl border px-3 py-2.5 text-left text-sm transition-colors ${checked ? 'border-[#BFE0CB] bg-[#EEF7F1] text-[#6B8F78] line-through' : 'border-[#EFE9DF] bg-[#FAF8F4] hover:border-[#D9CFBF] hover:bg-white'}`}
+      <section className="mt-5 grid grid-cols-[repeat(auto-fill,minmax(min(330px,100%),1fr))] gap-4">
+        {data.virtues.map((v, vi) => {
+          const acts = actsOf(v, state.custom)
+          const cnt = acts.filter((a) => done.includes(`${v.id}:${a.t}`)).length
+          const full = acts.length > 0 && cnt === acts.length
+          const col = SEAL[vi % SEAL.length]
+          const sealC = cnt ? col : '#D9CFBF'
+          return (
+            <article key={v.id} className="relative flex flex-col gap-3.5 rounded-[26px] border-[1.5px] bg-white p-[22px] transition-colors duration-300" style={{ borderColor: full ? col : '#E6DFD3' }}>
+              <div className="flex items-start gap-3.5">
+                <div
+                  ref={(el) => (sealRefs.current[v.id] = el)}
+                  aria-hidden="true"
+                  className="relative grid size-[74px] shrink-0 -rotate-10 place-items-center rounded-full border-[3.5px] transition-all duration-[350ms]"
+                  style={{ borderColor: sealC, color: sealC, background: full ? 'rgba(180,50,42,.06)' : 'transparent' }}
                 >
-                  <span
-                    className={`grid size-[22px] shrink-0 place-items-center rounded-[7px] transition-colors ${checked ? 'bg-[#2F7D4F]' : 'border-2 border-[#CFC4B3] bg-white'}`}
-                  >
-                    {checked && (
-                      <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }}>
-                        <Check className="size-3.5 text-white" strokeWidth={3} />
-                      </motion.span>
-                    )}
+                  <span className="absolute inset-[5px] rounded-full border-[1.5px] border-dashed opacity-60" style={{ borderColor: sealC }} />
+                  <span className="px-1.5 text-center leading-[1.05] font-extrabold" style={{ fontSize: v.name.length > 6 ? 11 : 17 }}>
+                    {v.name}
                   </span>
-                  <span>{a.text}</span>
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <h2 className="text-[24px] font-extrabold tracking-[-0.01em]">{v.name}</h2>
+                    <span className="text-[13px] font-extrabold" style={{ color: full ? col : '#7A7063' }}>
+                      {cnt}/{acts.length}
+                    </span>
+                  </div>
+                  <p className="mt-1.5 text-[13.5px] leading-[1.6] text-[#6B6155]">{v.meaning}</p>
+                </div>
+              </div>
+              <div className="h-[7px] overflow-hidden rounded-full bg-track">
+                <div className="h-full rounded-full transition-[width] duration-[450ms] ease-[cubic-bezier(.3,1.3,.4,1)]" style={{ width: `${acts.length ? (cnt / acts.length) * 100 : 0}%`, background: sealC }} />
+              </div>
+              <ul className="flex flex-col gap-2">
+                {acts.map((a) => {
+                  const on = done.includes(`${v.id}:${a.t}`)
+                  return (
+                    <li key={a.t} className={`flex items-center gap-1 rounded-2xl transition-colors duration-[250ms] ${on ? 'bg-paper' : ''}`}>
+                      <button type="button" role="checkbox" aria-checked={on} onClick={(e) => toggle(v, a.t, e)} className="flex min-h-[52px] flex-1 items-center gap-3 px-3 py-2 text-left">
+                        <span
+                          className={`grid size-[26px] shrink-0 place-items-center rounded-lg border-2 text-[14px] font-extrabold text-on-dark transition-all duration-300 ease-[cubic-bezier(.3,1.6,.5,1)] ${on ? 'scale-110 -rotate-6' : ''}`}
+                          style={{ borderColor: on ? col : '#D9CFBF', background: on ? col : '#FFFFFF' }}
+                        >
+                          {on ? '✓' : ''}
+                        </span>
+                        <span className={`text-[14.5px] leading-[1.45] ${on ? 'font-semibold text-ink-soft' : 'font-medium'}`}>{a.t}</span>
+                      </button>
+                      {a.c && (
+                        <button type="button" onClick={() => removeCustom(v, a.t)} aria-label={`Xoá việc: ${a.t}`} className="mr-1.5 grid size-10 shrink-0 place-items-center rounded-full text-[18px] text-faint hover:text-primary">
+                          ×
+                        </button>
+                      )}
+                    </li>
+                  )
+                })}
+              </ul>
+              <div className="flex gap-2">
+                <input
+                  value={drafts[v.id] ?? ''}
+                  onChange={(e) => setDrafts((d) => ({ ...d, [v.id]: e.target.value }))}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault()
+                      addCustom(v)
+                    }
+                  }}
+                  placeholder="Thêm việc của riêng bạn…"
+                  aria-label={`Thêm việc cho đức tính ${v.name}`}
+                  className="min-h-[46px] min-w-0 flex-1 rounded-[14px] border border-line-strong bg-paper px-3.5 text-[14px] outline-none focus:border-primary"
+                />
+                <button type="button" onClick={() => addCustom(v)} aria-label={`Thêm việc cho ${v.name}`} className="size-[46px] shrink-0 rounded-[14px] bg-ink text-[22px] font-bold text-on-dark">
+                  +
                 </button>
-                {a.custom && (
-                  <button
-                    onClick={() => onRemove(a.text)}
-                    aria-label={`Xóa "${a.text}"`}
-                    className="grid size-11 place-items-center rounded-[10px] text-[#A89C8B] hover:bg-[#FBEAE8] hover:text-[#B4322A]"
-                  >
-                    <X className="size-4" />
-                  </button>
-                )}
-              </motion.li>
-            )
-          })}
-        </AnimatePresence>
-      </ul>
+              </div>
+            </article>
+          )
+        })}
 
-      <form onSubmit={submit} className="mt-auto flex gap-2">
-        <input
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="Thêm việc của riêng bạn…"
-          className="min-h-[44px] min-w-0 flex-1 rounded-xl border border-dashed border-[#D9CFBF] bg-transparent px-3 text-sm outline-none focus:border-solid focus:border-[#B4322A]"
-        />
-        <button
-          type="submit"
-          aria-label="Thêm"
-          className="grid w-11 place-items-center rounded-xl bg-[#1F1B16] text-[#FFF8EC] hover:bg-black"
-        >
-          <Plus className="size-4" />
+        <div className="flex flex-col gap-3 rounded-[26px] border border-[#EEDFC4] bg-cream p-[22px]">
+          <h2 className="text-[22px] font-extrabold">Tự soi, tự sửa</h2>
+          <p className="text-[13.5px] leading-[1.55] text-[#7A6A52]">Nhật ký ngắn cho hôm nay, chỉ lưu trên máy của bạn.</p>
+          <textarea
+            value={note}
+            onChange={(e) => setState((s) => ({ ...s, notes: { ...s.notes, [today]: e.target.value } }))}
+            onBlur={(e) => note.trim().length >= 20 && award(`c6-n-${today}`, 10, { clientX: e.target.getBoundingClientRect().left + 80, clientY: e.target.getBoundingClientRect().top + 20 })}
+            placeholder="Hôm nay mình đã làm tốt điều gì? Điều gì cần sửa?"
+            aria-label="Nhật ký tự soi, tự sửa hôm nay"
+            className="min-h-[180px] w-full flex-1 resize-none rounded-2xl border border-[#EEDFC4] bg-[#FFFDF8] p-3.5 text-[14.5px] leading-[1.7] outline-none focus:border-amber"
+          />
+          <p className="text-[12.5px] font-bold text-faint">{note ? `${note.length} ký tự · đã lưu` : 'Chưa có ghi chú hôm nay'}</p>
+        </div>
+      </section>
+
+      <section className="mt-7">
+        <h2 className="mb-3.5 text-[24px] font-extrabold tracking-[-0.01em]">Nguyên tắc tu dưỡng đạo đức</h2>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(260px,100%),1fr))] gap-3.5">
+          {data.principles.map((p, i) => (
+            <div key={p.name} className="flex flex-col gap-2.5 rounded-[22px] border border-line bg-white p-[22px] transition-transform duration-[250ms] hover:-translate-y-1 hover:-rotate-[0.5deg]">
+              <span className="text-[34px] leading-none font-extrabold text-primary">{String(i + 1).padStart(2, '0')}</span>
+              <h3 className="text-[16.5px] leading-[1.35] font-extrabold">{p.name}</h3>
+              <p className="text-[14px] leading-[1.65] text-[#6B6155]">{p.detail}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+      <div className="mt-[22px] flex justify-center">
+        <button type="button" onClick={reset} className="min-h-11 rounded-full px-4 text-[13px] font-bold text-faint hover:text-primary">
+          ↺ Xóa dữ liệu sổ tay
         </button>
-      </form>
-    </motion.article>
+      </div>
+    </>
   )
 }

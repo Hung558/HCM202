@@ -1,176 +1,338 @@
 import { useEffect, useRef, useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd'
-import { Check, CircleAlert, Clock3, GripVertical, Play, RotateCcw, Trophy, X } from 'lucide-react'
-import data from './data.json'
 import { matchPair, secondsLeft, shuffle } from './game.js'
+import { animate, burst, centerOf, shake } from '../_fun/fx.js'
+import { award, play, say } from '../_fun/useGame.js'
 
-export default function MatchingGame() {
+const IDLE = { phase: 'idle', order: [], matched: [], sel: null, miss: 0, wrong: {}, deadline: 0, t0: 0, t1: 0 }
+
+// Ghép nối: kéo mảnh (tổ chức) thả vào năm, hoặc chạm/Enter mảnh rồi chạm/Enter năm.
+// Luật trong game.js: đúng thì khoá cặp, sai không trừ giờ, hết giờ không ghi điểm.
+export default function MatchingGame({ pairs, timeLimit, stats, onFinish }) {
   const [mode, setMode] = useState('timed')
-  const [status, setStatus] = useState('ready')
-  const [order, setOrder] = useState(() => shuffle(data.pairs))
-  const [matched, setMatched] = useState([])
-  const [selected, setSelected] = useState(null)
-  const [attempts, setAttempts] = useState(0)
-  const [feedback, setFeedback] = useState(null)
-  const [showError, setShowError] = useState(false)
-  const [remaining, setRemaining] = useState(data.timeLimitSeconds)
-  const [message, setMessage] = useState('Chọn chế độ rồi bắt đầu. Bạn cần ghép đúng cả 4 cặp.')
-  const deadline = useRef(null)
-  const running = status === 'playing'
-  const finished = status === 'won' || status === 'timeout'
-  const available = order.filter((pair) => !matched.includes(pair.id))
-  const selectedPair = data.pairs.find((pair) => pair.id === selected)
+  const [g, setG] = useState(IDLE)
+  const [over, setOver] = useState(null) // năm đang được kéo qua
+  const [now, setNow] = useState(0)
+  const slotRefs = useRef({})
+  const ended = useRef(false) // chặn kết thúc hai lần (hết giờ đúng lúc ghép cặp cuối)
+  const finishRef = useRef(null)
+  const timed = mode === 'timed'
+  const total = pairs.length
 
+  // Đồng hồ chạy theo mốc kết thúc thật (vẫn đúng khi chuyển tab)
   useEffect(() => {
-    if (!running || mode !== 'timed') return
+    finishRef.current = finish
+  })
+  useEffect(() => {
+    if (g.phase !== 'play') return undefined
     const tick = () => {
-      const left = secondsLeft(deadline.current)
-      setRemaining(left)
-      if (left === 0) {
-        setStatus('timeout')
-        setFeedback(null)
-        setShowError(false)
-        setSelected(null)
-        setMessage('Hết giờ! Xem lời giải bên dưới rồi thử lại nhé.')
-      }
+      const t = Date.now()
+      setNow(t)
+      if (timed && secondsLeft(g.deadline, t) === 0) finishRef.current(false)
     }
     tick()
-    const timer = window.setInterval(tick, 200)
-    return () => window.clearInterval(timer)
-  }, [running, mode])
+    const id = setInterval(tick, 250)
+    return () => clearInterval(id)
+  }, [g.phase, g.deadline, timed])
 
   function start() {
-    setFeedback(null)
-    setShowError(false)
-    setOrder(shuffle(data.pairs))
-    setMatched([])
-    setSelected(null)
-    setAttempts(0)
-    setRemaining(data.timeLimitSeconds)
-    deadline.current = mode === 'timed' ? Date.now() + data.timeLimitSeconds * 1000 : null
-    setStatus('playing')
-    setMessage('Đã bắt đầu! Kéo thẻ vào năm, hoặc chọn thẻ rồi chọn năm tương ứng.')
+    const t = Date.now()
+    ended.current = false
+    setG({ ...IDLE, phase: 'play', order: shuffle(pairs.map((p) => p.id)), deadline: t + timeLimit * 1000, t0: t })
+    setNow(t)
+    play('pick')
+    say(timed ? `Bắt đầu! Bạn có ${timeLimit} giây.` : 'Luyện tập tự do, không giới hạn thời gian.')
   }
 
-  function changeMode(value) {
-    setFeedback(null)
-    setShowError(false)
-    setMode(value)
-    setStatus('ready')
-    setMatched([])
-    setSelected(null)
-    setAttempts(0)
-    setRemaining(data.timeLimitSeconds)
-    deadline.current = null
-    setMessage('Đã đổi chế độ và đặt lại lượt chơi. Bấm Bắt đầu chơi khi bạn sẵn sàng.')
+  function finish(won) {
+    if (ended.current) return
+    ended.current = true
+    const t1 = Date.now()
+    const dur = Math.round((t1 - g.t0) / 1000)
+    setG((x) => ({ ...x, phase: 'over', t1, sel: null }))
+    const record = onFinish(won, dur, mode)
+    if (won) {
+      play('win')
+      setTimeout(() => burst(window.innerWidth / 2, window.innerHeight / 3, 80), 80)
+      say(record ? `Kỷ lục mới: ${dur} giây!` : `Đoàn kết là sức mạnh! Ghép đủ cả ${total} cặp.`)
+    } else {
+      play('lose')
+      say('Hết giờ rồi! Xem giải thích rồi thử lại nhé.')
+    }
   }
 
-  function match(id, year) {
-    if (!running) return
-    if (mode === 'timed' && secondsLeft(deadline.current) === 0) {
-      setRemaining(0)
-      setStatus('timeout')
-      setFeedback(null)
-      setShowError(false)
-      setSelected(null)
-      setMessage('Hết giờ! Xem lời giải bên dưới rồi thử lại nhé.')
-      return
+  function match(id, year, e) {
+    const expired = timed && secondsLeft(g.deadline) === 0
+    const res = matchPair(pairs, g.matched, id, year, expired)
+    if (res === 'ignored') return
+    const el = slotRefs.current[year]
+    if (res === 'correct') {
+      const matched = [...g.matched, id]
+      setG((x) => ({ ...x, matched, sel: null }))
+      play('ok')
+      const p = centerOf(el)
+      award(`c5-${id}`, 15, e ?? { clientX: p.x, clientY: p.y - 40 })
+      burst(p.x, p.y - 40, 26)
+      animate(el, [{ transform: 'scale(1)' }, { transform: 'scale(1.06)' }, { transform: 'scale(1)' }], { duration: 360, easing: 'cubic-bezier(.3,1.5,.5,1)' })
+      const pair = pairs.find((p) => p.id === id)
+      if (matched.length === total) setTimeout(() => finish(true), 450)
+      else say(`Chính xác! ${pair.organization} – ${year}.`)
+    } else {
+      setG((x) => ({ ...x, miss: x.miss + 1, sel: null, wrong: { ...x.wrong, [id]: true } }))
+      play('bad')
+      shake(el)
+      say('Chưa khớp, không bị trừ giờ đâu. Thử năm khác!')
     }
-    const result = matchPair(data.pairs, matched, id, year)
-    if (result === 'ignored') return
-    setAttempts((count) => count + 1)
-    setFeedback({ type: result, id, year })
-    setShowError(result === 'wrong')
-    if (result === 'wrong') {
-      setMessage(`Chưa đúng: ${data.pairs.find((pair) => pair.id === id).organization} không ứng với năm ${year}. Hãy thử một mốc khác.`)
-      return
-    }
-    const next = [...matched, id]
-    setMatched(next)
-    setSelected(null)
-    if (next.length === data.pairs.length) {
-      setStatus('won')
-      if (mode === 'timed') setRemaining(secondsLeft(deadline.current))
-      setMessage('Chính xác! Bạn đã hoàn thành cả 4 cặp. Khám phá ý nghĩa từng mốc bên dưới.')
-    } else setMessage(`Chính xác! Đã ghép ${next.length}/4 cặp. Tiếp tục nhé.`)
   }
+
+  const select = (id) => {
+    play('pick')
+    setG((x) => ({ ...x, sel: x.sel === id ? null : id }))
+  }
+  const quit = () => {
+    play('tap')
+    setG(IDLE)
+  }
+
+  const years = pairs.map((p) => p.year).sort((a, b) => a - b)
+  const remain = secondsLeft(g.deadline, now)
+  const elapsed = Math.round(((g.phase === 'over' ? g.t1 : now) - g.t0) / 1000)
+  const won = g.phase === 'over' && g.matched.length === total
+  const modeLabel = timed ? `Thử thách ${timeLimit} giây` : 'Luyện tập tự do'
+
+  if (g.phase === 'idle')
+    return (
+      <div className="mt-7 flex flex-wrap items-stretch gap-5">
+        <div className="relative flex-[2_1_440px] overflow-hidden rounded-[30px] bg-primary p-[clamp(24px,4vw,40px)] text-on-dark">
+          <span aria-hidden="true" className="absolute -right-[70px] -bottom-[70px] size-[240px] rounded-full bg-gold/20" />
+          <p className="relative text-[12.5px] font-extrabold tracking-[.14em] text-gold uppercase">Ghép nối lịch sử Mặt trận</p>
+          <h2 className="relative mt-2.5 text-[clamp(26px,3.4vw,38px)] leading-[1.15] font-extrabold">Nối mỗi tổ chức với năm ra đời</h2>
+          <p className="relative mt-3 max-w-[540px] text-[15.5px] leading-[1.65] text-on-dark/90">
+            Kéo mảnh ghép vào đúng năm, hoặc chạm mảnh rồi chạm năm. Ghép sai không bị trừ giờ, cứ thử lại. Ghép đúng thì cặp đó được khoá lại.
+          </p>
+          <div role="radiogroup" aria-label="Chế độ chơi" className="relative mt-5 flex w-fit flex-wrap gap-2 rounded-full bg-ink/25 p-[5px]">
+            {[
+              ['timed', `Thử thách ${timeLimit} giây`],
+              ['free', 'Luyện tập tự do'],
+            ].map(([id, label]) => (
+              <button
+                key={id}
+                type="button"
+                role="radio"
+                aria-checked={mode === id}
+                onClick={() => {
+                  play('tap')
+                  setMode(id)
+                }}
+                className={`min-h-11 rounded-full px-[18px] text-[14px] font-extrabold transition-all duration-200 ${mode === id ? 'bg-on-dark text-ink' : 'text-on-dark'}`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+          <button type="button" onClick={start} className="relative mt-[22px] block min-h-14 rounded-full bg-gold px-8 text-[16px] font-extrabold text-ink transition-transform hover:scale-[1.04]">
+            Bắt đầu chơi →
+          </button>
+        </div>
+        <div className="flex flex-[1_1_300px] flex-col gap-3 rounded-[30px] border border-line bg-white p-[22px]">
+          <p className="text-[16px] font-extrabold">Kỷ lục của bạn</p>
+          <div className="flex gap-2.5">
+            <div className="flex-1 rounded-[20px] bg-cream p-4">
+              <div className="text-[30px] font-extrabold text-primary">{stats.best ? `${stats.best}s` : '—'}</div>
+              <div className="text-[13px] font-semibold text-muted">Nhanh nhất · {timeLimit} giây</div>
+            </div>
+            <div className="flex-1 rounded-[20px] bg-paper p-4">
+              <div className="text-[30px] font-extrabold">{stats.plays}</div>
+              <div className="text-[13px] font-semibold text-muted">Lượt đã chơi</div>
+            </div>
+          </div>
+          <p className="text-[13px] leading-[1.6] text-muted">Lượt luyện tập tự do không tính vào kỷ lục thời gian.</p>
+        </div>
+      </div>
+    )
+
+  if (g.phase === 'over')
+    return (
+      <>
+        <div className={`relative mt-7 overflow-hidden rounded-[30px] p-[clamp(24px,4vw,40px)] text-center text-on-dark ${won ? 'bg-success' : 'bg-primary'}`} role="status">
+          <span aria-hidden="true" className="absolute -top-[60px] -left-[60px] size-[200px] rounded-full bg-gold/[.18]" />
+          <p className="relative text-[12.5px] font-extrabold tracking-[.14em] text-gold uppercase">{modeLabel}</p>
+          <h2 className="relative mt-2 text-[clamp(28px,3.8vw,42px)] font-extrabold">{won ? `Ghép đủ ${total} cặp!` : 'Hết giờ!'}</h2>
+          <p className="relative mt-2.5 text-[16px]">
+            {won
+              ? `Hoàn thành trong ${elapsed} giây · sai ${g.miss} lần${timed && stats.best === elapsed ? ' · kỷ lục mới!' : ''}`
+              : `Bạn ghép đúng ${g.matched.length} / ${total} cặp. Xem giải thích bên dưới.`}
+          </p>
+          <div className="relative mt-5 flex flex-wrap justify-center gap-2.5">
+            <button type="button" onClick={start} className="min-h-12 rounded-full bg-gold px-6 text-[15px] font-extrabold text-ink">
+              Chơi lại
+            </button>
+            <button type="button" onClick={quit} className="min-h-12 rounded-full border border-on-dark/40 px-6 text-[15px] font-bold">
+              Đổi chế độ
+            </button>
+          </div>
+        </div>
+        <div className="mt-4 grid grid-cols-[repeat(auto-fit,minmax(min(260px,100%),1fr))] gap-3">
+          {[...pairs]
+            .sort((a, b) => a.year - b.year)
+            .map((p) => {
+              const ok = g.matched.includes(p.id)
+              return (
+                <div key={p.id} className="flex flex-col gap-2 rounded-3xl border border-line bg-white p-5">
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-[26px] font-extrabold text-primary">{p.year}</span>
+                    <span className={`rounded-full px-2.5 py-1 text-[12px] font-extrabold ${ok ? 'bg-success-soft text-success' : 'bg-[#FBEDEB] text-primary'}`}>
+                      {ok ? (g.wrong[p.id] ? 'Đúng sau khi thử lại' : 'Đúng ngay') : 'Chưa ghép'}
+                    </span>
+                  </div>
+                  <p className="text-[16px] leading-[1.35] font-extrabold">{p.organization}</p>
+                  <p className="text-[14px] leading-[1.65] text-ink-soft">{p.explanation}</p>
+                </div>
+              )
+            })}
+        </div>
+      </>
+    )
+
+  const frac = timed ? remain / timeLimit : 1
+  const ringC = !timed ? '#2F7D4F' : remain <= 10 ? '#B4322A' : '#E59A2F'
+  const pieces = g.order.filter((id) => !g.matched.includes(id)).map((id) => pairs.find((p) => p.id === id))
 
   return (
-    <section aria-label="Trò chơi ghép nối">
-      <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_310px]">
-        <div className="card p-[22px]">
-          <p className="eyebrow">04 dấu mốc · 01 hành trình đoàn kết</p>
-          <h2 className="mt-3 text-[22px] font-extrabold tracking-[-0.01em]">Đưa tổ chức về đúng năm</h2>
-          <p id="matching-help" className="mt-3 text-[15.5px] leading-[1.65] text-ink-soft">Kéo tên tổ chức ở cột phải vào mốc năm ở cột trái. Bạn cũng có thể bấm chọn một tổ chức rồi bấm vào năm; dùng Tab và Enter hoặc Space khi thao tác bằng bàn phím.</p>
-          <fieldset className="mt-5 flex flex-wrap gap-3">
-            <legend className="mb-2 text-sm font-semibold">Chế độ chơi</legend>
-            {[['timed', 'Thử thách 60 giây'], ['practice', 'Luyện tập tự do']].map(([value, label]) => <label key={value} className="flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-line-strong px-4 text-sm"><input type="radio" name="chuong5-mode" value={value} checked={mode === value} onChange={() => changeMode(value)} />{label}</label>)}
-          </fieldset>
-          <button className="btn btn-primary mt-5" onClick={start}>{status === 'ready' ? <Play className="size-4" /> : <RotateCcw className="size-4" />}{status === 'ready' ? 'Bắt đầu chơi' : 'Chơi lại'}</button>
-          <p className="mt-3 text-xs leading-relaxed text-muted">Ghép sai được thử lại. Chơi lại hoặc đổi chế độ sẽ xóa kết quả lượt hiện tại. Đồng hồ vẫn chạy khi chuyển sang Học bài.</p>
+    <DragDropContext
+      onDragStart={(s) => setG((x) => ({ ...x, sel: s.draggableId }))}
+      onDragUpdate={(u) => setOver(u.destination?.droppableId.startsWith('y-') ? Number(u.destination.droppableId.slice(2)) : null)}
+      onDragEnd={(r) => {
+        setOver(null)
+        if (r.destination?.droppableId.startsWith('y-')) match(r.draggableId, Number(r.destination.droppableId.slice(2)))
+      }}
+    >
+      <div className="mt-7 flex flex-wrap items-center gap-3.5">
+        <div
+          className="grid size-[72px] shrink-0 place-items-center rounded-full transition-[background] duration-300"
+          style={{ background: `conic-gradient(${ringC} ${frac * 360}deg, #EFE9DF 0)` }}
+          role="timer"
+          aria-label={timed ? `Còn ${remain} giây` : 'Không giới hạn thời gian'}
+        >
+          <div className={`grid size-14 place-items-center rounded-full bg-paper text-[18px] font-extrabold ${timed && remain <= 10 ? 'text-primary' : ''}`}>{timed ? `${remain}s` : '∞'}</div>
         </div>
-        <div className="rounded-3xl bg-ink p-6 text-on-dark">
-          <div className="flex items-center gap-2 text-sm text-on-dark/80"><Clock3 className="size-4" />{mode === 'timed' ? 'Thời gian còn lại' : 'Không giới hạn thời gian'}</div>
-          <p role="timer" aria-label={mode === 'timed' ? `Còn ${remaining} giây` : 'Không giới hạn'} className={`mt-3 text-5xl font-extrabold tabular-nums ${remaining <= 10 && mode === 'timed' ? 'text-gold' : ''}`}>{mode === 'timed' ? `${String(Math.floor(remaining / 60)).padStart(2, '0')}:${String(remaining % 60).padStart(2, '0')}` : '∞'}</p>
-          <div className="mt-7 flex items-center justify-between text-sm"><span>Đã ghép đúng</span><strong>{matched.length} / {data.pairs.length}</strong></div>
-          <div role="progressbar" aria-label="Tiến độ ghép nối" aria-valuemin={0} aria-valuemax={data.pairs.length} aria-valuenow={matched.length} className="mt-3 h-2 overflow-hidden rounded-full bg-on-dark/20"><div className="h-full rounded-full bg-amber transition-[width]" style={{ width: `${matched.length / data.pairs.length * 100}%` }} /></div>
-          <p className="mt-4 text-sm text-on-dark/80">{attempts} lượt ghép · {attempts - matched.length} lượt chưa đúng</p>
+        <div className="min-w-[200px] flex-1">
+          <p className="text-[17px] font-extrabold" aria-live="polite">
+            {g.matched.length} / {total} cặp đã ghép
+          </p>
+          <p className="mt-0.5 text-[13.5px] font-semibold text-muted">
+            {modeLabel} · sai {g.miss} lần
+          </p>
         </div>
+        <button type="button" onClick={quit} className="btn btn-outline bg-white text-[13.5px] font-bold">
+          Đổi chế độ
+        </button>
       </div>
-      <div role="status" aria-live="polite" aria-atomic="true" className={`my-5 flex min-h-14 items-start gap-3 rounded-2xl border p-4 text-sm leading-relaxed ${feedback?.type === 'wrong' ? 'border-primary bg-primary/10 text-primary' : feedback?.type === 'correct' || status === 'won' ? 'border-success bg-success-soft text-success' : 'border-line bg-cream text-ink-soft'}`}>
-        {feedback?.type === 'wrong' && <CircleAlert className="mt-0.5 size-5 shrink-0" aria-hidden="true" />}
-        {feedback?.type === 'correct' && <Check className="mt-0.5 size-5 shrink-0" aria-hidden="true" />}
-        <p key={attempts}>{message}</p>
+
+      <div className="mt-5 rounded-[28px] bg-ink p-5">
+        <p className="mb-3 text-[12px] font-extrabold tracking-[.14em] text-gold uppercase">Mảnh ghép · kéo hoặc chạm để chọn</p>
+        <Droppable droppableId="tray" direction="horizontal" isDropDisabled>
+          {(dp) => (
+            <div ref={dp.innerRef} {...dp.droppableProps} className="flex min-h-14 flex-wrap gap-2.5">
+              {pieces.map((p, i) => {
+                const sel = g.sel === p.id
+                return (
+                  <Draggable key={p.id} draggableId={p.id} index={i}>
+                    {(dr, snap) => (
+                      <div
+                        ref={dr.innerRef}
+                        {...dr.draggableProps}
+                        {...dr.dragHandleProps}
+                        role="button"
+                        aria-pressed={sel}
+                        aria-label={`Mảnh ghép: ${p.organization}. Enter để chọn, rồi chọn năm.`}
+                        onClick={() => select(p.id)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            e.preventDefault()
+                            select(p.id)
+                          }
+                        }}
+                        className="outline-none"
+                      >
+                        <span
+                          className={`relative flex min-h-[54px] cursor-grab items-center rounded-2xl pr-[22px] pl-[30px] text-[15px] font-extrabold text-ink transition-all duration-[250ms] ease-[cubic-bezier(.3,1.4,.5,1)] select-none ${
+                            sel || snap.isDragging ? '-translate-y-[5px] -rotate-2 scale-[1.04] bg-gold outline-2 outline-offset-[3px] outline-gold' : 'bg-on-dark'
+                          }`}
+                        >
+                          <span aria-hidden="true" className="absolute top-1/2 -left-[9px] -mt-[9px] size-[18px] rounded-full bg-ink" />
+                          {p.organization}
+                        </span>
+                      </div>
+                    )}
+                  </Draggable>
+                )
+              })}
+              {dp.placeholder}
+              {!pieces.length && <span className="flex items-center text-[15px] font-extrabold text-gold">Đã ghép đủ, xem kết quả bên dưới!</span>}
+            </div>
+          )}
+        </Droppable>
       </div>
-      {showError && running && feedback?.type === 'wrong' && (
-        <div key={`error-${attempts}`} role="alert" aria-atomic="true" className="fixed inset-x-4 bottom-5 z-30 mx-auto flex max-w-[560px] items-start gap-3 rounded-2xl border border-primary bg-primary p-4 text-on-dark sm:inset-x-auto sm:right-5">
-          <CircleAlert className="mt-1 size-6 shrink-0" aria-hidden="true" />
-          <div className="min-w-0 flex-1">
-            <p className="font-bold">Ghép nối chưa đúng!</p>
-            <p className="mt-1 text-sm leading-relaxed">{message}</p>
-          </div>
-          <button type="button" aria-label="Đóng thông báo ghép sai" onClick={() => setShowError(false)} className="grid min-h-11 min-w-11 shrink-0 place-items-center rounded-full hover:bg-on-dark/20 focus-visible:outline-2 focus-visible:outline-on-dark"><X className="size-5" /></button>
-        </div>
-      )}
-      {selectedPair && running && <p className="mb-4 text-sm font-semibold text-primary">Đang chọn: {selectedPair.organization}. Chọn năm phù hợp ở cột trái.</p>}
-      <DragDropContext onDragStart={() => setSelected(null)} onDragEnd={({ draggableId, destination }) => { if (destination?.droppableId.startsWith('year-')) match(draggableId, Number(destination.droppableId.slice(5))) }} dragHandleUsageInstructions="Nhấn Space để nhấc thẻ, dùng phím mũi tên để di chuyển và Space để thả. Nhấn Escape để hủy. Hoặc dùng nút Chọn tổ chức rồi chọn năm.">
-        <div className="grid grid-cols-2 gap-3 sm:gap-6" aria-describedby="matching-help">
-          <div className="min-w-0"><h3 className="mb-3 text-sm font-bold text-muted">01 · Năm thành lập</h3>
-            <div className="space-y-3">{data.pairs.map((pair) => {
-              const done = matched.includes(pair.id)
-              const wrong = feedback?.type === 'wrong' && feedback.year === pair.year
-              return <Droppable key={pair.id} droppableId={`year-${pair.year}`} isDropDisabled={!running || done}>
-                {(provided, snapshot) => <div ref={provided.innerRef} {...provided.droppableProps} className={`min-h-32 rounded-2xl border-2 p-3 transition-colors sm:p-5 ${done ? 'border-success bg-success-soft' : wrong ? 'border-primary bg-primary/10' : snapshot.isDraggingOver ? 'border-dashed border-primary bg-primary/10' : 'border-dashed border-line-strong bg-white'}`}>
-                  <button disabled={!running || done || !selected} onClick={() => match(selected, pair.year)} aria-label={`Ghép tổ chức đã chọn vào năm ${pair.year}`} className="min-h-11 w-full rounded-xl text-left focus-visible:outline-2 focus-visible:outline-primary">
-                    <span className={`flex items-center justify-between gap-1 text-[clamp(22px,4vw,30px)] font-extrabold ${done ? 'text-success' : wrong ? 'text-primary' : 'text-amber'}`}>{pair.year}{done && <Check className="size-5 shrink-0" aria-hidden="true" />}{wrong && <X className="size-5 shrink-0 text-primary" aria-hidden="true" />}</span>
-                    <span className="mt-1 block break-words text-xs leading-relaxed text-ink-soft sm:text-sm">{done ? pair.organization : selected ? 'Bấm để ghép vào đây' : 'Thả tổ chức vào đây'}</span>
-                  </button>{provided.placeholder}
-                  {wrong && <p className="mt-2 text-xs font-bold text-primary">Chưa khớp tổ chức. Thử lại nhé!</p>}
-                </div>}
+
+      <div className="relative mt-[22px]">
+        <div aria-hidden="true" className="absolute top-[52px] right-5 left-5 h-1.5 rounded-md bg-line max-[520px]:hidden" />
+        <div
+          aria-hidden="true"
+          className="absolute top-[52px] left-5 h-1.5 rounded-md bg-success transition-[width] duration-500 ease-[cubic-bezier(.3,1.2,.4,1)] max-[520px]:hidden"
+          style={{ width: `calc((100% - 40px) * ${g.matched.length / total})` }}
+        />
+        <div className="relative grid grid-cols-[repeat(auto-fit,minmax(min(220px,100%),1fr))] gap-3.5">
+          {years.map((y) => {
+            const p = pairs.find((z) => z.year === y)
+            const done = g.matched.includes(p.id)
+            const hot = over === y
+            const armed = g.sel && !done
+            return (
+              <Droppable key={y} droppableId={`y-${y}`} isDropDisabled={done}>
+                {(dp) => (
+                  <div ref={dp.innerRef} {...dp.droppableProps}>
+                    <div
+                      ref={(el) => (slotRefs.current[y] = el)}
+                      role="button"
+                      tabIndex={0}
+                      aria-label={done ? `${y}: ${p.organization}` : `Năm ${y}${armed ? ', Enter để thả mảnh đã chọn' : ''}`}
+                      onClick={(e) => g.sel && match(g.sel, y, e)}
+                      onKeyDown={(e) => {
+                        if ((e.key === 'Enter' || e.key === ' ') && g.sel) {
+                          e.preventDefault()
+                          match(g.sel, y, e)
+                        }
+                      }}
+                      className="flex cursor-pointer flex-col items-center gap-3 rounded-3xl outline-offset-4 focus-visible:outline-2 focus-visible:outline-primary"
+                    >
+                      <div
+                        className={`grid size-[110px] place-items-center rounded-full border-4 text-[28px] font-extrabold tracking-[-0.02em] transition-all duration-300 ease-[cubic-bezier(.3,1.4,.5,1)] ${
+                          done ? 'border-success bg-success text-on-dark' : hot ? 'scale-[1.08] border-primary bg-primary text-on-dark' : armed ? 'border-primary bg-white' : 'border-line-strong bg-white'
+                        }`}
+                      >
+                        {y}
+                      </div>
+                      <div
+                        className={`flex min-h-[86px] w-full items-center justify-center rounded-[20px] border-[1.5px] px-3.5 py-3 text-center transition-all duration-300 ${
+                          done ? 'border-success bg-success-soft' : hot ? 'border-dashed border-primary bg-cream' : 'border-dashed border-line-strong bg-white'
+                        }`}
+                      >
+                        {done ? (
+                          <span className="text-[14.5px] leading-[1.35] font-extrabold text-success">✓ {p.organization}</span>
+                        ) : (
+                          <span className="text-[13.5px] font-bold text-faint">{armed ? 'Chạm để thả vào đây' : 'Thả mảnh ghép'}</span>
+                        )}
+                      </div>
+                    </div>
+                    <span className="hidden">{dp.placeholder}</span>
+                  </div>
+                )}
               </Droppable>
-            })}</div>
-          </div>
-          <div className="min-w-0"><h3 className="mb-3 text-sm font-bold text-muted">02 · Tên tổ chức</h3>
-            <Droppable droppableId="bank" isDropDisabled>
-              {(provided) => <div ref={provided.innerRef} {...provided.droppableProps} className="min-h-48 space-y-3">
-                {available.map((pair, index) => <Draggable key={pair.id} draggableId={pair.id} index={index} isDragDisabled={!running}>
-                  {(drag, snapshot) => <div ref={drag.innerRef} {...drag.draggableProps} className={`min-h-32 rounded-2xl border p-3 sm:p-5 ${feedback?.type === 'wrong' && feedback.id === pair.id ? 'border-primary bg-primary/10' : selected === pair.id || snapshot.isDragging ? 'border-primary bg-cream' : 'border-line bg-white'} ${!running ? 'opacity-60' : ''}`}>
-                    <div {...drag.dragHandleProps} aria-label={`Kéo ${pair.organization}`} className="flex min-h-11 items-start gap-2 rounded-lg text-sm font-bold leading-relaxed focus-visible:outline-2 focus-visible:outline-primary"><GripVertical className="mt-0.5 size-4 shrink-0 text-faint" aria-hidden="true" /><span className="break-words">{pair.organization}</span></div>
-                    <button disabled={!running} aria-pressed={selected === pair.id} onClick={() => setSelected(selected === pair.id ? null : pair.id)} className="mt-2 min-h-11 rounded-full border border-line-strong px-3 text-xs font-semibold hover:bg-paper disabled:cursor-not-allowed">{selected === pair.id ? 'Bỏ chọn' : 'Chọn tổ chức'}</button>
-                    {feedback?.type === 'wrong' && feedback.id === pair.id && <p className="mt-2 flex items-center gap-1 text-xs font-bold text-primary"><CircleAlert className="size-4 shrink-0" aria-hidden="true" />Chọn một năm khác</p>}
-                  </div>}
-                </Draggable>)}{provided.placeholder}
-                {available.length === 0 && <div className="rounded-2xl bg-success-soft p-6 text-center text-success"><Trophy className="mx-auto mb-3 size-8" /><p className="text-sm font-semibold">Tất cả đã về đúng vị trí!</p></div>}
-              </div>}
-            </Droppable>
-          </div>
+            )
+          })}
         </div>
-      </DragDropContext>
-      {finished && <section className="card mt-6 p-[22px]" aria-label="Kết quả và lời giải">
-        <h2 className="flex items-center gap-3 text-[22px] font-extrabold"><Trophy className="size-6 text-amber" />{status === 'won' ? 'Hoàn thành thử thách!' : 'Cùng ôn lại các dấu mốc'}</h2>
-        <p className="mt-3 text-ink-soft">Bạn ghép đúng {matched.length}/{data.pairs.length} cặp sau {attempts} lượt. {status === 'won' && mode === 'timed' ? `Thời gian thực hiện: ${data.timeLimitSeconds - remaining} giây.` : ''}</p>
-        <div className="mt-5 grid gap-4 sm:grid-cols-2">{data.pairs.map((pair) => <div key={pair.id} className="rounded-2xl bg-paper p-5"><p className="text-xs font-semibold text-muted">{matched.includes(pair.id) ? 'Đã ghép đúng' : 'Chưa ghép được'}</p><p className="mt-2 text-xl font-extrabold text-primary">{pair.year}</p><h3 className="mt-2 font-bold">{pair.organization}</h3><p className="mt-2 text-sm leading-relaxed text-ink-soft">{pair.explanation}</p></div>)}</div>
-      </section>}
-    </section>
+      </div>
+    </DragDropContext>
   )
 }

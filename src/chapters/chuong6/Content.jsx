@@ -1,166 +1,156 @@
 import { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowLeft, ArrowRight, Check } from 'lucide-react'
+import { motion } from 'framer-motion'
 import data from './data.json'
-import { READ_KEY, load, pad, save } from './utils.js'
+import Hero from '../_fun/Hero.jsx'
+import { burst, pt } from '../_fun/fx.js'
+import { award, play, say } from '../_fun/useGame.js'
 
-const LORA = { fontFamily: "'Lora', serif" }
+// Màu thẻ tiêu đề theo phần: đỏ / vàng / xanh rêu / nâu
+const PAL = [
+  { box: 'bg-primary text-on-dark', blob: 'bg-gold/[.22]', num: 'bg-primary text-on-dark' },
+  { box: 'bg-gold text-ink', blob: 'bg-primary/16', num: 'bg-gold text-ink' },
+  { box: 'bg-[#2F5E46] text-on-dark', blob: 'bg-gold/20', num: 'bg-[#2F5E46] text-on-dark' },
+  { box: 'bg-[#3A2F25] text-on-dark', blob: 'bg-amber/30', num: 'bg-[#3A2F25] text-on-dark' },
+]
+const C = data.content
+const shortTitle = (t) => t.replace('Tư tưởng Hồ Chí Minh về ', '').replace(/^./, (c) => c.toUpperCase())
 
-export default function Content({ onNext }) {
-  const sections = data.content
+// Tab Học bài: hero tối có 4 thẻ phần; thẻ tiêu đề phần; các nội dung là accordion 2 cột.
+export default function Content({ read, setRead, onDone }) {
   const [active, setActive] = useState(0)
-  const [read, setRead] = useState(() => load(READ_KEY, {}))
-  const cur = sections[active]
-  const readCount = sections.filter((s) => read[s.id]).length
-  const isLast = active === sections.length - 1
+  const [open, setOpen] = useState({ 0: true })
+  const x = C[active]
+  const pal = PAL[active % PAL.length]
+  const isRead = !!read[x.id]
+  const readN = C.filter((c) => read[c.id]).length
+  const quoteSum = /^["“]/.test(x.summary)
 
-  const select = (i) => {
+  const go = (i) => {
+    play('tap')
     setActive(i)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    setOpen({ 0: true })
   }
 
-  const toggleRead = () => {
-    const next = { ...read, [cur.id]: !read[cur.id] }
-    setRead(next)
-    save(READ_KEY, next)
+  function toggleRead(e) {
+    if (!isRead) {
+      play('ok')
+      award(`c6-r-${x.id}`, 10, e)
+      const p = pt(e)
+      burst(p.x, p.y, 24, 'petal')
+      say(readN + 1 === C.length ? 'Học xong cả 4 phần! Sang Rèn luyện thôi.' : `Đã học phần ${x.numeral}.`)
+    }
+    setRead({ ...read, [x.id]: !isRead })
   }
 
   return (
-    <div className="mx-auto max-w-[1180px] px-5 pb-20 pt-10">
-      <header className="mb-9 flex flex-wrap items-end justify-between gap-6">
-        <div className="max-w-[760px]">
-          <p className="text-[13px] font-bold uppercase tracking-[0.12em] text-[#B4322A]">{data.chapter} · Học bài</p>
-          <h1 className="mt-2.5 text-balance text-[clamp(30px,4.6vw,52px)] font-extrabold leading-[1.08] tracking-[-0.02em]">
-            {data.chapterTitle}
-          </h1>
-        </div>
-        <div className="min-w-[200px] rounded-[18px] border border-[#E6DFD3] bg-white px-[18px] py-4">
-          <div className="flex justify-between text-[13px] font-medium text-[#7A7063]">
-            <span>Tiến độ học</span>
-            <span className="font-bold text-[#1F1B16]">
-              {readCount}/{sections.length}
-            </span>
-          </div>
-          <div className="mt-2.5 h-2 overflow-hidden rounded-full bg-[#EFE9DF]">
-            <motion.div
-              className="h-full rounded-full bg-[#B4322A]"
-              animate={{ width: `${(readCount / sections.length) * 100}%` }}
-            />
-          </div>
-        </div>
-      </header>
-
-      <div className="flex flex-wrap items-start gap-7">
-        <aside className="flex max-w-[340px] flex-[1_1_260px] flex-col gap-2 md:sticky md:top-[88px]">
-          {sections.map((s, i) => {
+    <>
+      <Hero num="VI" eyebrow={`${data.chapter} · Học bài`} title={data.chapterTitle}>
+        <div className="mt-[26px] grid grid-cols-[repeat(auto-fit,minmax(min(220px,100%),1fr))] gap-2.5">
+          {C.map((c, i) => {
             const on = i === active
+            const rd = !!read[c.id]
             return (
               <button
-                key={s.id}
-                onClick={() => select(i)}
-                aria-current={on ? 'true' : undefined}
-                className={`flex w-full items-center gap-3.5 rounded-2xl p-3.5 text-left transition-colors ${on ? 'bg-[#1F1B16] text-[#FFF8EC]' : 'border border-[#E6DFD3] bg-white hover:border-[#CFC4B3]'}`}
+                key={c.id}
+                type="button"
+                aria-current={on ? 'step' : undefined}
+                onClick={() => go(i)}
+                className={`relative min-h-[110px] overflow-hidden rounded-[22px] border-[1.5px] px-[18px] py-4 text-left transition-all duration-300 ease-[cubic-bezier(.3,1.3,.5,1)] ${
+                  on ? '-translate-y-1 border-gold bg-gold text-ink' : rd ? 'border-success bg-on-dark/5' : 'border-on-dark/14 bg-on-dark/5'
+                }`}
               >
-                <span
-                  className={`grid size-10 shrink-0 place-items-center rounded-xl text-sm font-extrabold ${on ? 'bg-[#B4322A] text-[#FFF8EC]' : 'bg-[#F5F1EA] text-[#B4322A]'}`}
-                >
-                  {s.numeral}
+                <span aria-hidden="true" className="absolute -right-1.5 -bottom-[26px] text-[84px] leading-none font-extrabold opacity-16">
+                  {c.numeral}
                 </span>
-                <span className="flex-1 text-sm font-semibold leading-snug">
-                  {s.title.replace('Tư tưởng Hồ Chí Minh về', 'Về')}
+                <span className="relative flex justify-between gap-2 text-[12px] font-extrabold tracking-[.1em]">
+                  <span>PHẦN {c.numeral}</span>
+                  <span>{rd ? '✓ ĐÃ HỌC' : `${c.parts.length} NỘI DUNG`}</span>
                 </span>
-                {read[s.id] && (
-                  <span className={`text-xs font-bold ${on ? 'text-[#F2C06B]' : 'text-[#2F7D4F]'}`}>Đã học</span>
-                )}
+                <span className="relative mt-2.5 block text-[15.5px] leading-[1.3] font-extrabold">{shortTitle(c.title)}</span>
               </button>
             )
           })}
-          <button
-            onClick={onNext}
-            className="mt-3 flex items-center justify-between rounded-2xl bg-[#F2C06B] p-4 text-left text-sm font-bold text-[#1F1B16] hover:bg-[#EDB453]"
-          >
-            Bắt đầu rèn luyện <ArrowRight className="size-4" />
-          </button>
-        </aside>
+        </div>
+      </Hero>
 
-        <AnimatePresence mode="wait">
-          <motion.article
-            key={cur.id}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.2 }}
-            className="flex min-w-0 flex-[3_1_520px] flex-col gap-4"
-          >
-            <div className="rounded-3xl border border-[#E6DFD3] bg-white p-[clamp(22px,4vw,40px)]">
-              <div className="flex items-center gap-3">
-                <span className="text-[13px] font-bold tracking-[0.1em] text-[#B4322A]">PHẦN {cur.numeral}</span>
-                <span className="h-px flex-1 bg-[#EFE9DF]" />
-              </div>
-              <h2 className="mt-3 text-balance text-[clamp(24px,3vw,34px)] font-extrabold leading-tight tracking-[-0.015em]">
-                {cur.title}
-              </h2>
-              <p
-                style={LORA}
-                className="mt-[22px] text-pretty rounded-2xl bg-[#FBF3E4] px-[22px] py-5 text-lg italic leading-relaxed text-[#4A3F31]"
-              >
-                {cur.summary}
-              </p>
-            </div>
+      <motion.div key={x.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.32, ease: 'easeOut' }} className="mt-6 flex flex-col gap-4">
+        <div className={`relative overflow-hidden rounded-[28px] p-[clamp(22px,3.4vw,36px)] ${pal.box}`}>
+          <span aria-hidden="true" className={`absolute -top-10 -right-10 size-[180px] rounded-full ${pal.blob}`} />
+          <p className="relative text-[12.5px] font-extrabold tracking-[.14em] uppercase opacity-85">
+            Phần {x.numeral} · {x.parts.length} nội dung
+          </p>
+          <h2 className="relative mt-2.5 text-[clamp(24px,3vw,34px)] leading-[1.15] font-extrabold tracking-[-0.02em]">{x.title}</h2>
+          <p className={`relative mt-3.5 max-w-[820px] text-[16.5px] leading-[1.7] ${quoteSum ? 'font-serif italic' : ''}`}>{x.summary}</p>
+        </div>
 
-            {cur.parts.map((p, i) => (
-              <div
-                key={p.title}
-                className="grid grid-cols-[48px_minmax(0,1fr)] gap-4 rounded-[20px] border border-[#E6DFD3] bg-white px-[clamp(20px,3vw,32px)] py-6"
-              >
-                <span className="text-[28px] font-extrabold leading-none text-[#E59A2F]">{pad(i + 1)}</span>
-                <div>
-                  <h3 className="text-lg font-bold leading-snug">{p.title}</h3>
-                  <ul className="mt-3.5 flex flex-col gap-2.5">
-                    {p.points.map((pt) => (
-                      <li key={pt} className="flex gap-3 text-pretty text-[15.5px] leading-[1.65] text-[#3D352B]">
-                        <span className="mt-[11px] size-1.5 shrink-0 rounded-full bg-[#B4322A]" />
-                        <span>{pt}</span>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(420px,100%),1fr))] items-start gap-3.5">
+          {x.parts.map((p, i) => {
+            const isOpen = !!open[i]
+            return (
+              <div key={p.title} className={`overflow-hidden rounded-3xl border-[1.5px] bg-white transition-colors duration-300 ${isOpen ? 'border-amber' : 'border-line'}`}>
+                <button
+                  type="button"
+                  aria-expanded={isOpen}
+                  onClick={(e) => {
+                    play('tap')
+                    if (!isOpen) award(`c6-p-${x.id}-${i}`, 2, e)
+                    setOpen((o) => ({ ...o, [i]: !isOpen }))
+                  }}
+                  className={`flex min-h-[72px] w-full items-center gap-3.5 px-5 py-[18px] text-left transition-colors duration-[250ms] ${isOpen ? 'bg-cream' : 'bg-white'}`}
+                >
+                  <span className={`grid size-11 shrink-0 place-items-center rounded-[14px] text-[15px] font-extrabold transition-all duration-300 ${isOpen ? pal.num : 'bg-paper text-primary'}`}>
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span className="flex-1 text-[16.5px] leading-[1.3] font-extrabold">{p.title}</span>
+                  <span className="shrink-0 text-[12px] font-bold text-muted">{p.points.length} ý</span>
+                  <span aria-hidden="true" className={`grid size-[30px] shrink-0 place-items-center rounded-full border-[1.5px] border-line-strong font-extrabold transition-transform duration-300 ${isOpen ? 'rotate-45' : ''}`}>
+                    +
+                  </span>
+                </button>
+                {isOpen && (
+                  <motion.ul initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }} className="flex flex-col gap-2.5 px-5 pt-1 pb-5">
+                    {p.points.map((t) => (
+                      <li key={t} className="flex items-start gap-3 rounded-2xl bg-paper px-4 py-3.5">
+                        <span aria-hidden="true" className="mt-[9px] size-2 shrink-0 rounded-full bg-amber" />
+                        <span className="text-[15px] leading-[1.75] text-pretty">{t}</span>
                       </li>
                     ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-
-            <div className="mt-2 flex flex-wrap items-center gap-2.5">
-              {active > 0 && (
-                <button
-                  onClick={() => select(active - 1)}
-                  className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-[#D9CFBF] px-[18px] text-sm font-semibold hover:bg-white"
-                >
-                  <ArrowLeft className="size-4" /> Phần trước
-                </button>
-              )}
-              <div className="flex-1" />
-              <button
-                onClick={toggleRead}
-                aria-pressed={!!read[cur.id]}
-                className={`inline-flex min-h-[44px] items-center gap-2 rounded-full border px-[18px] text-sm font-semibold ${read[cur.id] ? 'border-[#BFE0CB] bg-[#E8F5ED] text-[#2F7D4F]' : 'border-[#D9CFBF] bg-white'}`}
-              >
-                {read[cur.id] ? (
-                  <>
-                    <Check className="size-4" strokeWidth={3} /> Đã học xong
-                  </>
-                ) : (
-                  'Đánh dấu đã học'
+                  </motion.ul>
                 )}
-              </button>
-              <button
-                onClick={isLast ? onNext : () => select(active + 1)}
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-[#B4322A] px-5 text-sm font-semibold text-[#FFF8EC] hover:bg-[#8A1F19]"
-              >
-                {isLast ? 'Sang Sổ tay rèn luyện' : 'Phần tiếp'} <ArrowRight className="size-4" />
-              </button>
-            </div>
-          </motion.article>
-        </AnimatePresence>
-      </div>
-    </div>
+              </div>
+            )
+          })}
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2.5">
+          <button
+            type="button"
+            aria-pressed={isRead}
+            onClick={toggleRead}
+            className={`min-h-[50px] rounded-full px-[22px] text-[14.5px] font-extrabold text-on-dark transition-colors ${isRead ? 'bg-success' : 'bg-primary hover:bg-primary-dark'}`}
+          >
+            {isRead ? '✓ Đã học · bỏ đánh dấu' : 'Đánh dấu đã học phần này'}
+          </button>
+          <span className="text-[13.5px] font-bold text-muted">
+            Tiến độ {readN}/{C.length}
+          </span>
+          <span className="flex-1" />
+          <button type="button" onClick={() => go(active - 1)} disabled={active === 0} className="min-h-[50px] rounded-full border border-line-strong bg-white px-[18px] text-[14px] font-bold disabled:opacity-35">
+            ← Phần trước
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              if (active === C.length - 1) return onDone()
+              go(active + 1)
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }}
+            className="min-h-[50px] rounded-full bg-ink px-[22px] text-[14.5px] font-extrabold text-on-dark"
+          >
+            {active === C.length - 1 ? 'Sang Rèn luyện' : 'Phần tiếp theo'} →
+          </button>
+        </div>
+      </motion.div>
+    </>
   )
 }

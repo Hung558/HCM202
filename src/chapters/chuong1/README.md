@@ -23,16 +23,17 @@ Mở `/chuong1.html` tại địa chỉ Vite in trong Terminal, rồi chọn **N
 
 | Tệp | Trách nhiệm |
 | --- | --- |
-| [Flashcards.jsx](Flashcards.jsx) | Điều hướng ba tab, trạng thái thẻ/từ điển và mở thẻ liên quan |
-| [ContentVideoTab.jsx](ContentVideoTab.jsx) | Tải chậm mô-đun, trạng thái đang tải và thông báo lỗi dựng nội dung |
-| [ContentVideo.jsx](ContentVideo.jsx) | Giới thiệu, mục lục, bài đọc, tự kiểm tra, liên kết thẻ/video và dấu đã đọc |
-| [ContentBlocks.jsx](ContentBlocks.jsx) | Hiển thị các khối bài đọc và thẻ liên quan |
-| [VideoLibrary.jsx](VideoLibrary.jsx) | Danh sách, trình phát YouTube, liên kết ngoài và dấu đã xem |
-| [Sources.jsx](Sources.jsx) | Hiển thị nguồn tham khảo theo `sourceId` và `locator` |
+| [Flashcards.jsx](Flashcards.jsx) | Trang chương: 4 tab theo `ui.tabs`, hero "nhiệm vụ", trạng thái thẻ/đọc/xem, mở bộ thẻ liên quan |
+| [Reader.jsx](Reader.jsx) | Tab Nội dung: "Đường học" (vòng tiến độ, tìm không dấu, mục lục), một phần mỗi lần, câu tự kiểm tra lật |
+| [ContentBlocks.jsx](ContentBlocks.jsx) | Hiển thị từng kiểu block (đoạn văn, danh sách, note vàng, lưới thẻ, dòng thời gian, ôn bộ thẻ) |
+| [VideoLibrary.jsx](VideoLibrary.jsx) | Tab Video: ảnh bìa, bấm mới tải trình phát, đánh dấu đã xem, mở YouTube |
+| [Deck.jsx](Deck.jsx) | Tab Flashcards: chồng thẻ lật 3D, chấm điểm, bản đồ bộ thẻ |
+| [Glossary.jsx](Glossary.jsx) | Tab Từ điển: tìm không dấu, panel định nghĩa |
+| [Sources.jsx](Sources.jsx) | Dòng nguồn tham khảo theo `sourceId` |
 | [learning-progress.js](learning-progress.js) | Lọc dữ liệu theo chương, chuẩn hóa/lưu tiến độ và tạo URL YouTube hợp lệ |
 | [progress.js](progress.js) | Thuật toán ôn thẻ hiện có |
 
-Không thêm thư viện hoặc thay đổi cấu hình/style dùng chung.
+XP, âm thanh, hiệu ứng và Bé Sen dùng chung ở [`../_fun/`](../_fun/). Không thêm thư viện hoặc thay đổi cấu hình/style dùng chung.
 
 ## Hợp đồng dữ liệu đang dùng
 

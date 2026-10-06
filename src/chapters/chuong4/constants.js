@@ -2,6 +2,3 @@
 export const STORAGE_KEY = 'hcm-chuong4-quiz'
 export const EMPTY = { history: [], bookmarks: [] }
 
-// Tab trang học bài: luôn mở Kiến thức trước
-export const TAB_QUIZ = 'quiz'
-export const TAB_CONTENT = 'content'

@@ -1,26 +1,33 @@
 import { useEffect, useState } from 'react'
-import { ArrowRight, BookOpen, Check, Clock3, Layers3, RotateCcw, Search, Video } from 'lucide-react'
 import data from './data.json'
-import { currentTime, getStudyQueue, normalizeSearch, rateCard } from './progress.js'
-import ContentVideoTab from './ContentVideoTab.jsx'
-import Sources from './Sources.jsx'
-import ChapterTabBar from '../../components/ChapterTabBar.jsx'
-import ChapterMenu from '../../components/ChapterMenu.jsx'
-import ChapterLogo from '../../components/ChapterLogo.jsx'
-import SiteFooter from '../../components/SiteFooter.jsx'
-import styles from './Flashcards.module.css'
+import { currentTime, rateCard } from './progress.js'
+import { getChapterResources, learningStorageKey, loadLearningProgress, saveLearningProgress, toggleCompleted } from './learning-progress.js'
+import Reader from './Reader.jsx'
+import VideoLibrary from './VideoLibrary.jsx'
+import Deck from './Deck.jsx'
+import Glossary from './Glossary.jsx'
+import ChapterShell from '../_fun/ChapterShell.jsx'
+import Hero from '../_fun/Hero.jsx'
+import { burst, pt } from '../_fun/fx.js'
+import { award, play, say } from '../_fun/useGame.js'
 
 const STORAGE_KEY = `hcm202:chuong1:progress:${data.metadata.id}`
 const cards = [...data.flashcards].sort((a, b) => a.order - b.order)
 const categories = [...data.categories].sort((a, b) => a.order - b.order)
+const { chapter, sections, videos } = getChapterResources(data)
+const TABS = [...data.ui.tabs].filter((t) => t.enabled).sort((a, b) => a.order - b.order)
+const LEARN_KEY = learningStorageKey(chapter.id)
+const storage = { getItem: (k) => localStorage.getItem(k), setItem: (k, v) => localStorage.setItem(k, v) }
 
-const TABS = [
-  { id: 'content-video', label: 'Nội dung & Video', icon: Video },
-  { id: 'cards', label: 'Thẻ ghi nhớ', icon: Layers3 },
-  { id: 'dictionary', label: 'Từ điển thuật ngữ', icon: BookOpen },
-]
+const TAB_TIPS = {
+  content: 'Đọc từng phần, bấm “Đã đọc” để đánh dấu đường học.',
+  videos: 'Xem video bài giảng, xong nhớ bấm Đã xem nhé.',
+  flashcards: 'Lật thẻ, tự chấm mình đã thuộc chưa!',
+  glossary: 'Gõ không dấu cũng tìm được thuật ngữ.',
+}
+const TIPS = ['XP được cộng chung cho cả 6 chương.', 'Thẻ đến hạn luôn xuất hiện trước thẻ mới.', 'Phím Space để lật thẻ đó!', 'Đọc xong mỗi phần được +10 XP.']
 
-function loadProgress() {
+function loadCards() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}')
     return saved && typeof saved === 'object' && !Array.isArray(saved) ? saved : {}
@@ -29,223 +36,148 @@ function loadProgress() {
   }
 }
 
-function formatReviewTime(value) {
-  return new Intl.DateTimeFormat('vi-VN', {
-    hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit',
-  }).format(new Date(value))
-}
-
 export default function Flashcards() {
-  const [tab, setTab] = useState('content-video')
-  const [categoryId, setCategoryId] = useState('all')
-  const [progress, setProgress] = useState(loadProgress)
+  const [tab, setTab] = useState(data.ui.defaultTabId ?? TABS[0].id)
+  const [progress, setProgress] = useState(loadCards)
+  const [learn, setLearn] = useState(() => loadLearningProgress(storage, LEARN_KEY, sections, videos))
   const [now, setNow] = useState(() => Date.now())
-  const [selectedCardId, setSelectedCardId] = useState(null)
-  const [flipped, setFlipped] = useState(false)
-  const [query, setQuery] = useState('')
-  const [selectedTermId, setSelectedTermId] = useState(null)
-  const [storageError, setStorageError] = useState(false)
+  const [deck, setDeck] = useState({ cat: 'all', focus: [], early: false, done: [], cur: null, flip: false })
+  const [playing, setPlaying] = useState(null)
+  const [termId, setTermId] = useState(null)
+  const [storageError, setStorageError] = useState(null)
 
   useEffect(() => {
-    const timer = window.setInterval(() => setNow(Date.now()), 30_000)
-    return () => window.clearInterval(timer)
+    const t = setInterval(() => setNow(Date.now()), 30_000)
+    return () => clearInterval(t)
   }, [])
 
-  const visibleCards = categoryId === 'all' ? cards : cards.filter((card) => card.categoryId === categoryId)
-  const queue = getStudyQueue(visibleCards, progress, now)
-  const activeCard = visibleCards.find((card) => card.id === selectedCardId) || queue[0]
-  const reviewedCount = cards.filter((card) => progress[card.id]?.reviewCount > 0).length
-  const newCount = visibleCards.filter((card) => !progress[card.id]?.reviewCount).length
-  const dueCount = queue.length - newCount
-  const futureReviews = visibleCards.map((card) => progress[card.id]?.nextReviewAt)
-    .filter((value) => value && new Date(value).getTime() > now)
-    .sort((a, b) => new Date(a).getTime() - new Date(b).getTime())
-  const selectedTerm = data.glossary.find((term) => term.id === selectedTermId)
-  const search = normalizeSearch(query)
-  const filteredTerms = [...data.glossary]
-    .filter((term) => !search || normalizeSearch([term.term, ...term.aliases, term.definition, term.searchText].join(' ')).includes(search))
-    .sort((a, b) => a.term.localeCompare(b.term, 'vi'))
-
-  function selectCategory(id) {
-    setCategoryId(id)
-    setSelectedCardId(null)
-    setFlipped(false)
+  const lp = learn.progress
+  const updateLearn = (changes) => {
+    const next = { ...lp, ...changes }
+    setLearn({ progress: next, error: saveLearningProgress(storage, LEARN_KEY, next) })
   }
 
-  function rate(action) {
-    if (!activeCard || !flipped) return
-    const ratedAt = currentTime()
-    const updated = rateCard(progress, activeCard.id, action, ratedAt, data.reviewConfig)
+  function changeTab(id) {
+    setTab(id)
+    setDeck((d) => ({ ...d, flip: false }))
+    say(TAB_TIPS[id] ?? '')
+  }
+
+  function openCards(ids, label) {
+    const valid = ids.filter((id) => cards.some((c) => c.id === id))
+    if (!valid.length) return
+    setDeck({ cat: 'focus', focus: valid, early: true, done: [], cur: valid[0], flip: false })
+    setTab('flashcards')
+    say(`Ôn ${valid.length} thẻ: ${label}.`)
+    window.scrollTo({ top: 0 })
+  }
+
+  function rate(id, action) {
+    const at = currentTime()
+    const updated = rateCard(progress, id, action, at, data.reviewConfig)
     setProgress(updated)
+    setNow(at)
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(updated))
     } catch {
-      setStorageError(true)
+      setStorageError('Trình duyệt không lưu được tiến độ. Các lựa chọn ôn tập có thể mất khi tải lại trang.')
     }
-    setSelectedCardId(null)
-    setFlipped(false)
-    setNow(ratedAt)
   }
 
-  function skipCard() {
-    const index = queue.findIndex((card) => card.id === activeCard?.id)
-    setSelectedCardId(queue[(index + 1) % queue.length].id)
-    setFlipped(false)
+  function toggleRead(id, e) {
+    const done = lp.completedSectionIds.includes(id)
+    updateLearn({ completedSectionIds: toggleCompleted(lp.completedSectionIds, id), lastSectionId: id })
+    if (done) return
+    play('ok')
+    award(`c1-r-${id}`, 10, e)
+    const p = pt(e)
+    burst(p.x, p.y, 24)
+    const n = sections.filter((s) => s.id === id || lp.completedSectionIds.includes(s.id)).length
+    if (n === sections.length) {
+      play('win')
+      say('Bạn đã đi hết đường học. Tuyệt vời!')
+    } else say(`Xong phần ${sections.findIndex((s) => s.id === id) + 1}! Sang phần tiếp nào.`)
   }
 
-  function openCard(id) {
-    setCategoryId('all')
-    setSelectedCardId(id)
-    setFlipped(false)
-    setTab('cards')
-    window.requestAnimationFrame(() => {
-      const target = document.querySelector('#study-card button')
-      target?.focus({ preventScroll: true })
-      target?.scrollIntoView({ block: 'center' })
-    })
+  function toggleWatched(id, e) {
+    const done = lp.completedVideoIds.includes(id)
+    updateLearn({ completedVideoIds: toggleCompleted(lp.completedVideoIds, id), lastVideoId: id })
+    if (done) return
+    play('ok')
+    award(`c1-v-${id}`, 15, e)
+    say('Đã xem xong một video. Giỏi lắm!')
   }
+
+  // Nhiệm vụ của chương tự đánh dấu theo tiến độ
+  const nRead = lp.completedSectionIds.length
+  const nKnown = cards.filter((c) => progress[c.id]?.status === 'reviewing').length
+  const objDone = [nRead >= 2, nRead >= 5, nRead === sections.length, lp.completedVideoIds.length > 0 && nKnown >= 5]
 
   return (
-    <div className="min-h-screen">
-      <nav aria-label="Điều hướng chương I" className="sticky top-0 z-20 border-b border-line bg-paper/90 backdrop-blur-md">
-        <div className="mx-auto flex max-w-[1180px] flex-wrap items-center gap-4 px-5 py-3">
-          <ChapterMenu current="I" />
-          <ChapterLogo num="I" />
-          <ChapterTabBar tabs={TABS} value={tab} onChange={setTab} label="Nội dung chương I" />
-        </div>
-      </nav>
-
-      <main className="mx-auto max-w-[1180px] px-5 pb-20 pt-10">
-        <div className="grid gap-8 lg:grid-cols-[1fr_280px] lg:items-end">
-          <div>
-            <p className="eyebrow">Chương I · Học và ôn tập</p>
-            <h1 className="mt-3 max-w-[760px] text-[clamp(30px,4.6vw,52px)] font-extrabold leading-[1.08] tracking-[-0.02em]">Thẻ ghi nhớ &amp; từ điển thuật ngữ</h1>
-            <p className="mt-5 max-w-[690px] text-[15.5px] leading-[1.65] text-ink-soft">Nắm vững khái niệm, cơ sở hình thành tư tưởng Hồ Chí Minh và các mốc nhận thức của Đảng qua từng Đại hội.</p>
+    <ChapterShell num="I" tabs={TABS} tab={tab} onTab={changeTab} tips={TIPS}>
+      <Hero
+        num="I"
+        eyebrow="Chương I · Nhập môn"
+        title={chapter.title}
+        intro={chapter.overview}
+        aside={
+          <div className="flex flex-col gap-2">
+            <p className="mb-1 text-[12px] font-bold tracking-[.12em] text-on-dark/60 uppercase">Nhiệm vụ của chương · {chapter.estimatedReadMinutes} phút đọc</p>
+            {chapter.learningObjectives.map((t, i) => (
+              <div key={t} className="flex items-center gap-3 rounded-2xl border border-on-dark/12 bg-on-dark/6 px-3.5 py-3">
+                <span
+                  className={`grid size-[30px] shrink-0 place-items-center rounded-full text-[13px] font-extrabold transition-all duration-300 ${
+                    objDone[i] ? 'bg-success text-on-dark' : 'bg-on-dark/12 text-gold'
+                  }`}
+                  aria-label={objDone[i] ? 'Đã xong' : `Nhiệm vụ ${i + 1}`}
+                >
+                  {objDone[i] ? '✓' : i + 1}
+                </span>
+                <span className="text-[14px] leading-[1.45] font-medium">{t}</span>
+              </div>
+            ))}
           </div>
-          <div className="card p-[22px]">
-            <div className="flex items-center justify-between text-sm text-muted"><span>Đã học lần đầu</span><span className="font-bold text-ink">{reviewedCount}/{cards.length} thẻ</span></div>
-            <div className="mt-3 h-2 overflow-hidden rounded-full bg-track" role="progressbar" aria-label="Tiến độ học thẻ lần đầu" aria-valuenow={reviewedCount} aria-valuemin={0} aria-valuemax={cards.length}>
-              <div className="h-full rounded-full bg-amber transition-all" style={{ width: `${reviewedCount / cards.length * 100}%` }} />
-            </div>
-            <p className="mt-3 text-sm text-muted">{data.glossary.length} thuật ngữ để tra cứu</p>
-          </div>
-        </div>
+        }
+      />
 
+      {(learn.error || storageError) && <p role="alert" className="mt-5 rounded-xl bg-cream px-4 py-3 text-sm text-ink-soft">{learn.error || storageError}</p>}
 
-        {storageError && <p role="alert" className="mt-5 rounded-xl bg-cream px-4 py-3 text-sm text-ink-soft">Trình duyệt không lưu được tiến độ. Các lựa chọn ôn tập có thể mất khi tải lại trang.</p>}
-
-        {tab === 'cards' ? (
-          <section className="mt-8" aria-label="Bộ thẻ ghi nhớ">
-            <div className="flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <p className="eyebrow">Lật thẻ · Tự đánh giá</p>
-                <h2 className="mt-2 text-[26px] font-extrabold">Học theo nhịp của bạn</h2>
-                <p className="mt-2 text-sm leading-relaxed text-ink-soft">Thẻ đến hạn xuất hiện trước thẻ mới. Chọn “Cần ôn lại” để gặp lại thẻ sau {data.reviewConfig.againIntervalMinutes} phút.</p>
-              </div>
-              <div className="flex flex-wrap gap-2 text-sm font-semibold">
-                <span className="rounded-full bg-white px-4 py-2 text-ink-soft">{dueCount} đến hạn</span>
-                <span className="rounded-full bg-white px-4 py-2 text-ink-soft">{newCount} thẻ mới</span>
-              </div>
-            </div>
-
-            <div className="mt-6 flex flex-wrap gap-2" aria-label="Lọc thẻ theo chủ đề">
-              <button type="button" onClick={() => selectCategory('all')} aria-pressed={categoryId === 'all'} className={`btn ${categoryId === 'all' ? 'btn-dark' : 'btn-outline bg-white'}`}>Tất cả</button>
-              {categories.map((category) => <button key={category.id} type="button" onClick={() => selectCategory(category.id)} aria-pressed={categoryId === category.id} className={`btn ${categoryId === category.id ? 'btn-dark' : 'btn-outline bg-white'}`}>{category.name}</button>)}
-            </div>
-
-            {activeCard ? (
-              <div id="study-card" className="mt-7 grid gap-5 lg:grid-cols-[minmax(0,1fr)_300px]">
-                <div>
-                  <div className="mb-3 flex flex-wrap items-center justify-between gap-2 text-sm text-muted">
-                    <span>{categories.find((item) => item.id === activeCard.categoryId)?.name}</span>
-                    <span>{progress[activeCard.id]?.reviewCount ? 'Thẻ ôn tập' : 'Thẻ mới'} · {String(activeCard.order).padStart(2, '0')}/{cards.length}</span>
-                  </div>
-                  <button type="button" onClick={() => setFlipped((value) => !value)} aria-label={flipped ? `Giải thích: ${activeCard.back}. Nhấn để xem lại thuật ngữ.` : `Lật thẻ: ${activeCard.front}`} aria-pressed={flipped} className={`${styles.flipScene} block w-full text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary`}>
-                    <span className={`${styles.flipInner} ${flipped ? styles.flipped : ''}`}>
-                      <span className={`${styles.face} bg-ink text-on-dark`} aria-hidden={flipped}>
-                        <span className="text-xs font-bold uppercase tracking-[0.16em] text-gold">Mặt trước · Thuật ngữ</span>
-                        <span className="mt-6 block max-w-[650px] text-[clamp(25px,3.5vw,38px)] font-extrabold leading-tight">{activeCard.front}</span>
-                        <span className="mt-auto inline-flex items-center gap-2 text-sm text-on-dark/80"><RotateCcw size={16} /> Chạm để lật thẻ</span>
-                      </span>
-                      <span className={`${styles.face} ${styles.back} border border-line bg-white text-ink`} aria-hidden={!flipped}>
-                        <span className="text-xs font-bold uppercase tracking-[0.16em] text-primary">Mặt sau · Giải thích</span>
-                        <span className="mt-5 block max-w-[700px] text-[clamp(18px,2.3vw,25px)] font-semibold leading-relaxed">{activeCard.back}</span>
-                        <span className="mt-auto inline-flex items-center gap-2 text-sm text-muted"><RotateCcw size={16} /> Chạm để xem mặt trước</span>
-                      </span>
-                    </span>
-                  </button>
-                  <div className="mt-5 flex flex-wrap items-center gap-3">
-                    {flipped ? <>
-                      <button type="button" onClick={() => rate('again')} className="btn btn-outline bg-white"><RotateCcw size={17} /> Cần ôn lại</button>
-                      <button type="button" onClick={() => rate('known')} className="btn btn-primary"><Check size={17} /> Đã thuộc</button>
-                    </> : <p className="text-sm text-muted">Lật thẻ để xem lời giải rồi tự đánh giá.</p>}
-                    {queue.length > 1 && <button type="button" onClick={skipCard} className="btn ml-auto text-ink-soft hover:bg-white">Thẻ tiếp theo <ArrowRight size={17} /></button>}
-                  </div>
-                  {flipped && <Sources citations={activeCard.citations} />}
-                </div>
-                <aside className="space-y-4">
-                  <div className="card p-[22px]">
-                    <Clock3 size={22} className="text-primary" />
-                    <h3 className="mt-3 text-[20px] font-extrabold">Lịch ôn tự động</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-ink-soft">“Đã thuộc” hẹn lại theo các mốc {data.reviewConfig.knownIntervalsDays.join(' · ')} ngày. “Cần ôn lại” hẹn sau {data.reviewConfig.againIntervalMinutes} phút.</p>
-                    {futureReviews.length > 0 && <p className="mt-4 rounded-xl bg-cream px-4 py-3 text-sm text-ink-soft">Lượt ôn sắp tới: <strong className="text-ink">{formatReviewTime(futureReviews[0])}</strong></p>}
-                  </div>
-                  {activeCard.glossaryIds?.length > 0 && <div className="card p-[22px]">
-                    <h3 className="font-bold">Thuật ngữ liên quan</h3>
-                    <div className="mt-3 flex flex-wrap gap-2">{activeCard.glossaryIds.map((id) => {
-                      const term = data.glossary.find((item) => item.id === id)
-                      return term && <button key={id} type="button" onClick={() => { setSelectedTermId(id); setTab('dictionary') }} className="rounded-full border border-line-strong px-3 py-2 text-sm text-ink-soft hover:bg-cream">{term.term}</button>
-                    })}</div>
-                  </div>}
-                </aside>
-              </div>
-            ) : <div className="card mt-7 p-8 text-center sm:p-12">
-              <Check size={34} className="mx-auto text-success" />
-              <h3 className="mt-4 text-[24px] font-extrabold">Đã hoàn thành lượt học hiện tại</h3>
-              <p className="mx-auto mt-3 max-w-[530px] text-ink-soft">Các thẻ trong chủ đề này đã được lên lịch. Quay lại khi đến hạn để tiếp tục ôn tập.</p>
-              {futureReviews.length > 0 && <p className="mt-4 text-sm font-semibold text-primary">Lượt ôn tiếp theo: {formatReviewTime(futureReviews[0])}</p>}
-            </div>}
-          </section>
-        ) : tab === 'content-video' ? (
-          <ContentVideoTab data={data} onOpenCard={openCard} />
-        ) : (
-          <section className="mt-8" aria-label="Từ điển thuật ngữ">
-            <p className="eyebrow">Tra cứu nhanh</p>
-            <h2 className="mt-2 text-[26px] font-extrabold">Từ điển thuật ngữ</h2>
-            <p className="mt-2 text-sm text-ink-soft">Tìm theo tên, tên gọi khác hoặc nội dung giải thích. Có thể nhập không dấu.</p>
-            <label className="mt-6 flex max-w-[620px] items-center gap-3 rounded-xl border border-line-strong bg-white px-4 focus-within:border-primary">
-              <Search size={20} className="shrink-0 text-muted" /><span className="sr-only">Tìm thuật ngữ</span>
-              <input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Ví dụ: chủ nghĩa Mác - Lênin, Đại hội VII..." className="min-h-12 w-full bg-transparent text-sm text-ink outline-none placeholder:text-faint" />
-            </label>
-            <p className="mt-3 text-sm text-muted">{filteredTerms.length} thuật ngữ</p>
-            <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.9fr)] lg:items-start">
-              <div className="grid gap-3">
-                {filteredTerms.length ? filteredTerms.map((term) => <button key={term.id} type="button" onClick={() => setSelectedTermId(term.id)} aria-pressed={selectedTermId === term.id} className={`card p-5 text-left transition-colors hover:border-primary ${selectedTermId === term.id ? 'border-primary bg-cream' : ''}`}>
-                  <span className="flex items-center justify-between gap-3 font-bold text-ink">{term.term}<ArrowRight size={17} className="shrink-0 text-primary" /></span>
-                  <span className="mt-2 block text-sm leading-relaxed text-ink-soft">{term.definition}</span>
-                </button>) : <div className="card p-7 text-ink-soft">Không tìm thấy thuật ngữ phù hợp. Thử một từ khóa khác.</div>}
-              </div>
-              <aside className="card p-[22px] lg:sticky lg:top-24">
-                {selectedTerm ? <>
-                  <p className="eyebrow">Giải nghĩa</p><h3 className="mt-2 text-[22px] font-extrabold">{selectedTerm.term}</h3>
-                  {selectedTerm.aliases.length > 0 && <p className="mt-2 text-sm text-muted">Tên gọi khác: {selectedTerm.aliases.join(', ')}</p>}
-                  <p className="mt-5 text-[15.5px] leading-[1.65] text-ink-soft">{selectedTerm.definition}</p>
-                  {selectedTerm.relatedTermIds.length > 0 && <div className="mt-6"><h4 className="text-sm font-bold">Thuật ngữ liên quan</h4><div className="mt-2 flex flex-wrap gap-2">{selectedTerm.relatedTermIds.map((id) => {
-                    const term = data.glossary.find((item) => item.id === id)
-                    return term && <button type="button" key={id} onClick={() => setSelectedTermId(id)} className="rounded-full border border-line-strong px-3 py-2 text-sm text-ink-soft hover:bg-cream">{term.term}</button>
-                  })}</div></div>}
-                  {selectedTerm.relatedFlashcardIds.length > 0 && <div className="mt-6"><h4 className="text-sm font-bold">Ôn bằng thẻ</h4><div className="mt-2 space-y-2">{selectedTerm.relatedFlashcardIds.map((id) => {
-                    const card = cards.find((item) => item.id === id)
-                    return card && <button type="button" key={id} onClick={() => openCard(id)} className="flex w-full items-center justify-between gap-2 rounded-xl bg-cream px-4 py-3 text-left text-sm font-semibold text-ink hover:bg-track">{card.front}<ArrowRight size={16} className="shrink-0 text-primary" /></button>
-                  })}</div></div>}
-                  <Sources citations={selectedTerm.citations} />
-                </> : <div className="py-8 text-center text-ink-soft"><BookOpen size={30} className="mx-auto text-primary" /><p className="mt-3">Chọn một thuật ngữ để xem liên hệ với thẻ ghi nhớ và nguồn tham khảo.</p></div>}
-              </aside>
-            </div>
-          </section>
-        )}
-      </main>
-      <SiteFooter current="I" />
-    </div>
+      {tab === 'content' && (
+        <Reader
+          ui={data.ui.content}
+          sections={sections}
+          cards={cards}
+          activeId={lp.lastSectionId ?? sections[0].id}
+          readIds={lp.completedSectionIds}
+          onSelect={(id) => updateLearn({ lastSectionId: id })}
+          onToggleRead={toggleRead}
+          onOpenCards={openCards}
+          onWatch={(id) => {
+            setPlaying(id)
+            changeTab('videos')
+            window.scrollTo({ top: 0 })
+          }}
+        />
+      )}
+      {tab === 'videos' && (
+        <VideoLibrary
+          videos={videos}
+          sections={sections}
+          ui={data.ui.videos}
+          watchedIds={lp.completedVideoIds}
+          playingId={playing}
+          onPlay={(id) => {
+            play('tap')
+            setPlaying(id)
+            updateLearn({ lastVideoId: id })
+          }}
+          onToggleWatched={toggleWatched}
+        />
+      )}
+      {tab === 'flashcards' && (
+        <Deck cards={cards} categories={categories} reviewConfig={data.reviewConfig} progress={progress} now={now} deck={deck} setDeck={setDeck} onRate={rate} />
+      )}
+      {tab === 'glossary' && <Glossary glossary={data.glossary} termId={termId} onTerm={setTermId} onOpenCards={openCards} />}
+    </ChapterShell>
   )
 }

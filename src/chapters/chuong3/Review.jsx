@@ -1,280 +1,177 @@
-import { useMemo, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, RotateCcw, XCircle } from "lucide-react";
-import knowledge from "./knowledge.json";
-import quiz from "./quiz.json";
+import { useRef } from 'react'
+import { motion } from 'framer-motion'
+import { burst, pt, shake } from '../_fun/fx.js'
+import { award, play, say } from '../_fun/useGame.js'
+import { freshRun } from './utils.js'
 
-const LETTERS = ["A", "B", "C", "D", "E", "F"];
+const shortTitle = (x) => `${x.number} · ${x.title.replace('Tư tưởng Hồ Chí Minh về ', '')}`
 
-function shuffle(arr) {
-    const a = [...arr];
-    for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
+// Tab Ôn tập: lọc theo phần, thanh bước đúng/sai, huy hiệu "🔥 Chuỗi n"; đúng thì confetti (nhiều hơn khi chuỗi dài), sai thì rung.
+export default function Review({ questions, sections, run, setRun, onKnow }) {
+  const boxRef = useRef(null)
+  const list = run.filter === 'all' ? questions : questions.filter((x) => x.section === run.filter)
+  const q = list[Math.min(run.qi, list.length - 1)]
+  const answered = run.pick !== null
+  const good = answered && run.pick === q.answer
+  const score = run.answers.filter((a) => a.ok).length
+  const ratio = score / list.length
+  const stars = ratio >= 0.9 ? 3 : ratio >= 0.6 ? 2 : score > 0 ? 1 : 0
+
+  const filters = [{ id: 'all', label: `Toàn bộ chương · ${questions.length}` }, ...sections.map((x) => ({ id: x.id, label: shortTitle(x) }))]
+
+  function pick(i, e) {
+    if (answered) return
+    const ok = i === q.answer
+    const streak = ok ? run.streak + 1 : 0
+    setRun((r) => ({ ...r, pick: i, streak, best: Math.max(r.best, streak), answers: [...r.answers, { sec: q.section, ok }] }))
+    if (ok) {
+      play('ok')
+      const p = pt(e)
+      burst(p.x, p.y, 20 + streak * 4)
+      award(`c3-q-${q.id}`, 15, e)
+      say(streak >= 3 ? `Chuỗi ${streak} câu! Đang cháy 🔥` : 'Chính xác!')
+    } else {
+      play('bad')
+      shake(boxRef.current)
+      say('Mất chuỗi rồi, đọc giải thích nhé.')
     }
-    return a;
-}
+  }
 
-/** Xáo thứ tự câu hỏi và đáp án; lưu lại vị trí đáp án đúng sau khi xáo. */
-function buildDeck(questions) {
-    return shuffle(questions).map((q) => {
-        const order = shuffle(q.options.map((text, i) => ({ text, isCorrect: i === q.answer })));
-        return { ...q, shuffled: order, answer: order.findIndex((o) => o.isCorrect) };
-    });
-}
+  function next() {
+    if (run.qi + 1 < list.length) return setRun((r) => ({ ...r, qi: r.qi + 1, pick: null }))
+    setRun((r) => ({ ...r, done: true }))
+    if (ratio >= 0.6) {
+      play('win')
+      setTimeout(() => burst(window.innerWidth / 2, window.innerHeight / 2, 70), 100)
+    }
+  }
 
-const fade = {
-    initial: { opacity: 0, y: 12 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -12 },
-    transition: { duration: 0.2 },
-};
+  return (
+    <>
+      <div className="mt-6 flex gap-1.5 overflow-x-auto pb-1" role="group" aria-label="Lọc câu hỏi theo phần">
+        {filters.map((f) => {
+          const on = run.filter === f.id
+          return (
+            <button
+              key={f.id}
+              type="button"
+              aria-pressed={on}
+              onClick={() => {
+                play('tap')
+                setRun(freshRun(f.id))
+              }}
+              className={`min-h-[42px] shrink-0 rounded-full border px-4 text-[13.5px] font-bold whitespace-nowrap ${on ? 'border-primary bg-primary text-on-dark' : 'border-line-strong bg-white text-ink-soft'}`}
+            >
+              {f.label}
+            </button>
+          )
+        })}
+      </div>
 
-export default function Review() {
-    const [phase, setPhase] = useState("setup"); // setup | quiz | result
-    const [scope, setScope] = useState("all");
-    const [deck, setDeck] = useState([]);
-    const [index, setIndex] = useState(0);
-    const [picked, setPicked] = useState(null);
-    const [results, setResults] = useState([]); // { id, correct }
-
-    const sections = knowledge.sections;
-    const sectionTitle = useMemo(
-        () => Object.fromEntries(sections.map((s) => [s.id, `${s.number} · ${s.title}`])),
-        [sections]
-    );
-    const countBySection = useMemo(() => {
-        const map = { all: quiz.questions.length };
-        quiz.questions.forEach((q) => (map[q.section] = (map[q.section] || 0) + 1));
-        return map;
-    }, []);
-
-    const start = (questions) => {
-        setDeck(buildDeck(questions));
-        setIndex(0);
-        setPicked(null);
-        setResults([]);
-        setPhase("quiz");
-    };
-
-    const startScope = () =>
-        start(scope === "all" ? quiz.questions : quiz.questions.filter((q) => q.section === scope));
-
-    const current = deck[index];
-    const answered = picked !== null;
-    const score = results.filter((r) => r.correct).length;
-
-    const choose = (i) => {
-        if (answered) return;
-        setPicked(i);
-        setResults((prev) => [...prev, { id: current.id, correct: i === current.answer }]);
-    };
-
-    const next = () => {
-        if (index + 1 >= deck.length) {
-            setPhase("result");
-        } else {
-            setIndex(index + 1);
-            setPicked(null);
-        }
-    };
-
-    const retryWrong = () => {
-        const wrongIds = new Set(results.filter((r) => !r.correct).map((r) => r.id));
-        start(quiz.questions.filter((q) => wrongIds.has(q.id)));
-    };
-
-    const wrongCount = results.filter((r) => !r.correct).length;
-    const percent = deck.length ? Math.round((score / deck.length) * 100) : 0;
-
-    return (
-        <div className="mx-auto max-w-[1180px] px-5 pt-10 pb-20">
-            <header className="text-center">
-                <p className="eyebrow">Chương III · Ôn tập</p>
-                <h1 className="mt-2.5 text-[clamp(30px,4.6vw,52px)] font-extrabold leading-[1.08] tracking-[-0.02em]">
-                    Trắc nghiệm ôn tập
-                </h1>
-                <p className="mx-auto mt-3 max-w-[640px] text-[15.5px] leading-[1.65] text-ink-soft">
-                    Các câu hỏi được soạn từ phần Kiến thức của chương. Chọn một phần để ôn riêng, hoặc làm toàn bộ.
-                </p>
-            </header>
-
-            <div className="mx-auto mt-8 max-w-[760px]">
-                <AnimatePresence mode="wait">
-                    {/* ---------- Chọn phạm vi ---------- */}
-                    {phase === "setup" && (
-                        <motion.div key="setup" {...fade} className="card p-[22px]">
-                            <h2 className="text-[22px] font-extrabold tracking-[-0.01em]">Chọn phạm vi ôn tập</h2>
-                            <div className="mt-4 flex flex-col gap-2.5" role="radiogroup" aria-label="Phạm vi ôn tập">
-                                {[{ id: "all", label: "Toàn bộ chương" }, ...sections.map((s) => ({ id: s.id, label: sectionTitle[s.id] }))].map(
-                                    (opt) => {
-                                        const active = scope === opt.id;
-                                        return (
-                                            <button
-                                                key={opt.id}
-                                                type="button"
-                                                role="radio"
-                                                aria-checked={active}
-                                                onClick={() => setScope(opt.id)}
-                                                className={
-                                                    "flex min-h-11 items-center justify-between gap-4 rounded-xl border px-4 py-3 text-left text-[15px] transition-colors " +
-                                                    (active
-                                                        ? "border-ink bg-ink text-on-dark"
-                                                        : "border-line-strong bg-white text-ink hover:bg-cream")
-                                                }
-                                            >
-                                                <span className="font-semibold">{opt.label}</span>
-                                                <span className={"shrink-0 text-[13px] " + (active ? "text-gold" : "text-muted")}>
-                                                    {countBySection[opt.id] || 0} câu
-                                                </span>
-                                            </button>
-                                        );
-                                    }
-                                )}
-                            </div>
-                            <button type="button" onClick={startScope} className="btn btn-primary mt-6">
-                                Bắt đầu làm bài
-                                <ArrowRight className="size-4" />
-                            </button>
-                        </motion.div>
-                    )}
-
-                    {/* ---------- Làm bài ---------- */}
-                    {phase === "quiz" && current && (
-                        <motion.div key={`q-${current.id}`} {...fade}>
-                            <div className="mb-4 flex items-center gap-3">
-                                <span className="text-[13px] font-semibold text-muted">
-                                    Câu {index + 1}/{deck.length}
-                                </span>
-                                <div className="h-2 flex-1 overflow-hidden rounded-full bg-track">
-                                    <div
-                                        className="h-full rounded-full bg-amber transition-all duration-200"
-                                        style={{ width: `${((index + (answered ? 1 : 0)) / deck.length) * 100}%` }}
-                                    />
-                                </div>
-                                <span className="text-[13px] font-semibold text-success">{score} đúng</span>
-                            </div>
-
-                            <div className="card p-[22px]">
-                                <p className="text-[12.5px] text-muted">
-                                    Mục {current.subsection} · {sectionTitle[current.section]}
-                                </p>
-                                <h2 className="mt-2 text-[20px] font-extrabold leading-snug tracking-[-0.01em]">
-                                    {current.question}
-                                </h2>
-
-                                <div className="mt-5 flex flex-col gap-2.5">
-                                    {current.shuffled.map((opt, i) => {
-                                        const isCorrect = i === current.answer;
-                                        const isPicked = i === picked;
-                                        let style = "border-line-strong bg-white text-ink hover:bg-cream";
-                                        if (answered && isCorrect) style = "border-success bg-success-soft text-ink";
-                                        else if (answered && isPicked) style = "border-primary bg-primary/10 text-ink";
-                                        else if (answered) style = "border-line bg-white text-faint";
-
-                                        return (
-                                            <button
-                                                key={i}
-                                                type="button"
-                                                disabled={answered}
-                                                onClick={() => choose(i)}
-                                                className={
-                                                    "flex min-h-11 items-start gap-3 rounded-xl border px-4 py-3 text-left text-[15px] leading-[1.5] transition-colors " +
-                                                    style
-                                                }
-                                            >
-                                                <span className="mt-px w-5 shrink-0 font-extrabold text-muted">{LETTERS[i]}</span>
-                                                <span className="flex-1">{opt.text}</span>
-                                                {answered && isCorrect && <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-success" />}
-                                                {answered && isPicked && !isCorrect && (
-                                                    <XCircle className="mt-0.5 size-5 shrink-0 text-primary" />
-                                                )}
-                                            </button>
-                                        );
-                                    })}
-                                </div>
-
-                                {answered && (
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 8 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.2 }}
-                                        className="mt-5 rounded-2xl bg-cream px-5 py-4"
-                                    >
-                                        <p className="text-[13px] font-semibold text-muted">
-                                            {picked === current.answer ? "Chính xác" : "Chưa đúng"}
-                                        </p>
-                                        <p className="mt-1 text-[15px] leading-[1.65] text-ink-soft">{current.explanation}</p>
-                                    </motion.div>
-                                )}
-
-                                {answered && (
-                                    <button type="button" onClick={next} className="btn btn-dark mt-5">
-                                        {index + 1 >= deck.length ? "Xem kết quả" : "Câu tiếp theo"}
-                                        <ArrowRight className="size-4" />
-                                    </button>
-                                )}
-                            </div>
-                        </motion.div>
-                    )}
-
-                    {/* ---------- Kết quả ---------- */}
-                    {phase === "result" && (
-                        <motion.div key="result" {...fade} className="card p-[22px]">
-                            <p className="text-[13px] font-semibold text-muted">Kết quả</p>
-                            <p className="mt-1 text-[clamp(30px,4.6vw,52px)] font-extrabold leading-[1.08] tracking-[-0.02em]">
-                                {score}/{deck.length} <span className="text-amber">câu đúng</span>
-                            </p>
-                            <div className="mt-4 h-2 overflow-hidden rounded-full bg-track">
-                                <div className="h-full rounded-full bg-amber" style={{ width: `${percent}%` }} />
-                            </div>
-                            <p className="mt-4 rounded-2xl bg-cream px-5 py-4 text-[15px] leading-[1.65] text-ink-soft">
-                                {percent === 100
-                                    ? "Bạn đã trả lời đúng toàn bộ. Nội dung phần này đã nắm rất chắc."
-                                    : percent >= 70
-                                    ? "Kết quả tốt. Xem lại các câu sai bên dưới để củng cố thêm."
-                                    : "Nên đọc lại phần Kiến thức tương ứng rồi làm lại để nhớ chắc hơn."}
-                            </p>
-
-                            {wrongCount > 0 && (
-                                <div className="mt-5">
-                                    <h3 className="text-[16px] font-extrabold">Các câu cần xem lại</h3>
-                                    <ul className="mt-3 flex flex-col gap-2.5">
-                                        {results
-                                            .filter((r) => !r.correct)
-                                            .map((r) => {
-                                                const q = deck.find((d) => d.id === r.id);
-                                                return (
-                                                    <li key={r.id} className="rounded-xl border border-line px-4 py-3">
-                                                        <p className="text-[15px] font-semibold text-ink">{q.question}</p>
-                                                        <p className="mt-1 text-[14px] leading-[1.6] text-success">
-                                                            Đáp án: {q.shuffled[q.answer].text}
-                                                        </p>
-                                                        <p className="mt-1 text-[13.5px] leading-[1.6] text-muted">
-                                                            Xem lại mục {q.subsection}
-                                                        </p>
-                                                    </li>
-                                                );
-                                            })}
-                                    </ul>
-                                </div>
-                            )}
-
-                            <div className="mt-6 flex flex-wrap gap-3">
-                                {wrongCount > 0 && (
-                                    <button type="button" onClick={retryWrong} className="btn btn-primary">
-                                        <RotateCcw className="size-4" />
-                                        Làm lại {wrongCount} câu sai
-                                    </button>
-                                )}
-                                <button type="button" onClick={() => setPhase("setup")} className="btn btn-outline">
-                                    Chọn phạm vi khác
-                                </button>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+      {!run.done ? (
+        <motion.div
+          key={`${run.filter}-${run.qi}`}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2 }}
+          className="mx-auto mt-[18px] max-w-[820px]"
+        >
+          <div ref={boxRef} className="rounded-[28px] border border-line bg-white p-[clamp(20px,3vw,32px)]">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <span className="eyebrow text-[12.5px]">
+                Câu {run.qi + 1} / {list.length} · Mục {q.subsection}
+              </span>
+              <span
+                className={`flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[13.5px] font-extrabold transition-all duration-300 ${
+                  run.streak >= 3 ? 'bg-primary text-on-dark' : run.streak > 0 ? 'bg-cream text-ink-soft' : 'bg-paper text-ink-soft'
+                }`}
+              >
+                🔥 Chuỗi {run.streak}
+              </span>
             </div>
-        </div>
-    );
+            <div className="mt-3.5 flex gap-1" aria-hidden="true">
+              {list.map((_, i) => (
+                <span
+                  key={i}
+                  className={`h-2 flex-1 rounded-full transition-colors duration-300 ${
+                    i < run.answers.length ? (run.answers[i].ok ? 'bg-success' : 'bg-primary') : i === run.qi ? 'bg-amber' : 'bg-track'
+                  }`}
+                />
+              ))}
+            </div>
+            <h2 className="mt-5 text-[clamp(19px,2.3vw,24px)] leading-[1.4] font-extrabold text-pretty">{q.question}</h2>
+            <div className="mt-[18px] grid grid-cols-[repeat(auto-fit,minmax(min(320px,100%),1fr))] gap-2.5">
+              {q.options.map((t, i) => {
+                const right = i === q.answer
+                const picked = run.pick === i
+                const look = answered && right ? 'border-success bg-success-soft' : answered && picked ? 'border-primary bg-[#FBEDEB]' : answered ? 'border-line bg-white opacity-50' : 'border-line bg-white hover:-translate-y-0.5'
+                const badge = answered && right ? 'bg-success text-on-dark' : answered && picked ? 'bg-primary text-on-dark' : 'bg-paper'
+                return (
+                  <button
+                    key={i}
+                    type="button"
+                    disabled={answered}
+                    onClick={(e) => pick(i, e)}
+                    className={`flex min-h-16 w-full items-center gap-3.5 rounded-[18px] border-[1.5px] px-4 py-3 text-left text-[15px] leading-normal transition-all duration-[250ms] ${look}`}
+                  >
+                    <span className={`grid size-9 shrink-0 place-items-center rounded-xl font-extrabold ${badge}`}>{'ABCD'[i]}</span>
+                    <span>{t}</span>
+                  </button>
+                )
+              })}
+            </div>
+            {answered && (
+              <div role="status" className={`mt-4 rounded-[20px] px-5 py-[18px] ${good ? 'bg-success-soft' : 'bg-[#FBEDEB]'}`}>
+                <p className={`text-[18px] font-extrabold ${good ? 'text-success' : 'text-primary'}`}>{good ? 'Chính xác!' : 'Chưa đúng rồi'}</p>
+                <p className="mt-1.5 text-[14.5px] leading-[1.65]">{q.explanation}</p>
+                <button type="button" onClick={next} className="btn btn-dark mt-3.5">
+                  {run.qi + 1 >= list.length ? 'Xem kết quả' : 'Câu tiếp'} →
+                </button>
+              </div>
+            )}
+          </div>
+        </motion.div>
+      ) : (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="relative mx-auto mt-[18px] max-w-[820px] overflow-hidden rounded-[28px] bg-primary p-[clamp(24px,4vw,44px)] text-on-dark"
+        >
+          <span aria-hidden="true" className="absolute -top-[60px] -left-[60px] size-[200px] rounded-full bg-gold/[.18]" />
+          <div className="relative text-center">
+            <div className="text-[52px] tracking-[8px] text-gold" aria-label={`${stars} trên 3 sao`}>
+              {'★'.repeat(stars) + '☆'.repeat(3 - stars)}
+            </div>
+            <h2 className="mt-2 text-[clamp(26px,3.4vw,36px)] font-extrabold">{stars === 3 ? 'Xuất sắc!' : stars === 2 ? 'Làm tốt lắm!' : 'Cố gắng thêm nhé!'}</h2>
+            <p className="mt-2 text-[16px]">
+              Đúng {score} / {list.length} câu · chuỗi dài nhất {run.best}
+            </p>
+          </div>
+          <div className="relative mt-[22px] grid grid-cols-[repeat(auto-fit,minmax(min(170px,100%),1fr))] gap-2.5">
+            {sections.map((x) => {
+              const a = run.answers.filter((z) => z.sec === x.id)
+              return (
+                a.length > 0 && (
+                  <div key={x.id} className="rounded-[18px] bg-on-dark/10 p-3.5">
+                    <p className="text-[12px] leading-[1.4] font-bold opacity-80">{shortTitle(x)}</p>
+                    <p className="mt-1.5 text-[22px] font-extrabold text-gold">
+                      {a.filter((z) => z.ok).length}/{a.length}
+                    </p>
+                  </div>
+                )
+              )
+            })}
+          </div>
+          <div className="relative mt-[22px] flex flex-wrap justify-center gap-2.5">
+            <button type="button" onClick={() => setRun(freshRun(run.filter))} className="min-h-12 rounded-full bg-gold px-6 text-[15px] font-extrabold text-ink">
+              Làm lại
+            </button>
+            <button type="button" onClick={onKnow} className="min-h-12 rounded-full border border-on-dark/40 px-6 text-[15px] font-bold">
+              Đọc lại kiến thức
+            </button>
+          </div>
+        </motion.div>
+      )}
+    </>
+  )
 }

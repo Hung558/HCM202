@@ -51,7 +51,7 @@ Sửa code và lưu lại (Ctrl+S) thì trình duyệt tự cập nhật. Muốn
 |---|---|---|---|
 | I | Flashcards & Từ điển thuật ngữ | `src/chapters/chuong1` | framer-motion (lật thẻ) |
 | II | Trục thời gian tương tác | `src/chapters/chuong2` | framer-motion |
-| III | Sơ đồ tư duy động | `src/chapters/chuong3` | @xyflow/react |
+| III | Sơ đồ tư duy động | `src/chapters/chuong3` | framer-motion (sơ đồ vẽ bằng CSS) |
 | IV | Trắc nghiệm tình huống | `src/chapters/chuong4` | framer-motion |
 | V | Kéo thả ghép nối | `src/chapters/chuong5` | @hello-pangea/dnd |
 | VI | Sổ tay rèn luyện đạo đức | `src/chapters/chuong6` | localStorage |

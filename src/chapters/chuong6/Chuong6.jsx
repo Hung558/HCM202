@@ -1,78 +1,45 @@
 import { useEffect, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { BookOpen, NotebookPen } from 'lucide-react'
 import Content from './Content.jsx'
 import Tracker from './Tracker.jsx'
-import ChapterTabBar from '../../components/ChapterTabBar.jsx'
-import ChapterMenu from '../../components/ChapterMenu.jsx'
-import ChapterLogo from '../../components/ChapterLogo.jsx'
-import SiteFooter from '../../components/SiteFooter.jsx'
-import { EMPTY, TRACKER_KEY, load, save, streak } from './utils.js'
-
-const FONT_URL =
-  'https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Lora:ital,wght@1,500&display=swap'
+import ChapterShell from '../_fun/ChapterShell.jsx'
+import { say } from '../_fun/useGame.js'
+import { EMPTY, READ_KEY, TRACKER_KEY, load, save } from './utils.js'
 
 const TABS = [
-  { id: 'content', label: 'Học bài', icon: BookOpen },
-  { id: 'tracker', label: 'Rèn luyện', icon: NotebookPen },
+  { id: 'content', label: 'Học bài' },
+  { id: 'tracker', label: 'Rèn luyện' },
 ]
+const TAB_TIPS = { content: 'Mở từng nội dung để đọc, xong thì đánh dấu đã học.', tracker: 'Mỗi việc tốt là một lần đóng dấu. Cố gắng đóng đủ 5 con dấu nhé!' }
+const TIPS = ['XP được cộng chung cho cả 6 chương.', 'Làm đủ các việc của một đức tính sẽ được đóng dấu.', 'Sổ tay chỉ lưu trên máy của bạn.']
 
 // Chương VI: tab Học bài (mặc định) + tab Rèn luyện
 export default function Chuong6() {
   const [tab, setTab] = useState('content')
   const [tracker, setTracker] = useState(() => load(TRACKER_KEY, EMPTY))
-
-  // Font chỉ nạp cho chương 6, không đụng CSS chung
-  useEffect(() => {
-    if (document.querySelector(`link[href="${FONT_URL}"]`)) return
-    const link = document.createElement('link')
-    link.rel = 'stylesheet'
-    link.href = FONT_URL
-    document.head.appendChild(link)
-  }, [])
+  const [read, setRead] = useState(() => load(READ_KEY, {}))
 
   useEffect(() => save(TRACKER_KEY, tracker), [tracker])
+  useEffect(() => save(READ_KEY, read), [read])
 
-  const go = (id) => {
+  function changeTab(id) {
     setTab(id)
-    window.scrollTo({ top: 0 })
+    say(TAB_TIPS[id])
   }
 
   return (
-    <main
-      className="min-h-screen bg-[#F5F1EA] text-[#1F1B16] antialiased"
-      style={{ fontFamily: "'Be Vietnam Pro', system-ui, sans-serif" }}
-    >
-      <nav className="sticky top-0 z-10 border-b border-[#E6DFD3] bg-[#F5F1EA]/90 backdrop-blur-md">
-        <div className="mx-auto flex max-w-[1180px] flex-wrap items-center gap-4 px-5 py-3">
-          <ChapterMenu current="VI" />
-          <ChapterLogo num="VI" />
-
-          <ChapterTabBar tabs={TABS} value={tab} onChange={go} label="Nội dung chương VI" />
-
-          <div className="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-[#E6DFD3] bg-white px-3.5 py-2 text-sm font-semibold max-sm:hidden">
-            <span className="size-2 rounded-full bg-[#E59A2F]" />
-            {streak(tracker.log)} ngày liên tiếp
-          </div>
-        </div>
-      </nav>
-
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={tab}
-          initial={{ opacity: 0, x: tab === 'content' ? -24 : 24 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: tab === 'content' ? 24 : -24 }}
-          transition={{ duration: 0.2 }}
-        >
-          {tab === 'content' ? (
-            <Content onNext={() => go('tracker')} />
-          ) : (
-            <Tracker state={tracker} setState={setTracker} />
-          )}
-        </motion.div>
-      </AnimatePresence>
-      <SiteFooter current="VI" />
-    </main>
+    <ChapterShell num="VI" tabs={TABS} tab={tab} onTab={changeTab} tips={TIPS}>
+      {tab === 'content' ? (
+        <Content
+          read={read}
+          setRead={setRead}
+          onDone={() => {
+            changeTab('tracker')
+            window.scrollTo({ top: 0 })
+          }}
+        />
+      ) : (
+        <Tracker state={tracker} setState={setTracker} />
+      )}
+    </ChapterShell>
   )
 }

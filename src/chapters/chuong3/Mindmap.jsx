@@ -1,324 +1,116 @@
-import { memo, useCallback, useEffect, useMemo, useState } from "react";
-import {
-  ReactFlow,
-  ReactFlowProvider,
-  Controls,
-  Handle,
-  Position,
-  useReactFlow,
-} from "@xyflow/react";
-import "@xyflow/react/dist/style.css";
-import { AnimatePresence, motion } from "framer-motion";
-import { ChevronRight, ChevronDown, Maximize, Network, Quote } from "lucide-react";
-import data from "./data.json";
-import NavBar from "./NavBar";
-import SiteFooter from "../../components/SiteFooter.jsx";
-import Knowledge from "./Knowledge";
-import Review from "./Review";
+import { useEffect, useState } from 'react'
+import map from './data.json'
+import know from './knowledge.json'
+import quiz from './quiz.json'
+import Knowledge from './Knowledge.jsx'
+import MapView from './MapView.jsx'
+import Review from './Review.jsx'
+import { flatten, freshRun } from './utils.js'
+import ChapterShell from '../_fun/ChapterShell.jsx'
+import Hero from '../_fun/Hero.jsx'
+import { award, play, say, useGame } from '../_fun/useGame.js'
 
-const COL_GAP = 310;
-const ROW_GAP = 92;
+// Tiến độ riêng chương III: ý ghi nhớ đã đánh dấu + ý đã xem trên sơ đồ
+const KEY = 'hcm202_c3'
+const ROOT = map.root.id
+const nodes = flatten(map.root)
+const keysTotal = know.sections.reduce((a, x) => a + x.key.length, 0)
 
-/* ---------- Duyệt cây dữ liệu ---------- */
-
-function flatten(node, depth = 0, parent = null, out = []) {
-  out.push({ node, depth, parent });
-  (node.children || []).forEach((c) => flatten(c, depth + 1, node.id, out));
-  return out;
-}
-
-const ALL = flatten(data.root);
-const BY_ID = Object.fromEntries(ALL.map((x) => [x.node.id, x]));
-const EXPANDABLE_IDS = ALL.filter((x) => x.node.children?.length).map((x) => x.node.id);
-
-/* ---------- Tính vị trí node (trái → phải), chỉ tính các node đang hiện ---------- */
-
-function buildGraph(expanded) {
-  const nodes = [];
-  const edges = [];
-  let nextRow = 0;
-
-  function place(node, depth) {
-    const kids = expanded.has(node.id) ? node.children || [] : [];
-    let y;
-    if (kids.length === 0) {
-      y = nextRow * ROW_GAP;
-      nextRow += 1;
-    } else {
-      const ys = kids.map((k) => {
-        const ky = place(k, depth + 1);
-        edges.push({
-          id: `${node.id}->${k.id}`,
-          source: node.id,
-          target: k.id,
-          type: "smoothstep",
-          style: { stroke: "var(--color-line-strong, #D9CFBF)", strokeWidth: 2 },
-        });
-        return ky;
-      });
-      y = (ys[0] + ys[ys.length - 1]) / 2;
-    }
-    nodes.push({
-      id: node.id,
-      type: "topic",
-      position: { x: depth * COL_GAP, y },
-      data: { depth, hasChildren: !!node.children?.length },
-    });
-    return y;
+function load() {
+  try {
+    const p = JSON.parse(localStorage.getItem(KEY) || '{}')
+    return { keys: p.keys ?? {}, seen: p.seen ?? { [ROOT]: true } }
+  } catch {
+    return { keys: {}, seen: { [ROOT]: true } }
   }
-
-  place(data.root, 0);
-  return { nodes, edges };
 }
 
-/* ---------- Node tuỳ chỉnh ---------- */
-
-const TopicNode = memo(function TopicNode({ id, data: d }) {
-  const { depth, hasChildren, label, expanded, selected, visited, onToggle } = d;
-
-  const tone =
-    depth === 0
-      ? "bg-primary text-on-dark border-primary"
-      : depth === 1
-        ? "bg-ink text-on-dark border-ink"
-        : "bg-white text-ink border-line-strong";
-
-  const ring = selected ? "outline outline-2 outline-offset-2 outline-amber" : "";
-  const width = depth === 0 ? 250 : depth === 1 ? 230 : 240;
-
-  return (
-    <div
-      className={`flex items-center gap-2 rounded-2xl border px-4 py-3 text-left ${tone} ${ring}`}
-      style={{ width }}
-    >
-      <Handle type="target" position={Position.Left} style={{ opacity: 0 }} isConnectable={false} />
-      <span className="flex-1 text-[14px] font-bold leading-snug">{label}</span>
-      {depth > 1 && visited && (
-        <span className="size-2 shrink-0 rounded-full bg-success" aria-label="Đã xem" />
-      )}
-      {hasChildren && (
-        <button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            onToggle(id);
-          }}
-          aria-label={expanded ? "Thu gọn nhánh" : "Mở nhánh"}
-          aria-expanded={expanded}
-          className="nodrag grid size-7 shrink-0 place-items-center rounded-full bg-gold text-ink transition-transform hover:scale-105"
-        >
-          {expanded ? <ChevronDown className="size-4" /> : <ChevronRight className="size-4" />}
-        </button>
-      )}
-      <Handle type="source" position={Position.Right} style={{ opacity: 0 }} isConnectable={false} />
-    </div>
-  );
-});
-
-const nodeTypes = { topic: TopicNode };
-
-/* ---------- Bản đồ + panel chi tiết ---------- */
-
-function MindmapInner() {
-  const { fitView } = useReactFlow();
-  const [expanded, setExpanded] = useState(() => new Set([data.root.id]));
-  const [selectedId, setSelectedId] = useState(data.root.id);
-  const [visited, setVisited] = useState(() => new Set([data.root.id]));
-
-  const toggle = useCallback((id) => {
-    setExpanded((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
-  }, []);
-
-  const select = useCallback((id) => {
-    setSelectedId(id);
-    setVisited((prev) => (prev.has(id) ? prev : new Set(prev).add(id)));
-  }, []);
-
-  // Mở cả chuỗi cha để một node con luôn hiện ra khi chọn từ panel
-  const reveal = useCallback(
-    (id) => {
-      setExpanded((prev) => {
-        const next = new Set(prev);
-        let p = BY_ID[id].parent;
-        while (p) {
-          next.add(p);
-          p = BY_ID[p].parent;
-        }
-        return next;
-      });
-      select(id);
-    },
-    [select],
-  );
-
-  const graph = useMemo(() => buildGraph(expanded), [expanded]);
-
-  const nodes = useMemo(
-    () =>
-      graph.nodes.map((n) => ({
-        ...n,
-        data: {
-          ...n.data,
-          label: BY_ID[n.id].node.short || BY_ID[n.id].node.label,
-          expanded: expanded.has(n.id),
-          selected: n.id === selectedId,
-          visited: visited.has(n.id),
-          onToggle: toggle,
-        },
-      })),
-    [graph, expanded, selectedId, visited, toggle],
-  );
-
-  // Căn lại khung nhìn mỗi khi số node đang hiện thay đổi
-  const layoutKey = graph.nodes.map((n) => n.id).join("|");
-  useEffect(() => {
-    const t = setTimeout(() => fitView({ padding: 0.15, maxZoom: 1, duration: 300 }), 30);
-    return () => clearTimeout(t);
-  }, [layoutKey, fitView]);
-
-  const current = BY_ID[selectedId].node;
-  const allOpen = EXPANDABLE_IDS.every((id) => expanded.has(id));
-  const total = ALL.length;
-  const percent = Math.round((visited.size / total) * 100);
-
-  return (
-    <div className="mx-auto max-w-[1180px] px-5 pt-10 pb-20">
-      <p className="eyebrow">{data.eyebrow}</p>
-      <h1 className="mt-2.5 text-[clamp(30px,4.6vw,52px)] font-extrabold leading-[1.08] tracking-[-0.02em]">
-        {data.title}
-      </h1>
-      <p className="mt-3 max-w-[60ch] text-[15.5px] leading-[1.65] text-ink-soft">{data.intro}</p>
-
-      <div className="mt-6 flex flex-wrap items-center gap-3">
-        <button
-          type="button"
-          className="btn btn-dark"
-          onClick={() => setExpanded(new Set(allOpen ? [data.root.id] : EXPANDABLE_IDS))}
-        >
-          <Network className="size-4" />
-          {allOpen ? "Thu gọn tất cả" : "Mở tất cả"}
-        </button>
-        <button
-          type="button"
-          className="btn btn-outline"
-          onClick={() => fitView({ padding: 0.15, maxZoom: 1, duration: 300 })}
-        >
-          <Maximize className="size-4" />
-          Căn giữa sơ đồ
-        </button>
-
-        <div className="ml-auto flex min-w-[200px] items-center gap-3">
-          <div className="h-2 flex-1 overflow-hidden rounded-full bg-track">
-            <motion.div
-              className="h-full rounded-full bg-amber"
-              animate={{ width: `${percent}%` }}
-              transition={{ duration: 0.3 }}
-            />
-          </div>
-          <span className="text-[13px] font-semibold text-muted">
-            Đã xem {visited.size}/{total} ý
-          </span>
-        </div>
-      </div>
-
-      <div className="mt-5 grid gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
-        <div className="card h-[460px] overflow-hidden lg:h-[600px]">
-          <ReactFlow
-            nodes={nodes}
-            edges={graph.edges}
-            nodeTypes={nodeTypes}
-            onNodeClick={(_, n) => select(n.id)}
-            nodesDraggable={false}
-            nodesConnectable={false}
-            elementsSelectable={false}
-            zoomOnScroll={false}
-            preventScrolling={false}
-            minZoom={0.4}
-            maxZoom={1.4}
-            proOptions={{ hideAttribution: true }}
-          >
-            <Controls showInteractive={false} />
-          </ReactFlow>
-        </div>
-
-        <aside className="card p-[22px] lg:h-[600px] lg:overflow-y-auto" aria-live="polite">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={current.id}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.2 }}
-            >
-              <p className="text-[13px] font-semibold text-muted">
-                {BY_ID[current.id].parent
-                  ? BY_ID[BY_ID[current.id].parent].node.label
-                  : "Ý trung tâm"}
-              </p>
-              <h2 className="mt-1.5 text-[22px] font-extrabold tracking-[-0.01em]">
-                {current.label}
-              </h2>
-              <p className="mt-3 text-[15.5px] leading-[1.65] text-ink-soft">{current.detail}</p>
-
-              {current.quote && (
-                <p className="mt-4 rounded-2xl bg-cream px-5 py-4 font-serif italic leading-[1.6]">
-                  <Quote className="mb-1.5 size-4 text-faint" aria-hidden="true" />
-                  {current.quote}
-                  <span className="mt-2 block text-[13px] not-italic text-muted">Hồ Chí Minh</span>
-                </p>
-              )}
-
-              {current.children?.length > 0 && (
-                <div className="mt-5">
-                  <p className="text-[13px] font-semibold text-muted">Các ý nhánh</p>
-                  <ul className="mt-2 grid gap-2">
-                    {current.children.map((c) => (
-                      <li key={c.id}>
-                        <button
-                          type="button"
-                          onClick={() => reveal(c.id)}
-                          className="flex min-h-11 w-full items-center justify-between gap-2 rounded-xl border border-line-strong bg-white px-3.5 py-2 text-left text-[14px] font-semibold text-ink hover:bg-cream"
-                        >
-                          {c.label}
-                          {visited.has(c.id) ? (
-                            <span className="size-2 shrink-0 rounded-full bg-success" aria-label="Đã xem" />
-                          ) : (
-                            <ChevronRight className="size-4 shrink-0 text-faint" />
-                          )}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </motion.div>
-          </AnimatePresence>
-        </aside>
-      </div>
-    </div>
-  );
+const TABS = [
+  { id: 'knowledge', label: 'Kiến thức' },
+  { id: 'mindmap', label: 'Sơ đồ tư duy' },
+  { id: 'review', label: 'Ôn tập' },
+]
+const TAB_TIPS = {
+  knowledge: 'Đọc từng phần, cuối phần có khung ghi nhớ nhanh.',
+  mindmap: 'Chạm nút + để bung nhánh, chạm ý để xem nội dung.',
+  review: 'Trả lời liên tiếp đúng để giữ chuỗi lửa 🔥!',
 }
+const TIPS = ['XP được cộng chung cho cả 6 chương.', 'Mở hết các nhánh sơ đồ để nhận XP.', 'Chuỗi đúng càng dài càng vui!']
 
 export default function Mindmap() {
-  const [tab, setTab] = useState("knowledge"); // mở chương vào tab Kiến thức trước
+  const { earned } = useGame()
+  const [tab, setTab] = useState('knowledge')
+  const [prog, setProg] = useState(load)
+  const [open, setOpen] = useState({})
+  const [sel, setSel] = useState(ROOT)
+  const [run, setRun] = useState(() => freshRun())
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(KEY, JSON.stringify(prog))
+    } catch {
+      // không lưu được: vẫn dùng trong phiên này
+    }
+  }, [prog])
+
+  function changeTab(id) {
+    setTab(id)
+    say(TAB_TIPS[id])
+  }
+  const go = (id) => {
+    changeTab(id)
+    window.scrollTo({ top: 0 })
+  }
+
+  function visit(id, e) {
+    play('pop')
+    setSel(id)
+    setProg((p) => ({ ...p, seen: { ...p.seen, [id]: true } }))
+    award(`c3-m-${id}`, 3, e)
+  }
+
+  const keysN = Object.values(prog.keys).filter(Boolean).length
+  const seenN = nodes.filter((x) => prog.seen[x.n.id]).length
+  const qDone = quiz.questions.filter((q) => earned[`c3-q-${q.id}`]).length
+  const stats = [
+    { v: `${keysN}/${keysTotal}`, l: 'ý ghi nhớ' },
+    { v: `${seenN}/${nodes.length}`, l: 'ý trên sơ đồ' },
+    { v: `${qDone}/${quiz.questions.length}`, l: 'câu đã đúng' },
+  ]
 
   return (
-    <>
-      <NavBar activeTab={tab} onTabChange={setTab} />
+    <ChapterShell num="III" tabs={TABS} tab={tab} onTab={changeTab} tips={TIPS}>
+      <Hero num="III" eyebrow={know.eyebrow} title={know.title} intro={know.intro}>
+        <div className="mt-[22px] flex flex-wrap gap-2.5">
+          {stats.map((st) => (
+            <div key={st.l} className="flex items-center gap-2.5 rounded-[18px] border border-on-dark/14 bg-on-dark/7 px-4 py-2.5">
+              <span className="text-[22px] font-extrabold text-gold">{st.v}</span>
+              <span className="text-[13px] font-semibold text-on-dark/80">{st.l}</span>
+            </div>
+          ))}
+        </div>
+      </Hero>
 
-      {tab === "mindmap" && (
-        <ReactFlowProvider>
-          <MindmapInner />
-        </ReactFlowProvider>
+      {tab === 'knowledge' && (
+        <Knowledge
+          sections={know.sections}
+          keys={prog.keys}
+          toggleKey={(k) => setProg((p) => ({ ...p, keys: { ...p.keys, [k]: !p.keys[k] } }))}
+          onMap={(i) => {
+            const id = map.root.children[i]?.id ?? ROOT
+            setOpen((o) => ({ ...o, [id]: true }))
+            setSel(id)
+            setProg((p) => ({ ...p, seen: { ...p.seen, [id]: true } }))
+            go('mindmap')
+          }}
+          onQuiz={(i) => {
+            setRun(freshRun(know.sections[i].id))
+            go('review')
+          }}
+        />
       )}
-      {tab === "knowledge" && <Knowledge />}
-      {tab === "review" && <Review />}
-      <SiteFooter current="III" />
-    </>
-  );
+      {tab === 'mindmap' && <MapView map={map} open={open} setOpen={setOpen} sel={sel} seen={prog.seen} onVisit={visit} />}
+      {tab === 'review' && <Review questions={quiz.questions} sections={know.sections} run={run} setRun={setRun} onKnow={() => go('knowledge')} />}
+    </ChapterShell>
+  )
 }

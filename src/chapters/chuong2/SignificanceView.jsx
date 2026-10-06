@@ -1,124 +1,76 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { Flag, Globe2, Quote, CheckCircle2, ShieldCheck, HeartHandshake } from 'lucide-react'
+import { useState } from 'react'
+import { burst, pt } from '../_fun/fx.js'
+import { award, play } from '../_fun/useGame.js'
 
-export default function SignificanceView({ significance }) {
-  const domains = significance?.domains || []
+const PAL = [
+  { box: 'bg-primary', blob: 'bg-gold/20', tag: 'bg-gold text-ink', pt: 'bg-on-dark/10', ptOn: 'bg-on-dark/[.18]' },
+  { box: 'bg-ink', blob: 'bg-amber/[.18]', tag: 'bg-amber text-ink', pt: 'bg-on-dark/[.07]', ptOn: 'bg-on-dark/[.14]' },
+]
+const FRUITS = ['#F2C06B', '#E59A2F', '#7FAE6A', '#F2C06B', '#E59A2F']
+
+// Mục III · "Trái ngọt": mỗi mảng ý nghĩa là một thẻ màu, chạm từng quả để "hái" (mở ý, +5 XP, lá bay).
+export default function SignificanceView({ significance, onQuiz }) {
+  const [open, setOpen] = useState({})
 
   return (
-    <div className="space-y-6 pt-2">
-      {/* Hai khối giá trị: Với Việt Nam & Với Nhân loại */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {domains.map((domain, index) => {
-          const isVN = domain.id === 'vietnam'
-
+    <>
+      <div className="mt-9 flex flex-col items-center gap-2 text-center">
+        <p className="eyebrow">Mục III · Trái ngọt của cây tư tưởng</p>
+        <h2 className="text-[clamp(24px,3vw,34px)] font-extrabold tracking-[-0.02em]">{significance.title}</h2>
+        <p className="max-w-[640px] text-[15.5px] leading-[1.6] text-ink-soft">{significance.subtitle}</p>
+      </div>
+      <div className="mt-7 grid grid-cols-[repeat(auto-fit,minmax(min(420px,100%),1fr))] items-start gap-[18px]">
+        {significance.domains.map((dm, di) => {
+          const c = PAL[di % PAL.length]
           return (
-            <motion.div
-              key={domain.id}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.2, delay: index * 0.1 }}
-              className="card p-6 sm:p-8 flex flex-col justify-between space-y-6"
-            >
-              <div>
-                <div className="flex items-center justify-between gap-3 mb-4">
-                  <div className="flex items-center gap-3">
-                    <span
-                      className={`grid size-11 place-items-center rounded-2xl ${
-                        isVN ? 'bg-primary text-on-dark' : 'bg-amber text-ink'
-                      }`}
+            <div key={dm.id ?? di} className={`relative overflow-hidden rounded-[30px] p-[clamp(22px,3vw,32px)] text-on-dark ${c.box}`}>
+              <span aria-hidden="true" className={`absolute -top-[50px] -right-[50px] size-[180px] rounded-full ${c.blob}`} />
+              <span className={`relative rounded-full px-3 py-1.5 text-[12px] font-extrabold ${c.tag}`}>{dm.tag}</span>
+              <h3 className="relative mt-3.5 text-[24px] font-extrabold tracking-[-0.01em]">{dm.title}</h3>
+              <div className="relative mt-[18px] flex flex-col gap-2.5">
+                {dm.points.map((p, k) => {
+                  const key = `${di}-${k}`
+                  const isOpen = !!open[key]
+                  return (
+                    <button
+                      key={key}
+                      type="button"
+                      aria-expanded={isOpen}
+                      onClick={(e) => {
+                        play(isOpen ? 'tap' : 'pop')
+                        if (!isOpen) {
+                          award(`c2-s-${key}`, 5, e)
+                          const q = pt(e)
+                          burst(q.x, q.y, 14, 'leaf')
+                        }
+                        setOpen((o) => ({ ...o, [key]: !isOpen }))
+                      }}
+                      className={`flex items-start gap-3.5 rounded-[20px] p-4 text-left transition-[transform,background] duration-200 hover:translate-x-1 ${isOpen ? c.ptOn : c.pt}`}
                     >
-                      {isVN ? <Flag className="size-5" /> : <Globe2 className="size-5" />}
-                    </span>
-                    <h3 className="text-xl sm:text-2xl font-bold text-ink">
-                      {domain.title}
-                    </h3>
-                  </div>
-
-                  <span
-                    className={`rounded-full px-3 py-1 text-xs font-bold ${
-                      isVN
-                        ? 'bg-cream text-primary border border-line-strong'
-                        : 'bg-paper text-ink border border-line'
-                    }`}
-                  >
-                    {domain.tag}
-                  </span>
-                </div>
-
-                <div className="space-y-4 mt-6">
-                  {domain.points.map((pt, ptIdx) => (
-                    <div
-                      key={ptIdx}
-                      className="rounded-2xl border border-line bg-paper/50 p-4 space-y-1.5 transition-colors hover:border-line-strong"
-                    >
-                      <div className="flex items-center gap-2">
-                        <CheckCircle2
-                          className={`size-4 shrink-0 ${
-                            isVN ? 'text-primary' : 'text-amber'
-                          }`}
-                        />
-                        <h4 className="font-bold text-ink text-[15.5px]">
-                          {pt.title}
-                        </h4>
-                      </div>
-                      <p className="text-ink-soft text-[14.5px] leading-relaxed pl-6">
-                        {pt.desc}
-                      </p>
-                    </div>
-                  ))}
-                </div>
+                      <span
+                        className={`grid size-10 shrink-0 place-items-center rounded-full text-[14px] font-extrabold text-ink transition-transform duration-[400ms] ease-[cubic-bezier(.3,1.6,.5,1)] ${isOpen ? 'scale-[1.12]' : ''}`}
+                        style={{ background: FRUITS[k % FRUITS.length] }}
+                      >
+                        {String(k + 1).padStart(2, '0')}
+                      </span>
+                      <span className="flex min-w-0 flex-col gap-1.5">
+                        <span className="text-[16px] leading-[1.35] font-extrabold">{p.title}</span>
+                        {isOpen ? <span className="text-[14.5px] leading-[1.65] opacity-90">{p.desc}</span> : <span className="text-[12.5px] font-bold opacity-70">Chạm để hái quả →</span>}
+                      </span>
+                    </button>
+                  )
+                })}
               </div>
-
-              {/* Chú thích phía dưới */}
-              <div
-                className={`rounded-2xl p-4 text-xs ${
-                  isVN
-                    ? 'bg-cream border border-primary/20 text-ink-soft'
-                    : 'bg-paper border border-line text-ink-soft'
-                }`}
-              >
-                <div className="flex items-center gap-2 font-bold mb-1 text-ink">
-                  {isVN ? (
-                    <ShieldCheck className="size-4 text-primary" />
-                  ) : (
-                    <HeartHandshake className="size-4 text-amber" />
-                  )}
-                  <span>
-                    {isVN ? 'Kim chỉ nam hành động' : 'Hòa bình & Hữu nghị'}
-                  </span>
-                </div>
-                <p>
-                  {isVN
-                    ? 'Khi nào làm đúng với tư tưởng Hồ Chí Minh thì cách mạng thắng lợi. Tư tưởng Người trường tồn cùng sự phát triển của dân tộc.'
-                    : '"Làm bạn với tất cả mọi nước dân chủ và không gây thù oán với một ai" — Hồ Chí Minh'}
-                </p>
-              </div>
-            </motion.div>
+            </div>
           )
         })}
       </div>
-
-      {/* Trích văn kiện Đại hội XII của Đảng */}
-      <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.2, delay: 0.2 }}
-        className="card p-6 sm:p-8 bg-ink text-on-dark space-y-4"
-      >
-        <div className="flex items-center gap-2 text-gold text-xs font-bold uppercase tracking-wider">
-          <Quote className="size-4" />
-          <span>Văn kiện Đại hội đại biểu toàn quốc lần thứ XII của Đảng</span>
-        </div>
-
-        <p className="font-serif italic text-base sm:text-lg leading-relaxed text-on-dark/95">
-          "Chủ tịch Hồ Chí Minh vĩ đại, lãnh tụ thiên tài của Đảng và nhân dân ta, người thầy vĩ đại của cách mạng Việt Nam, Anh hùng giải phóng dân tộc, Danh nhân văn hóa thế giới... Tư tưởng của Người, cùng với chủ nghĩa Mác - Lênin là nền tảng tư tưởng, kim chỉ nam cho hành động của Đảng và cách mạng Việt Nam, là tài sản tinh thần vô cùng to lớn và quý giá của Đảng và dân tộc ta, mãi mãi soi đường cho sự nghiệp cách mạng của Đảng và nhân dân ta."
-        </p>
-
-        <div className="text-right text-xs text-faint">
-          — Trích Văn kiện Đại hội XII của Đảng Cộng sản Việt Nam
-        </div>
-      </motion.div>
-    </div>
+      <div className="mt-7 flex flex-wrap items-center justify-center gap-3 rounded-[26px] border border-line bg-white p-5 text-center">
+        <span className="text-[15px] font-bold">Hái hết trái rồi? Thử ôn lại cả chương nhé.</span>
+        <button type="button" onClick={onQuiz} className="min-h-12 rounded-full bg-ink px-5 text-[14px] font-extrabold text-on-dark">
+          Đố nhanh ★
+        </button>
+      </div>
+    </>
   )
 }

@@ -1,195 +1,72 @@
-import React, { useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { X, Calendar, MapPin, Quote, BookOpen, ChevronLeft, ChevronRight, Award, Image as ImageIcon } from 'lucide-react'
+import { useEffect } from 'react'
 import { getEventImage } from './imageRegistry.js'
+import Modal from '../_fun/Modal.jsx'
 
-// Sử dụng bộ giải mã ảnh tư liệu lịch sử chuẩn hóa
-const resolveEventImage = getEventImage
-
-export default function EventModal({ event, onClose, onPrev, onNext, hasPrev, hasNext }) {
-  // Đóng modal khi bấm ESC
+// Chi tiết một sự kiện: ảnh tư liệu, mô tả, trích dẫn, ý nghĩa, tác phẩm; chuyển trước/sau (cả phím ← →).
+export default function EventModal({ event, period, index, total, onClose, onStep }) {
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') onClose()
-      if (e.key === 'ArrowLeft' && hasPrev) onPrev()
-      if (e.key === 'ArrowRight' && hasNext) onNext()
+    if (!event) return undefined
+    const onKey = (e) => {
+      if (e.key === 'ArrowRight') onStep(1)
+      if (e.key === 'ArrowLeft') onStep(-1)
     }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [onClose, onPrev, onNext, hasPrev, hasNext])
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [event, onStep])
 
-  // Ngăn chặn cuộn trang phía dưới khi modal mở
-  useEffect(() => {
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.body.style.overflow = 'unset'
-    }
-  }, [])
-
-  if (!event) return null
-
-  const eventImageSrc = resolveEventImage(event)
-
+  const img = event && getEventImage(event)
   return (
-    <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-        {/* Lớp nền mờ mờ */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-          onClick={onClose}
-          className="fixed inset-0 bg-[#1F1B16]/60 backdrop-blur-sm"
-          aria-hidden="true"
-        />
-
-        {/* Khung nội dung modal */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 16 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 16 }}
-          transition={{ duration: 0.2 }}
-          className="card relative z-10 w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white p-6 sm:p-8"
-          onClick={(e) => e.stopPropagation()}
-          role="dialog"
-          aria-modal="true"
-        >
-          {/* Nút đóng góc trên */}
-          <button
-            onClick={onClose}
-            className="absolute top-5 right-5 grid size-10 place-items-center rounded-full border border-line bg-paper text-ink transition-colors hover:bg-cream hover:border-line-strong"
-            aria-label="Đóng chi tiết"
-          >
-            <X className="size-5" />
-          </button>
-
-          {/* Phần đầu Modal */}
-          <div className="pr-12">
-            <div className="flex flex-wrap items-center gap-2 mb-3">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-cream px-3 py-1 text-xs font-bold text-primary">
-                <Calendar className="size-3.5" />
-                {event.date}
-              </span>
-              <span className="rounded-full bg-ink px-3 py-1 text-xs font-medium text-on-dark">
-                {event.tag}
-              </span>
-              {event.location && (
-                <span className="inline-flex items-center gap-1 text-xs text-muted">
-                  <MapPin className="size-3.5 text-amber" />
-                  {event.location}
+    <Modal open={!!event} onClose={onClose} label={event?.title}>
+      {event && (
+        <>
+          {img && (
+            <>
+              <div className="h-[clamp(180px,34vw,300px)] bg-ink bg-cover bg-center" style={{ backgroundImage: `url('${img}')` }} role="img" aria-label={event.imageCaption || event.title} />
+              {event.imageCaption && <p className="bg-ink px-6 py-2.5 text-[12.5px] leading-normal text-on-dark/80">{event.imageCaption}</p>}
+            </>
+          )}
+          <div className="p-[clamp(20px,3vw,32px)]">
+            <div className="flex flex-wrap items-center gap-2 pr-12">
+              {period && (
+                <span className="rounded-full bg-ink px-3 py-1.5 text-[12px] font-extrabold text-gold">
+                  {period.badge} · {period.timeSpan}
                 </span>
               )}
+              <span className="rounded-full bg-cream px-3 py-1.5 text-[12px] font-extrabold text-primary-dark">{event.tag}</span>
             </div>
-
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-ink leading-tight">
-              {event.title}
-            </h2>
-          </div>
-
-          <div className="my-5 border-t border-line" />
-
-          {/* Nội dung chi tiết */}
-          <div className="space-y-6">
-            {/* Hình ảnh tư liệu lịch sử (nếu có) */}
-            {eventImageSrc && (
-              <div className="rounded-2xl overflow-hidden border border-line bg-cream/40 p-3 space-y-2 flex flex-col items-center">
-                <img
-                  src={eventImageSrc}
-                  alt={event.title}
-                  className="max-h-[380px] w-auto max-w-full object-contain rounded-xl"
-                  loading="lazy"
-                />
-                {event.imageCaption && (
-                  <p className="text-xs text-muted text-center italic px-2 py-1">
-                    {event.imageCaption}
-                  </p>
-                )}
-              </div>
-            )}
-
-            {/* Khối trích dẫn lời Bác hoặc danh ngôn lịch sử */}
+            <p className="mt-3.5 text-[30px] font-extrabold tracking-[-0.02em] text-amber">{event.date}</p>
+            <h2 className="mt-1 text-[clamp(21px,2.6vw,27px)] leading-[1.3] font-extrabold tracking-[-0.01em] text-pretty">{event.title}</h2>
+            <p className="mt-2 text-[13.5px] font-semibold text-muted">⌖ {event.location}</p>
+            <p className="mt-[18px] text-[15.5px] leading-[1.75] text-pretty">{event.detailDesc}</p>
             {event.quotes && (
-              <div className="bg-cream rounded-2xl p-5 border-l-4 border-amber">
-                <div className="flex items-center gap-2 mb-2 text-xs font-bold uppercase tracking-wider text-amber">
-                  <Quote className="size-4" />
-                  <span>Lời dạy & Trích dẫn bất hủ</span>
-                </div>
-                <p className="font-serif italic text-ink text-[16px] sm:text-[17px] leading-relaxed">
-                  "{event.quotes}"
-                </p>
+              <div className="mt-[18px] rounded-[22px] bg-primary px-[22px] py-5 text-on-dark">
+                <p className="font-serif text-[17px] leading-[1.6] italic">“{event.quotes}”</p>
               </div>
             )}
-
-            {/* Bối cảnh và diễn biến lịch sử */}
-            <div>
-              <h3 className="text-sm font-bold uppercase tracking-wider text-primary mb-2">
-                Bối cảnh & Diễn biến lịch sử
-              </h3>
-              <p className="text-ink-soft text-[15.5px] leading-[1.65] text-justify whitespace-pre-line">
-                {event.detailDesc}
-              </p>
-            </div>
-
-            {/* Ý nghĩa đối với bước phát triển tư tưởng */}
-            <div className="rounded-2xl border border-line bg-paper/60 p-5">
-              <div className="flex items-center gap-2 mb-2 text-sm font-bold text-ink">
-                <Award className="size-5 text-primary" />
-                <span>Ý nghĩa đối với bước phát triển Tư tưởng Hồ Chí Minh</span>
+            <div className="mt-3 grid grid-cols-[repeat(auto-fit,minmax(min(260px,100%),1fr))] gap-3">
+              <div className="rounded-[20px] bg-success-soft p-[18px]">
+                <p className="text-[12px] font-extrabold tracking-[.1em] text-success uppercase">Ý nghĩa</p>
+                <p className="mt-1.5 text-[14.5px] leading-[1.65]">{event.significance}</p>
               </div>
-              <p className="text-ink-soft text-[15.5px] leading-[1.65]">
-                {event.significance}
-              </p>
-            </div>
-
-            {/* Tác phẩm / Văn kiện tiêu biểu nếu có */}
-            {event.works && (
-              <div className="flex items-start gap-3 rounded-2xl bg-paper p-4 border border-line">
-                <BookOpen className="size-5 text-amber shrink-0 mt-0.5" />
-                <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-muted block mb-0.5">
-                    Tác phẩm / Văn kiện liên quan
-                  </span>
-                  <span className="text-sm font-semibold text-ink">
-                    {event.works}
-                  </span>
-                </div>
+              <div className="rounded-[20px] bg-cream p-[18px]">
+                <p className="text-[12px] font-extrabold tracking-[.1em] text-primary-dark uppercase">Tác phẩm · Văn kiện</p>
+                <p className="mt-1.5 text-[14.5px] leading-[1.65]">{event.works}</p>
               </div>
-            )}
-          </div>
-
-          {/* Phần chân modal: Chuyển mốc trước / sau và nút đóng */}
-          <div className="mt-8 pt-5 border-t border-line flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-2">
-              <button
-                onClick={onPrev}
-                disabled={!hasPrev}
-                className={`btn btn-outline py-2 px-3 text-xs ${!hasPrev ? 'opacity-40 cursor-not-allowed' : ''}`}
-                title="Mốc sự kiện trước (Phím mũi tên trái)"
-              >
-                <ChevronLeft className="size-4" />
-                <span>Mốc trước</span>
+            </div>
+            <div className="mt-5 flex justify-between gap-2.5">
+              <button type="button" onClick={() => onStep(-1)} disabled={index <= 0} className="min-h-[46px] rounded-full border border-line-strong bg-white px-[18px] text-[14px] font-bold disabled:opacity-35">
+                ← Trước
               </button>
-              <button
-                onClick={onNext}
-                disabled={!hasNext}
-                className={`btn btn-outline py-2 px-3 text-xs ${!hasNext ? 'opacity-40 cursor-not-allowed' : ''}`}
-                title="Mốc sự kiện tiếp theo (Phím mũi tên phải)"
-              >
-                <span>Mốc sau</span>
-                <ChevronRight className="size-4" />
+              <span className="self-center text-[13px] font-bold text-muted">
+                {index + 1} / {total}
+              </span>
+              <button type="button" onClick={() => onStep(1)} disabled={index >= total - 1} className="min-h-[46px] rounded-full bg-ink px-[18px] text-[14px] font-bold text-on-dark disabled:opacity-35">
+                Tiếp →
               </button>
             </div>
-
-            <button
-              onClick={onClose}
-              className="btn btn-dark py-2 px-5 text-xs font-semibold"
-            >
-              Đóng cửa sổ
-            </button>
           </div>
-        </motion.div>
-      </div>
-    </AnimatePresence>
+        </>
+      )}
+    </Modal>
   )
 }

@@ -2,22 +2,21 @@ import data from './data.json'
 
 const sources = Object.fromEntries(data.sources.map((source) => [source.id, source]))
 
-export default function Sources({ citations }) {
-  if (!citations?.length) return null
+// Dòng nguồn gọn: "Nguồn: <nhà xuất bản> · ..." (mỗi nguồn một lần, bấm để mở trang gốc).
+export default function Sources({ citations, className = 'text-faint' }) {
+  const list = [...new Map((citations ?? []).map((c) => [c.sourceId, sources[c.sourceId]])).values()].filter(Boolean)
+  if (!list.length) return null
   return (
-    <div className="mt-5 border-t border-line pt-4 text-sm text-muted">
-      <p className="mb-2 font-bold text-ink-soft">Nguồn tham khảo</p>
-      <ul className="space-y-2">
-        {citations.map(({ sourceId, locator }) => {
-          const source = sources[sourceId]
-          return source && (
-            <li key={`${sourceId}-${locator}`}>
-              <a className="font-semibold text-primary underline underline-offset-2 hover:text-primary-dark" href={source.url} target="_blank" rel="noopener noreferrer">{source.title}</a>
-              {locator && <span> · {locator}</span>}
-            </li>
-          )
-        })}
-      </ul>
-    </div>
+    <p className={`mt-1.5 text-[12px] font-semibold ${className}`}>
+      Nguồn:{' '}
+      {list.map((s, i) => (
+        <span key={s.id}>
+          {i > 0 && ' · '}
+          <a href={s.url} target="_blank" rel="noopener noreferrer" title={s.title} className="underline-offset-2 hover:underline">
+            {s.publisher.split(';')[0]}
+          </a>
+        </span>
+      ))}
+    </p>
   )
 }
