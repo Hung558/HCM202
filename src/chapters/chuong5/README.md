@@ -6,7 +6,7 @@ Branch: `chuong5/phucnguyen`. Trang chạy riêng: `/chuong5.html`.
 
 - `DragDrop.jsx`: trang chương, tab Học bài (thẻ phần, các ý hiện dần, video, câu hỏi suy ngẫm) và giữ trò chơi khi đổi tab.
 - `MatchingGame.jsx`: kéo thả bằng `@hello-pangea/dnd` có sẵn; hỗ trợ chọn mảnh rồi chọn năm bằng chuột, cảm ứng hoặc Tab + Enter.
-- XP, âm thanh, hiệu ứng và Bé Sen dùng chung ở `../_fun/`; kỷ lục và số lượt lưu ở key `hcm202_c5`.
+- XP, âm thanh, hiệu ứng và linh vật dùng chung ở `../_fun/`; kỷ lục và số lượt lưu ở key `hcm202_c5`.
 - `data.json`: nội dung tóm lược, bốn cặp năm – tổ chức, giải thích và nguồn.
 - `game.js`, `game.test.js`: logic ghép, xáo trộn và đồng hồ theo thời điểm kết thúc thực tế.
 

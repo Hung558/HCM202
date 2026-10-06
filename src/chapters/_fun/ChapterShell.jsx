@@ -8,7 +8,7 @@ import XpPill from './XpPill.jsx'
 import { animate } from './fx.js'
 import { toggleSound, useGame } from './useGame.js'
 
-// Khung chung của 6 chương: header dính (☰, logo, XP, âm thanh, tab), vùng nội dung, Bé Sen, footer.
+// Khung chung của 6 chương: header dính (☰, logo, XP, âm thanh, tab), vùng nội dung, linh vật, footer.
 // Đổi tab thì cuộn lên đầu và nội dung hiện dần (opacity .4→1, trượt 16px).
 export default function ChapterShell({ num, tabs, tab, onTab, tips, mascot = true, children }) {
   const { sound } = useGame()

@@ -79,7 +79,7 @@ export default function TreeView({ periods, events, period, setPeriod, q, setQ, 
         </button>
       </div>
 
-      <div ref={treeRef} className="relative mt-10 pt-[60px]">
+      <div ref={treeRef} className="relative mt-10 overflow-x-clip pt-[60px]">
         <div aria-hidden="true" className="absolute top-0 bottom-0 -ml-2 w-4 rounded-2xl bg-track" style={{ left: trunkLeft }} />
         <motion.div
           aria-hidden="true"
@@ -201,7 +201,7 @@ export default function TreeView({ periods, events, period, setPeriod, q, setQ, 
       </div>
 
       {curYear && (
-        <div className="fixed right-5 bottom-5 z-30 flex items-center gap-2.5 rounded-full bg-ink py-2.5 pr-[18px] pl-3 text-[13.5px] font-semibold text-on-dark max-sm:right-3 max-sm:bottom-3" aria-live="polite">
+        <div className="fixed bottom-5 left-5 z-30 flex items-center gap-2.5 rounded-full bg-ink py-2.5 pr-[18px] pl-3 text-[13.5px] font-semibold text-on-dark max-sm:bottom-3 max-sm:left-3" aria-live="polite">
           <span className="size-2.5 rounded-full bg-[#7FAE6A]" />
           Cây đã lớn tới <span className="text-[16px] font-extrabold text-gold">{curYear}</span>
         </div>

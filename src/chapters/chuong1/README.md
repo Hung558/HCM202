@@ -33,7 +33,7 @@ Mở `/chuong1.html` tại địa chỉ Vite in trong Terminal, rồi chọn **N
 | [learning-progress.js](learning-progress.js) | Lọc dữ liệu theo chương, chuẩn hóa/lưu tiến độ và tạo URL YouTube hợp lệ |
 | [progress.js](progress.js) | Thuật toán ôn thẻ hiện có |
 
-XP, âm thanh, hiệu ứng và Bé Sen dùng chung ở [`../_fun/`](../_fun/). Không thêm thư viện hoặc thay đổi cấu hình/style dùng chung.
+XP, âm thanh, hiệu ứng và linh vật dùng chung ở [`../_fun/`](../_fun/). Không thêm thư viện hoặc thay đổi cấu hình/style dùng chung.
 
 ## Hợp đồng dữ liệu đang dùng
 

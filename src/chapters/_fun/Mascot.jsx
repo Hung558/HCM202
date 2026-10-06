@@ -1,16 +1,19 @@
 import { useEffect, useRef } from 'react'
+import { motion } from 'framer-motion'
+import mascotImg from './mascot.webp'
 import { animate } from './fx.js'
 import { hideBubble, play, say, useGame } from './useGame.js'
 
-// "Bé Sen" vẽ bằng CSS ở góc trái dưới. Nói qua say() trong useGame.js; bong bóng tự ẩn sau 5 giây.
-// Bấm vào Bé Sen: đang nói thì ẩn bong bóng, không thì nói một mẹo ngẫu nhiên trong `tips`.
+// Linh vật ở góc phải dưới (không bị bảng danh sách chương bên trái che). Nói qua say(); bong bóng tự ẩn sau 5 giây.
+// Bấm vào linh vật: đang nói thì ẩn bong bóng, không thì nói một mẹo ngẫu nhiên trong `tips`.
+// Ảnh: Klee (Genshin Impact, HoYoverse), fan art có chữ ký họa sĩ trên ảnh — chỉ dùng cho sản phẩm học tập, không thương mại.
 export default function Mascot({ tips = [] }) {
   const { msg, msgN, bubble } = useGame()
   const ref = useRef(null)
 
   useEffect(() => {
     if (!msgN) return undefined
-    animate(ref.current, [{ transform: 'none' }, { transform: 'translateY(-14px) rotate(-6deg)' }, { transform: 'none' }], {
+    animate(ref.current, [{ transform: 'none' }, { transform: 'translateY(-14px) rotate(6deg)' }, { transform: 'none' }], {
       duration: 420,
       easing: 'cubic-bezier(.3,1.5,.5,1)',
     })
@@ -25,17 +28,22 @@ export default function Mascot({ tips = [] }) {
   }
 
   return (
-    <div className="pointer-events-none fixed bottom-3 left-3 z-[35] flex origin-bottom-left scale-[.72] items-end gap-1.5">
-      <button ref={ref} type="button" onClick={poke} aria-label="Bé Sen: bấm để nghe mẹo học" title="Bé Sen" className="pointer-events-auto relative size-[60px] shrink-0 cursor-pointer">
-        <span className="absolute top-0 left-1.5 h-7 w-5 -rotate-[24deg] rounded-[50%_50%_40%_40%] bg-amber" />
-        <span className="absolute top-0 right-1.5 h-7 w-5 rotate-[24deg] rounded-[50%_50%_40%_40%] bg-amber" />
-        <span className="absolute top-[9px] left-1 h-[49px] w-[52px] rounded-full border-[3px] border-ink bg-gold" />
-        <span className="absolute top-7 left-[19px] h-[9px] w-[7px] rounded-full bg-ink" />
-        <span className="absolute top-7 left-[34px] h-[9px] w-[7px] rounded-full bg-ink" />
-        <span className="absolute top-[38px] left-[23px] h-[7px] w-3.5 rounded-[0_0_50%_50%] border-b-[3px] border-ink" />
+    <div className="pointer-events-none fixed right-2 bottom-2 z-[35] flex flex-row-reverse items-end gap-1">
+      <button ref={ref} type="button" onClick={poke} aria-label="Linh vật: bấm để nghe mẹo học" className="pointer-events-auto w-[96px] shrink-0 cursor-pointer max-sm:w-[78px]">
+        {/* bồng bềnh nhẹ; tự tắt khi bật giảm chuyển động (MotionConfig ở ChapterShell) */}
+        <motion.img
+          src={mascotImg}
+          alt=""
+          draggable="false"
+          width={248}
+          height={240}
+          className="block h-auto w-full select-none"
+          animate={{ y: [0, -4, 0] }}
+          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+        />
       </button>
       {bubble && msg && (
-        <div role="status" className="pointer-events-none mb-[26px] max-w-[min(260px,58vw)] rounded-[18px_18px_18px_4px] border-[1.5px] border-ink bg-white px-3.5 py-2.5 text-[13.5px] leading-[1.45] font-semibold text-ink">
+        <div role="status" className="pointer-events-none mb-16 max-w-[min(240px,60vw)] rounded-[18px_18px_4px_18px] border-[1.5px] border-ink bg-white px-3.5 py-2.5 text-[13px] leading-[1.45] font-semibold text-ink max-sm:mb-12">
           {msg}
         </div>
       )}

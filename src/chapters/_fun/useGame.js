@@ -2,7 +2,7 @@ import { useSyncExternalStore } from 'react'
 import { tone } from './sfx.js'
 import { burst, floatXp, pt } from './fx.js'
 
-// XP chung của cả 6 chương + lời nói của Bé Sen. Lưu ở localStorage key `hcm202_game` = { xp, earned, sound }.
+// XP chung của cả 6 chương + lời nói của linh vật. Lưu ở localStorage key `hcm202_game` = { xp, earned, sound }.
 const KEY = 'hcm202_game'
 
 function load() {
