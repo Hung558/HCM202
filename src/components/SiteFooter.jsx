@@ -10,7 +10,7 @@ export default function SiteFooter({ current }) {
     <footer className="mt-16 border-t-[3px] border-double border-line-strong">
       <div className="mx-auto flex max-w-[1180px] flex-col items-center gap-3 px-5 pt-9 pb-12 text-center">
         <StarLogo size="size-8" star="size-4" radius="rounded-lg" />
-        <span className="text-[14px] font-semibold">HCM Web · Học phần Tư tưởng Hồ Chí Minh</span>
+        <span className="text-[14px] font-semibold">Dấu Chân Của Bác · Học phần Tư tưởng Hồ Chí Minh</span>
 
         <nav aria-label="Các trang học" className="mt-1">
           <ul className="flex flex-wrap justify-center gap-x-5 gap-y-1">

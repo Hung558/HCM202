@@ -1,4 +1,4 @@
-// Trang chủ HCM Web — dựng theo bản thiết kế "design_handoff_trang_chu" (cổ điển, trang trọng).
+// Trang chủ Dấu Chân Của Bác — dựng theo bản thiết kế "design_handoff_trang_chu" (cổ điển, trang trọng).
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import chuong2 from '../chapters/chuong2/data.json'
@@ -52,7 +52,7 @@ function Nav() {
         <a href="/" className="flex items-center gap-3 text-ink">
           <StarLogo />
           <span className="flex flex-col leading-tight">
-            <span className="text-[15px] font-bold">HCM Web</span>
+            <span className="text-[15px] font-bold">Dấu Chân Của Bác</span>
             <span className="text-xs text-muted">Tư tưởng Hồ Chí Minh</span>
           </span>
         </a>

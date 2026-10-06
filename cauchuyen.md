@@ -1,4 +1,4 @@
-# Câu chuyện của HCM Web
+# Câu chuyện của "Dấu Chân Của Bác"
 
 Tài liệu để giới thiệu web học tập **Tư tưởng Hồ Chí Minh (HCM202)**: web làm được gì, từng chương có gì, nên bấm thử chỗ nào khi trình bày.
 
