@@ -10,13 +10,13 @@ import {
   Quote,
   Sparkles,
   Layers,
-  Columns2,
   LayoutGrid,
   ChevronLeft,
   ChevronRight,
   ArrowUpRight,
   CheckCircle2,
-  X
+  X,
+  Image as ImageIcon
 } from 'lucide-react'
 import ChapterTabBar from '../../components/ChapterTabBar.jsx'
 import ChapterMenu from '../../components/ChapterMenu.jsx'
@@ -52,7 +52,7 @@ const SECTIONS = {
     key: 'timeline',
     eyebrow: 'CHƯƠNG II · MỤC II: QUÁ TRÌNH HÌNH THÀNH & PHÁT TRIỂN',
     title: 'Quá trình hình thành và phát triển Tư tưởng Hồ Chí Minh',
-    subtitle: 'Trục thời gian tương tác qua 5 thời kỳ lịch sử (trước 1911 – 1969) với 28 mốc sự kiện và tư liệu lịch sử được xác thực.'
+    subtitle: 'Dòng thời gian tương tác qua 5 thời kỳ lịch sử (trước 1911 – 1969) với 28 mốc sự kiện và tư liệu lịch sử được xác thực. Nhấp vào từng mốc sự kiện để mở chi tiết đầy đủ.'
   },
   significance: {
     key: 'significance',
@@ -66,8 +66,8 @@ export default function InteractiveTimeline() {
   // Trạng thái tab chính: 'foundations' (Mục I) | 'timeline' (Mục II) | 'significance' (Mục III)
   const [activeTab, setActiveTab] = useState('foundations')
 
-  // Trạng thái chế độ xem timeline: 'split' (chia đôi màn hình - dễ nhìn nhất) | 'grid' (lưới thẻ toàn cảnh)
-  const [layoutMode, setLayoutMode] = useState('split')
+  // Trạng thái chế độ xem timeline: 'timeline' (dòng thời gian) | 'grid' (lưới thẻ toàn cảnh)
+  const [layoutMode, setLayoutMode] = useState('timeline')
 
   // Trạng thái bộ lọc thời kỳ
   const [selectedPeriodId, setSelectedPeriodId] = useState('all')
@@ -75,16 +75,11 @@ export default function InteractiveTimeline() {
   // Trạng thái tìm kiếm từ khóa
   const [searchQuery, setSearchQuery] = useState('')
 
-  // Mốc sự kiện đang được chọn để hiển thị chi tiết ở cột phải (chế độ Split View)
-  const [selectedEventId, setSelectedEventId] = useState(data.events[0]?.id || 'ev-01')
-
-  // Modal chi tiết đầy đủ khi người dùng muốn phóng to toàn màn hình
+  // Modal chi tiết đầy đủ khi người dùng muốn xem chi tiết mốc sự kiện
   const [modalEvent, setModalEvent] = useState(null)
 
   // Modal trắc nghiệm
   const [isQuizOpen, setIsQuizOpen] = useState(false)
-
-  const listContainerRef = useRef(null)
 
   // Danh sách sự kiện đã lọc
   const filteredEvents = useMemo(() => {
@@ -108,72 +103,15 @@ export default function InteractiveTimeline() {
     })
   }, [selectedPeriodId, searchQuery])
 
-  // Tự động chọn mốc đầu tiên của danh sách đã lọc nếu mốc hiện tại không còn nằm trong bộ lọc
-  useEffect(() => {
-    if (filteredEvents.length > 0) {
-      const exists = filteredEvents.some((e) => e.id === selectedEventId)
-      if (!exists) {
-        setSelectedEventId(filteredEvents[0].id)
-      }
-    }
-  }, [filteredEvents, selectedEventId])
-
-  // Sự kiện đang được chọn để hiển thị chi tiết
-  const currentEvent = useMemo(() => {
-    return (
-      filteredEvents.find((e) => e.id === selectedEventId) ||
-      filteredEvents[0] ||
-      data.events[0]
-    )
-  }, [filteredEvents, selectedEventId])
-
-  // Vị trí của sự kiện hiện tại trong danh sách đã lọc
-  const currentIndex = useMemo(() => {
-    return filteredEvents.findIndex((e) => e.id === currentEvent?.id)
-  }, [filteredEvents, currentEvent])
-
-  const hasPrev = currentIndex > 0
-  const hasNext = currentIndex >= 0 && currentIndex < filteredEvents.length - 1
-
-  const handlePrev = () => {
-    if (hasPrev) {
-      const prevEvent = filteredEvents[currentIndex - 1]
-      setSelectedEventId(prevEvent.id)
-      scrollEventIntoView(prevEvent.id)
-    }
-  }
-
-  const handleNext = () => {
-    if (hasNext) {
-      const nextEvent = filteredEvents[currentIndex + 1]
-      setSelectedEventId(nextEvent.id)
-      scrollEventIntoView(nextEvent.id)
-    }
-  }
-
-  // Tự động cuộn danh sách bên trái đến mốc đang chọn
-  const scrollEventIntoView = (eventId) => {
-    const el = document.getElementById(`timeline-item-${eventId}`)
-    if (el && listContainerRef.current) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
-    }
-  }
-
-  // Bấm phím mũi tên lên / xuống để chuyển mốc khi ở chế độ Split
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (activeTab !== 'timeline' || layoutMode !== 'split' || modalEvent || isQuizOpen) return
-      if (e.key === 'ArrowUp') {
-        e.preventDefault()
-        handlePrev()
-      } else if (e.key === 'ArrowDown') {
-        e.preventDefault()
-        handleNext()
-      }
-    }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [activeTab, layoutMode, modalEvent, isQuizOpen, hasPrev, hasNext, currentIndex, filteredEvents])
+  // Nhóm các sự kiện đã lọc theo từng thời kỳ lịch sử
+  const groupedEvents = useMemo(() => {
+    return data.periods
+      .map((period) => ({
+        period,
+        events: filteredEvents.filter((e) => e.periodId === period.id)
+      }))
+      .filter((group) => group.events.length > 0)
+  }, [filteredEvents])
 
   // Thống kê số lượng sự kiện theo thời kỳ
   const eventCountByPeriod = useMemo(() => {
@@ -220,21 +158,21 @@ export default function InteractiveTimeline() {
               </p>
             </div>
 
-            {/* Chuyển đổi chế độ xem: Chia đôi (Master-Detail) vs Lưới toàn cảnh (Grid) */}
+            {/* Chuyển đổi chế độ xem: Dòng thời gian (Timeline) vs Lưới toàn cảnh (Grid) */}
             {activeTab === 'timeline' && (
               <div className="flex items-center gap-2 self-start md:self-auto">
                 <div className="flex items-center rounded-full bg-white border border-line p-0.5 shadow-none">
                   <button
-                    onClick={() => setLayoutMode('split')}
+                    onClick={() => setLayoutMode('timeline')}
                     className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold transition-all ${
-                      layoutMode === 'split'
+                      layoutMode === 'timeline'
                         ? 'bg-ink text-on-dark'
                         : 'text-ink-soft hover:text-ink'
                     }`}
-                    title="Bố cục chia đôi màn hình: Cực kỳ dễ nhìn, xem chi tiết ngay không cần cuộn trang dài"
+                    title="Dạng dòng thời gian lịch sử trực quan theo 5 thời kỳ"
                   >
-                    <Columns2 className="size-3.5" />
-                    <span>Dễ nhìn (Chia đôi)</span>
+                    <Clock className="size-3.5" />
+                    <span>Dòng thời gian</span>
                   </button>
 
                   <button
@@ -265,7 +203,7 @@ export default function InteractiveTimeline() {
 
         {/* 3. KHU VỰC NỘI DUNG THEO TAB */}
         {activeTab === 'timeline' && (
-          <section className="space-y-3.5">
+          <section className="space-y-4">
             {/* Thanh tìm kiếm & Bộ lọc 5 thời kỳ */}
             <div className="space-y-2.5">
               <div className="flex items-center justify-between gap-3">
@@ -299,231 +237,159 @@ export default function InteractiveTimeline() {
               </div>
             </div>
 
-            {/* BỐ CỤC 1: MASTER - DETAIL (CHIA ĐÔI MÀN HÌNH - DỄ NHÌN NHẤT) */}
-            {layoutMode === 'split' ? (
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
-                {/* CỘT TRÁI (4/12): Danh sách mốc lịch sử gọn gàng, có scroll riêng */}
-                <div className="lg:col-span-4 card p-3 bg-white border border-line flex flex-col h-[580px]">
-                  <div className="flex items-center justify-between px-2 pb-2 mb-1 border-b border-line text-xs font-semibold text-muted">
-                    <span className="flex items-center gap-1">
-                      <Clock className="size-3.5 text-primary" />
-                      <span>Các mốc lịch sử ({filteredEvents.length})</span>
-                    </span>
-                    <span className="text-[11px] text-faint hidden sm:inline">
-                      Dùng phím ↑ ↓
-                    </span>
-                  </div>
-
-                  {/* Danh sách các mốc lịch sử cuộn bên trong */}
-                  <div
-                    ref={listContainerRef}
-                    className="flex-1 overflow-y-auto space-y-1.5 pr-1 scrollbar-thin"
-                  >
-                    {filteredEvents.length > 0 ? (
-                      filteredEvents.map((event, idx) => {
-                        const isSelected = event.id === currentEvent?.id
-                        const periodInfo = data.periods.find((p) => p.id === event.periodId)
-
-                        return (
-                          <div
-                            key={event.id}
-                            id={`timeline-item-${event.id}`}
-                            onClick={() => setSelectedEventId(event.id)}
-                            className={`p-2.5 rounded-xl cursor-pointer transition-all duration-150 border text-left flex items-start gap-2.5 ${
-                              isSelected
-                                ? 'bg-ink text-on-dark border-ink shadow-none'
-                                : 'bg-paper/40 hover:bg-paper border-line text-ink'
-                            }`}
-                          >
-                            <span
-                              className={`grid size-6 shrink-0 place-items-center rounded-lg text-[11px] font-black ${
-                                isSelected
-                                  ? 'bg-amber text-ink'
-                                  : 'bg-white border border-line text-muted'
-                              }`}
-                            >
-                              {idx + 1}
+            {/* BỐ CỤC 1: DẠNG DÒNG THỜI GIAN LỊCH SỬ (TIMELINE) */}
+            {layoutMode === 'timeline' ? (
+              <div className="space-y-8 pt-2">
+                {groupedEvents.length > 0 ? (
+                  groupedEvents.map((group) => (
+                    <div key={group.period.id} className="space-y-4">
+                      {/* Tiêu đề & Thông tin khái quát của Thời kỳ */}
+                      <div className="rounded-2xl border border-line bg-paper/90 p-4 sm:p-5">
+                        <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="rounded-full bg-ink px-3 py-0.5 text-xs font-bold text-gold uppercase tracking-wider">
+                              {group.period.badge}
                             </span>
+                            <span className="font-extrabold text-sm sm:text-base text-primary">
+                              {group.period.timeSpan}
+                            </span>
+                          </div>
+                          <span className="text-xs font-semibold text-muted bg-white border border-line px-2.5 py-0.5 rounded-full">
+                            {group.events.length} mốc lịch sử
+                          </span>
+                        </div>
+                        <h3 className="text-base sm:text-lg font-extrabold text-ink leading-snug">
+                          {group.period.title}
+                        </h3>
+                        <p className="text-ink-soft text-xs sm:text-sm mt-1 leading-relaxed">
+                          {group.period.core}
+                        </p>
+                      </div>
 
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center justify-between gap-1 mb-0.5">
-                                <span
-                                  className={`text-[12px] font-bold tracking-wide uppercase ${
-                                    isSelected ? 'text-gold' : 'text-primary'
-                                  }`}
-                                >
-                                  {event.date}
-                                </span>
-                                <span
-                                  className={`text-[10px] px-1.5 py-0.2 rounded-full truncate ${
-                                    isSelected
-                                      ? 'bg-white/20 text-on-dark'
-                                      : 'bg-cream text-amber font-bold'
-                                  }`}
-                                >
-                                  {periodInfo?.shortTitle}
-                                </span>
-                              </div>
+                      {/* Trục dòng thời gian thẳng đứng */}
+                      <div className="relative pl-7 sm:pl-11">
+                        {/* Đường kẻ trục dọc nối liền các điểm */}
+                        <div
+                          className="absolute left-[13px] sm:left-[19px] top-4 bottom-4 w-0.5 bg-line-strong"
+                          aria-hidden="true"
+                        />
 
-                              <h4
-                                className={`text-[13.5px] font-semibold leading-snug truncate ${
-                                  isSelected ? 'text-on-dark' : 'text-ink'
-                                }`}
+                        <div className="space-y-4">
+                          {group.events.map((event) => {
+                            const globalIdx =
+                              data.events.findIndex((e) => e.id === event.id) + 1
+                            const hasImage = Boolean(resolveEventImage(event))
+
+                            return (
+                              <div
+                                key={event.id}
+                                onClick={() => setModalEvent(event)}
+                                className="relative group cursor-pointer"
                               >
-                                {event.title}
-                              </h4>
-                            </div>
-                          </div>
-                        )
-                      })
-                    ) : (
-                      <div className="text-center py-10 text-xs text-muted">
-                        Không tìm thấy sự kiện nào phù hợp.
+                                {/* Điểm nút mốc trên trục (Node) */}
+                                <div
+                                  className="absolute left-[-15px] sm:left-[-21px] top-4 -translate-x-1/2 z-10 grid size-7 sm:size-8 place-items-center rounded-full border-2 border-line bg-white text-[11px] sm:text-xs font-black text-ink transition-all duration-200 group-hover:scale-110 group-hover:border-primary group-hover:bg-primary group-hover:text-white"
+                                  title={`Mốc số ${globalIdx}: ${event.title}`}
+                                >
+                                  {globalIdx}
+                                </div>
+
+                                {/* Thẻ mốc sự kiện */}
+                                <div className="card p-4 sm:p-5 bg-white border border-line rounded-2xl transition-all duration-200 hover:border-line-strong hover:bg-cream/15 hover:translate-x-1">
+                                  <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                                    <div className="flex flex-wrap items-center gap-2">
+                                      <span className="font-extrabold text-sm sm:text-base text-primary uppercase tracking-wide">
+                                        {event.date}
+                                      </span>
+                                      <span className="rounded-full bg-cream px-2.5 py-0.5 text-xs font-semibold text-amber">
+                                        {event.tag}
+                                      </span>
+                                      {event.location && (
+                                        <span className="inline-flex items-center gap-1 text-xs text-muted">
+                                          <MapPin className="size-3 text-amber shrink-0" />
+                                          <span className="truncate max-w-[200px] sm:max-w-none">
+                                            {event.location}
+                                          </span>
+                                        </span>
+                                      )}
+                                    </div>
+
+                                    {hasImage && (
+                                      <span className="inline-flex items-center gap-1 rounded-full bg-paper px-2 py-0.5 text-[11px] font-semibold text-muted border border-line">
+                                        <ImageIcon className="size-3 text-primary" />
+                                        <span>Có ảnh tư liệu</span>
+                                      </span>
+                                    )}
+                                  </div>
+
+                                  {/* Nội dung mốc sự kiện */}
+                                  <div className="flex gap-4 items-start">
+                                    <div className="flex-1 min-w-0">
+                                      <h4 className="text-base sm:text-lg font-bold text-ink group-hover:text-primary transition-colors leading-snug mb-1.5">
+                                        {event.title}
+                                      </h4>
+
+                                      <p className="text-ink-soft text-xs sm:text-[13.5px] leading-relaxed line-clamp-2">
+                                        {event.shortDesc}
+                                      </p>
+
+                                      {event.quotes && (
+                                        <div className="mt-2 border-l-2 border-amber/70 pl-2.5 py-0.5 text-xs font-serif italic text-muted line-clamp-1">
+                                          "{event.quotes}"
+                                        </div>
+                                      )}
+                                    </div>
+
+                                    {/* Ảnh đại diện nhỏ trên thẻ nếu có */}
+                                    {hasImage && (
+                                      <div className="hidden sm:block shrink-0 w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden border border-line bg-paper">
+                                        <img
+                                          src={resolveEventImage(event)}
+                                          alt={event.title}
+                                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                          loading="lazy"
+                                        />
+                                      </div>
+                                    )}
+                                  </div>
+
+                                  {/* Chân thẻ: Tác phẩm liên quan & Nút hành động */}
+                                  <div className="flex items-center justify-between pt-3 mt-3 border-t border-line/60 text-xs">
+                                    <span className="text-[11.5px] text-muted italic truncate max-w-[220px] sm:max-w-md">
+                                      {event.works ? `Tác phẩm: ${event.works}` : ''}
+                                    </span>
+                                    <span className="inline-flex items-center gap-1 font-bold text-primary group-hover:underline shrink-0 ml-auto">
+                                      <span>Bấm xem chi tiết</span>
+                                      <ArrowUpRight className="size-3.5" />
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            )
+                          })}
+                        </div>
                       </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* CỘT PHẢI (8/12): Chi tiết mốc đang chọn (Hiển thị cố định, không phải mở modal) */}
-                <div className="lg:col-span-8 card p-5 sm:p-7 bg-white border border-line flex flex-col justify-between min-h-[580px]">
-                  {currentEvent ? (
-                    <div className="space-y-4">
-                      {/* Hàng điều hướng trên cùng của chi tiết */}
-                      <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-line">
-                        <div className="flex items-center gap-2">
-                          <span className="font-extrabold text-base sm:text-lg text-primary uppercase">
-                            {currentEvent.date}
-                          </span>
-                          <span className="rounded-full bg-cream px-2.5 py-0.5 text-xs font-bold text-amber">
-                            {currentEvent.tag}
-                          </span>
-                          {currentEvent.location && (
-                            <span className="inline-flex items-center gap-1 text-xs text-muted">
-                              <MapPin className="size-3 text-amber shrink-0" />
-                              <span className="truncate">{currentEvent.location}</span>
-                            </span>
-                          )}
-                        </div>
-
-                        {/* Nút mốc trước / mốc sau */}
-                        <div className="flex items-center gap-1">
-                          <button
-                            onClick={handlePrev}
-                            disabled={!hasPrev}
-                            className={`p-1.5 rounded-full border border-line bg-paper hover:bg-cream transition-colors ${
-                              !hasPrev ? 'opacity-30 cursor-not-allowed' : ''
-                            }`}
-                            title="Mốc trước (Phím mũi tên lên)"
-                          >
-                            <ChevronLeft className="size-4" />
-                          </button>
-                          <span className="text-xs font-semibold text-muted px-1.5">
-                            {currentIndex + 1} / {filteredEvents.length}
-                          </span>
-                          <button
-                            onClick={handleNext}
-                            disabled={!hasNext}
-                            className={`p-1.5 rounded-full border border-line bg-paper hover:bg-cream transition-colors ${
-                              !hasNext ? 'opacity-30 cursor-not-allowed' : ''
-                            }`}
-                            title="Mốc sau (Phím mũi tên xuống)"
-                          >
-                            <ChevronRight className="size-4" />
-                          </button>
-                        </div>
-                      </div>
-
-                      {/* Tiêu đề sự kiện */}
-                      <h2 className="text-xl sm:text-2xl font-extrabold text-ink leading-snug">
-                        {currentEvent.title}
-                      </h2>
-
-                      {/* Ảnh tư liệu lịch sử (nếu có) */}
-                      {resolveEventImage(currentEvent) && (
-                        <div className="rounded-2xl overflow-hidden border border-line bg-cream/40 p-2 space-y-1.5 flex flex-col items-center">
-                          <img
-                            src={resolveEventImage(currentEvent)}
-                            alt={currentEvent.title}
-                            className="max-h-[320px] w-auto max-w-full object-contain rounded-xl"
-                            loading="lazy"
-                          />
-                          {currentEvent.imageCaption && (
-                            <p className="text-[11.5px] text-muted text-center italic px-2 py-0.5">
-                              {currentEvent.imageCaption}
-                            </p>
-                          )}
-                        </div>
-                      )}
-
-                      {/* Khối trích dẫn lời Bác hoặc câu nói lịch sử */}
-                      {currentEvent.quotes && (
-                        <div className="bg-cream rounded-2xl p-4 border-l-4 border-amber">
-                          <div className="flex items-center gap-1.5 mb-1.5 text-xs font-bold uppercase tracking-wider text-amber">
-                            <Quote className="size-3.5" />
-                            <span>Lời dạy & Trích dẫn bất hủ</span>
-                          </div>
-                          <p className="font-serif italic text-ink text-[15px] sm:text-[16px] leading-relaxed">
-                            "{currentEvent.quotes}"
-                          </p>
-                        </div>
-                      )}
-
-                      {/* Bối cảnh lịch sử chi tiết */}
-                      <div>
-                        <h4 className="text-xs font-bold uppercase tracking-wider text-primary mb-1.5">
-                          Bối cảnh & Diễn biến lịch sử
-                        </h4>
-                        <p className="text-ink-soft text-[14.5px] sm:text-[15px] leading-relaxed text-justify">
-                          {currentEvent.detailDesc}
-                        </p>
-                      </div>
-
-                      {/* Ý nghĩa đối với tư tưởng */}
-                      <div className="rounded-2xl border border-line bg-paper/50 p-4 space-y-1">
-                        <div className="flex items-center gap-2 text-xs font-bold text-ink">
-                          <Award className="size-4 text-primary" />
-                          <span>Ý nghĩa đối với bước phát triển tư tưởng Hồ Chí Minh</span>
-                        </div>
-                        <p className="text-ink-soft text-xs sm:text-[13.5px] leading-relaxed pl-6">
-                          {currentEvent.significance}
-                        </p>
-                      </div>
-
-                      {/* Tác phẩm / Văn kiện nếu có */}
-                      {currentEvent.works && (
-                        <div className="flex items-start gap-2.5 rounded-xl bg-paper p-3 border border-line text-xs">
-                          <BookOpen className="size-4 text-amber shrink-0 mt-0.5" />
-                          <div>
-                            <span className="font-bold text-muted block mb-0.5">
-                              Tác phẩm / Văn kiện liên quan:
-                            </span>
-                            <span className="font-medium text-ink">
-                              {currentEvent.works}
-                            </span>
-                          </div>
-                        </div>
-                      )}
                     </div>
-                  ) : null}
-
-                  {/* Thanh điều khiển cuối cột chi tiết */}
-                  <div className="flex items-center justify-between pt-3 mt-4 border-t border-line text-xs">
-                    <span className="text-muted">
-                      Mẹo: Nhấp vào các mốc bên trái để đổi nội dung ngay lập tức
-                    </span>
-
+                  ))
+                ) : (
+                  <div className="card p-10 text-center bg-white border border-line">
+                    <p className="text-sm font-medium text-muted">
+                      Không tìm thấy mốc sự kiện nào phù hợp với bộ lọc hiện tại.
+                    </p>
                     <button
-                      onClick={() => setModalEvent(currentEvent)}
-                      className="inline-flex items-center gap-1 font-bold text-primary hover:underline"
+                      onClick={() => {
+                        setSearchQuery('')
+                        setSelectedPeriodId('all')
+                      }}
+                      className="mt-3 btn btn-outline text-xs font-semibold"
                     >
-                      <span>Mở toàn màn hình</span>
-                      <ArrowUpRight className="size-3.5" />
+                      Đặt lại tìm kiếm
                     </button>
                   </div>
-                </div>
+                )}
               </div>
             ) : (
-              /* BỐ CỤC 2: LƯỚI THẺ TINH GỌN (COMPACT GRID) */
+              /* BỐ CỤC 2: LƯỚI THẺ TOÀN CẢNH (GRID) */
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
                 {filteredEvents.map((event) => {
                   const periodInfo = data.periods.find((p) => p.id === event.periodId)
@@ -569,7 +435,7 @@ export default function InteractiveTimeline() {
                           {event.location || ''}
                         </span>
                         <span className="font-bold text-primary group-hover:underline inline-flex items-center gap-0.5">
-                          <span>Chi tiết</span>
+                          <span>Bấm xem chi tiết</span>
                           <ArrowUpRight className="size-3" />
                         </span>
                       </div>
