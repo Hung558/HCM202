@@ -3,12 +3,14 @@ import { animate } from '../_fun/fx.js'
 import { play } from '../_fun/useGame.js'
 import { flatten } from './utils.js'
 
-// Khung sơ đồ 1100×760 (cuộn được trên màn nhỏ). Tâm ở (550,380); 4 nhánh lớn quanh tâm, ý con bay ra khi mở nhánh.
+// Khung sơ đồ 1100×760: kéo để di chuyển, lăn chuột để phóng to/thu nhỏ. Tâm ở (550,380); 4 nhánh lớn quanh tâm, ý con bay ra khi mở nhánh.
 const W = 1100
 const H = 760
 const CX = 550
 const CY = 380
 const LEVEL = ['Chủ đề trung tâm', 'Nhánh lớn', 'Ý nhỏ']
+const MIN = 0.4
+const MAX = 2
 
 // Đường nối "vẽ ra" bằng scaleX 0→1
 function Line({ x1, y1, x2, y2, show, color, h, delay = 0 }) {
@@ -36,17 +38,72 @@ function Line({ x1, y1, x2, y2, show, color, h, delay = 0 }) {
 export default function MapView({ map, open, setOpen, sel, seen, onVisit }) {
   const panelRef = useRef(null)
   const boxRef = useRef(null)
+  const canvasRef = useRef(null)
+  // Vị trí/tỉ lệ sơ đồ giữ trong ref và gán thẳng vào style, để kéo/zoom không render lại cả sơ đồ
+  const view = useRef({ x: 0, y: 0, s: 1 })
+  const drag = useRef(null)
+  const dragged = useRef(false)
   const all = flatten(map.root)
   const selN = all.find((x) => x.n.id === sel) ?? all[0]
   const nSeen = all.filter((x) => seen[x.n.id]).length
   const ch = map.root.children
   const angs = ch.length === 4 ? [-140, -40, 40, 140] : ch.map((_, i) => -90 + (i * 360) / ch.length)
 
-  // Màn hẹp hơn khung sơ đồ: cuộn sẵn tới tâm
-  useEffect(() => {
+  const apply = () => {
+    const { x, y, s } = view.current
+    canvasRef.current.style.transform = `translate(${x}px,${y}px) scale(${s})`
+  }
+  // Thu vừa khung và đặt tâm sơ đồ vào giữa
+  const fit = () => {
     const el = boxRef.current
-    el.scrollLeft = (W - el.clientWidth) / 2
+    const s = Math.min(1, el.clientWidth / W, el.clientHeight / H)
+    view.current = { s, x: (el.clientWidth - W * s) / 2, y: (el.clientHeight - H * s) / 2 }
+    apply()
+  }
+  // Phóng to/thu nhỏ quanh điểm (mx, my) trong khung, giữ điểm đó đứng yên
+  const zoomAt = (mx, my, f) => {
+    const o = view.current
+    const s = Math.min(MAX, Math.max(MIN, o.s * f))
+    view.current = { s, x: mx - ((mx - o.x) * s) / o.s, y: my - ((my - o.y) * s) / o.s }
+    apply()
+  }
+  const zoomCenter = (f) => zoomAt(boxRef.current.clientWidth / 2, boxRef.current.clientHeight / 2, f)
+
+  useEffect(() => {
+    fit()
+    // Lăn chuột trong khung thì zoom sơ đồ thay vì cuộn trang (cần passive: false để chặn cuộn)
+    const el = boxRef.current
+    const onWheel = (e) => {
+      e.preventDefault()
+      const r = el.getBoundingClientRect()
+      zoomAt(e.clientX - r.left, e.clientY - r.top, Math.exp(-e.deltaY * 0.0015))
+    }
+    el.addEventListener('wheel', onWheel, { passive: false })
+    return () => el.removeEventListener('wheel', onWheel)
   }, [])
+
+  // Kéo để di chuyển; chỉ "bắt" con trỏ khi đã kéo quá 4px để bấm vào các ý vẫn hoạt động
+  const onPointerDown = (e) => {
+    if (e.button !== 0) return
+    drag.current = { px: e.clientX, py: e.clientY, x: view.current.x, y: view.current.y, moved: false }
+  }
+  const onPointerMove = (e) => {
+    const d = drag.current
+    if (!d) return
+    const dx = e.clientX - d.px
+    const dy = e.clientY - d.py
+    if (!d.moved) {
+      if (Math.hypot(dx, dy) < 4) return
+      d.moved = true
+      e.currentTarget.setPointerCapture(e.pointerId)
+    }
+    view.current = { ...view.current, x: d.x + dx, y: d.y + dy }
+    apply()
+  }
+  const onPointerUp = () => {
+    dragged.current = !!drag.current?.moved
+    drag.current = null
+  }
 
   useEffect(() => {
     animate(panelRef.current, [{ transform: 'scale(.96)', opacity: 0.5 }, { transform: 'none', opacity: 1 }], { duration: 300, easing: 'cubic-bezier(.3,1.4,.5,1)' })
@@ -153,8 +210,22 @@ export default function MapView({ map, open, setOpen, sel, seen, onVisit }) {
       </div>
 
       <div className="mt-4 flex flex-wrap items-start gap-5">
-        <div ref={boxRef} className="min-w-0 flex-[999_1_560px] overflow-auto rounded-[28px] border border-line bg-white">
-          <div className="relative bg-[radial-gradient(#E6DFD3_1.2px,transparent_1.2px)] bg-size-[24px_24px]" style={{ width: W, height: H }}>
+        <div
+          ref={boxRef}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={onPointerUp}
+          onPointerCancel={onPointerUp}
+          onClickCapture={(e) => {
+            // vừa kéo xong thì không tính là bấm vào ý
+            if (dragged.current) {
+              e.stopPropagation()
+              dragged.current = false
+            }
+          }}
+          className="relative h-[560px] min-w-0 flex-[999_1_560px] cursor-grab touch-none overflow-hidden rounded-[28px] border border-line bg-white bg-[radial-gradient(#E6DFD3_1.2px,transparent_1.2px)] bg-size-[24px_24px] select-none active:cursor-grabbing max-sm:h-[420px]"
+        >
+          <div ref={canvasRef} className="absolute top-0 left-0 origin-top-left" style={{ width: W, height: H }}>
             {lines}
             <span aria-hidden="true" className="absolute size-[250px] -translate-1/2 rounded-full border-[1.5px] border-dashed border-line-strong" style={{ left: CX, top: CY }} />
             <button
@@ -169,6 +240,20 @@ export default function MapView({ map, open, setOpen, sel, seen, onVisit }) {
             {kids}
             {branches}
           </div>
+
+          {/* Nút zoom cho chuột không có bánh xe và màn cảm ứng */}
+          <div className="absolute right-3 bottom-3 z-10 flex flex-col overflow-hidden rounded-2xl border border-line bg-white" onPointerDown={(e) => e.stopPropagation()}>
+            <button type="button" onClick={() => zoomCenter(1.25)} aria-label="Phóng to" title="Phóng to" className="grid size-11 place-items-center border-b border-line text-[18px] font-extrabold last:border-b-0 hover:bg-cream">
+              +
+            </button>
+            <button type="button" onClick={() => zoomCenter(0.8)} aria-label="Thu nhỏ" title="Thu nhỏ" className="grid size-11 place-items-center border-b border-line text-[18px] font-extrabold last:border-b-0 hover:bg-cream">
+              −
+            </button>
+            <button type="button" onClick={() => fit()} aria-label="Vừa khung" title="Vừa khung" className="grid size-11 place-items-center border-b border-line text-[18px] font-extrabold last:border-b-0 hover:bg-cream">
+              ⤢
+            </button>
+          </div>
+          <p className="pointer-events-none absolute bottom-3 left-4 text-[12px] font-semibold text-faint max-sm:hidden">Kéo để di chuyển · lăn chuột để phóng to</p>
         </div>
 
         <div ref={panelRef} aria-live="polite" className="relative max-w-full flex-[1_1_300px] overflow-hidden rounded-[28px] bg-ink p-[clamp(20px,3vw,28px)] text-on-dark md:sticky md:top-[84px]">
