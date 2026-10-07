@@ -9,6 +9,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
+    touch-action: none; /* để kéo/chụm trên điện thoại xoay & zoom quả cầu thay vì cuộn/zoom trang */
 }
 
 [hidden] {

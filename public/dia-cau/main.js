@@ -4,11 +4,16 @@ let targetRotationX = DEFAULT_ROTATION_X;
 let targetRotationY = DEFAULT_ROTATION_Y;
 let autoRotate = true;
 let mouseXOnMouseDown = 0, mouseYOnMouseDown = 0;
-let dragging = false, dragDX = 0, dragDY = 0; // mouse movement since last frame
+let dragging = false, dragDX = 0, dragDY = 0; // pointer movement since last frame
 
 const EARTH_RADIUS = 0.5;
 const DEFAULT_CAMERA_Z = 1.7;
 const FOCUS_CAMERA_Z = 1.2;
+// Khoảng cách camera để cả quả cầu (kèm quầng mây) vừa bề ngang màn hình; màn dọc điện thoại thì lùi xa hơn
+function fitCameraZ(aspect) {
+    const halfFovX = Math.atan(Math.tan(THREE.MathUtils.degToRad(45 / 2)) * aspect);
+    return Math.max(DEFAULT_CAMERA_Z, (EARTH_RADIUS * 1.12) / Math.sin(halfFovX));
+}
 const COUNTRY_COLOR = '#FFD700'; // gold
 const EVENT_COLORS = ['#FF3B30', '#FF4500', '#DC143C', '#9932CC', '#FF1493']; // 1, 2, 3, 4, 5+ events at a place
 const FOCUSED_COLOR = '#00BF19';
@@ -174,12 +179,15 @@ function main() {
     scene.add(starMesh);
 
     const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = DEFAULT_CAMERA_Z;
+    camera.position.z = fitCameraZ(camera.aspect);
 
     window.addEventListener('resize', () => {
+        const wasFit = Math.abs(targetCameraZ - fitCameraZ(camera.aspect)) < 0.01;
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
+        // chưa zoom tay thì giữ quả cầu vừa màn khi xoay ngang/dọc điện thoại
+        if (wasFit) targetCameraZ = fitCameraZ(camera.aspect);
     });
 
     // Markers + labels are children of the earth so they rotate with it.
@@ -550,39 +558,64 @@ function main() {
         (row, country) => { row.textContent = country.name; }
     ));
 
-    // ---- Mouse: drag to rotate, click a marker to focus ----
+    // ---- Pointer (chuột + cảm ứng): 1 ngón/chuột kéo để xoay, 2 ngón chụm/mở để zoom, chạm nhẹ vào điểm để mở ----
     const raycaster = new THREE.Raycaster();
     const pointer = new THREE.Vector2();
+    const pointers = new Map(); // pointerId -> { x, y } đang chạm
+    let pinch = null; // { dist, z } lúc bắt đầu chụm
+    let gestureMoved = false; // đã kéo/chụm thì không tính là chạm để mở điểm
 
-    function onMouseDown(event) {
-        if (focused) return;
-        event.preventDefault();
-        document.addEventListener('mousemove', onMouseMove, false);
-        document.addEventListener('mouseup', onMouseUp, false);
-        mouseXOnMouseDown = event.clientX;
-        mouseYOnMouseDown = event.clientY;
-        dragging = true;
+    const pinchDist = () => {
+        const [p1, p2] = [...pointers.values()];
+        return Math.hypot(p1.x - p2.x, p1.y - p2.y);
+    };
+
+    function onPointerDown(event) {
+        if (focused || (event.pointerType === 'mouse' && event.button !== 0)) return;
+        canvas.setPointerCapture(event.pointerId);
+        pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+        if (pointers.size === 1) {
+            mouseXOnMouseDown = event.clientX;
+            mouseYOnMouseDown = event.clientY;
+            gestureMoved = false;
+            dragging = true;
+        } else if (pointers.size === 2) {
+            dragging = false;
+            gestureMoved = true;
+            pinch = { dist: pinchDist(), z: targetCameraZ };
+        }
     }
 
-    function onMouseMove(event) {
-        dragDX += event.movementX;
-        dragDY += event.movementY;
+    function onPointerMove(event) {
+        const prev = pointers.get(event.pointerId);
+        if (!prev) return;
+        pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+        if (pinch && pointers.size === 2) {
+            // mở hai ngón ra → camera lại gần (phóng to)
+            targetCameraZ = THREE.MathUtils.clamp(pinch.z * (pinch.dist / Math.max(pinchDist(), 1)), 0.65, 4);
+        } else if (dragging) {
+            dragDX += event.clientX - prev.x;
+            dragDY += event.clientY - prev.y;
+            if (Math.hypot(event.clientX - mouseXOnMouseDown, event.clientY - mouseYOnMouseDown) > 5) gestureMoved = true;
+        }
     }
 
-    function onMouseUp(event) {
-        document.removeEventListener('mousemove', onMouseMove, false);
-        document.removeEventListener('mouseup', onMouseUp, false);
+    function onPointerUp(event) {
+        if (!pointers.delete(event.pointerId)) return;
+        if (pointers.size < 2) pinch = null;
+        if (pointers.size > 0) return; // còn ngón trên màn: chờ nhấc hết mới xoay/chạm lại
         dragging = false;
-
-        const moved = Math.hypot(event.clientX - mouseXOnMouseDown, event.clientY - mouseYOnMouseDown);
-        if (moved > 5) return; // it was a drag, not a click
+        if (gestureMoved || event.type === 'pointercancel') return; // là kéo/chụm, không phải chạm
         pointer.set((event.clientX / window.innerWidth) * 2 - 1, -(event.clientY / window.innerHeight) * 2 + 1);
         raycaster.setFromCamera(pointer, camera);
         const hit = raycaster.intersectObjects(clickables, false).find((h) => h.object.visible);
         if (hit && hit.object.userData.item) focus(hit.object.userData.item);
     }
 
-    canvas.addEventListener('mousedown', onMouseDown, false);
+    canvas.addEventListener('pointerdown', onPointerDown);
+    canvas.addEventListener('pointermove', onPointerMove);
+    canvas.addEventListener('pointerup', onPointerUp);
+    canvas.addEventListener('pointercancel', onPointerUp);
 
     // Mouse wheel zoom: ~6% per notch, eased, clamped between just above the clouds and inside the star sphere
     canvas.addEventListener('wheel', (event) => {
@@ -598,7 +631,7 @@ function main() {
             camera.position.z += (FOCUS_CAMERA_Z - camera.position.z) * 0.08;
         } else {
             if (dragging) {
-                // Globe follows the cursor: 1px of mouse moves the surface ~1px, whatever the zoom
+                // Globe follows the cursor/finger: 1px of drag moves the surface ~1px, whatever the zoom
                 const radPerPx = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * (camera.position.z - EARTH_RADIUS) / window.innerHeight / EARTH_RADIUS;
                 targetRotationX = dragDX * radPerPx;
                 targetRotationY = dragDY * radPerPx;
