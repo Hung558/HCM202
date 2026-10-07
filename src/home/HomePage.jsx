@@ -58,7 +58,7 @@ function Nav() {
         </a>
         <div className="ml-auto flex max-w-full gap-7 overflow-x-auto [scrollbar-width:none] max-sm:order-last max-sm:ml-0 max-sm:w-full max-sm:gap-5">
           <a href="#muc-luc" className={link}>Mục lục</a>
-          <a href="#hanh-trinh" className={link}>Cuộc đời và sự nghiệp</a>
+          <a href="#hanh-trinh" className={link}>Cuộc đời và sự nghiệp của Bác</a>
           <a href="#loi-bac" className={link}>Lời Bác dạy</a>
           <a href={GLOBE.href} className={link}>Quả địa cầu</a>
         </div>
@@ -178,7 +178,7 @@ function Journey() {
     <section id="hanh-trinh" className="mt-20 scroll-mt-14 bg-ink text-on-dark">
       <div className="mx-auto max-w-[1180px] px-5 py-[72px]">
         <div className="text-center">
-          <p className="eyebrow text-gold">Cuộc đời và sự nghiệp</p>
+          <p className="eyebrow text-gold">Cuộc đời và sự nghiệp của Bác</p>
           <h2 className={H2}>Từ bến Nhà Rồng đến bản Di chúc</h2>
           <p className="mx-auto mt-3.5 max-w-[560px] font-serif text-lg leading-normal text-line italic">
             Những dấu mốc trên hành trình tìm đường cứu nước và lãnh đạo cách mạng Việt Nam
