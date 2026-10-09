@@ -137,3 +137,7 @@ Theme chung nằm trong `src/index.css`. **Không tự chọn mã màu**, chỉ 
 ```
 
 Cần CSS riêng thì tạo `TenFile.module.css` trong folder chương. **Không dùng file `.css` thường**, vì class sẽ trùng giữa các chương khi gộp.
+
+## License
+
+[MIT](LICENSE) © 2026 Hà Duy Hưng
